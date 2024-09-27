@@ -23,6 +23,4 @@ jobs:
         uses: aquasecurity/trivy-action@0.19.0
         with:
           scan-type: 'config'
-         #trivyignores: ".trivyignore"
-         #skip-dirs: "modules/products/static-site"
           exit-code: '1'
