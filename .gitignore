@@ -36,3 +36,6 @@ terraform.rc
 
 *.devel.tfvars
 *.env
+.DS_Store
+
+**/__not_tracked_*

@@ -2,13 +2,11 @@
 
 This terraform module is used to create Dynatrace environment specific resources.
 
+## Metrics to monitor
 
-## Changelog
+By default, services defined in the [default\_DT\_Metrics.yaml](default_DT_Metrics.yaml) will be monitored on all the aws connections specified in the input (from the terragrunt repo). 
 
-
-## Examples
-
-Please see the `./examples` directory for usage
+This set of services can be _topped up_ or _completely replaced_ by including/altering relavant sections as specified in the https://github.com/UKHomeOffice/core-cloud-dynatrace-terragrunt documentation.
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
@@ -26,12 +24,6 @@ Please see the `./examples` directory for usage
 ## Modules
 
 No modules.
-
-## Resources
-
-| Name | Type |
-|------|------|
-| [dynatrace_aws_credentials.aws_connection](https://registry.terraform.io/providers/dynatrace-oss/dynatrace/latest/docs/resources/aws_credentials) | resource |
 
 ## Inputs
 
