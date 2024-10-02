@@ -29,7 +29,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_aws_connections"></a> [aws\_connections](#input\_aws\_connections) | A map of AWS Connections to create. The key is the name of the connection. | <pre>map(object({<br/>    account_id = string<br/>    role_name  = string<br/>    optional_services_top_up = map(object)<br/>    optional_exclusive_services = map(object)<br/>}))</pre> | `{}` | no (Both the the optional_services_top_up and optional_exclusive_services can either be empty or completely omitted)|
+| <a name="input_aws_connections"></a> [aws\_connections](#input\_aws\_connections) | A map of AWS Connections to create. The key is the name of the connection. | <pre>map(object({<br/>    account_id = string<br/>    role_name  = string<br/>    optional_services_top_up = map(object)<br/>    optional_exclusive_services = map(object)<br/>}))</pre> | `{}` | no (Both the the `optional_services_top_up` and `optional_exclusive_services` can either be empty or completely omitted.)|
 
 ## Outputs
 
