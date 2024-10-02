@@ -7,7 +7,7 @@
 # by defining 'optional_services_top_up' within 
 # an aws account section with the same format as the 
 # following with valid DT values from the API 
-# page (TODO - provide the API link)
+# page (https://docs.dynatrace.com/docs/dynatrace-api)
 # -----------------
 # The following values can be replaced by defining 
 # 'optional_exclusive_services' within the individual
