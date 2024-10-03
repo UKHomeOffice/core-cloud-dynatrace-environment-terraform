@@ -20,7 +20,7 @@ resource "dynatrace_aws_credentials" "aws_connection" {
 }
 
 resource "dynatrace_aws_service" "monitoredservices" {
-  for_each = length(lookup(var.tenant_vars,"optional_exclusive_services",{})) > 0 ?var.tenant_vars.optional_exclusive_services : merge(var.default_services, lookup(var.tenant_vars,"optional_services_top_up",{}))
+  for_each = local.services_to_configure
 
   credentials_id = dynatrace_aws_credentials.aws_connection.id
   name = each.key
