@@ -1,0 +1,717 @@
+# This is the list of services monitored on an account
+# if *no other services* are defined in the specific account
+# in 'aws_connections:' section of an environment (within the 
+# 'core-cloud-dynatrace-terragrunt' repository).
+# -----------------
+# The following set of services can be topped up
+# by defining 'optional_services_top_up' within 
+# an aws account section with the same format as the 
+# following with valid DT values from the API 
+# page (https://docs.dynatrace.com/docs/dynatrace-api)
+# -----------------
+# The following values can be replaced by defining 
+# 'optional_exclusive_services' within the individual
+# account section.
+cloudfront:
+  - name: Requests
+    statistic: SUM
+    dimensions:
+    - DistributionId
+    - Region
+  - name: TotalErrorRate
+    statistic: AVERAGE
+    dimensions:
+    - DistributionId
+    - Region
+  - name: BytesDownloaded
+    statistic: SUM
+    dimensions:
+    - DistributionId
+    - Region
+dynamodb:
+  - name: UserErrors
+    statistic: SUM
+    dimensions:
+    - Region
+  - name: ReturnedItemCount
+    statistic: SUM
+    dimensions:
+    - TableName
+    - Operation
+  - name: SuccessfulRequestLatency
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - TableName
+    - Operation
+  - name: SystemErrors
+    statistic: SUM
+    dimensions:
+    - TableName
+    - Operation
+  - name: ThrottledRequests
+    statistic: SUM
+    dimensions:
+    - TableName
+    - Operation
+  - name: ConditionalCheckFailedRequests
+    statistic: SUM
+    dimensions:
+    - TableName
+  - name: ConsumedReadCapacityUnits
+    statistic: SUM
+    dimensions:
+    - TableName
+  - name: ConsumedWriteCapacityUnits
+    statistic: SUM
+    dimensions:
+    - TableName
+  - name: ProvisionedReadCapacityUnits
+    statistic: SUM
+    dimensions:
+    - TableName
+  - name: ProvisionedWriteCapacityUnits
+    statistic: SUM
+    dimensions:
+    - TableName
+  - name: ReadThrottleEvents
+    statistic: SUM
+    dimensions:
+    - TableName
+  - name: TransactionConflict
+    statistic: SUM
+    dimensions:
+    - TableName
+  - name: WriteThrottleEvents
+    statistic: SUM
+    dimensions:
+    - TableName
+elasticache:
+  - name: CPUUtilization
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - CacheClusterId
+  - name: CurrConnections
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - CacheClusterId
+  - name: Evictions
+    statistic: SUM
+    dimensions:
+    - CacheClusterId
+  - name: SwapUsage
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - CacheClusterId
+  - name: NetworkBytesIn
+    statistic: SUM
+    dimensions:
+    - CacheClusterId
+  - name: NetworkBytesIn
+    statistic: SUM
+    dimensions:
+    - CacheClusterId
+    - CacheNodeId
+  - name: NetworkBytesOut
+    statistic: SUM
+    dimensions:
+    - CacheClusterId
+  - name: NetworkBytesOut
+    statistic: SUM
+    dimensions:
+    - CacheClusterId
+    - CacheNodeId
+  - name: EngineCPUUtilization
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - CacheClusterId
+  - name: EngineCPUUtilization
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - CacheClusterId
+    - CacheNodeId
+  - name: DatabaseMemoryUsagePercentage
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - CacheClusterId
+  - name: DatabaseMemoryUsagePercentage
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - CacheClusterId
+    - CacheNodeId
+  - name: NetworkBandwidthInAllowanceExceeded
+    statistic: SUM
+    dimensions:
+    - CacheClusterId
+  - name: NetworkBandwidthInAllowanceExceeded
+    statistic: SUM
+    dimensions:
+    - CacheClusterId
+    - CacheNodeId
+es:
+  - name: CPUUtilization
+    statistic: AVERAGE
+    dimensions:
+    - DomainName
+    - ClientId
+  - name: CPUUtilization
+    statistic: MAXIMUM
+    dimensions:
+    - DomainName
+    - ClientId
+  - name: "ClusterStatus.green"
+    statistic: MINIMUM
+    dimensions:
+    - DomainName
+    - ClientId
+  - name: "ClusterStatus.red"
+    statistic: MAXIMUM
+    dimensions:
+    - DomainName
+    - ClientId
+  - name: "ClusterStatus.yellow"
+    statistic: MAXIMUM
+    dimensions:
+    - DomainName
+    - ClientId
+  - name: ElasticsearchRequests
+    statistic: SUM
+    dimensions:
+    - DomainName
+    - ClientId
+  - name: FreeStorageSpace
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - DomainName
+    - ClientId
+  - name: MasterCPUUtilization
+    statistic: AVERAGE
+    dimensions:
+    - DomainName
+    - ClientId
+  - name: Nodes
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - DomainName
+    - ClientId
+  - name: MasterJVMMemoryPressure
+    statistic: MAXIMUM
+    dimensions:
+    - DomainName
+    - ClientId
+  - name: MasterReachableFromNode
+    statistic: MINIMUM
+    dimensions:
+    - DomainName
+    - ClientId
+kafka:
+  - name: CpuIdle
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: CpuIdle
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: CpuSystem
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: CpuSystem
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: CpuUser
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: CpuUser
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: KafkaAppLogsDiskUsed
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: KafkaAppLogsDiskUsed
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: KafkaDataLogsDiskUsed
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: KafkaDataLogsDiskUsed
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: MemoryBuffered
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: MemoryBuffered
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: MemoryCached
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: MemoryCached
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: MemoryFree
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: MemoryFree
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: MemoryUsed
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: MemoryUsed
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: NetworkRxDropped
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: NetworkRxDropped
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: NetworkRxErrors
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: NetworkRxErrors
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: NetworkRxPackets
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: NetworkRxPackets
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: NetworkTxDropped
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: NetworkTxDropped
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: NetworkTxErrors
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: NetworkTxErrors
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: NetworkTxPackets
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: NetworkTxPackets
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: RootDiskUsed
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: RootDiskUsed
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: SwapFree
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: SwapFree
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: SwapUsed
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: SwapUsed
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: ZooKeeperRequestLatencyMsMean
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: ZooKeeperRequestLatencyMsMean
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: ZooKeeperSessionState
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: ActiveControllerCount
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+  - name: ActiveControllerCount
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+  - name: GlobalPartitionCount
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+  - name: GlobalPartitionCount
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+  - name: GlobalTopicCount
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+  - name: GlobalTopicCount
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+  - name: OfflinePartitionsCount
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+  - name: OfflinePartitionsCount
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+  - name: ZooKeeperRequestLatencyMsMean
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+  - name: ZooKeeperRequestLatencyMsMean
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+  - name: ZooKeeperSessionState
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+  - name: BytesInPerSec
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: BytesInPerSec
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name" 
+    - "Broker ID" 
+    - "Topic"
+  - name: BytesInPerSec
+    statistic: SUM
+    dimensions:
+    - "Cluster Name" 
+    - "Broker ID"
+  - name: BytesInPerSec
+    statistic: SUM
+    dimensions:
+    - "Cluster Name" 
+    - "Broker ID" 
+    - "Topic"
+  - name: BytesOutPerSec
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: BytesOutPerSec
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+    - "Topic"
+  - name: BytesOutPerSec
+    statistic: SUM
+    dimensions:
+    - "Cluster Name" 
+    - "Broker ID"
+  - name: BytesOutPerSec
+    statistic: SUM
+    dimensions:
+    - "Cluster Name" 
+    - "Broker ID"
+    - "Topic"
+  - name: PartitionCount
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name" 
+    - "Broker ID"
+  - name: PartitionCount
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+logs:
+  - name: DeliveryErrors
+    statistic: SUM
+    dimensions:
+    - LogGroupName
+    - DestinationType
+    - FilterName
+  - name: DeliveryThrottling
+    statistic: SUM
+    dimensions:
+    - LogGroupName
+    - DestinationType
+    - FilterName
+  - name: ForwardedBytes
+    statistic: SUM
+    dimensions:
+    - LogGroupName
+    - DestinationType
+    - FilterName
+  - name: ForwardedLogEvents
+    statistic: SUM
+    dimensions:
+    - LogGroupName 
+    - DestinationType
+    - FilterName
+  - name: IncomingBytes
+    statistic: SUM
+    dimensions:
+    - LogGroupName
+  - name: IncomingBytes
+    statistic: SUM
+    dimensions:
+    - Region
+  - name: IncomingLogEvents
+    statistic: SUM
+    dimensions:
+    - LogGroupName
+  - name: IncomingLogEvents
+    statistic: SUM
+    dimensions:
+    - Region
+rds:
+  - name: NetworkTransmitThroughput
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - DBInstanceIdentifier
+  - name: BinLogDiskUsage
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - DBInstanceIdentifier
+  - name: BinLogDiskUsage
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - Region
+    - EngineName
+  - name: BurstBalance
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - DBInstanceIdentifier
+  - name: BurstBalance
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - Region
+    - EngineName
+  - name: CPUUtilization
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - DBInstanceIdentifier
+  - name: CPUUtilization
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - Region
+    - EngineName
+  - name: DatabaseConnections
+    statistic: SUM
+    dimensions:
+    - DBInstanceIdentifier
+  - name: DatabaseConnections
+    statistic: SUM
+    dimensions:
+    - Region
+    - EngineName
+  - name: DiskQueueDepth
+    statistic: SUM
+    dimensions:
+    - DBInstanceIdentifier
+  - name: DiskQueueDepth
+    statistic: SUM
+    dimensions:
+    - Region
+    - EngineName
+  - name: "EBSByteBalance%"
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - DBInstanceIdentifier
+  - name: "EBSByteBalance%"
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - Region
+    - EngineName
+  - name: "EBSIOBalance%"
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - DBInstanceIdentifier
+  - name: FreeStorageSpace
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - DBInstanceIdentifier
+  - name: FreeStorageSpace
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - Region
+    - EngineName
+  - name: FreeableMemory
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - DBInstanceIdentifier
+  - name: FreeableMemory
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - Region
+    - EngineName
+  - name: LVMReadIOPS
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - DBInstanceIdentifier
+  - name: LVMReadIOPS
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - Region
+    - EngineName
+  - name: LVMWriteIOPS
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - DBInstanceIdentifier
+  - name: LVMWriteIOPS
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - Region
+    - EngineName
+  - name: NetworkReceiveThroughput
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - DBInstanceIdentifier
+  - name: NetworkReceiveThroughput
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - Region
+    - EngineName
+  - name: ReadLatency
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - DBInstanceIdentifier
+  - name: WriteLatency
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - DBInstanceIdentifier
+  - name: "EBSIOBalance%"
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - DBInstanceIdentifier
+  - name: "EBSIOBalance%"
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - Region
+    - EngineName
+s3:
+  - name: 4xxErrors
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - BucketName
+    - FilterId
+  - name: 5xxErrors
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - BucketName
+    - FilterId
+  - name: AllRequests
+    statistic: SUM
+    dimensions:
+    - BucketName
+    - FilterId
+  - name: BytesDownloaded
+    statistic: SUM
+    dimensions:
+    - BucketName
+    - FilterId  
+  - name: BytesDownloaded
+    statistic: SAMPLE_COUNT
+    dimensions:
+    - BucketName
+    - FilterId
+  - name: BytesDownloaded
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - BucketName
+    - FilterId  
+  - name: BytesUploaded
+    statistic: SUM
+    dimensions:
+    - BucketName
+    - FilterId  
+  - name: BytesUploaded
+    statistic: SAMPLE_COUNT
+    dimensions:
+    - BucketName
+    - FilterId  
+  - name: BytesUploaded
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - BucketName
+    - FilterId  
+  - name: GetRequests    
+    statistic: SUM
+    dimensions:
+    - BucketName
+    - FilterId
+
