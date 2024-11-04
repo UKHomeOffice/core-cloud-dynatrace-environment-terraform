@@ -203,6 +203,26 @@ es:
     dimensions:
     - DomainName
     - ClientId
+  - name: 2xx
+    statistic: SUM
+    dimensions:
+    - DomainName
+    - ClientId
+  - name: 3xx
+    statistic: SUM
+    dimensions:
+    - DomainName
+    - ClientId
+  - name: 4xx
+    statistic: SUM
+    dimensions:
+    - DomainName
+    - ClientId
+  - name: 5xx
+    statistic: SUM
+    dimensions:
+    - DomainName
+    - ClientId
 kafka:
   - name: CpuIdle
     statistic: AVG_MIN_MAX
