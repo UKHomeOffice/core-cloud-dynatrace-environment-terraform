@@ -10,3 +10,11 @@ module "aws_account_configurations" {
   connection_name = each.key
   default_services = local.default_services
 }
+
+module "dynatrace_managment_zones" {
+  source = "./dynatrace_managment_zones"
+
+  for_each = var.tenant_vars.management_zones
+  tenant_vars = each.value
+  zone_name = each.key
+}
