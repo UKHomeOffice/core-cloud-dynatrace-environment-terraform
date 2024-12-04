@@ -7,7 +7,7 @@ terraform {
   }
 }
 
-resource "dynatrace_managment_zones" "management_zone" {
+resource "dynatrace_management_zones" "management_zone" {
   for_each = var.tenant_vars.management_zones
 
   name = var.zone_name
