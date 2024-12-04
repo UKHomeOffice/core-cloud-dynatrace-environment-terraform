@@ -10,10 +10,10 @@ terraform {
 resource "dynatrace_managment_zones" "management_zone" {
   for_each = var.tenant_vars.management_zones
 
-  name = each.key
-  description = each.value.description
+  name = var.zone_name
+  description = var.zone_vars.description
   dynamic "rules" {
-    for_each = each.value.rules
+    for_each = var.zone_vars.rules
     content {
       name = rules.key
       type = rules.value.type
