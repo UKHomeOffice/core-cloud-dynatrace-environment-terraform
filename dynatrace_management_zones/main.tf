@@ -8,17 +8,31 @@ terraform {
 }
 
 resource "dynatrace_management_zone_v2" "management_zone" {
-  for_each = var.tenant_vars.management_zones
 
   name = var.zone_name
   description = var.zone_vars.description
-  dynamic "rules" {
-    for_each = var.zone_vars.rules
-    content {
-      name = rules.key
-      type = rules.value.type
-      enabled = rules.value.enabled
-      entity_selector = ""
+  rules {
+    dynamic "rule" {
+      for_each = var.zone_vars.rules
+      content {
+        type = rule.value.type
+        enabled = rule.value.enabled
+        entity_selector = ""
+
+        dynamic "attribute_rule" {
+          for_each = rule.value.attribute_rule
+          content {
+            entity_type = attribute_rule.entity_type
+            attribute_conditions {
+              condition {
+                key = attribute_rule.value.attribute_conditions.condition.key
+                operator = attribute_rule.value.attribute_conditions.condition.operator
+              }
+            }
+          }
+        }
+
+      }
     }
   }
 }
