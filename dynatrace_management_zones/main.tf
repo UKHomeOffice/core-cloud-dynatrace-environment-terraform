@@ -13,7 +13,7 @@ resource "dynatrace_management_zone_v2" "management_zone" {
   description = var.zone_vars.description
   rules {
     dynamic "rule" {
-      for_each = var.zone_vars.rules[*]
+      for_each = var.zone_vars.rules
       content {
         type = rule.value.type
         enabled = rule.value.enabled
