@@ -11,16 +11,16 @@ resource "dynatrace_management_zone_v2" "management_zone" {
 
   name = var.zone_name
   description = var.zone_vars.description
-  rules {
-    dynamic "rule" {
-      for_each = var.zone_vars.rules
-      content {
-        type = rule.value.type
-        enabled = rule.value.enabled
+  dynamic "rules" {
+    for_each = var.zone_vars.rules != null ? var.zone_vars.rules : {}
+    content {
+      rule {
+        type = rules.value.type
+        enabled = rules.value.enabled
         entity_selector = ""
 
         dynamic "attribute_rule" {
-          for_each = rule.value.attribute_rule[*]
+          for_each = rules.value.attribute_rule[*]
           content {
             entity_type = attribute_rule.value.entity_type
             attribute_conditions {
@@ -31,7 +31,20 @@ resource "dynatrace_management_zone_v2" "management_zone" {
             }
           }
         }
-
+        dynamic "dimension_rule" {
+          for_each = rules.value.dimension_rule != null ? rules.value.dimension_rule : {}
+          content {
+            applies_to = dimension_rule.applies_to
+            dimension_conditions {
+              condition {
+                condition_type = dimension_rule.condition.type
+                rule_matcher = dimension_rule.condition.type
+                value = dimension_rule.condition.value
+                key = dimension_rule.condition.key
+              }
+            }
+          }
+        }
       }
     }
   }
