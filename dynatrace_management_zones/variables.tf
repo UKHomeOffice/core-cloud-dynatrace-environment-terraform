@@ -2,18 +2,17 @@ variable "zone_name" {
   type = string
 }
 
-variable "zone_vars" {
-  type = any
-}
+#variable "zone_vars" {
+#  type = any
+#}
 
-/*
+
 variable "zone_vars" {
   type = object({
     description = optional(string)
     legacy_id = optional(string)
 
-    rules = optional(object({
-      rule = optional(object({
+    rules = optional(map(object({
         enabled = bool
         type = string
         entity_selector = optional(string, "")
@@ -53,8 +52,6 @@ variable "zone_vars" {
             })
           }))
         }))
-      }))
-    }))
-  })
+      })))
+    })
 }
-*/
