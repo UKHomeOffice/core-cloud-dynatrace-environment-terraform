@@ -11,6 +11,7 @@ resource "dynatrace_management_zone_v2" "management_zone" {
 
   name = var.zone_name
   description = var.zone_vars.description
+  legacy_id = var.zone_vars.legacy_id
   dynamic "rules" {
     for_each = var.zone_vars.rules != null ? var.zone_vars.rules : {}
     content {
