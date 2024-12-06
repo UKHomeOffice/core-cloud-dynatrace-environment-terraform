@@ -31,20 +31,22 @@ resource "dynatrace_management_zone_v2" "management_zone" {
             }
           }
         }
+        
         dynamic "dimension_rule" {
           for_each = rules.value.dimension_rule[*]
           content {
-            applies_to = dimension_rule.applies_to
+            applies_to = dimension_rule.value.applies_to
             dimension_conditions {
               condition {
-                condition_type = dimension_rule.condition.condition_type
-                rule_matcher = dimension_rule.condition.rule_matcher
-                value = dimension_rule.condition.value
-                key = dimension_rule.condition.key
+                condition_type = dimension_rule.value.dimension_conditions.condition.condition_type
+                rule_matcher = dimension_rule.value.dimension_conditions.condition.rule_matcher
+                value = dimension_rule.value.dimension_conditions.condition.value
+                key = dimension_rule.value.dimension_conditions.condition.key
               }
             }
           }
         }
+
       }
     }
   }
