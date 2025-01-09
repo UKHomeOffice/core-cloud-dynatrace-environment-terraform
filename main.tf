@@ -10,3 +10,14 @@ module "aws_account_configurations" {
   connection_name = each.key
   default_services = local.default_services
 }
+
+module "dynatrace_management_zones" {
+  source = "./dynatrace_management_zones"
+
+  for_each = var.tenant_vars.management_zones
+  # Create one management zone per named entry under the "management_zones" block of the config.yaml
+  zone_vars = each.value
+  # Value is the attribute/parameter content of each named entry
+  zone_name = each.key
+  # Name reference for the zone within config yaml is used as the literal name of the MZ to be created
+}
