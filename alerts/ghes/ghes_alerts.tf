@@ -1,4 +1,4 @@
-resource "dynatrace_alerting" "cosmos-msk-alerting-profile" {
+resource "dynatrace_alerting" "cosmos-ghes-alerting-profile" {
   name = var.ghes_alerting_profile_name
   rules {
     rule {
