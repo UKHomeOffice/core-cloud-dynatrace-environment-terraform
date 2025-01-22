@@ -21,3 +21,13 @@ module "dynatrace_management_zones" {
   zone_name = each.key
   # Name reference for the zone within config yaml is used as the literal name of the MZ to be created
 }
+
+module "ghes_alerts" {
+  source = "./alerts/ghes"
+
+  count = var.tenant_vars.ghes.enabled == true : 1 ? 0
+
+  disk = var.tenant_vars.ghes.disk
+  cpu = var.tenant_vars.ghes.cpu
+
+}

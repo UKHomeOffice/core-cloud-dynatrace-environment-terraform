@@ -190,6 +190,16 @@ resource "dynatrace_metric_events" "ghes_cpu_utilization_critical_alerts" {
   }
 }
 
+variable "disk" {
+  type = object({
+    name = 
+  })
+}
+
+variable "cpu" {
+
+}
+
 # disk warning alerts
 resource "dynatrace_metric_events" "ghes_disk_utilization_warning_alerts" {
   enabled                    = var.ghes_disk_usage_warning_alerts_enabled
