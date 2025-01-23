@@ -5,9 +5,9 @@ locals {
 module "aws_account_configurations" {
   source = "./aws_account_configuration"
 
-  for_each = var.tenant_vars.aws_connections
-  tenant_vars = each.value
-  connection_name = each.key
+  for_each         = var.tenant_vars.aws_connections
+  tenant_vars      = each.value
+  connection_name  = each.key
   default_services = local.default_services
 }
 
@@ -20,4 +20,10 @@ module "dynatrace_management_zones" {
   # Value is the attribute/parameter content of each named entry
   zone_name = each.key
   # Name reference for the zone within config yaml is used as the literal name of the MZ to be created
+}
+
+module "ghes_alerts" {
+  source = "./alerts/ghes"
+
+  ghes_alert_config = var.tenant_vars.ghes_alert
 }
