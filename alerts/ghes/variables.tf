@@ -53,7 +53,6 @@ variable "ghes_alert_config" {
     cpu_usage = object({
       summary               = string
       description           = string
-      title                 = string
       alert_condition       = string
       dealerting_samples    = string
       query_definition_type = string
@@ -75,7 +74,6 @@ variable "ghes_alert_config" {
     disk_usage = object({
       summary               = string
       description           = string
-      title                 = string
       alert_condition       = string
       dealerting_samples    = string
       query_definition_type = string
