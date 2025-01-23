@@ -5,9 +5,9 @@ locals {
 module "aws_account_configurations" {
   source = "./aws_account_configuration"
 
-  for_each = var.tenant_vars.aws_connections
-  tenant_vars = each.value
-  connection_name = each.key
+  for_each         = var.tenant_vars.aws_connections
+  tenant_vars      = each.value
+  connection_name  = each.key
   default_services = local.default_services
 }
 
@@ -25,9 +25,5 @@ module "dynatrace_management_zones" {
 module "ghes_alerts" {
   source = "./alerts/ghes"
 
-  count = var.tenant_vars.ghes.enabled == true : 1 ? 0
-
-  disk = var.tenant_vars.ghes.disk
-  cpu = var.tenant_vars.ghes.cpu
-
+  ghes_alert_config = var.tenant_vars.ghes_alert
 }
