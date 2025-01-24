@@ -4,7 +4,7 @@ resource "dynatrace_email_notification" "email_alerts" {
   name                   = var.ghes_alert_config.email_notification_name
   profile                = dynatrace_alerting.cosmos-ghes-alerting-profile.id
   subject                = var.ghes_alert_config.email_subject
-  to                     = var.ghes_alert_config.email_from
+  to                     = var.ghes_alert_config.email_to
   notify_closed_problems = var.ghes_alert_config.notify_closed_problem
   body                   = "{ProblemDetailsHTML}"
 }
@@ -20,8 +20,8 @@ resource "dynatrace_slack_notification" "slack_alerts" {
 
 # memory warning alerts
 resource "dynatrace_metric_events" "freeable_memory_warning_alerts" {
-  count = var.ghes_alert_config.memory_usage.warning == true ? 1 : 0
-  enabled                    = var.ghes_alert_config.memory_usage.warning.enabled 
+  count                      = var.ghes_alert_config.memory_usage.warning.enabled == true ? 1 : 0
+  enabled                    = var.ghes_alert_config.memory_usage.warning.enabled
   event_entity_dimension_key = var.ghes_alert_config.event_entity_dimension_key
   summary                    = var.ghes_alert_config.memory_usage.summary
   event_template {
@@ -64,7 +64,7 @@ resource "dynatrace_metric_events" "freeable_memory_warning_alerts" {
 
 # memory critical alerts
 resource "dynatrace_metric_events" "freeable_memory_critical_alerts" {
-  count = var.ghes_alert_config.memory_usage.critical == true ? 1 : 0
+  count                      = var.ghes_alert_config.memory_usage.critical.enabled == true ? 1 : 0
   enabled                    = var.ghes_alert_config.memory_usage.critical.enabled
   event_entity_dimension_key = var.ghes_alert_config.event_entity_dimension_key
   summary                    = var.ghes_alert_config.memory_usage.summary
@@ -108,7 +108,7 @@ resource "dynatrace_metric_events" "freeable_memory_critical_alerts" {
 
 # cpu warning alerts
 resource "dynatrace_metric_events" "cpu_utilization_warning_alerts" {
-  count = var.ghes_alert_config.cpu_usage.warning == true ? 1 : 0
+  count                      = var.ghes_alert_config.cpu_usage.warning.enabled == true ? 1 : 0
   enabled                    = var.ghes_alert_config.cpu_usage.warning.enabled
   event_entity_dimension_key = var.ghes_alert_config.event_entity_dimension_key
   summary                    = var.ghes_alert_config.cpu_usage.summary
@@ -152,7 +152,7 @@ resource "dynatrace_metric_events" "cpu_utilization_warning_alerts" {
 
 # cpu critical alerts
 resource "dynatrace_metric_events" "cpu_utilization_critical_alerts" {
-  count = var.ghes_alert_config.cpu_usage.critical == true ? 1 : 0
+  count                      = var.ghes_alert_config.cpu_usage.critical.enabled == true ? 1 : 0
   enabled                    = var.ghes_alert_config.cpu_usage.critical.enabled
   event_entity_dimension_key = var.ghes_alert_config.event_entity_dimension_key
   summary                    = var.ghes_alert_config.cpu_usage.summary
@@ -196,7 +196,7 @@ resource "dynatrace_metric_events" "cpu_utilization_critical_alerts" {
 
 # disk warning alerts
 resource "dynatrace_metric_events" "ghes_disk_utilization_warning_alerts" {
-  count = var.ghes_alert_config.disk_usage.warning == true ? 1 : 0
+  count                      = var.ghes_alert_config.disk_usage.warning.enabled == true ? 1 : 0
   enabled                    = var.ghes_alert_config.disk_usage.warning.enabled
   event_entity_dimension_key = var.ghes_alert_config.event_entity_dimension_key
   summary                    = var.ghes_alert_config.disk_usage.summary
@@ -240,7 +240,7 @@ resource "dynatrace_metric_events" "ghes_disk_utilization_warning_alerts" {
 
 # disk critical alerts
 resource "dynatrace_metric_events" "ghes_disk_utilization_critical_alerts" {
-  count = var.ghes_alert_config.disk_usage.critical == true ? 1 : 0
+  count                      = var.ghes_alert_config.disk_usage.critical.enabled == true ? 1 : 0
   enabled                    = var.ghes_alert_config.disk_usage.critical.enabled
   event_entity_dimension_key = var.ghes_alert_config.event_entity_dimension_key
   summary                    = var.ghes_alert_config.disk_usage.summary
