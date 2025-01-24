@@ -29,11 +29,6 @@ module "ghes_alerts" {
 }
 
 module "ghes_dashboards" {
-  source = "./dashbaords/"
-
-  for_each = var.tenant_vars.management_zones
-  zone_vars = each.value
-  zone_name = each.key
-  ghes_alert_config = var.tenant_vars.ghes_alert
+  source = "./dashbaords/ghes_dashbaords"
 }
 
