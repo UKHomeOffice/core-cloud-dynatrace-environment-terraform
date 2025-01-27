@@ -1,4 +1,4 @@
-variable "dashboard_json" {
-  type = string
-  description = "The json defination of the dynatrace dashboard"
+variable "ghes_hostname" {
+  type        = string
+  description = "GHES dashboard hostname"
 }
