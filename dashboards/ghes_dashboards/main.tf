@@ -9,7 +9,7 @@ resource "dynatrace_json_dashboard" "this" {
     },
     "dashboardMetadata": {
       "name": "GHES Monitoring Dashboard",
-      "shared": false,
+      "shared": true,
       "owner": "e-Mohammed.Shareef42@eng.homeoffice.gov.uk",
       "popularity": 1,
       "hasConsistentColors": false
