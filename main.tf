@@ -29,6 +29,9 @@ module "ghes_alerts" {
 }
 
 module "ghes_dashboards" {
-  source = "./dashbaords/ghes_dashbaords"
+  source = "./dashboards/ghes_dashboards"
+  dashboard_json = var.dashboard_json.dashboard_json
 }
+
+
 
