@@ -7,7 +7,6 @@ resource "dynatrace_json_dashboard" "this" {
       ],
       "clusterVersion": "1.305.88.20250104-012102"
     },
-    "id": "404588b4-96d3-4f24-a79c-aa18b3ef729b",
     "dashboardMetadata": {
       "name": "GHES Monitoring Dashboard",
       "shared": false,
