@@ -23,12 +23,13 @@ module "dynatrace_management_zones" {
 }
 
 module "ghes_alerts" {
-  source = "./alerts/ghes"
-
+  source            = "./alerts/ghes"
+  count             = contains(keys(var.tenant_vars), "ghes_alert") ? 1 : 0
   ghes_alert_config = var.tenant_vars.ghes_alert
 }
 
 module "ghes_dashboards" {
   source        = "./dashboards/ghes_dashboards"
+  count         = contains(keys(var.tenant_vars), "ghes_dashboard_hostname") ? 1 : 0
   ghes_hostname = var.tenant_vars.ghes_dashboard_hostname
 }
