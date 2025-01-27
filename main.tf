@@ -27,7 +27,8 @@ module "ghes_alerts" {
 
   ghes_alert_config = var.tenant_vars.ghes_alert
 }
+
 module "ghes_dashboards" {
-  source = "./dashboards/ghes_dashboards"
-  dashboard_json = var.dashboard_json.dashboard_json
+  source        = "./dashboards/ghes_dashboards"
+  ghes_hostname = var.tenant_vars.ghes_dashboard_hostname
 }
