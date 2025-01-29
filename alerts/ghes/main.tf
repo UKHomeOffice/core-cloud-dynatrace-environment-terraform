@@ -29,6 +29,10 @@ resource "dynatrace_metric_events" "freeable_memory_warning_alerts" {
     davis_merge = var.ghes_alert_config.davis_merge
     event_type  = var.ghes_alert_config.event_type
     title       = var.ghes_alert_config.memory_usage.warning.title
+    metadata {
+      metadata_key   = var.ghes_alert_config.tag_key
+      metadata_value = var.ghes_alert_config.tag_value
+    }
   }
   model_properties {
     type               = var.ghes_alert_config.model_properties_type
@@ -73,6 +77,10 @@ resource "dynatrace_metric_events" "freeable_memory_critical_alerts" {
     davis_merge = var.ghes_alert_config.davis_merge
     event_type  = var.ghes_alert_config.event_type
     title       = var.ghes_alert_config.memory_usage.critical.title
+    metadata {
+      metadata_key   = var.ghes_alert_config.tag_key
+      metadata_value = var.ghes_alert_config.tag_value
+    }
   }
   model_properties {
     type               = var.ghes_alert_config.model_properties_type
@@ -117,6 +125,10 @@ resource "dynatrace_metric_events" "cpu_utilization_warning_alerts" {
     davis_merge = var.ghes_alert_config.davis_merge
     event_type  = var.ghes_alert_config.event_type
     title       = var.ghes_alert_config.cpu_usage.warning.title
+    metadata {
+      metadata_key   = var.ghes_alert_config.tag_key
+      metadata_value = var.ghes_alert_config.tag_value
+    }
   }
   model_properties {
     type               = var.ghes_alert_config.model_properties_type
@@ -161,6 +173,10 @@ resource "dynatrace_metric_events" "cpu_utilization_critical_alerts" {
     davis_merge = var.ghes_alert_config.davis_merge
     event_type  = var.ghes_alert_config.event_type
     title       = var.ghes_alert_config.cpu_usage.critical.title
+    metadata {
+      metadata_key   = var.ghes_alert_config.tag_key
+      metadata_value = var.ghes_alert_config.tag_value
+    }
   }
   model_properties {
     type               = var.ghes_alert_config.model_properties_type
@@ -205,6 +221,10 @@ resource "dynatrace_metric_events" "ghes_disk_utilization_warning_alerts" {
     davis_merge = var.ghes_alert_config.davis_merge
     event_type  = var.ghes_alert_config.event_type
     title       = var.ghes_alert_config.disk_usage.warning.title
+    metadata {
+      metadata_key   = var.ghes_alert_config.tag_key
+      metadata_value = var.ghes_alert_config.tag_value
+    }
   }
   model_properties {
     type               = var.ghes_alert_config.model_properties_type
@@ -249,6 +269,10 @@ resource "dynatrace_metric_events" "ghes_disk_utilization_critical_alerts" {
     davis_merge = var.ghes_alert_config.davis_merge
     event_type  = var.ghes_alert_config.event_type
     title       = var.ghes_alert_config.disk_usage.critical.title
+    metadata {
+      metadata_key   = var.ghes_alert_config.tag_key
+      metadata_value = var.ghes_alert_config.tag_value
+    }
   }
   model_properties {
     type               = var.ghes_alert_config.model_properties_type

@@ -27,6 +27,8 @@ variable "ghes_alert_config" {
     alert_on_no_data                  = bool
     samples                           = string
     violating_samples                 = string
+    tag_key                           = string
+    tag_value                         = string
 
     # config related to memory usage alerts for ghes
     memory_usage = object({

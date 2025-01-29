@@ -33,4 +33,19 @@ resource "dynatrace_alerting" "cosmos-ghes-alerting-profile" {
       severity_level   = "RESOURCE_CONTENTION"
     }
   }
+  # restrict this profile to as tagged
+  filters {
+    filter {
+      custom {
+        metadata {
+          items {
+            filter {
+              key = var.ghes_alert_config.tag_key
+              value = var.ghes_alert_config.tag_value
+            }
+          }
+        }
+      }
+    }
+  }
 }
