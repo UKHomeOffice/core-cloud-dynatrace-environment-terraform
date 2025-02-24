@@ -1,14 +1,3 @@
-
-resource "dynatrace_email_notification" "email_alerts" {
-  active                 = var.ghes_alert_config.email_notification_enabled
-  name                   = var.ghes_alert_config.email_notification_name
-  profile                = dynatrace_alerting.cosmos-ghes-alerting-profile.id
-  subject                = var.ghes_alert_config.email_subject
-  to                     = var.ghes_alert_config.email_to
-  notify_closed_problems = var.ghes_alert_config.notify_closed_problem
-  body                   = "{ProblemDetailsHTML}"
-}
-
 resource "dynatrace_slack_notification" "slack_alerts" {
   active  = var.ghes_alert_config.slack_notification_enabled
   name    = var.ghes_alert_config.slack_notification_name

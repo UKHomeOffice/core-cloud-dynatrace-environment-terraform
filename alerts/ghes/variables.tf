@@ -6,10 +6,6 @@ variable "ghes_alert_config" {
     notify_closed_problem             = bool
     include_mode                      = string
     delay_in_minutes                  = string
-    email_notification_enabled        = bool
-    email_to                          = list(string)
-    email_notification_name           = string
-    email_subject                     = string
     slack_notification_enabled        = bool
     slack_message                     = string
     slack_notification_name           = string
