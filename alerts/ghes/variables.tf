@@ -3,7 +3,6 @@ variable "ghes_alert_config" {
     # generic config for ghes alerts
     enabled                           = bool
     alerting_profile_name             = string
-    notify_closed_problem             = bool
     include_mode                      = string
     delay_in_minutes                  = string
     slack_notification_enabled        = bool
