@@ -35,6 +35,6 @@ module "ghes_dashboards" {
 }
 
 module "dynatrace_privatelink_aws_accounts_allowlist" {
-  source = "./dynatrace_privatelink_aws_accounts_allowlist"
-   aws_account_Ids= var.tenant_vars.aws_account_Ids
+  source       = "./dynatrace_privatelink_aws_accounts_allowlist"
+  aws_accounts = var.tenant_vars.privatelink_allowlist_aws_accounts
 }
