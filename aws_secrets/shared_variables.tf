@@ -11,12 +11,12 @@ variable "aws_secrets" {
       )
       branch_ref = optional(string,"*")               # Branch allowed to access the secret; ideally should me 'main'
     }))
-    tags = optional(map(string),{                     # Tags to be applied to the secret (required by the SCP)
-      account-code    = "cosmos"
-      cost-centre     = "cosmos"
-      service-id      = "srinivasan.sundaram1@digital.homeoffice.gov.uk"
-      portfolio-id    = "cosmos"
-      project-id      = "cosmos-devel"    
-    })
+    tags = (map(object({                              # Tags to be applied to the secret (required by the SCP)
+      account-code    = string
+      cost-centre     = string
+      service-id      = string
+      portfolio-id    = string
+      project-id      = string
+    })))
   }))
 }
