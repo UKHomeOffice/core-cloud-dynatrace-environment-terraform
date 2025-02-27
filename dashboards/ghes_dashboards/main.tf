@@ -1403,3 +1403,18 @@ resource "dynatrace_json_dashboard" "this" {
   }
 EOT
 }
+data "dynatrace_iam_group" "ho_cc_platform_engineer_env_admin" {
+  name = "ho_cc_platform_engineer_env_admin"
+}
+
+resource "dynatrace_dashboard_sharing" "this" {
+  dashboard_id = dynatrace_json_dashboard.this.id
+  enabled = true
+  permissions {
+    permission {
+      id    = data.dynatrace_iam_group.ho_cc_platform_engineer_env_admin.id
+      level = "EDIT"
+      type  = "GROUP"
+    }
+  }
+}
