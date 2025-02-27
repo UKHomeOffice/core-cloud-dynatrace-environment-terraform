@@ -1,5 +1,5 @@
 resource "terraform_data" "aws_allowlist" {
-  for_each = toset(var.aws_account_Ids)
+  for_each = toset(var.aws_accounts)
 
   provisioner "local-exec" {
     when    = create
