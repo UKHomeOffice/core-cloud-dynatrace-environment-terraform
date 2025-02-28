@@ -1404,7 +1404,7 @@ resource "dynatrace_json_dashboard" "this" {
 EOT
 }
 data "dynatrace_iam_group" "ho_cc_platform_engineer_env_admin" {
-  name = "ho_cc_platform_engineer_env_admin"
+  name = var.dt_admin_group_name
 }
 
 resource "dynatrace_dashboard_sharing" "this" {
@@ -1412,7 +1412,7 @@ resource "dynatrace_dashboard_sharing" "this" {
   enabled = true
   permissions {
     permission {
-      id    = data.dynatrace_iam_group.ho_cc_platform_engineer_env_admin.id
+      id    = data.dynatrace_iam_group.var.dt_admin_group_name.id
       level = "EDIT"
       type  = "GROUP"
     }
