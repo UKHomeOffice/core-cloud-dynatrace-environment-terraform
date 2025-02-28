@@ -32,6 +32,7 @@ module "ghes_dashboards" {
   source        = "./dashboards/ghes_dashboards"
   count         = contains(keys(var.tenant_vars), "ghes_dashboard_hostname") ? 1 : 0
   ghes_hostname = var.tenant_vars.ghes_dashboard_hostname
+  dt_admin_group_name = var.tenant_vars.dt_admin_group_name
 }
 
 module "dynatrace_privatelink_aws_accounts_allowlist" {
