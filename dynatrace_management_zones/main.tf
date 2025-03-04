@@ -9,7 +9,7 @@ terraform {
 
 resource "dynatrace_management_zone_v2" "management_zone" {
 # Corresponds to the object structure defined in the variables.tf
-# One zone enitty, consisting of 0 or 1 'rules' blocks - which in turn consist of 1 or more individual 'rule' definitions
+# One zone entity, consisting of 0 or 1 'rules' blocks - which in turn consist of 1 or more individual 'rule' definitions
 
   name = var.zone_name
   description = var.zone_vars.description
@@ -24,7 +24,7 @@ resource "dynatrace_management_zone_v2" "management_zone" {
         content {
             type = rule.value.type
             enabled = rule.value.enabled
-            entity_selector = ""
+            entity_selector = "rule.value.entity_selector"
 
           dynamic "attribute_rule" {
             for_each = rule.value.attribute_rule[*]
