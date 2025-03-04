@@ -1403,16 +1403,18 @@ resource "dynatrace_json_dashboard" "this" {
   }
 EOT
 }
-data "dynatrace_iam_group" "ho_cc_platform_engineer_env_admin" {
-  name = var.dt_admin_group_name
-}
+# data "dynatrace_iam_group" "ho_cc_platform_engineer_env_admin" { 
+#   name = var.dt_admin_group_name
+# }
+# oauth client required for this data source, will bring back this into conifg once we have oauth client configured. 
+
 
 resource "dynatrace_dashboard_sharing" "this" {
   dashboard_id = dynatrace_json_dashboard.this.id
   enabled = true
   permissions {
     permission {
-      id    = data.dynatrace_iam_group.ho_cc_platform_engineer_env_admin.id
+      id    = var.dt_admin_group_id
       level = "EDIT"
       type  = "GROUP"
     }
