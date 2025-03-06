@@ -2,13 +2,13 @@ resource "dynatrace_json_dashboard" "comos_rds_dasboard_terraform" {
   contents = jsonencode(
     {
       "dashboardMetadata" : {
-        "name" : var.rds_dashboard_name
-        "shared" : var.rds_shared
-        "owner" : var.rds_owner_name
+        "name" : "RDS_dashboard_template_hardcoded",
+        "shared" : true,
+        "owner" : "Cosmos",
         "tags" : [
           "cosmos"
         ],
-        "preset" : var.rds_preset,
+        "preset" : true,
         "dynamicFilters": {
       "filters": [
         "CUSTOM_DIMENSION:Amazon RDS"
