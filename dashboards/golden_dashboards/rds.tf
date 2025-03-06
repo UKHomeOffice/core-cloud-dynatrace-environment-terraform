@@ -2,7 +2,7 @@ resource "dynatrace_json_dashboard" "comos_rds_dasboard_terraform" {
   contents = jsonencode(
     {
       "dashboardMetadata" : {
-        "name" : "RDS_dashboard_template_hardcoded",
+        "name" : "RDS_dashboard_template",
         "shared" : true,
         "owner" : "Cosmos",
         "tags" : [
