@@ -2,13 +2,13 @@ resource "dynatrace_json_dashboard" "cosmo_cloudfront_dashboard_template" {
    contents = jsonencode(
     {
     "dashboardMetadata": {
-      "name": var.cloudfront_dashboard_name
-      "shared": var.cloudfront_shared
-      "owner": var.cloudfront_owner_name
+      "name": "cloudfront_dashboard_template",
+      "shared": true,
+      "owner": "Cosmos",
       "tags": [
         ""
       ],
-      "preset": var.cloudfront_preset
+      "preset": true,
     },
     "tiles": [
     {

@@ -2,13 +2,13 @@ resource "dynatrace_json_dashboard" "comos_msk_dashboard_terraform" {
   contents = jsonencode(
     {
       "dashboardMetadata" : {
-        "name" : var.msk_dashboard_name
-        "shared" : var.msk_shared
-        "owner" : var.msk_owner_name
+        "name" : "MSK_dashboard_template",
+        "shared" : true,
+        "owner" : "Cosmos",
         "tags" : [
           "cosmos"
         ],
-        "preset" : var.msk_preset
+        "preset" : true,
       },
     "tiles": [
         {

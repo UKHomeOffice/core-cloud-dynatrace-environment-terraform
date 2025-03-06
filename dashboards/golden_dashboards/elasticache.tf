@@ -2,13 +2,13 @@ resource "dynatrace_json_dashboard" "cosmo_elasticache_dashboard_template" {
    contents = jsonencode(
     {
     "dashboardMetadata": {
-      "name": var.elasticache_dashboard_name
-      "shared": var.elasticache_shared
-      "owner": var.elasticache_owner_name
+      "name": "elasticache_dashboard_template",
+      "shared": true,
+      "owner": "Cosmos",
       "tags": [
         ""
       ],
-      "preset": var.elasticache_preset
+      "preset": true,
     },
     "tiles": [
     {

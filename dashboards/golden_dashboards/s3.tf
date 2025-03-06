@@ -2,13 +2,13 @@ resource "dynatrace_json_dashboard" "cosmo_s3_dashboard_template" {
    contents = jsonencode(
     {
     "dashboardMetadata": {
-      "name": var.s3_dashboard_name
-      "shared": var.s3_shared
-      "owner": var.s3_owner_name
+      "name": "S3_dashboard_template",
+      "shared": true
+      "owner": "Cosmos",
       "tags": [
         ""
       ],
-      "preset": var.s3_preset
+      "preset": true,
     },
    "tiles": [
     {
