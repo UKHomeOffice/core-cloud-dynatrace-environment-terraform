@@ -13,7 +13,7 @@ resource "dynatrace_json_dashboard" "comos_rds_dasboard_terraform" {
       "filters": [
         "CUSTOM_DIMENSION:Amazon RDS"
       ]
-        }    
+        }
       },
    "tiles": [
     {
@@ -228,7 +228,7 @@ resource "dynatrace_json_dashboard" "comos_rds_dasboard_terraform" {
       "queries": [
         {
           "id": "A",
-          "metric": "ext:cloud.aws.ec.cpuUtilization",
+          "metric": "ext:cloud.aws.rds.cpuUtilization",
           "spaceAggregation": "AUTO",
           "timeAggregation": "DEFAULT",
           "splitBy": [],
