@@ -24,7 +24,7 @@ resource "dynatrace_management_zone_v2" "management_zone" {
         content {
             type = rule.value.type
             enabled = rule.value.enabled
-            entity_selector = "rule.value.entity_selector"
+            entity_selector = rule.value.entity_selector
 
           dynamic "attribute_rule" {
             for_each = rule.value.attribute_rule[*]
