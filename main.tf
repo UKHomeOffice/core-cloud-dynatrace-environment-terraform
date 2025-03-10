@@ -43,5 +43,10 @@ module "dynatrace_privatelink_aws_accounts_allowlist" {
 }
 
 module "golden_dashboards" {
-  source        = "./dashboards/golden_dashboards"
+  source = "./dashboards/golden_dashboards"
+}
+
+module "aws_secrets" {
+  source      = "git::https://github.com/UKHomeOffice/core-cloud-aws-secrets-terraform.git?ref=0.0.1"
+  aws_secrets = var.tenant_vars.aws_secrets
 }
