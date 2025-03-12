@@ -1,16 +1,14 @@
 resource "dynatrace_json_dashboard" "cosmo_cloudfront_dashboard_template" {
-   contents = jsonencode(
-    {
-    "dashboardMetadata": {
-      "name": "cloudfront_dashboard_template",
-      "shared": true,
-      "owner": "Cosmos",
-      "tags": [
-        ""
-      ],
-      "preset": true,
-    },
-    "tiles": [
+  contents = <<EOT
+{
+  "dashboardMetadata": {
+    "name": "cloudfront_dashboard_template",
+    "shared": true,
+    "owner": "Cosmos",
+    "preset": true,
+    "hasConsistentColors": false
+  },
+  "tiles": [
     {
       "name": "Requests",
       "tileType": "DATA_EXPLORER",
@@ -328,5 +326,5 @@ resource "dynatrace_json_dashboard" "cosmo_cloudfront_dashboard_template" {
     }
   ]
 }
-   )
+EOT
 }

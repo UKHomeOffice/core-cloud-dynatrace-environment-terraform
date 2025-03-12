@@ -5,954 +5,951 @@ resource "dynatrace_json_dashboard" "comos_msk_dashboard_terraform" {
         "name" : "MSK_dashboard_template",
         "shared" : true,
         "owner" : "Cosmos",
-        "tags" : [
-          "cosmos"
-        ],
         "preset" : true,
       },
-    "tiles": [
+      "tiles" : [
         {
-      "name": "PartitionCount",
-      "tileType": "DATA_EXPLORER",
-      "configured": true,
-      "bounds": {
-        "top": 38,
-        "left": 0,
-        "width": 304,
-        "height": 304
-      },
-      "tileFilter": {},
-      "isAutoRefreshDisabled": false,
-      "customName": "Data explorer results",
-      "queries": [
-        {
-          "id": "A",
-          "metric": "ext:cloud.aws.kafka.partitionCountByBrokerID",
-          "spaceAggregation": "AUTO",
-          "timeAggregation": "DEFAULT",
-          "splitBy": [],
-          "sortBy": "DESC",
-          "sortByDimension": "",
-          "filterBy": {
-            "nestedFilters": [],
-            "criteria": []
+          "name" : "PartitionCount",
+          "tileType" : "DATA_EXPLORER",
+          "configured" : true,
+          "bounds" : {
+            "top" : 38,
+            "left" : 0,
+            "width" : 304,
+            "height" : 304
           },
-          "limit": 20,
-          "rate": "NONE",
-          "enabled": true
-        }
-      ],
-      "visualConfig": {
-        "type": "GRAPH_CHART",
-        "global": {},
-        "rules": [
-          {
-            "matcher": "A:",
-            "properties": {
-              "color": "DEFAULT"
-            },
-            "seriesOverrides": []
-          }
-        ],
-        "axes": {
-          "xAxis": {
-            "displayName": "",
-            "visible": true
-          },
-          "yAxes": [
+          "tileFilter" : {},
+          "isAutoRefreshDisabled" : false,
+          "customName" : "Data explorer results",
+          "queries" : [
             {
-              "displayName": "Y axis",
-              "visible": true,
-              "min": "AUTO",
-              "max": "AUTO",
-              "position": "LEFT",
-              "queryIds": [
-                "A"
-              ],
-              "defaultAxis": true
+              "id" : "A",
+              "metric" : "ext:cloud.aws.kafka.partitionCountByBrokerID",
+              "spaceAggregation" : "AUTO",
+              "timeAggregation" : "DEFAULT",
+              "splitBy" : [],
+              "sortBy" : "DESC",
+              "sortByDimension" : "",
+              "filterBy" : {
+                "nestedFilters" : [],
+                "criteria" : []
+              },
+              "limit" : 20,
+              "rate" : "NONE",
+              "enabled" : true
             }
-          ]
-        },
-        "heatmapSettings": {
-          "yAxis": "VALUE",
-          "showLabels": false
-        },
-        "singleValueSettings": {
-          "showTrend": true,
-          "showSparkLine": true,
-          "linkTileColorToThreshold": true
-        },
-        "thresholds": [
-          {
-            "axisTarget": "LEFT",
-            "rules": [
+          ],
+          "visualConfig" : {
+            "type" : "GRAPH_CHART",
+            "global" : {},
+            "rules" : [
               {
-                "color": "#7dc540"
-              },
-              {
-                "color": "#f5d30f"
-              },
-              {
-                "color": "#dc172a"
+                "matcher" : "A:",
+                "properties" : {
+                  "color" : "DEFAULT"
+                },
+                "seriesOverrides" : []
               }
             ],
-            "visible": true
-          }
-        ],
-        "tableSettings": {
-          "hiddenColumns": []
-        },
-        "graphChartSettings": {
-          "connectNulls": false
-        },
-        "honeycombSettings": {
-          "showHive": true,
-          "showLegend": true,
-          "showLabels": false
-        }
-      },
-      "queriesSettings": {
-        "resolution": ""
-      },
-      "metricExpressions": [
-        "resolution=null&(ext:cloud.aws.kafka.partitionCountByBrokerID:splitBy():sort(value(auto,descending)):limit(20)):limit(100):names"
-      ]
-    },
-    {
-      "name": "MemoryUsed",
-      "tileType": "DATA_EXPLORER",
-      "configured": true,
-      "bounds": {
-        "top": 38,
-        "left": 304,
-        "width": 304,
-        "height": 304
-      },
-      "tileFilter": {},
-      "isAutoRefreshDisabled": false,
-      "customName": "Data explorer results",
-      "queries": [
-        {
-          "id": "A",
-          "metric": "ext:cloud.aws.kafka.memoryUsedByBrokerID",
-          "spaceAggregation": "AUTO",
-          "timeAggregation": "DEFAULT",
-          "splitBy": [],
-          "sortBy": "DESC",
-          "sortByDimension": "",
-          "filterBy": {
-            "nestedFilters": [],
-            "criteria": []
-          },
-          "limit": 20,
-          "rate": "NONE",
-          "enabled": true
-        }
-      ],
-      "visualConfig": {
-        "type": "GRAPH_CHART",
-        "global": {},
-        "rules": [
-          {
-            "matcher": "A:",
-            "properties": {
-              "color": "DEFAULT"
+            "axes" : {
+              "xAxis" : {
+                "displayName" : "",
+                "visible" : true
+              },
+              "yAxes" : [
+                {
+                  "displayName" : "Y axis",
+                  "visible" : true,
+                  "min" : "AUTO",
+                  "max" : "AUTO",
+                  "position" : "LEFT",
+                  "queryIds" : [
+                    "A"
+                  ],
+                  "defaultAxis" : true
+                }
+              ]
             },
-            "seriesOverrides": []
-          }
-        ],
-        "axes": {
-          "xAxis": {
-            "displayName": "",
-            "visible": true
-          },
-          "yAxes": [
-            {
-              "displayName": "",
-              "visible": true,
-              "min": "AUTO",
-              "max": "AUTO",
-              "position": "LEFT",
-              "queryIds": [
-                "A"
-              ],
-              "defaultAxis": true
-            }
-          ]
-        },
-        "heatmapSettings": {
-          "yAxis": "VALUE",
-          "showLabels": false
-        },
-        "singleValueSettings": {
-          "showTrend": true,
-          "showSparkLine": true,
-          "linkTileColorToThreshold": true
-        },
-        "thresholds": [
-          {
-            "axisTarget": "LEFT",
-            "rules": [
+            "heatmapSettings" : {
+              "yAxis" : "VALUE",
+              "showLabels" : false
+            },
+            "singleValueSettings" : {
+              "showTrend" : true,
+              "showSparkLine" : true,
+              "linkTileColorToThreshold" : true
+            },
+            "thresholds" : [
               {
-                "color": "#7dc540"
-              },
-              {
-                "color": "#f5d30f"
-              },
-              {
-                "color": "#dc172a"
+                "axisTarget" : "LEFT",
+                "rules" : [
+                  {
+                    "color" : "#7dc540"
+                  },
+                  {
+                    "color" : "#f5d30f"
+                  },
+                  {
+                    "color" : "#dc172a"
+                  }
+                ],
+                "visible" : true
               }
             ],
-            "visible": true
-          }
-        ],
-        "tableSettings": {
-          "hiddenColumns": []
-        },
-        "graphChartSettings": {
-          "connectNulls": false
-        },
-        "honeycombSettings": {
-          "showHive": true,
-          "showLegend": true,
-          "showLabels": false
-        }
-      },
-      "queriesSettings": {
-        "resolution": ""
-      },
-      "metricExpressions": [
-        "resolution=null&(ext:cloud.aws.kafka.memoryUsedByBrokerID:splitBy():sort(value(auto,descending)):limit(20)):limit(100):names"
-      ]
-    },
-    {
-      "name": "BytesInPerSec",
-      "tileType": "DATA_EXPLORER",
-      "configured": true,
-      "bounds": {
-        "top": 38,
-        "left": 608,
-        "width": 304,
-        "height": 304
-      },
-      "tileFilter": {},
-      "isAutoRefreshDisabled": false,
-      "customName": "Data explorer results",
-      "queries": [
-        {
-          "id": "A",
-          "metric": "ext:cloud.aws.kafka.bytesInPerSecSumByBrokerIDTopic",
-          "spaceAggregation": "AUTO",
-          "timeAggregation": "DEFAULT",
-          "splitBy": [],
-          "sortBy": "DESC",
-          "sortByDimension": "",
-          "filterBy": {
-            "nestedFilters": [],
-            "criteria": []
-          },
-          "limit": 20,
-          "rate": "NONE",
-          "enabled": true
-        }
-      ],
-      "visualConfig": {
-        "type": "GRAPH_CHART",
-        "global": {},
-        "rules": [
-          {
-            "matcher": "A:",
-            "properties": {
-              "color": "DEFAULT"
+            "tableSettings" : {
+              "hiddenColumns" : []
             },
-            "seriesOverrides": []
-          }
-        ],
-        "axes": {
-          "xAxis": {
-            "displayName": "",
-            "visible": true
-          },
-          "yAxes": [
-            {
-              "displayName": "",
-              "visible": true,
-              "min": "AUTO",
-              "max": "AUTO",
-              "position": "LEFT",
-              "queryIds": [
-                "A"
-              ],
-              "defaultAxis": true
+            "graphChartSettings" : {
+              "connectNulls" : false
+            },
+            "honeycombSettings" : {
+              "showHive" : true,
+              "showLegend" : true,
+              "showLabels" : false
             }
+          },
+          "queriesSettings" : {
+            "resolution" : ""
+          },
+          "metricExpressions" : [
+            "resolution=null&(ext:cloud.aws.kafka.partitionCountByBrokerID:splitBy():sort(value(auto,descending)):limit(20)):limit(100):names"
           ]
         },
-        "heatmapSettings": {
-          "yAxis": "VALUE",
-          "showLabels": false
-        },
-        "singleValueSettings": {
-          "showTrend": true,
-          "showSparkLine": true,
-          "linkTileColorToThreshold": true
-        },
-        "thresholds": [
-          {
-            "axisTarget": "LEFT",
-            "rules": [
-              {
-                "color": "#7dc540"
+        {
+          "name" : "MemoryUsed",
+          "tileType" : "DATA_EXPLORER",
+          "configured" : true,
+          "bounds" : {
+            "top" : 38,
+            "left" : 304,
+            "width" : 304,
+            "height" : 304
+          },
+          "tileFilter" : {},
+          "isAutoRefreshDisabled" : false,
+          "customName" : "Data explorer results",
+          "queries" : [
+            {
+              "id" : "A",
+              "metric" : "ext:cloud.aws.kafka.memoryUsedByBrokerID",
+              "spaceAggregation" : "AUTO",
+              "timeAggregation" : "DEFAULT",
+              "splitBy" : [],
+              "sortBy" : "DESC",
+              "sortByDimension" : "",
+              "filterBy" : {
+                "nestedFilters" : [],
+                "criteria" : []
               },
+              "limit" : 20,
+              "rate" : "NONE",
+              "enabled" : true
+            }
+          ],
+          "visualConfig" : {
+            "type" : "GRAPH_CHART",
+            "global" : {},
+            "rules" : [
               {
-                "color": "#f5d30f"
-              },
-              {
-                "color": "#dc172a"
+                "matcher" : "A:",
+                "properties" : {
+                  "color" : "DEFAULT"
+                },
+                "seriesOverrides" : []
               }
             ],
-            "visible": true
-          }
-        ],
-        "tableSettings": {
-          "hiddenColumns": []
-        },
-        "graphChartSettings": {
-          "connectNulls": false
-        },
-        "honeycombSettings": {
-          "showHive": true,
-          "showLegend": true,
-          "showLabels": false
-        }
-      },
-      "queriesSettings": {
-        "resolution": ""
-      },
-      "metricExpressions": [
-        "resolution=null&(ext:cloud.aws.kafka.bytesInPerSecSumByBrokerIDTopic:splitBy():sort(value(auto,descending)):limit(20)):limit(100):names"
-      ]
-    },
-    {
-      "name": "BytesOutPerSec",
-      "tileType": "DATA_EXPLORER",
-      "configured": true,
-      "bounds": {
-        "top": 38,
-        "left": 912,
-        "width": 304,
-        "height": 304
-      },
-      "tileFilter": {},
-      "isAutoRefreshDisabled": false,
-      "customName": "Data explorer results",
-      "queries": [
-        {
-          "id": "A",
-          "metric": "ext:cloud.aws.kafka.bytesOutPerSecSumByBrokerIDTopic",
-          "spaceAggregation": "AUTO",
-          "timeAggregation": "DEFAULT",
-          "splitBy": [],
-          "rate": "NONE",
-          "enabled": true
-        }
-      ],
-      "visualConfig": {
-        "type": "GRAPH_CHART",
-        "global": {},
-        "rules": [
-          {
-            "matcher": "A:",
-            "properties": {
-              "color": "DEFAULT"
+            "axes" : {
+              "xAxis" : {
+                "displayName" : "",
+                "visible" : true
+              },
+              "yAxes" : [
+                {
+                  "displayName" : "",
+                  "visible" : true,
+                  "min" : "AUTO",
+                  "max" : "AUTO",
+                  "position" : "LEFT",
+                  "queryIds" : [
+                    "A"
+                  ],
+                  "defaultAxis" : true
+                }
+              ]
             },
-            "seriesOverrides": []
-          }
-        ],
-        "axes": {
-          "xAxis": {
-            "displayName": "",
-            "visible": true
-          },
-          "yAxes": [
-            {
-              "displayName": "",
-              "visible": true,
-              "min": "AUTO",
-              "max": "AUTO",
-              "position": "LEFT",
-              "queryIds": [
-                "A"
-              ],
-              "defaultAxis": true
+            "heatmapSettings" : {
+              "yAxis" : "VALUE",
+              "showLabels" : false
+            },
+            "singleValueSettings" : {
+              "showTrend" : true,
+              "showSparkLine" : true,
+              "linkTileColorToThreshold" : true
+            },
+            "thresholds" : [
+              {
+                "axisTarget" : "LEFT",
+                "rules" : [
+                  {
+                    "color" : "#7dc540"
+                  },
+                  {
+                    "color" : "#f5d30f"
+                  },
+                  {
+                    "color" : "#dc172a"
+                  }
+                ],
+                "visible" : true
+              }
+            ],
+            "tableSettings" : {
+              "hiddenColumns" : []
+            },
+            "graphChartSettings" : {
+              "connectNulls" : false
+            },
+            "honeycombSettings" : {
+              "showHive" : true,
+              "showLegend" : true,
+              "showLabels" : false
             }
+          },
+          "queriesSettings" : {
+            "resolution" : ""
+          },
+          "metricExpressions" : [
+            "resolution=null&(ext:cloud.aws.kafka.memoryUsedByBrokerID:splitBy():sort(value(auto,descending)):limit(20)):limit(100):names"
           ]
         },
-        "heatmapSettings": {
-          "yAxis": "VALUE",
-          "showLabels": false
-        },
-        "singleValueSettings": {
-          "showTrend": true,
-          "showSparkLine": true,
-          "linkTileColorToThreshold": true
-        },
-        "thresholds": [
-          {
-            "axisTarget": "LEFT",
-            "rules": [
-              {
-                "color": "#7dc540"
+        {
+          "name" : "BytesInPerSec",
+          "tileType" : "DATA_EXPLORER",
+          "configured" : true,
+          "bounds" : {
+            "top" : 38,
+            "left" : 608,
+            "width" : 304,
+            "height" : 304
+          },
+          "tileFilter" : {},
+          "isAutoRefreshDisabled" : false,
+          "customName" : "Data explorer results",
+          "queries" : [
+            {
+              "id" : "A",
+              "metric" : "ext:cloud.aws.kafka.bytesInPerSecSumByBrokerIDTopic",
+              "spaceAggregation" : "AUTO",
+              "timeAggregation" : "DEFAULT",
+              "splitBy" : [],
+              "sortBy" : "DESC",
+              "sortByDimension" : "",
+              "filterBy" : {
+                "nestedFilters" : [],
+                "criteria" : []
               },
+              "limit" : 20,
+              "rate" : "NONE",
+              "enabled" : true
+            }
+          ],
+          "visualConfig" : {
+            "type" : "GRAPH_CHART",
+            "global" : {},
+            "rules" : [
               {
-                "color": "#f5d30f"
-              },
-              {
-                "color": "#dc172a"
+                "matcher" : "A:",
+                "properties" : {
+                  "color" : "DEFAULT"
+                },
+                "seriesOverrides" : []
               }
             ],
-            "visible": true
-          }
-        ],
-        "tableSettings": {
-          "hiddenColumns": []
-        },
-        "graphChartSettings": {
-          "connectNulls": false
-        },
-        "honeycombSettings": {
-          "showHive": true,
-          "showLegend": true,
-          "showLabels": false
-        }
-      },
-      "queriesSettings": {
-        "resolution": ""
-      },
-      "metricExpressions": [
-        "resolution=null&(ext:cloud.aws.kafka.bytesOutPerSecSumByBrokerIDTopic:splitBy():sort(value(auto,descending)):limit(20)):limit(100):names"
-      ]
-    },
-    {
-      "name": "CpuUser",
-      "tileType": "DATA_EXPLORER",
-      "configured": true,
-      "bounds": {
-        "top": 342,
-        "left": 0,
-        "width": 304,
-        "height": 304
-      },
-      "tileFilter": {},
-      "isAutoRefreshDisabled": false,
-      "customName": "Data explorer results",
-      "queries": [
-        {
-          "id": "A",
-          "metric": "ext:cloud.aws.kafka.cpuUserSumByBrokerID",
-          "spaceAggregation": "AUTO",
-          "timeAggregation": "DEFAULT",
-          "splitBy": [],
-          "rate": "NONE",
-          "enabled": true
-        }
-      ],
-      "visualConfig": {
-        "type": "GRAPH_CHART",
-        "global": {},
-        "rules": [
-          {
-            "matcher": "A:",
-            "properties": {
-              "color": "DEFAULT"
+            "axes" : {
+              "xAxis" : {
+                "displayName" : "",
+                "visible" : true
+              },
+              "yAxes" : [
+                {
+                  "displayName" : "",
+                  "visible" : true,
+                  "min" : "AUTO",
+                  "max" : "AUTO",
+                  "position" : "LEFT",
+                  "queryIds" : [
+                    "A"
+                  ],
+                  "defaultAxis" : true
+                }
+              ]
             },
-            "seriesOverrides": []
-          }
-        ],
-        "axes": {
-          "xAxis": {
-            "displayName": "",
-            "visible": true
-          },
-          "yAxes": [
-            {
-              "displayName": "",
-              "visible": true,
-              "min": "AUTO",
-              "max": "AUTO",
-              "position": "LEFT",
-              "queryIds": [
-                "A"
-              ],
-              "defaultAxis": true
+            "heatmapSettings" : {
+              "yAxis" : "VALUE",
+              "showLabels" : false
+            },
+            "singleValueSettings" : {
+              "showTrend" : true,
+              "showSparkLine" : true,
+              "linkTileColorToThreshold" : true
+            },
+            "thresholds" : [
+              {
+                "axisTarget" : "LEFT",
+                "rules" : [
+                  {
+                    "color" : "#7dc540"
+                  },
+                  {
+                    "color" : "#f5d30f"
+                  },
+                  {
+                    "color" : "#dc172a"
+                  }
+                ],
+                "visible" : true
+              }
+            ],
+            "tableSettings" : {
+              "hiddenColumns" : []
+            },
+            "graphChartSettings" : {
+              "connectNulls" : false
+            },
+            "honeycombSettings" : {
+              "showHive" : true,
+              "showLegend" : true,
+              "showLabels" : false
             }
+          },
+          "queriesSettings" : {
+            "resolution" : ""
+          },
+          "metricExpressions" : [
+            "resolution=null&(ext:cloud.aws.kafka.bytesInPerSecSumByBrokerIDTopic:splitBy():sort(value(auto,descending)):limit(20)):limit(100):names"
           ]
         },
-        "heatmapSettings": {
-          "yAxis": "VALUE",
-          "showLabels": false
-        },
-        "singleValueSettings": {
-          "showTrend": true,
-          "showSparkLine": true,
-          "linkTileColorToThreshold": true
-        },
-        "thresholds": [
-          {
-            "axisTarget": "LEFT",
-            "rules": [
+        {
+          "name" : "BytesOutPerSec",
+          "tileType" : "DATA_EXPLORER",
+          "configured" : true,
+          "bounds" : {
+            "top" : 38,
+            "left" : 912,
+            "width" : 304,
+            "height" : 304
+          },
+          "tileFilter" : {},
+          "isAutoRefreshDisabled" : false,
+          "customName" : "Data explorer results",
+          "queries" : [
+            {
+              "id" : "A",
+              "metric" : "ext:cloud.aws.kafka.bytesOutPerSecSumByBrokerIDTopic",
+              "spaceAggregation" : "AUTO",
+              "timeAggregation" : "DEFAULT",
+              "splitBy" : [],
+              "rate" : "NONE",
+              "enabled" : true
+            }
+          ],
+          "visualConfig" : {
+            "type" : "GRAPH_CHART",
+            "global" : {},
+            "rules" : [
               {
-                "color": "#7dc540"
-              },
-              {
-                "color": "#f5d30f"
-              },
-              {
-                "color": "#dc172a"
+                "matcher" : "A:",
+                "properties" : {
+                  "color" : "DEFAULT"
+                },
+                "seriesOverrides" : []
               }
             ],
-            "visible": true
-          }
-        ],
-        "tableSettings": {
-          "hiddenColumns": []
-        },
-        "graphChartSettings": {
-          "connectNulls": false
-        },
-        "honeycombSettings": {
-          "showHive": true,
-          "showLegend": true,
-          "showLabels": false
-        }
-      },
-      "queriesSettings": {
-        "resolution": ""
-      },
-      "metricExpressions": [
-        "resolution=null&(ext:cloud.aws.kafka.cpuUserSumByBrokerID:splitBy():sort(value(auto,descending)):limit(20)):limit(100):names"
-      ]
-    },
-    {
-      "name": "CpuSystem",
-      "tileType": "DATA_EXPLORER",
-      "configured": true,
-      "bounds": {
-        "top": 342,
-        "left": 304,
-        "width": 304,
-        "height": 304
-      },
-      "tileFilter": {},
-      "isAutoRefreshDisabled": false,
-      "customName": "Data explorer results",
-      "queries": [
-        {
-          "id": "A",
-          "metric": "ext:cloud.aws.kafka.cpuSystemSumByBrokerID",
-          "spaceAggregation": "AUTO",
-          "timeAggregation": "DEFAULT",
-          "splitBy": [],
-          "sortBy": "DESC",
-          "sortByDimension": "",
-          "filterBy": {
-            "nestedFilters": [],
-            "criteria": []
-          },
-          "limit": 20,
-          "rate": "NONE",
-          "enabled": true
-        }
-      ],
-      "visualConfig": {
-        "type": "GRAPH_CHART",
-        "global": {},
-        "rules": [
-          {
-            "matcher": "A:",
-            "properties": {
-              "color": "DEFAULT"
+            "axes" : {
+              "xAxis" : {
+                "displayName" : "",
+                "visible" : true
+              },
+              "yAxes" : [
+                {
+                  "displayName" : "",
+                  "visible" : true,
+                  "min" : "AUTO",
+                  "max" : "AUTO",
+                  "position" : "LEFT",
+                  "queryIds" : [
+                    "A"
+                  ],
+                  "defaultAxis" : true
+                }
+              ]
             },
-            "seriesOverrides": []
-          }
-        ],
-        "axes": {
-          "xAxis": {
-            "displayName": "",
-            "visible": true
-          },
-          "yAxes": [
-            {
-              "displayName": "",
-              "visible": true,
-              "min": "AUTO",
-              "max": "AUTO",
-              "position": "LEFT",
-              "queryIds": [
-                "A"
-              ],
-              "defaultAxis": true
+            "heatmapSettings" : {
+              "yAxis" : "VALUE",
+              "showLabels" : false
+            },
+            "singleValueSettings" : {
+              "showTrend" : true,
+              "showSparkLine" : true,
+              "linkTileColorToThreshold" : true
+            },
+            "thresholds" : [
+              {
+                "axisTarget" : "LEFT",
+                "rules" : [
+                  {
+                    "color" : "#7dc540"
+                  },
+                  {
+                    "color" : "#f5d30f"
+                  },
+                  {
+                    "color" : "#dc172a"
+                  }
+                ],
+                "visible" : true
+              }
+            ],
+            "tableSettings" : {
+              "hiddenColumns" : []
+            },
+            "graphChartSettings" : {
+              "connectNulls" : false
+            },
+            "honeycombSettings" : {
+              "showHive" : true,
+              "showLegend" : true,
+              "showLabels" : false
             }
+          },
+          "queriesSettings" : {
+            "resolution" : ""
+          },
+          "metricExpressions" : [
+            "resolution=null&(ext:cloud.aws.kafka.bytesOutPerSecSumByBrokerIDTopic:splitBy():sort(value(auto,descending)):limit(20)):limit(100):names"
           ]
         },
-        "heatmapSettings": {
-          "yAxis": "VALUE",
-          "showLabels": false
-        },
-        "singleValueSettings": {
-          "showTrend": true,
-          "showSparkLine": true,
-          "linkTileColorToThreshold": true
-        },
-        "thresholds": [
-          {
-            "axisTarget": "LEFT",
-            "rules": [
+        {
+          "name" : "CpuUser",
+          "tileType" : "DATA_EXPLORER",
+          "configured" : true,
+          "bounds" : {
+            "top" : 342,
+            "left" : 0,
+            "width" : 304,
+            "height" : 304
+          },
+          "tileFilter" : {},
+          "isAutoRefreshDisabled" : false,
+          "customName" : "Data explorer results",
+          "queries" : [
+            {
+              "id" : "A",
+              "metric" : "ext:cloud.aws.kafka.cpuUserSumByBrokerID",
+              "spaceAggregation" : "AUTO",
+              "timeAggregation" : "DEFAULT",
+              "splitBy" : [],
+              "rate" : "NONE",
+              "enabled" : true
+            }
+          ],
+          "visualConfig" : {
+            "type" : "GRAPH_CHART",
+            "global" : {},
+            "rules" : [
               {
-                "color": "#7dc540"
-              },
-              {
-                "color": "#f5d30f"
-              },
-              {
-                "color": "#dc172a"
+                "matcher" : "A:",
+                "properties" : {
+                  "color" : "DEFAULT"
+                },
+                "seriesOverrides" : []
               }
             ],
-            "visible": true
-          }
-        ],
-        "tableSettings": {
-          "hiddenColumns": []
-        },
-        "graphChartSettings": {
-          "connectNulls": false
-        },
-        "honeycombSettings": {
-          "showHive": true,
-          "showLegend": true,
-          "showLabels": false
-        }
-      },
-      "queriesSettings": {
-        "resolution": ""
-      },
-      "metricExpressions": [
-        "resolution=null&(ext:cloud.aws.kafka.cpuSystemSumByBrokerID:splitBy():sort(value(auto,descending)):limit(20)):limit(100):names"
-      ]
-    },
-    {
-      "name": "KafkaDataLogsDiskUsed",
-      "tileType": "DATA_EXPLORER",
-      "configured": true,
-      "bounds": {
-        "top": 342,
-        "left": 608,
-        "width": 304,
-        "height": 304
-      },
-      "tileFilter": {},
-      "isAutoRefreshDisabled": false,
-      "customName": "Data explorer results",
-      "queries": [
-        {
-          "id": "A",
-          "metric": "ext:cloud.aws.kafka.kafkaAppLogsDiskUsedByBrokerID",
-          "spaceAggregation": "AUTO",
-          "timeAggregation": "DEFAULT",
-          "splitBy": [],
-          "rate": "NONE",
-          "enabled": true
-        }
-      ],
-      "visualConfig": {
-        "type": "GRAPH_CHART",
-        "global": {},
-        "rules": [
-          {
-            "matcher": "A:",
-            "properties": {
-              "color": "DEFAULT"
+            "axes" : {
+              "xAxis" : {
+                "displayName" : "",
+                "visible" : true
+              },
+              "yAxes" : [
+                {
+                  "displayName" : "",
+                  "visible" : true,
+                  "min" : "AUTO",
+                  "max" : "AUTO",
+                  "position" : "LEFT",
+                  "queryIds" : [
+                    "A"
+                  ],
+                  "defaultAxis" : true
+                }
+              ]
             },
-            "seriesOverrides": []
-          }
-        ],
-        "axes": {
-          "xAxis": {
-            "displayName": "",
-            "visible": true
-          },
-          "yAxes": [
-            {
-              "displayName": "",
-              "visible": true,
-              "min": "AUTO",
-              "max": "AUTO",
-              "position": "LEFT",
-              "queryIds": [
-                "A"
-              ],
-              "defaultAxis": true
+            "heatmapSettings" : {
+              "yAxis" : "VALUE",
+              "showLabels" : false
+            },
+            "singleValueSettings" : {
+              "showTrend" : true,
+              "showSparkLine" : true,
+              "linkTileColorToThreshold" : true
+            },
+            "thresholds" : [
+              {
+                "axisTarget" : "LEFT",
+                "rules" : [
+                  {
+                    "color" : "#7dc540"
+                  },
+                  {
+                    "color" : "#f5d30f"
+                  },
+                  {
+                    "color" : "#dc172a"
+                  }
+                ],
+                "visible" : true
+              }
+            ],
+            "tableSettings" : {
+              "hiddenColumns" : []
+            },
+            "graphChartSettings" : {
+              "connectNulls" : false
+            },
+            "honeycombSettings" : {
+              "showHive" : true,
+              "showLegend" : true,
+              "showLabels" : false
             }
+          },
+          "queriesSettings" : {
+            "resolution" : ""
+          },
+          "metricExpressions" : [
+            "resolution=null&(ext:cloud.aws.kafka.cpuUserSumByBrokerID:splitBy():sort(value(auto,descending)):limit(20)):limit(100):names"
           ]
         },
-        "heatmapSettings": {
-          "yAxis": "VALUE",
-          "showLabels": false
-        },
-        "singleValueSettings": {
-          "showTrend": true,
-          "showSparkLine": true,
-          "linkTileColorToThreshold": true
-        },
-        "thresholds": [
-          {
-            "axisTarget": "LEFT",
-            "rules": [
-              {
-                "color": "#7dc540"
+        {
+          "name" : "CpuSystem",
+          "tileType" : "DATA_EXPLORER",
+          "configured" : true,
+          "bounds" : {
+            "top" : 342,
+            "left" : 304,
+            "width" : 304,
+            "height" : 304
+          },
+          "tileFilter" : {},
+          "isAutoRefreshDisabled" : false,
+          "customName" : "Data explorer results",
+          "queries" : [
+            {
+              "id" : "A",
+              "metric" : "ext:cloud.aws.kafka.cpuSystemSumByBrokerID",
+              "spaceAggregation" : "AUTO",
+              "timeAggregation" : "DEFAULT",
+              "splitBy" : [],
+              "sortBy" : "DESC",
+              "sortByDimension" : "",
+              "filterBy" : {
+                "nestedFilters" : [],
+                "criteria" : []
               },
+              "limit" : 20,
+              "rate" : "NONE",
+              "enabled" : true
+            }
+          ],
+          "visualConfig" : {
+            "type" : "GRAPH_CHART",
+            "global" : {},
+            "rules" : [
               {
-                "color": "#f5d30f"
-              },
-              {
-                "color": "#dc172a"
+                "matcher" : "A:",
+                "properties" : {
+                  "color" : "DEFAULT"
+                },
+                "seriesOverrides" : []
               }
             ],
-            "visible": true
-          }
-        ],
-        "tableSettings": {
-          "hiddenColumns": []
-        },
-        "graphChartSettings": {
-          "connectNulls": false
-        },
-        "honeycombSettings": {
-          "showHive": true,
-          "showLegend": true,
-          "showLabels": false
-        }
-      },
-      "queriesSettings": {
-        "resolution": ""
-      },
-      "metricExpressions": [
-        "resolution=null&(ext:cloud.aws.kafka.kafkaAppLogsDiskUsedByBrokerID:splitBy():sort(value(auto,descending)):limit(20)):limit(100):names"
-      ]
-    },
-    {
-      "name": "NetworkTxPackets",
-      "tileType": "DATA_EXPLORER",
-      "configured": true,
-      "bounds": {
-        "top": 342,
-        "left": 912,
-        "width": 304,
-        "height": 304
-      },
-      "tileFilter": {},
-      "isAutoRefreshDisabled": false,
-      "customName": "Data explorer results",
-      "queries": [
-        {
-          "id": "A",
-          "metric": "ext:cloud.aws.kafka.networkTxPacketsByBrokerID",
-          "spaceAggregation": "AUTO",
-          "timeAggregation": "DEFAULT",
-          "splitBy": [],
-          "sortBy": "DESC",
-          "sortByDimension": "",
-          "filterBy": {
-            "nestedFilters": [],
-            "criteria": []
-          },
-          "limit": 20,
-          "rate": "NONE",
-          "enabled": true
-        }
-      ],
-      "visualConfig": {
-        "type": "GRAPH_CHART",
-        "global": {},
-        "rules": [
-          {
-            "matcher": "A:",
-            "properties": {
-              "color": "DEFAULT"
+            "axes" : {
+              "xAxis" : {
+                "displayName" : "",
+                "visible" : true
+              },
+              "yAxes" : [
+                {
+                  "displayName" : "",
+                  "visible" : true,
+                  "min" : "AUTO",
+                  "max" : "AUTO",
+                  "position" : "LEFT",
+                  "queryIds" : [
+                    "A"
+                  ],
+                  "defaultAxis" : true
+                }
+              ]
             },
-            "seriesOverrides": []
-          }
-        ],
-        "axes": {
-          "xAxis": {
-            "displayName": "",
-            "visible": true
-          },
-          "yAxes": [
-            {
-              "displayName": "",
-              "visible": true,
-              "min": "AUTO",
-              "max": "AUTO",
-              "position": "LEFT",
-              "queryIds": [
-                "A"
-              ],
-              "defaultAxis": true
+            "heatmapSettings" : {
+              "yAxis" : "VALUE",
+              "showLabels" : false
+            },
+            "singleValueSettings" : {
+              "showTrend" : true,
+              "showSparkLine" : true,
+              "linkTileColorToThreshold" : true
+            },
+            "thresholds" : [
+              {
+                "axisTarget" : "LEFT",
+                "rules" : [
+                  {
+                    "color" : "#7dc540"
+                  },
+                  {
+                    "color" : "#f5d30f"
+                  },
+                  {
+                    "color" : "#dc172a"
+                  }
+                ],
+                "visible" : true
+              }
+            ],
+            "tableSettings" : {
+              "hiddenColumns" : []
+            },
+            "graphChartSettings" : {
+              "connectNulls" : false
+            },
+            "honeycombSettings" : {
+              "showHive" : true,
+              "showLegend" : true,
+              "showLabels" : false
             }
+          },
+          "queriesSettings" : {
+            "resolution" : ""
+          },
+          "metricExpressions" : [
+            "resolution=null&(ext:cloud.aws.kafka.cpuSystemSumByBrokerID:splitBy():sort(value(auto,descending)):limit(20)):limit(100):names"
           ]
         },
-        "heatmapSettings": {
-          "yAxis": "VALUE",
-          "showLabels": false
-        },
-        "singleValueSettings": {
-          "showTrend": true,
-          "showSparkLine": true,
-          "linkTileColorToThreshold": true
-        },
-        "thresholds": [
-          {
-            "axisTarget": "LEFT",
-            "rules": [
+        {
+          "name" : "KafkaDataLogsDiskUsed",
+          "tileType" : "DATA_EXPLORER",
+          "configured" : true,
+          "bounds" : {
+            "top" : 342,
+            "left" : 608,
+            "width" : 304,
+            "height" : 304
+          },
+          "tileFilter" : {},
+          "isAutoRefreshDisabled" : false,
+          "customName" : "Data explorer results",
+          "queries" : [
+            {
+              "id" : "A",
+              "metric" : "ext:cloud.aws.kafka.kafkaAppLogsDiskUsedByBrokerID",
+              "spaceAggregation" : "AUTO",
+              "timeAggregation" : "DEFAULT",
+              "splitBy" : [],
+              "rate" : "NONE",
+              "enabled" : true
+            }
+          ],
+          "visualConfig" : {
+            "type" : "GRAPH_CHART",
+            "global" : {},
+            "rules" : [
               {
-                "color": "#7dc540"
-              },
-              {
-                "color": "#f5d30f"
-              },
-              {
-                "color": "#dc172a"
+                "matcher" : "A:",
+                "properties" : {
+                  "color" : "DEFAULT"
+                },
+                "seriesOverrides" : []
               }
             ],
-            "visible": true
-          }
-        ],
-        "tableSettings": {
-          "hiddenColumns": []
-        },
-        "graphChartSettings": {
-          "connectNulls": false
-        },
-        "honeycombSettings": {
-          "showHive": true,
-          "showLegend": true,
-          "showLabels": false
-        }
-      },
-      "queriesSettings": {
-        "resolution": ""
-      },
-      "metricExpressions": [
-        "resolution=null&(ext:cloud.aws.kafka.networkTxPacketsByBrokerID:splitBy():sort(value(auto,descending)):limit(20)):limit(100):names"
-      ]
-    },
-    {
-      "name": "NetworkRxPackets",
-      "tileType": "DATA_EXPLORER",
-      "configured": true,
-      "bounds": {
-        "top": 38,
-        "left": 1216,
-        "width": 304,
-        "height": 304
-      },
-      "tileFilter": {},
-      "isAutoRefreshDisabled": false,
-      "customName": "Data explorer results",
-      "queries": [
-        {
-          "id": "A",
-          "metric": "ext:cloud.aws.kafka.networkRxPacketsByBrokerID",
-          "spaceAggregation": "AUTO",
-          "timeAggregation": "DEFAULT",
-          "splitBy": [],
-          "sortBy": "DESC",
-          "sortByDimension": "",
-          "filterBy": {
-            "nestedFilters": [],
-            "criteria": []
-          },
-          "limit": 20,
-          "rate": "NONE",
-          "enabled": true
-        }
-      ],
-      "visualConfig": {
-        "type": "GRAPH_CHART",
-        "global": {},
-        "rules": [
-          {
-            "matcher": "A:",
-            "properties": {
-              "color": "DEFAULT"
+            "axes" : {
+              "xAxis" : {
+                "displayName" : "",
+                "visible" : true
+              },
+              "yAxes" : [
+                {
+                  "displayName" : "",
+                  "visible" : true,
+                  "min" : "AUTO",
+                  "max" : "AUTO",
+                  "position" : "LEFT",
+                  "queryIds" : [
+                    "A"
+                  ],
+                  "defaultAxis" : true
+                }
+              ]
             },
-            "seriesOverrides": []
-          }
-        ],
-        "axes": {
-          "xAxis": {
-            "displayName": "",
-            "visible": true
-          },
-          "yAxes": [
-            {
-              "displayName": "",
-              "visible": true,
-              "min": "AUTO",
-              "max": "AUTO",
-              "position": "LEFT",
-              "queryIds": [
-                "A"
-              ],
-              "defaultAxis": true
+            "heatmapSettings" : {
+              "yAxis" : "VALUE",
+              "showLabels" : false
+            },
+            "singleValueSettings" : {
+              "showTrend" : true,
+              "showSparkLine" : true,
+              "linkTileColorToThreshold" : true
+            },
+            "thresholds" : [
+              {
+                "axisTarget" : "LEFT",
+                "rules" : [
+                  {
+                    "color" : "#7dc540"
+                  },
+                  {
+                    "color" : "#f5d30f"
+                  },
+                  {
+                    "color" : "#dc172a"
+                  }
+                ],
+                "visible" : true
+              }
+            ],
+            "tableSettings" : {
+              "hiddenColumns" : []
+            },
+            "graphChartSettings" : {
+              "connectNulls" : false
+            },
+            "honeycombSettings" : {
+              "showHive" : true,
+              "showLegend" : true,
+              "showLabels" : false
             }
+          },
+          "queriesSettings" : {
+            "resolution" : ""
+          },
+          "metricExpressions" : [
+            "resolution=null&(ext:cloud.aws.kafka.kafkaAppLogsDiskUsedByBrokerID:splitBy():sort(value(auto,descending)):limit(20)):limit(100):names"
           ]
         },
-        "heatmapSettings": {
-          "yAxis": "VALUE",
-          "showLabels": false
-        },
-        "singleValueSettings": {
-          "showTrend": true,
-          "showSparkLine": true,
-          "linkTileColorToThreshold": true
-        },
-        "thresholds": [
-          {
-            "axisTarget": "LEFT",
-            "rules": [
-              {
-                "color": "#7dc540"
+        {
+          "name" : "NetworkTxPackets",
+          "tileType" : "DATA_EXPLORER",
+          "configured" : true,
+          "bounds" : {
+            "top" : 342,
+            "left" : 912,
+            "width" : 304,
+            "height" : 304
+          },
+          "tileFilter" : {},
+          "isAutoRefreshDisabled" : false,
+          "customName" : "Data explorer results",
+          "queries" : [
+            {
+              "id" : "A",
+              "metric" : "ext:cloud.aws.kafka.networkTxPacketsByBrokerID",
+              "spaceAggregation" : "AUTO",
+              "timeAggregation" : "DEFAULT",
+              "splitBy" : [],
+              "sortBy" : "DESC",
+              "sortByDimension" : "",
+              "filterBy" : {
+                "nestedFilters" : [],
+                "criteria" : []
               },
+              "limit" : 20,
+              "rate" : "NONE",
+              "enabled" : true
+            }
+          ],
+          "visualConfig" : {
+            "type" : "GRAPH_CHART",
+            "global" : {},
+            "rules" : [
               {
-                "color": "#f5d30f"
-              },
-              {
-                "color": "#dc172a"
+                "matcher" : "A:",
+                "properties" : {
+                  "color" : "DEFAULT"
+                },
+                "seriesOverrides" : []
               }
             ],
-            "visible": true
-          }
-        ],
-        "tableSettings": {
-          "hiddenColumns": []
+            "axes" : {
+              "xAxis" : {
+                "displayName" : "",
+                "visible" : true
+              },
+              "yAxes" : [
+                {
+                  "displayName" : "",
+                  "visible" : true,
+                  "min" : "AUTO",
+                  "max" : "AUTO",
+                  "position" : "LEFT",
+                  "queryIds" : [
+                    "A"
+                  ],
+                  "defaultAxis" : true
+                }
+              ]
+            },
+            "heatmapSettings" : {
+              "yAxis" : "VALUE",
+              "showLabels" : false
+            },
+            "singleValueSettings" : {
+              "showTrend" : true,
+              "showSparkLine" : true,
+              "linkTileColorToThreshold" : true
+            },
+            "thresholds" : [
+              {
+                "axisTarget" : "LEFT",
+                "rules" : [
+                  {
+                    "color" : "#7dc540"
+                  },
+                  {
+                    "color" : "#f5d30f"
+                  },
+                  {
+                    "color" : "#dc172a"
+                  }
+                ],
+                "visible" : true
+              }
+            ],
+            "tableSettings" : {
+              "hiddenColumns" : []
+            },
+            "graphChartSettings" : {
+              "connectNulls" : false
+            },
+            "honeycombSettings" : {
+              "showHive" : true,
+              "showLegend" : true,
+              "showLabels" : false
+            }
+          },
+          "queriesSettings" : {
+            "resolution" : ""
+          },
+          "metricExpressions" : [
+            "resolution=null&(ext:cloud.aws.kafka.networkTxPacketsByBrokerID:splitBy():sort(value(auto,descending)):limit(20)):limit(100):names"
+          ]
         },
-        "graphChartSettings": {
-          "connectNulls": false
-        },
-        "honeycombSettings": {
-          "showHive": true,
-          "showLegend": true,
-          "showLabels": false
+        {
+          "name" : "NetworkRxPackets",
+          "tileType" : "DATA_EXPLORER",
+          "configured" : true,
+          "bounds" : {
+            "top" : 38,
+            "left" : 1216,
+            "width" : 304,
+            "height" : 304
+          },
+          "tileFilter" : {},
+          "isAutoRefreshDisabled" : false,
+          "customName" : "Data explorer results",
+          "queries" : [
+            {
+              "id" : "A",
+              "metric" : "ext:cloud.aws.kafka.networkRxPacketsByBrokerID",
+              "spaceAggregation" : "AUTO",
+              "timeAggregation" : "DEFAULT",
+              "splitBy" : [],
+              "sortBy" : "DESC",
+              "sortByDimension" : "",
+              "filterBy" : {
+                "nestedFilters" : [],
+                "criteria" : []
+              },
+              "limit" : 20,
+              "rate" : "NONE",
+              "enabled" : true
+            }
+          ],
+          "visualConfig" : {
+            "type" : "GRAPH_CHART",
+            "global" : {},
+            "rules" : [
+              {
+                "matcher" : "A:",
+                "properties" : {
+                  "color" : "DEFAULT"
+                },
+                "seriesOverrides" : []
+              }
+            ],
+            "axes" : {
+              "xAxis" : {
+                "displayName" : "",
+                "visible" : true
+              },
+              "yAxes" : [
+                {
+                  "displayName" : "",
+                  "visible" : true,
+                  "min" : "AUTO",
+                  "max" : "AUTO",
+                  "position" : "LEFT",
+                  "queryIds" : [
+                    "A"
+                  ],
+                  "defaultAxis" : true
+                }
+              ]
+            },
+            "heatmapSettings" : {
+              "yAxis" : "VALUE",
+              "showLabels" : false
+            },
+            "singleValueSettings" : {
+              "showTrend" : true,
+              "showSparkLine" : true,
+              "linkTileColorToThreshold" : true
+            },
+            "thresholds" : [
+              {
+                "axisTarget" : "LEFT",
+                "rules" : [
+                  {
+                    "color" : "#7dc540"
+                  },
+                  {
+                    "color" : "#f5d30f"
+                  },
+                  {
+                    "color" : "#dc172a"
+                  }
+                ],
+                "visible" : true
+              }
+            ],
+            "tableSettings" : {
+              "hiddenColumns" : []
+            },
+            "graphChartSettings" : {
+              "connectNulls" : false
+            },
+            "honeycombSettings" : {
+              "showHive" : true,
+              "showLegend" : true,
+              "showLabels" : false
+            }
+          },
+          "queriesSettings" : {
+            "resolution" : ""
+          },
+          "metricExpressions" : [
+            "resolution=null&(ext:cloud.aws.kafka.networkRxPacketsByBrokerID:splitBy():sort(value(auto,descending)):limit(20)):limit(100):names"
+          ]
         }
-      },
-      "queriesSettings": {
-        "resolution": ""
-      },
-      "metricExpressions": [
-        "resolution=null&(ext:cloud.aws.kafka.networkRxPacketsByBrokerID:splitBy():sort(value(auto,descending)):limit(20)):limit(100):names"
       ]
-    }   
-  ]
-})
+  })
 }
