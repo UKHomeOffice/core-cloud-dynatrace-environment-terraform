@@ -12,6 +12,12 @@ resource "dynatrace_json_dashboard" "this" {
       "shared": true,
       "owner": "e-Mohammed.Shareef42@eng.homeoffice.gov.uk",
       "popularity": 1,
+      "dynamicFilters": {
+        "filters": [
+          "CUSTOM_DIMENSION:Host"
+        ],
+        "genericTagFilters": []
+      },
       "hasConsistentColors": false
     },
     "tiles": [
@@ -1403,10 +1409,10 @@ resource "dynatrace_json_dashboard" "this" {
   }
 EOT
 }
-# data "dynatrace_iam_group" "ho_cc_platform_engineer_env_admin" { 
+# data "dynatrace_iam_group" "ho_cc_platform_engineer_env_admin" {
 #   name = var.dt_admin_group_name
 # }
-# oauth client required for this data source, will bring back this into conifg once we have oauth client configured. 
+# oauth client required for this data source, will bring back this into conifg once we have oauth client configured.
 
 
 resource "dynatrace_dashboard_sharing" "this" {
