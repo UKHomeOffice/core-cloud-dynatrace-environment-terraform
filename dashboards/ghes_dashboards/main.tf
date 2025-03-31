@@ -1,17 +1,24 @@
 resource "dynatrace_json_dashboard" "this" {
   contents = <<EOT
-{
+  {
     "metadata": {
       "configurationVersions": [
         7
       ],
-      "clusterVersion": "1.305.88.20250104-012102"
+      "clusterVersion": "1.311.42.20250325-145552"
     },
+    "id": "69bb2fe9-1f47-4226-b729-73e4aac4b081",
     "dashboardMetadata": {
       "name": "GHES Monitoring Dashboard",
       "shared": true,
       "owner": "e-Mohammed.Shareef42@eng.homeoffice.gov.uk",
       "popularity": 1,
+      "dynamicFilters": {
+        "filters": [
+          "CUSTOM_DIMENSION:Host"
+        ],
+        "genericTagFilters": []
+      },
       "hasConsistentColors": false
     },
     "tiles": [
@@ -72,7 +79,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "A",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.cpu.idle:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):avg",
+            "metricSelector": "builtin:host.cpu.idle:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C)):avg",
             "rate": "NONE",
             "enabled": true
           },
@@ -80,7 +87,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "B",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.cpu.iowait:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):avg",
+            "metricSelector": "builtin:host.cpu.iowait:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C)):avg",
             "rate": "NONE",
             "enabled": true
           },
@@ -88,7 +95,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "C",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.cpu.user:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):avg",
+            "metricSelector": "builtin:host.cpu.user:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C)):avg",
             "rate": "NONE",
             "enabled": true
           },
@@ -96,7 +103,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "D",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.cpu.system:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):avg",
+            "metricSelector": "builtin:host.cpu.system:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C)):avg",
             "rate": "NONE",
             "enabled": true
           },
@@ -104,7 +111,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "E",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.cpu.steal:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):avg",
+            "metricSelector": "builtin:host.cpu.steal:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C)):avg",
             "rate": "NONE",
             "enabled": true
           },
@@ -112,7 +119,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "F",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.cpu.other:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):avg",
+            "metricSelector": "builtin:host.cpu.other:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C)):avg",
             "rate": "NONE",
             "enabled": true
           }
@@ -220,7 +227,7 @@ resource "dynatrace_json_dashboard" "this" {
           "resolution": ""
         },
         "metricExpressions": [
-          "resolution=null&(builtin:host.cpu.idle:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):avg):limit(100):names,(builtin:host.cpu.iowait:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):avg):limit(100):names,(builtin:host.cpu.user:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):avg):limit(100):names,(builtin:host.cpu.system:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):avg):limit(100):names,(builtin:host.cpu.steal:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):avg):limit(100):names,(builtin:host.cpu.other:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):avg):limit(100):names"
+          "resolution=null&(builtin:host.cpu.idle:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C)):avg):limit(100):names,(builtin:host.cpu.iowait:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C)):avg):limit(100):names,(builtin:host.cpu.user:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C)):avg):limit(100):names,(builtin:host.cpu.system:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C)):avg):limit(100):names,(builtin:host.cpu.steal:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C)):avg):limit(100):names,(builtin:host.cpu.other:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C)):avg):limit(100):names"
         ]
       },
       {
@@ -241,7 +248,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "A",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.mem.total:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))",
+            "metricSelector": "builtin:host.mem.total:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C))",
             "rate": "NONE",
             "enabled": true
           },
@@ -249,7 +256,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "B",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.mem.recl:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))",
+            "metricSelector": "builtin:host.mem.recl:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C))",
             "rate": "NONE",
             "enabled": true
           },
@@ -257,7 +264,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "C",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.mem.used:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))",
+            "metricSelector": "builtin:host.mem.used:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C))",
             "rate": "NONE",
             "enabled": true
           },
@@ -265,7 +272,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "D",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.mem.kernel:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))",
+            "metricSelector": "builtin:host.mem.kernel:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C))",
             "rate": "NONE",
             "enabled": true
           }
@@ -341,7 +348,7 @@ resource "dynatrace_json_dashboard" "this" {
           "resolution": ""
         },
         "metricExpressions": [
-          "resolution=null&(builtin:host.mem.total:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))):limit(100):names,(builtin:host.mem.recl:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))):limit(100):names,(builtin:host.mem.used:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))):limit(100):names,(builtin:host.mem.kernel:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))):limit(100):names"
+          "resolution=null&(builtin:host.mem.total:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C))):limit(100):names,(builtin:host.mem.recl:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C))):limit(100):names,(builtin:host.mem.used:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C))):limit(100):names,(builtin:host.mem.kernel:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C))):limit(100):names"
         ]
       },
       {
@@ -362,7 +369,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "A",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.net.nic.trafficIn:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):merge(\"dt.entity.network_interface\"):sum",
+            "metricSelector": "builtin:host.net.nic.trafficIn:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C)):merge(\"dt.entity.network_interface\"):sum",
             "rate": "NONE",
             "enabled": true
           },
@@ -370,7 +377,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "B",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.net.nic.trafficOut:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):merge(\"dt.entity.network_interface\"):sum",
+            "metricSelector": "builtin:host.net.nic.trafficOut:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C)):merge(\"dt.entity.network_interface\"):sum",
             "rate": "NONE",
             "enabled": true
           }
@@ -430,7 +437,7 @@ resource "dynatrace_json_dashboard" "this" {
           "resolution": ""
         },
         "metricExpressions": [
-          "resolution=null&(builtin:host.net.nic.trafficIn:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):merge(\"dt.entity.network_interface\"):sum):limit(100):names,(builtin:host.net.nic.trafficOut:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):merge(\"dt.entity.network_interface\"):sum):limit(100):names"
+          "resolution=null&(builtin:host.net.nic.trafficIn:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C)):merge(\"dt.entity.network_interface\"):sum):limit(100):names,(builtin:host.net.nic.trafficOut:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C)):merge(\"dt.entity.network_interface\"):sum):limit(100):names"
         ]
       },
       {
@@ -451,7 +458,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "A",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:tech.generic.cpu.usage:filter(or(in(\"dt.entity.process_group_instance\",entitySelector(\"type(PROCESS_GROUP_INSTANCE) AND fromRelationship.isProcessOf(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy(\"dt.entity.process_group_instance\"):sort(value(auto,descending)):limit(10):avg",
+            "metricSelector": "builtin:tech.generic.cpu.usage:filter(or(in(\"dt.entity.process_group_instance\",entitySelector(\"type(PROCESS_GROUP_INSTANCE) AND fromRelationship.isProcessOf(type(HOST),entityId(HOST-9BF585812D884C6C))\")))):splitBy(\"dt.entity.process_group_instance\"):sort(value(auto,descending)):limit(10):avg",
             "rate": "NONE",
             "enabled": true
           }
@@ -502,7 +509,7 @@ resource "dynatrace_json_dashboard" "this" {
           "resolution": ""
         },
         "metricExpressions": [
-          "resolution=null&(builtin:tech.generic.cpu.usage:filter(or(in(\"dt.entity.process_group_instance\",entitySelector(\"type(PROCESS_GROUP_INSTANCE) AND fromRelationship.isProcessOf(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy(\"dt.entity.process_group_instance\"):sort(value(auto,descending)):limit(10):avg):limit(100):names"
+          "resolution=null&(builtin:tech.generic.cpu.usage:filter(or(in(\"dt.entity.process_group_instance\",entitySelector(\"type(PROCESS_GROUP_INSTANCE) AND fromRelationship.isProcessOf(type(HOST),entityId(HOST-9BF585812D884C6C))\")))):splitBy(\"dt.entity.process_group_instance\"):sort(value(auto,descending)):limit(10):avg):limit(100):names"
         ]
       },
       {
@@ -523,7 +530,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "A",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:tech.generic.mem.workingSetSize:filter(or(in(\"dt.entity.process_group_instance\",entitySelector(\"type(PROCESS_GROUP_INSTANCE) AND fromRelationship.isProcessOf(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy(\"dt.entity.process_group_instance\"):sort(value(auto,descending)):limit(10):avg",
+            "metricSelector": "builtin:tech.generic.mem.workingSetSize:filter(or(in(\"dt.entity.process_group_instance\",entitySelector(\"type(PROCESS_GROUP_INSTANCE) AND fromRelationship.isProcessOf(type(HOST),entityId(HOST-9BF585812D884C6C))\")))):splitBy(\"dt.entity.process_group_instance\"):sort(value(auto,descending)):limit(10):avg",
             "rate": "NONE",
             "enabled": true
           }
@@ -574,7 +581,7 @@ resource "dynatrace_json_dashboard" "this" {
           "resolution": ""
         },
         "metricExpressions": [
-          "resolution=null&(builtin:tech.generic.mem.workingSetSize:filter(or(in(\"dt.entity.process_group_instance\",entitySelector(\"type(PROCESS_GROUP_INSTANCE) AND fromRelationship.isProcessOf(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy(\"dt.entity.process_group_instance\"):sort(value(auto,descending)):limit(10):avg):limit(100):names"
+          "resolution=null&(builtin:tech.generic.mem.workingSetSize:filter(or(in(\"dt.entity.process_group_instance\",entitySelector(\"type(PROCESS_GROUP_INSTANCE) AND fromRelationship.isProcessOf(type(HOST),entityId(HOST-9BF585812D884C6C))\")))):splitBy(\"dt.entity.process_group_instance\"):sort(value(auto,descending)):limit(10):avg):limit(100):names"
         ]
       },
       {
@@ -595,7 +602,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "A",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "((builtin:host.disk.used:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(${var.ghes_hostname}))\")))))+(builtin:host.disk.avail:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(${var.ghes_hostname}))\")))))):splitBy(\"dt.entity.host\"):sum",
+            "metricSelector": "((builtin:host.disk.used:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C)):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(HOST-9BF585812D884C6C))\")))))+(builtin:host.disk.avail:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C)):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(HOST-9BF585812D884C6C))\")))))):splitBy(\"dt.entity.host\"):sum",
             "rate": "NONE",
             "enabled": true
           },
@@ -603,7 +610,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "B",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.disk.avail:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy(\"dt.entity.host\"):sum",
+            "metricSelector": "builtin:host.disk.avail:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C)):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(HOST-9BF585812D884C6C))\")))):splitBy(\"dt.entity.host\"):sum",
             "rate": "NONE",
             "enabled": true
           },
@@ -611,7 +618,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "C",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.disk.used:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy(\"dt.entity.host\"):sum",
+            "metricSelector": "builtin:host.disk.used:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C)):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(HOST-9BF585812D884C6C))\")))):splitBy(\"dt.entity.host\"):sum",
             "rate": "NONE",
             "enabled": true
           }
@@ -682,7 +689,7 @@ resource "dynatrace_json_dashboard" "this" {
           "resolution": ""
         },
         "metricExpressions": [
-          "resolution=null&(((builtin:host.disk.used:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(${var.ghes_hostname}))\")))))+(builtin:host.disk.avail:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(${var.ghes_hostname}))\")))))):splitBy(\"dt.entity.host\"):sum):limit(100):names,(builtin:host.disk.avail:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy(\"dt.entity.host\"):sum):limit(100):names,(builtin:host.disk.used:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy(\"dt.entity.host\"):sum):limit(100):names"
+          "resolution=null&(((builtin:host.disk.used:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C)):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(HOST-9BF585812D884C6C))\")))))+(builtin:host.disk.avail:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C)):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(HOST-9BF585812D884C6C))\")))))):splitBy(\"dt.entity.host\"):sum):limit(100):names,(builtin:host.disk.avail:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C)):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(HOST-9BF585812D884C6C))\")))):splitBy(\"dt.entity.host\"):sum):limit(100):names,(builtin:host.disk.used:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C)):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(HOST-9BF585812D884C6C))\")))):splitBy(\"dt.entity.host\"):sum):limit(100):names"
         ]
       },
       {
@@ -703,7 +710,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "A",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.disk.bytesWritten:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy(\"dt.entity.host\"):sum",
+            "metricSelector": "builtin:host.disk.bytesWritten:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C)):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(HOST-9BF585812D884C6C))\")))):splitBy(\"dt.entity.host\"):sum",
             "rate": "NONE",
             "enabled": true
           },
@@ -711,7 +718,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "B",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.disk.bytesRead:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy(\"dt.entity.host\"):sum",
+            "metricSelector": "builtin:host.disk.bytesRead:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C)):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(HOST-9BF585812D884C6C))\")))):splitBy(\"dt.entity.host\"):sum",
             "rate": "NONE",
             "enabled": true
           }
@@ -769,7 +776,7 @@ resource "dynatrace_json_dashboard" "this" {
           "resolution": ""
         },
         "metricExpressions": [
-          "resolution=null&(builtin:host.disk.bytesWritten:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy(\"dt.entity.host\"):sum):limit(100):names,(builtin:host.disk.bytesRead:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy(\"dt.entity.host\"):sum):limit(100):names"
+          "resolution=null&(builtin:host.disk.bytesWritten:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C)):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(HOST-9BF585812D884C6C))\")))):splitBy(\"dt.entity.host\"):sum):limit(100):names,(builtin:host.disk.bytesRead:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C)):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(HOST-9BF585812D884C6C))\")))):splitBy(\"dt.entity.host\"):sum):limit(100):names"
         ]
       },
       {
@@ -790,7 +797,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "A",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.disk.writeOps:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy(\"dt.entity.host\"):sum",
+            "metricSelector": "builtin:host.disk.writeOps:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C)):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(HOST-9BF585812D884C6C))\")))):splitBy(\"dt.entity.host\"):sum",
             "rate": "NONE",
             "enabled": true
           },
@@ -798,7 +805,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "B",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.disk.readOps:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy(\"dt.entity.host\"):sum",
+            "metricSelector": "builtin:host.disk.readOps:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C)):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(HOST-9BF585812D884C6C))\")))):splitBy(\"dt.entity.host\"):sum",
             "rate": "NONE",
             "enabled": true
           }
@@ -856,7 +863,7 @@ resource "dynatrace_json_dashboard" "this" {
           "resolution": ""
         },
         "metricExpressions": [
-          "resolution=null&(builtin:host.disk.writeOps:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy(\"dt.entity.host\"):sum):limit(100):names,(builtin:host.disk.readOps:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy(\"dt.entity.host\"):sum):limit(100):names"
+          "resolution=null&(builtin:host.disk.writeOps:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C)):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(HOST-9BF585812D884C6C))\")))):splitBy(\"dt.entity.host\"):sum):limit(100):names,(builtin:host.disk.readOps:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C)):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(HOST-9BF585812D884C6C))\")))):splitBy(\"dt.entity.host\"):sum):limit(100):names"
         ]
       },
       {
@@ -890,7 +897,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "A",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:containers.cpu.usageSystemMilliCores:filter(or(in(\"dt.entity.container_group_instance\",entitySelector(\"type(CONTAINER_GROUP_INSTANCE) AND fromRelationships.isCgiOfHost(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy():avg",
+            "metricSelector": "builtin:containers.cpu.usageSystemMilliCores:filter(or(in(\"dt.entity.container_group_instance\",entitySelector(\"type(CONTAINER_GROUP_INSTANCE) AND fromRelationships.isCgiOfHost(type(HOST),entityId(HOST-9BF585812D884C6C))\")))):splitBy():avg",
             "rate": "NONE",
             "enabled": true
           },
@@ -898,7 +905,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "B",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:containers.cpu.usageUserMilliCores:filter(or(in(\"dt.entity.container_group_instance\",entitySelector(\"type(CONTAINER_GROUP_INSTANCE) AND fromRelationships.isCgiOfHost(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy():avg",
+            "metricSelector": "builtin:containers.cpu.usageUserMilliCores:filter(or(in(\"dt.entity.container_group_instance\",entitySelector(\"type(CONTAINER_GROUP_INSTANCE) AND fromRelationships.isCgiOfHost(type(HOST),entityId(HOST-9BF585812D884C6C))\")))):splitBy():avg",
             "rate": "NONE",
             "enabled": true
           }
@@ -956,7 +963,7 @@ resource "dynatrace_json_dashboard" "this" {
           "resolution": ""
         },
         "metricExpressions": [
-          "resolution=null&(builtin:containers.cpu.usageSystemMilliCores:filter(or(in(\"dt.entity.container_group_instance\",entitySelector(\"type(CONTAINER_GROUP_INSTANCE) AND fromRelationships.isCgiOfHost(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy():avg):limit(100):names,(builtin:containers.cpu.usageUserMilliCores:filter(or(in(\"dt.entity.container_group_instance\",entitySelector(\"type(CONTAINER_GROUP_INSTANCE) AND fromRelationships.isCgiOfHost(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy():avg):limit(100):names"
+          "resolution=null&(builtin:containers.cpu.usageSystemMilliCores:filter(or(in(\"dt.entity.container_group_instance\",entitySelector(\"type(CONTAINER_GROUP_INSTANCE) AND fromRelationships.isCgiOfHost(type(HOST),entityId(HOST-9BF585812D884C6C))\")))):splitBy():avg):limit(100):names,(builtin:containers.cpu.usageUserMilliCores:filter(or(in(\"dt.entity.container_group_instance\",entitySelector(\"type(CONTAINER_GROUP_INSTANCE) AND fromRelationships.isCgiOfHost(type(HOST),entityId(HOST-9BF585812D884C6C))\")))):splitBy():avg):limit(100):names"
         ]
       },
       {
@@ -977,7 +984,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "A",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:containers.memory.residentSetBytes:filter(or(in(\"dt.entity.container_group_instance\",entitySelector(\"type(CONTAINER_GROUP_INSTANCE) AND fromRelationships.isCgiOfHost(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy():avg",
+            "metricSelector": "builtin:containers.memory.residentSetBytes:filter(or(in(\"dt.entity.container_group_instance\",entitySelector(\"type(CONTAINER_GROUP_INSTANCE) AND fromRelationships.isCgiOfHost(type(HOST),entityId(HOST-9BF585812D884C6C))\")))):splitBy():avg",
             "rate": "NONE",
             "enabled": true
           }
@@ -1028,7 +1035,7 @@ resource "dynatrace_json_dashboard" "this" {
           "resolution": ""
         },
         "metricExpressions": [
-          "resolution=null&(builtin:containers.memory.residentSetBytes:filter(or(in(\"dt.entity.container_group_instance\",entitySelector(\"type(CONTAINER_GROUP_INSTANCE) AND fromRelationships.isCgiOfHost(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy():avg):limit(100):names"
+          "resolution=null&(builtin:containers.memory.residentSetBytes:filter(or(in(\"dt.entity.container_group_instance\",entitySelector(\"type(CONTAINER_GROUP_INSTANCE) AND fromRelationships.isCgiOfHost(type(HOST),entityId(HOST-9BF585812D884C6C))\")))):splitBy():avg):limit(100):names"
         ]
       },
       {
@@ -1049,7 +1056,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "A",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:containers.cpu.throttledTime:filter(or(in(\"dt.entity.container_group_instance\",entitySelector(\"type(CONTAINER_GROUP_INSTANCE) AND fromRelationships.isCgiOfHost(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy():avg",
+            "metricSelector": "builtin:containers.cpu.throttledTime:filter(or(in(\"dt.entity.container_group_instance\",entitySelector(\"type(CONTAINER_GROUP_INSTANCE) AND fromRelationships.isCgiOfHost(type(HOST),entityId(HOST-9BF585812D884C6C))\")))):splitBy():avg",
             "rate": "NONE",
             "enabled": true
           }
@@ -1100,7 +1107,7 @@ resource "dynatrace_json_dashboard" "this" {
           "resolution": ""
         },
         "metricExpressions": [
-          "resolution=null&(builtin:containers.cpu.throttledTime:filter(or(in(\"dt.entity.container_group_instance\",entitySelector(\"type(CONTAINER_GROUP_INSTANCE) AND fromRelationships.isCgiOfHost(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy():avg):limit(100):names"
+          "resolution=null&(builtin:containers.cpu.throttledTime:filter(or(in(\"dt.entity.container_group_instance\",entitySelector(\"type(CONTAINER_GROUP_INSTANCE) AND fromRelationships.isCgiOfHost(type(HOST),entityId(HOST-9BF585812D884C6C))\")))):splitBy():avg):limit(100):names"
         ]
       },
       {
@@ -1134,7 +1141,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "A",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.mem.total:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))",
+            "metricSelector": "builtin:host.mem.total:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C))",
             "rate": "NONE",
             "enabled": true
           },
@@ -1142,7 +1149,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "B",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.mem.recl:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))",
+            "metricSelector": "builtin:host.mem.recl:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C))",
             "rate": "NONE",
             "enabled": true
           },
@@ -1150,7 +1157,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "C",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.mem.used:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))",
+            "metricSelector": "builtin:host.mem.used:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C))",
             "rate": "NONE",
             "enabled": true
           },
@@ -1158,7 +1165,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "D",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.mem.kernel:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))",
+            "metricSelector": "builtin:host.mem.kernel:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C))",
             "rate": "NONE",
             "enabled": true
           }
@@ -1234,7 +1241,7 @@ resource "dynatrace_json_dashboard" "this" {
           "resolution": ""
         },
         "metricExpressions": [
-          "resolution=null&(builtin:host.mem.total:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))):limit(100):names,(builtin:host.mem.recl:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))):limit(100):names,(builtin:host.mem.used:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))):limit(100):names,(builtin:host.mem.kernel:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))):limit(100):names"
+          "resolution=null&(builtin:host.mem.total:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C))):limit(100):names,(builtin:host.mem.recl:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C))):limit(100):names,(builtin:host.mem.used:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C))):limit(100):names,(builtin:host.mem.kernel:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C))):limit(100):names"
         ]
       },
       {
@@ -1255,7 +1262,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "A",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.mem.avail.pfps:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):avg",
+            "metricSelector": "builtin:host.mem.avail.pfps:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C)):avg",
             "rate": "NONE",
             "enabled": true
           }
@@ -1307,7 +1314,7 @@ resource "dynatrace_json_dashboard" "this" {
           "resolution": ""
         },
         "metricExpressions": [
-          "resolution=null&(builtin:host.mem.avail.pfps:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):avg):limit(100):names"
+          "resolution=null&(builtin:host.mem.avail.pfps:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C)):avg):limit(100):names"
         ]
       },
       {
@@ -1328,7 +1335,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "A",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.mem.swap.total:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))",
+            "metricSelector": "builtin:host.mem.swap.total:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C))",
             "rate": "NONE",
             "enabled": true
           },
@@ -1336,7 +1343,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "B",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.mem.swap.used:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))",
+            "metricSelector": "builtin:host.mem.swap.used:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C))",
             "rate": "NONE",
             "enabled": true
           }
@@ -1396,27 +1403,9 @@ resource "dynatrace_json_dashboard" "this" {
           "resolution": ""
         },
         "metricExpressions": [
-          "resolution=null&(builtin:host.mem.swap.total:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))):limit(100):names,(builtin:host.mem.swap.used:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))):limit(100):names"
+          "resolution=null&(builtin:host.mem.swap.total:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C))):limit(100):names,(builtin:host.mem.swap.used:filter(eq(\"dt.entity.host\",HOST-9BF585812D884C6C))):limit(100):names"
         ]
       }
     ]
-  }
-EOT
-}
-# data "dynatrace_iam_group" "ho_cc_platform_engineer_env_admin" { 
-#   name = var.dt_admin_group_name
-# }
-# oauth client required for this data source, will bring back this into conifg once we have oauth client configured. 
-
-
-resource "dynatrace_dashboard_sharing" "this" {
-  dashboard_id = dynatrace_json_dashboard.this.id
-  enabled = true
-  permissions {
-    permission {
-      id    = var.dt_admin_group_id
-      level = "EDIT"
-      type  = "GROUP"
-    }
   }
 }
