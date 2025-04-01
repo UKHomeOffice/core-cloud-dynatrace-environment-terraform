@@ -78,7 +78,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "A",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.cpu.idle:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):avg",
+            "metricSelector": "builtin:host.cpu.idle:avg",
             "rate": "NONE",
             "enabled": true
           },
@@ -86,7 +86,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "B",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.cpu.iowait:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):avg",
+            "metricSelector": "builtin:host.cpu.iowait:avg",
             "rate": "NONE",
             "enabled": true
           },
@@ -94,7 +94,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "C",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.cpu.user:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):avg",
+            "metricSelector": "builtin:host.cpu.user:avg",
             "rate": "NONE",
             "enabled": true
           },
@@ -102,7 +102,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "D",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.cpu.system:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):avg",
+            "metricSelector": "builtin:host.cpu.system:avg",
             "rate": "NONE",
             "enabled": true
           },
@@ -110,7 +110,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "E",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.cpu.steal:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):avg",
+            "metricSelector": "builtin:host.cpu.steal:avg",
             "rate": "NONE",
             "enabled": true
           },
@@ -118,7 +118,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "F",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.cpu.other:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):avg",
+            "metricSelector": "builtin:host.cpu.other:avg",
             "rate": "NONE",
             "enabled": true
           }
@@ -226,7 +226,7 @@ resource "dynatrace_json_dashboard" "this" {
           "resolution": ""
         },
         "metricExpressions": [
-          "resolution=null&(builtin:host.cpu.idle:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):avg):limit(100):names,(builtin:host.cpu.iowait:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):avg):limit(100):names,(builtin:host.cpu.user:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):avg):limit(100):names,(builtin:host.cpu.system:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):avg):limit(100):names,(builtin:host.cpu.steal:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):avg):limit(100):names,(builtin:host.cpu.other:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):avg):limit(100):names"
+          "resolution=null&(builtin:host.cpu.idle:avg):limit(100):names,(builtin:host.cpu.iowait:avg):limit(100):names,(builtin:host.cpu.user:avg):limit(100):names,(builtin:host.cpu.system:avg):limit(100):names,(builtin:host.cpu.steal:avg):limit(100):names,(builtin:host.cpu.other:avg):limit(100):names"
         ]
       },
       {
@@ -247,7 +247,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "A",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.mem.total:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))",
+            "metricSelector": "builtin:host.mem.total",
             "rate": "NONE",
             "enabled": true
           },
@@ -255,7 +255,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "B",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.mem.recl:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))",
+            "metricSelector": "builtin:host.mem.recl",
             "rate": "NONE",
             "enabled": true
           },
@@ -263,7 +263,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "C",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.mem.used:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))",
+            "metricSelector": "builtin:host.mem.used",
             "rate": "NONE",
             "enabled": true
           },
@@ -271,7 +271,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "D",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.mem.kernel:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))",
+            "metricSelector": "builtin:host.mem.kernel",
             "rate": "NONE",
             "enabled": true
           }
@@ -347,7 +347,7 @@ resource "dynatrace_json_dashboard" "this" {
           "resolution": ""
         },
         "metricExpressions": [
-          "resolution=null&(builtin:host.mem.total:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))):limit(100):names,(builtin:host.mem.recl:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))):limit(100):names,(builtin:host.mem.used:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))):limit(100):names,(builtin:host.mem.kernel:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))):limit(100):names"
+          "resolution=null&(builtin:host.mem.total):limit(100):names,(builtin:host.mem.recl):limit(100):names,(builtin:host.mem.used):limit(100):names,(builtin:host.mem.kernel):limit(100):names"
         ]
       },
       {
@@ -368,7 +368,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "A",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.net.nic.trafficIn:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):merge(\"dt.entity.network_interface\"):sum",
+            "metricSelector": "builtin:host.net.nic.trafficIn:merge(\"dt.entity.network_interface\"):sum",
             "rate": "NONE",
             "enabled": true
           },
@@ -376,7 +376,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "B",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.net.nic.trafficOut:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):merge(\"dt.entity.network_interface\"):sum",
+            "metricSelector": "builtin:host.net.nic.trafficOut:merge(\"dt.entity.network_interface\"):sum",
             "rate": "NONE",
             "enabled": true
           }
@@ -436,7 +436,7 @@ resource "dynatrace_json_dashboard" "this" {
           "resolution": ""
         },
         "metricExpressions": [
-          "resolution=null&(builtin:host.net.nic.trafficIn:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):merge(\"dt.entity.network_interface\"):sum):limit(100):names,(builtin:host.net.nic.trafficOut:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):merge(\"dt.entity.network_interface\"):sum):limit(100):names"
+          "resolution=null&(builtin:host.net.nic.trafficIn:merge(\"dt.entity.network_interface\"):sum):limit(100):names,(builtin:host.net.nic.trafficOut:merge(\"dt.entity.network_interface\"):sum):limit(100):names"
         ]
       },
       {
@@ -457,7 +457,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "A",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:tech.generic.cpu.usage:filter(or(in(\"dt.entity.process_group_instance\",entitySelector(\"type(PROCESS_GROUP_INSTANCE) AND fromRelationship.isProcessOf(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy(\"dt.entity.process_group_instance\"):sort(value(auto,descending)):limit(10):avg",
+            "metricSelector": "builtin:tech.generic.cpu.usage:filter(or(in(\"dt.entity.process_group_instance\",entitySelector(\"type(PROCESS_GROUP_INSTANCE) AND fromRelationship.isProcessOf(type(HOST))\")))):splitBy(\"dt.entity.process_group_instance\"):sort(value(auto,descending)):limit(10):avg",
             "rate": "NONE",
             "enabled": true
           }
@@ -508,7 +508,7 @@ resource "dynatrace_json_dashboard" "this" {
           "resolution": ""
         },
         "metricExpressions": [
-          "resolution=null&(builtin:tech.generic.cpu.usage:filter(or(in(\"dt.entity.process_group_instance\",entitySelector(\"type(PROCESS_GROUP_INSTANCE) AND fromRelationship.isProcessOf(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy(\"dt.entity.process_group_instance\"):sort(value(auto,descending)):limit(10):avg):limit(100):names"
+          "resolution=null&(builtin:tech.generic.cpu.usage:filter(or(in(\"dt.entity.process_group_instance\",entitySelector(\"type(PROCESS_GROUP_INSTANCE) AND fromRelationship.isProcessOf(type(HOST))\")))):splitBy(\"dt.entity.process_group_instance\"):sort(value(auto,descending)):limit(10):avg):limit(100):names"
         ]
       },
       {
@@ -529,7 +529,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "A",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:tech.generic.mem.workingSetSize:filter(or(in(\"dt.entity.process_group_instance\",entitySelector(\"type(PROCESS_GROUP_INSTANCE) AND fromRelationship.isProcessOf(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy(\"dt.entity.process_group_instance\"):sort(value(auto,descending)):limit(10):avg",
+            "metricSelector": "builtin:tech.generic.mem.workingSetSize:filter(or(in(\"dt.entity.process_group_instance\",entitySelector(\"type(PROCESS_GROUP_INSTANCE) AND fromRelationship.isProcessOf(type(HOST))\")))):splitBy(\"dt.entity.process_group_instance\"):sort(value(auto,descending)):limit(10):avg",
             "rate": "NONE",
             "enabled": true
           }
@@ -580,7 +580,7 @@ resource "dynatrace_json_dashboard" "this" {
           "resolution": ""
         },
         "metricExpressions": [
-          "resolution=null&(builtin:tech.generic.mem.workingSetSize:filter(or(in(\"dt.entity.process_group_instance\",entitySelector(\"type(PROCESS_GROUP_INSTANCE) AND fromRelationship.isProcessOf(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy(\"dt.entity.process_group_instance\"):sort(value(auto,descending)):limit(10):avg):limit(100):names"
+          "resolution=null&(builtin:tech.generic.mem.workingSetSize:filter(or(in(\"dt.entity.process_group_instance\",entitySelector(\"type(PROCESS_GROUP_INSTANCE) AND fromRelationship.isProcessOf(type(HOST))\")))):splitBy(\"dt.entity.process_group_instance\"):sort(value(auto,descending)):limit(10):avg):limit(100):names"
         ]
       },
       {
@@ -601,7 +601,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "A",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "((builtin:host.disk.used:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(${var.ghes_hostname}))\")))))+(builtin:host.disk.avail:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(${var.ghes_hostname}))\")))))):splitBy(\"dt.entity.host\"):sum",
+            "metricSelector": "((builtin:host.disk.used:filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST))\")))))+(builtin:host.disk.avail:filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST))\")))))):splitBy(\"dt.entity.host\"):sum",
             "rate": "NONE",
             "enabled": true
           },
@@ -609,7 +609,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "B",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.disk.avail:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy(\"dt.entity.host\"):sum",
+            "metricSelector": "builtin:host.disk.avail:filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST))\")))):splitBy(\"dt.entity.host\"):sum",
             "rate": "NONE",
             "enabled": true
           },
@@ -617,7 +617,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "C",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.disk.used:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy(\"dt.entity.host\"):sum",
+            "metricSelector": "builtin:host.disk.used:filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST))\")))):splitBy(\"dt.entity.host\"):sum",
             "rate": "NONE",
             "enabled": true
           }
@@ -688,7 +688,7 @@ resource "dynatrace_json_dashboard" "this" {
           "resolution": ""
         },
         "metricExpressions": [
-          "resolution=null&(((builtin:host.disk.used:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(${var.ghes_hostname}))\")))))+(builtin:host.disk.avail:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(${var.ghes_hostname}))\")))))):splitBy(\"dt.entity.host\"):sum):limit(100):names,(builtin:host.disk.avail:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy(\"dt.entity.host\"):sum):limit(100):names,(builtin:host.disk.used:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy(\"dt.entity.host\"):sum):limit(100):names"
+          "resolution=null&(((builtin:host.disk.used:filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST))\")))))+(builtin:host.disk.avail:filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST))\")))))):splitBy(\"dt.entity.host\"):sum):limit(100):names,(builtin:host.disk.avail:filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST))\")))):splitBy(\"dt.entity.host\"):sum):limit(100):names,(builtin:host.disk.used:filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST))\")))):splitBy(\"dt.entity.host\"):sum):limit(100):names"
         ]
       },
       {
@@ -709,7 +709,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "A",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.disk.bytesWritten:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy(\"dt.entity.host\"):sum",
+            "metricSelector": "builtin:host.disk.bytesWritten:filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST))\")))):splitBy(\"dt.entity.host\"):sum",
             "rate": "NONE",
             "enabled": true
           },
@@ -717,7 +717,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "B",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.disk.bytesRead:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy(\"dt.entity.host\"):sum",
+            "metricSelector": "builtin:host.disk.bytesRead:filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST))\")))):splitBy(\"dt.entity.host\"):sum",
             "rate": "NONE",
             "enabled": true
           }
@@ -775,7 +775,7 @@ resource "dynatrace_json_dashboard" "this" {
           "resolution": ""
         },
         "metricExpressions": [
-          "resolution=null&(builtin:host.disk.bytesWritten:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy(\"dt.entity.host\"):sum):limit(100):names,(builtin:host.disk.bytesRead:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy(\"dt.entity.host\"):sum):limit(100):names"
+          "resolution=null&(builtin:host.disk.bytesWritten:filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST))\")))):splitBy(\"dt.entity.host\"):sum):limit(100):names,(builtin:host.disk.bytesRead:filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST))\")))):splitBy(\"dt.entity.host\"):sum):limit(100):names"
         ]
       },
       {
@@ -796,7 +796,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "A",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.disk.writeOps:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy(\"dt.entity.host\"):sum",
+            "metricSelector": "builtin:host.disk.writeOps:filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST))\")))):splitBy(\"dt.entity.host\"):sum",
             "rate": "NONE",
             "enabled": true
           },
@@ -804,7 +804,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "B",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.disk.readOps:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy(\"dt.entity.host\"):sum",
+            "metricSelector": "builtin:host.disk.readOps:filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST))\")))):splitBy(\"dt.entity.host\"):sum",
             "rate": "NONE",
             "enabled": true
           }
@@ -862,7 +862,7 @@ resource "dynatrace_json_dashboard" "this" {
           "resolution": ""
         },
         "metricExpressions": [
-          "resolution=null&(builtin:host.disk.writeOps:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy(\"dt.entity.host\"):sum):limit(100):names,(builtin:host.disk.readOps:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy(\"dt.entity.host\"):sum):limit(100):names"
+          "resolution=null&(builtin:host.disk.writeOps:filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST))\")))):splitBy(\"dt.entity.host\"):sum):limit(100):names,(builtin:host.disk.readOps:filter(or(in(\"dt.entity.disk\",entitySelector(\"type(DISK) AND fromRelationship.isDiskOf(type(HOST))\")))):splitBy(\"dt.entity.host\"):sum):limit(100):names"
         ]
       },
       {
@@ -896,7 +896,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "A",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:containers.cpu.usageSystemMilliCores:filter(or(in(\"dt.entity.container_group_instance\",entitySelector(\"type(CONTAINER_GROUP_INSTANCE) AND fromRelationships.isCgiOfHost(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy():avg",
+            "metricSelector": "builtin:containers.cpu.usageSystemMilliCores:filter(or(in(\"dt.entity.container_group_instance\",entitySelector(\"type(CONTAINER_GROUP_INSTANCE) AND fromRelationships.isCgiOfHost(type(HOST))\")))):splitBy():avg",
             "rate": "NONE",
             "enabled": true
           },
@@ -904,7 +904,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "B",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:containers.cpu.usageUserMilliCores:filter(or(in(\"dt.entity.container_group_instance\",entitySelector(\"type(CONTAINER_GROUP_INSTANCE) AND fromRelationships.isCgiOfHost(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy():avg",
+            "metricSelector": "builtin:containers.cpu.usageUserMilliCores:filter(or(in(\"dt.entity.container_group_instance\",entitySelector(\"type(CONTAINER_GROUP_INSTANCE) AND fromRelationships.isCgiOfHost(type(HOST))\")))):splitBy():avg",
             "rate": "NONE",
             "enabled": true
           }
@@ -962,7 +962,7 @@ resource "dynatrace_json_dashboard" "this" {
           "resolution": ""
         },
         "metricExpressions": [
-          "resolution=null&(builtin:containers.cpu.usageSystemMilliCores:filter(or(in(\"dt.entity.container_group_instance\",entitySelector(\"type(CONTAINER_GROUP_INSTANCE) AND fromRelationships.isCgiOfHost(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy():avg):limit(100):names,(builtin:containers.cpu.usageUserMilliCores:filter(or(in(\"dt.entity.container_group_instance\",entitySelector(\"type(CONTAINER_GROUP_INSTANCE) AND fromRelationships.isCgiOfHost(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy():avg):limit(100):names"
+          "resolution=null&(builtin:containers.cpu.usageSystemMilliCores:filter(or(in(\"dt.entity.container_group_instance\",entitySelector(\"type(CONTAINER_GROUP_INSTANCE) AND fromRelationships.isCgiOfHost(type(HOST))\")))):splitBy():avg):limit(100):names,(builtin:containers.cpu.usageUserMilliCores:filter(or(in(\"dt.entity.container_group_instance\",entitySelector(\"type(CONTAINER_GROUP_INSTANCE) AND fromRelationships.isCgiOfHost(type(HOST))\")))):splitBy():avg):limit(100):names"
         ]
       },
       {
@@ -983,7 +983,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "A",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:containers.memory.residentSetBytes:filter(or(in(\"dt.entity.container_group_instance\",entitySelector(\"type(CONTAINER_GROUP_INSTANCE) AND fromRelationships.isCgiOfHost(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy():avg",
+            "metricSelector": "builtin:containers.memory.residentSetBytes:filter(or(in(\"dt.entity.container_group_instance\",entitySelector(\"type(CONTAINER_GROUP_INSTANCE) AND fromRelationships.isCgiOfHost(type(HOST))\")))):splitBy():avg",
             "rate": "NONE",
             "enabled": true
           }
@@ -1034,7 +1034,7 @@ resource "dynatrace_json_dashboard" "this" {
           "resolution": ""
         },
         "metricExpressions": [
-          "resolution=null&(builtin:containers.memory.residentSetBytes:filter(or(in(\"dt.entity.container_group_instance\",entitySelector(\"type(CONTAINER_GROUP_INSTANCE) AND fromRelationships.isCgiOfHost(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy():avg):limit(100):names"
+          "resolution=null&(builtin:containers.memory.residentSetBytes:filter(or(in(\"dt.entity.container_group_instance\",entitySelector(\"type(CONTAINER_GROUP_INSTANCE) AND fromRelationships.isCgiOfHost(type(HOST))\")))):splitBy():avg):limit(100):names"
         ]
       },
       {
@@ -1055,7 +1055,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "A",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:containers.cpu.throttledTime:filter(or(in(\"dt.entity.container_group_instance\",entitySelector(\"type(CONTAINER_GROUP_INSTANCE) AND fromRelationships.isCgiOfHost(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy():avg",
+            "metricSelector": "builtin:containers.cpu.throttledTime:filter(or(in(\"dt.entity.container_group_instance\",entitySelector(\"type(CONTAINER_GROUP_INSTANCE) AND fromRelationships.isCgiOfHost(type(HOST))\")))):splitBy():avg",
             "rate": "NONE",
             "enabled": true
           }
@@ -1106,7 +1106,7 @@ resource "dynatrace_json_dashboard" "this" {
           "resolution": ""
         },
         "metricExpressions": [
-          "resolution=null&(builtin:containers.cpu.throttledTime:filter(or(in(\"dt.entity.container_group_instance\",entitySelector(\"type(CONTAINER_GROUP_INSTANCE) AND fromRelationships.isCgiOfHost(type(HOST),entityId(${var.ghes_hostname}))\")))):splitBy():avg):limit(100):names"
+          "resolution=null&(builtin:containers.cpu.throttledTime:filter(or(in(\"dt.entity.container_group_instance\",entitySelector(\"type(CONTAINER_GROUP_INSTANCE) AND fromRelationships.isCgiOfHost(type(HOST))\")))):splitBy():avg):limit(100):names"
         ]
       },
       {
@@ -1140,7 +1140,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "A",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.mem.total:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))",
+            "metricSelector": "builtin:host.mem.total",
             "rate": "NONE",
             "enabled": true
           },
@@ -1148,7 +1148,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "B",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.mem.recl:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))",
+            "metricSelector": "builtin:host.mem.recl",
             "rate": "NONE",
             "enabled": true
           },
@@ -1156,7 +1156,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "C",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.mem.used:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))",
+            "metricSelector": "builtin:host.mem.used",
             "rate": "NONE",
             "enabled": true
           },
@@ -1164,7 +1164,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "D",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.mem.kernel:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))",
+            "metricSelector": "builtin:host.mem.kernel",
             "rate": "NONE",
             "enabled": true
           }
@@ -1240,7 +1240,7 @@ resource "dynatrace_json_dashboard" "this" {
           "resolution": ""
         },
         "metricExpressions": [
-          "resolution=null&(builtin:host.mem.total:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))):limit(100):names,(builtin:host.mem.recl:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))):limit(100):names,(builtin:host.mem.used:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))):limit(100):names,(builtin:host.mem.kernel:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))):limit(100):names"
+          "resolution=null&(builtin:host.mem.total):limit(100):names,(builtin:host.mem.recl):limit(100):names,(builtin:host.mem.used):limit(100):names,(builtin:host.mem.kernel):limit(100):names"
         ]
       },
       {
@@ -1261,7 +1261,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "A",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.mem.avail.pfps:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):avg",
+            "metricSelector": "builtin:host.mem.avail.pfps:avg",
             "rate": "NONE",
             "enabled": true
           }
@@ -1313,7 +1313,7 @@ resource "dynatrace_json_dashboard" "this" {
           "resolution": ""
         },
         "metricExpressions": [
-          "resolution=null&(builtin:host.mem.avail.pfps:filter(eq(\"dt.entity.host\",${var.ghes_hostname})):avg):limit(100):names"
+          "resolution=null&(builtin:host.mem.avail.pfps:avg):limit(100):names"
         ]
       },
       {
@@ -1334,7 +1334,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "A",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.mem.swap.total:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))",
+            "metricSelector": "builtin:host.mem.swap.total",
             "rate": "NONE",
             "enabled": true
           },
@@ -1342,7 +1342,7 @@ resource "dynatrace_json_dashboard" "this" {
             "id": "B",
             "spaceAggregation": "AUTO",
             "timeAggregation": "DEFAULT",
-            "metricSelector": "builtin:host.mem.swap.used:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))",
+            "metricSelector": "builtin:host.mem.swap.used",
             "rate": "NONE",
             "enabled": true
           }
@@ -1402,7 +1402,7 @@ resource "dynatrace_json_dashboard" "this" {
           "resolution": ""
         },
         "metricExpressions": [
-          "resolution=null&(builtin:host.mem.swap.total:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))):limit(100):names,(builtin:host.mem.swap.used:filter(eq(\"dt.entity.host\",${var.ghes_hostname}))):limit(100):names"
+          "resolution=null&(builtin:host.mem.swap.total):limit(100):names,(builtin:host.mem.swap.used):limit(100):names"
         ]
       }
     ]
