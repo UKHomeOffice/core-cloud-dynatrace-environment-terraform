@@ -46,9 +46,8 @@ module "golden_dashboards" {
   source = "./dashboards/golden_dashboards"
 }
 
-#temporarily commented out, see CCL-2255 for details
-# module "aws_secrets" {
-#   source      = "git::https://github.com/UKHomeOffice/core-cloud-aws-secrets-terraform.git?ref=0.0.1"
-#   count       = contains(keys(var.tenant_vars), "aws_secrets") ? 1 : 0
-#   aws_secrets = var.tenant_vars.aws_secrets
-# }
+module "aws_secrets" {
+  source      = "git::https://github.com/UKHomeOffice/core-cloud-aws-secrets-terraform.git?ref=0.0.2"
+  count       = contains(keys(var.tenant_vars), "aws_secrets") ? 1 : 0
+  aws_secrets = var.tenant_vars.aws_secrets
+}
