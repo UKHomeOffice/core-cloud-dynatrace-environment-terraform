@@ -5,9 +5,9 @@ resource "dynatrace_json_dashboard" "cosmo_s3_dashboard_template" {
       "name": "S3_dashboard_template",
       "shared": true
       "owner": "Cosmos",
-      "tags": [
-        ""
-      ],
+      "tags" : [
+          "cosmos"
+        ],
       "preset": true,
     },
    "tiles": [
