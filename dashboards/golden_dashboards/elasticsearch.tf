@@ -5,9 +5,9 @@ resource "dynatrace_json_dashboard" "cosmo_elasticsearch_dashboard_template" {
       "name": "elasticsearch_dashboard_template",
       "shared": true,
       "owner": "Cosmos",
-      "tags": [
-        ""
-      ],
+      "tags" : [
+          "cosmos"
+        ],
       "preset": true,
     },
    "tiles": [
