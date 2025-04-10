@@ -1,9 +1,9 @@
 locals {
   # Initialise the exclusive service map (to be empty if not defined)
-  exclusive_services = lookup(var.tenant_vars,"optional_exclusive_services",{})
+  exclusive_services = lookup(var.tenant_vars, "optional_exclusive_services", {})
 
   # Initialise the topup service map (to be empty if not defined)
-  top_up_services = lookup(var.tenant_vars,"optional_services_top_up",{})
+  top_up_services = lookup(var.tenant_vars, "optional_services_top_up", {})
 
   # Merge the topup service map with the default service map
   computed_services = merge(var.default_services, local.top_up_services)
