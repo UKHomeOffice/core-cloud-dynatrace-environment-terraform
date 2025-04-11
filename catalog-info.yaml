@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: core-cloud-dynatrace-environment-terraform
+  description: A repo used to create Dynatrace environment specific resources.
+  annotations:
+    github.com/project-slug: UKHomeOffice/core-cloud-dynatrace-environment-terraform
+spec:
+  type: service
+  owner: core-cloud-devops
+  lifecycle: experimental
+  system: core-cloud
