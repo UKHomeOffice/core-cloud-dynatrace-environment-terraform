@@ -35,10 +35,3 @@ resource "dynatrace_aws_service" "monitoredservices" {
   }
 }
 
-
-output "all_aws_connection_ids" {
-  value = {
-    for key, value in dynatrace_aws_credentials.aws_connection :
-    key => value
-  }
-}
