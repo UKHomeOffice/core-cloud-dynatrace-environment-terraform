@@ -20,13 +20,3 @@ variable "activegate_deployment_type" {
     error_message = "ActiveGate deployment type must be either 'on_prem' or 'saas'"
   }
 }
-
-variable "aws_access_key" {
-  type    = any
-  default = ""
-}
-
-variable "aws_secret_key" {
-  type    = any
-  default = ""
-}
