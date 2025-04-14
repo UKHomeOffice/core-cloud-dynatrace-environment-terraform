@@ -11,16 +11,11 @@ resource "dynatrace_aws_credentials" "aws_connection" {
   label                               = var.connection_name
   partition_type                      = "AWS_DEFAULT"
   tagged_only                         = false
-  running_on_dynatrace_infrastructure = true
+  running_on_dynatrace_infrastructure = var.activegate_deployment_type == "saas" ? true : false
   remove_defaults                     = true
   authentication_data {
-    # For IAM Role (on-prem)
     account_id = var.tenant_vars.account_id
-    iam_role   = var.activegate_deployment_type == "on_prem" ? var.tenant_vars.iam_role : null
-
-    # For Access Keys (SaaS)
-    access_key = var.activegate_deployment_type == "saas" ? var.aws_access_key : null
-    secret_key = var.activegate_deployment_type == "saas" ? var.aws_secret_key : null
+    iam_role   = var.tenant_vars.iam_role 
   }
 }
 
@@ -39,3 +34,4 @@ resource "dynatrace_aws_service" "monitoredservices" {
     }
   }
 }
+
