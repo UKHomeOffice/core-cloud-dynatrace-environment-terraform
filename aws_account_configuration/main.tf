@@ -34,5 +34,3 @@ resource "dynatrace_aws_service" "monitoredservices" {
     }
   }
 }
-
-
