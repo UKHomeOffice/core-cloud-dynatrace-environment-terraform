@@ -9,7 +9,6 @@ module "aws_account_configurations" {
   tenant_vars      = each.value
   connection_name  = each.key
   default_services = local.default_services
-
 }
 
 module "dynatrace_management_zones" {

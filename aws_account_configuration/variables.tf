@@ -9,4 +9,3 @@ variable "tenant_vars" {
 variable "default_services" {
   type = any
 }
-
