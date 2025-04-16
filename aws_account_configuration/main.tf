@@ -11,7 +11,7 @@ resource "dynatrace_aws_credentials" "aws_connection" {
   label                               = var.connection_name
   partition_type                      = "AWS_DEFAULT"
   tagged_only                         = false
-  running_on_dynatrace_infrastructure = var.activegate_deployment_type == "saas" ? true : false
+  running_on_dynatrace_infrastructure = contains(keys(var.tenant_vars), "saas_metricpolling") ? var.tenant_vars.saas_metricpolling : false
   remove_defaults                     = true
   authentication_data {
     account_id = var.tenant_vars.account_id
@@ -34,4 +34,3 @@ resource "dynatrace_aws_service" "monitoredservices" {
     }
   }
 }
-
