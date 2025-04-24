@@ -1,0 +1,32 @@
+ {
+    "dashboardMetadata": {
+      "name": "dynamodb_dashboard_template",
+      "shared": true,
+      "owner": "Cosmos",
+      "tags" : [
+          "cosmos"
+        ],
+      "preset": true,
+      "popularity": 1,
+      "dynamicFilters": {
+        "filters": [
+          "CUSTOM_DIMENSION:DynamoDB Table"
+        ],
+        "genericTagFilters": []
+      },
+      "hasConsistentColors": false
+    },
+  "tiles": [
+    ${file("./dynamodb/conditionalcheckfailedrequests.json")},
+    ${file("./dynamodb/consumedreadcapacityunits.json")},
+    ${file("./dynamodb/consumedwritecapacityunits.json")},
+    ${file("./dynamodb/readthrottleevents.json")},
+    ${file("./dynamodb/returneditemcount.json")},
+    ${file("./dynamodb/successfulrequestlatency.json")},
+    ${file("./dynamodb/systemerrors.json")},
+    ${file("./dynamodb/throttledrequests.json")},
+    ${file("./dynamodb/transactionconflict.json")},
+    ${file("./dynamodb/usererrors.json")},
+    ${file("./dynamodb/writethrottleevents.json")}
+  ]
+}
