@@ -55,21 +55,21 @@ module "aws_secrets" {
 module "dynatrace_servicenow_integration" {
   source = "./dynatrace_servicenow_integration"
   count = contains(
-            keys(var.tenant_vars),
-            "servicenow_integration"
-          ) ? 1 : 0
+    keys(var.tenant_vars),
+    "servicenow_integration"
+  ) ? 1 : 0
 
-  SERVICENOW_END_POINT = var.SERVICENOW_END_POINT
-  SERVICENOW_ENV_ID = var.SERVICENOW_ENV_ID
-  SERVICENOW_CLIENT_ID = var.SERVICENOW_CLIENT_ID
+  SERVICENOW_END_POINT     = var.SERVICENOW_END_POINT
+  SERVICENOW_ENV_ID        = var.SERVICENOW_ENV_ID
+  SERVICENOW_CLIENT_ID     = var.SERVICENOW_CLIENT_ID
   SERVICENOW_CLIENT_SECRET = var.SERVICENOW_CLIENT_SECRET
 
   servicenow_payload = contains(
-                         keys(var.tenant_vars.servicenow_integration),
-                         "servicenow_payload"
-                       ) ? var.tenant_vars.servicenow_integration.servicenow_payload : tomap({})
+    keys(var.tenant_vars.servicenow_integration),
+    "servicenow_payload"
+  ) ? var.tenant_vars.servicenow_integration.servicenow_payload : tomap({})
   servicenow_alerting_rules = contains(
-                                keys(var.tenant_vars.servicenow_integration),
-                                "servicenow_alerting_profile_rules"
-                              ) ? tomap(var.tenant_vars.servicenow_integration.servicenow_alerting_profile_rules) : tomap({})
+    keys(var.tenant_vars.servicenow_integration),
+    "servicenow_alerting_profile_rules"
+  ) ? tomap(var.tenant_vars.servicenow_integration.servicenow_alerting_profile_rules) : tomap({})
 }
