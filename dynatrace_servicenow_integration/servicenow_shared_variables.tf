@@ -1,0 +1,1 @@
+../servicenow_shared_variables.tf
