@@ -10,13 +10,19 @@ terraform {
 resource "dynatrace_aws_credentials" "aws_connection" {
   label                               = var.connection_name
   partition_type                      = "AWS_DEFAULT"
-  tagged_only                         = contains(keys(var.tenant_vars), "monitor_tags") ? var.tenant_vars.monitor_tags : false
-  tags_to_monitor                     = var.tenant_vars.monitor_tags
   running_on_dynatrace_infrastructure = contains(keys(var.tenant_vars), "saas_metricpolling") ? var.tenant_vars.saas_metricpolling : false
   remove_defaults                     = true
   authentication_data {
     account_id = var.tenant_vars.account_id
     iam_role   = var.tenant_vars.iam_role
+  }
+  tagged_only                         = contains(keys(var.tenant_vars), "monitor_tags") ? var.tenant_vars.monitor_tags : false
+  dynamic "tags_to_monitor" {
+    for each = var.tenant_vars.monitor_tags
+    content {
+      name  = each.key
+      value = each.value
+    }
   }
 }
 
