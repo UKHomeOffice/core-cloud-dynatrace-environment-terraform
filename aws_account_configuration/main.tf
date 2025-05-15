@@ -17,7 +17,7 @@ resource "dynatrace_aws_credentials" "aws_connection" {
     iam_role   = var.tenant_vars.iam_role
   }
   tagged_only                         = contains(keys(var.tenant_vars), "monitor_tags") ? var.tenant_vars.monitor_tags : false
-  default_tags_to_monitor {
+  tags_to_monitor {
     name = "dynatrace"
     value = "true"
     }
