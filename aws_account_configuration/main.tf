@@ -18,7 +18,7 @@ resource "dynatrace_aws_credentials" "aws_connection" {
   }
   tagged_only                         = contains(keys(var.tenant_vars), "monitor_tags") ? var.tenant_vars.monitor_tags : false
   dynamic "tags_to_monitor" {
-    for_each = var.tenant_vars.monitor_tags
+    for_each = contains(keys(var.tenant_vars), "monitor_tags") ? var.tenant_vars.monitor_tags : false
     content {
       name  = each.key
       value = each.value
