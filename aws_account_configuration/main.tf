@@ -18,7 +18,7 @@ resource "dynatrace_aws_credentials" "aws_connection" {
   }
   tagged_only                         = contains(keys(var.tenant_vars), "monitor_tags") ? true : false
 #  tags_to_monitor                     = contains(keys(var.tenant_vars), "monitor_tags") ? var.tenant_vars.monitor_tags : null
-  tags_to_monitor                     = {name = 'dynatrace', value = 'true'}
+  tags_to_monitor                     = contains(keys(var.tenant_vars), "monitor_tags") ? {name = 'dynatrace', value = 'true'} : null
 }
 
 
