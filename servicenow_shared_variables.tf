@@ -4,11 +4,13 @@
 variable "SERVICENOW_END_POINT" {
   description = "ServiceNow endpoint url."
   type        = optional(string)
+  default     = ""
 }
 
 variable "SERVICENOW_ENV_ID" {
   description = "The equivalent of the envid of the dynatrace. The id will be used as https://<this var>.service-now.com/oauth_token.do for oauth authentication."
   type        = optional(string)
+  default     = ""
 }
 
 variable "SERVICENOW_CLIENT_ID" {
@@ -16,6 +18,7 @@ variable "SERVICENOW_CLIENT_ID" {
   type        = optional(string)
   sensitive   = true
   #ephemeral = true
+  default    = ""
 }
 
 variable "SERVICENOW_CLIENT_SECRET" {
@@ -23,4 +26,5 @@ variable "SERVICENOW_CLIENT_SECRET" {
   type        = optional(string)
   sensitive   = true
   #ephemeral = true
+  default     = ""
 }
