@@ -17,7 +17,6 @@ variable "SERVICENOW_CLIENT_ID" {
   description = "Username for the above url."
   type        = string
   sensitive   = true
-  #ephemeral = true
   default    = ""
 }
 
@@ -25,6 +24,5 @@ variable "SERVICENOW_CLIENT_SECRET" {
   description = "Password for the above url."
   type        = string
   sensitive   = true
-  #ephemeral = true
   default     = ""
 }

@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# NOTE: For the terraform script will never be executed. 
+#       Including here for completion. 
+# !!! Also please keep this script up-to-date with the
+# !!! create_integration script.
+
+set -eu
+
+curl "https://core-cloud-test.live.dynatrace.com/api/v2/settings/objects/${OBJECT_ID}" \
+-X PUT \
+-H 'Accept: application/json; charset=utf-8' \
+-H 'Content-Type: application/json; charset=utf-8' \
+-H "Authorization: Api-Token ${DYNATRACE_API_TOKEN}" \
+-d $"{
+        \"schemaVersion\":\"1.6.1\",
+        \"updateToken\":\"${OBJECT_UPDATE_TOKEN}\",
+        \"value\":{
+          \"enabled\":${ENABLED},
+          \"type\":\"WEBHOOK\",
+          \"displayName\":\"${INTEGRATION_NAME}\",
+          \"alertingProfile\":\"${ALERTING_PROFILE_ID}\",
+          \"webHookNotification\":{
+            \"url\":\"${SERVICENOW_END_POINT}\",
+            \"acceptAnyCertificate\":${ACCEPT_ANY_CERT},
+            \"notifyEventMergesEnabled\":${NOTIFY_EVENT_MERGES},
+            \"notifyClosedProblems\":${NOTIFY_CLOSED_PROBLEMS},
+            \"useOAuth2\":true,
+            \"oAuth2Credentials\":{
+              \"accessTokenUrl\":\"https://${SERVICENOW_ENV_ID}.service-now.com/oauth_token.do\",
+              \"clientId\":\"${SERVICENOW_CLIENT_ID}\",
+              \"clientSecret\":\"${TF_VAR_SERVICENOW_CLIENT_SECRET}\"
+          },
+          \"payload\": \"{\n  \\\"ImpactedEntities\\\": {ImpactedEntities},\n  \\\"ImpactedEntity\\\": \\\"{ImpactedEntity}\\\",\n  \\\"PID\\\": \\\"{PID}\\\",\n  \\\"ProblemDetailsHTML\\\": \\\"{ProblemDetailsHTML}\\\",\n  \\\"ProblemDetailsJSONv2\\\": {ProblemDetailsJSONv2},\n  \\\"ProblemDetailsMarkdown\\\": \\\"{ProblemDetailsMarkdown}\\\",\n  \\\"ProblemDetailsText\\\": \\\"{ProblemDetailsText}\\\",\n  \\\"ProblemID\\\": \\\"{ProblemID}\\\",\n  \\\"ProblemImpact\\\": \\\"{ProblemImpact}\\\",\n  \\\"ProblemSeverity\\\": \\\"{ProblemSeverity}\\\",\n  \\\"ProblemTitle\\\": \\\"{ProblemTitle}\\\",\n  \\\"ProblemURL\\\": \\\"{ProblemURL}\\\",\n  \\\"State\\\": \\\"{State}\\\",\n  \\\"Tags\\\": \\\"{Tags}\\\"\n}\"
+        }
+      }"

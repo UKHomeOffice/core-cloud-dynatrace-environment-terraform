@@ -17,3 +17,33 @@ variable "servicenow_alerting_rules" {
     delay_in_minutes = optional(number, 0)
   }))
 }
+
+variable "snow_integration_state" {
+  type = string
+  description = "State to be passed on to through the API, though boolean, better be processed as string."
+  default = "false"
+}
+
+variable "accept_any_cert" {
+  type = string
+  description = "Accept any SSL certificates."
+  default = "true"
+}
+
+variable "notify_event_merges" {
+  type = string
+  description = "Call webhook if new events merge into existing problems."
+  default = "true"
+}
+
+variable "notify_closed_problems" {
+  type = string
+  description = "Call webhook if problem is closed."
+  default = "true"
+}
+
+variable "integration_name" {
+  type = string
+  description = "TODO - name of the integration. Must be fed through a dictionary list."
+  default = "servicenow_integration"
+}
