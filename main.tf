@@ -88,4 +88,9 @@ module "dynatrace_servicenow_integration" {
     keys(var.tenant_vars.servicenow_integration),
     "notify_closed_problems"
   ) ? var.tenant_vars.servicenow_integration.notify_closed_problems : "true"
+
+  snow_integration_state = contains(
+    keys(var.tenant_vars.servicenow_integration),
+    "snow_integration_state"
+  ) ? var.tenant_vars.servicenow_integration.snow_integration_state : "false"
 }
