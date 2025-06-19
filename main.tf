@@ -68,8 +68,24 @@ module "dynatrace_servicenow_integration" {
     keys(var.tenant_vars.servicenow_integration),
     "servicenow_payload"
   ) ? var.tenant_vars.servicenow_integration.servicenow_payload : tomap({})
+
   servicenow_alerting_rules = contains(
     keys(var.tenant_vars.servicenow_integration),
     "servicenow_alerting_profile_rules"
   ) ? tomap(var.tenant_vars.servicenow_integration.servicenow_alerting_profile_rules) : tomap({})
+
+  accept_any_cert = contains(
+    keys(var.tenant_vars.servicenow_integration),
+    "accept_any_cert"
+  ) ? var.tenant_vars.servicenow_integration.accept_any_cert : "true"
+
+  notify_event_merges = contains(
+    keys(var.tenant_vars.servicenow_integration),
+    "notify_event_merges"
+  ) ? var.tenant_vars.servicenow_integration.notify_event_merges : "true"
+
+  notify_closed_problems = contains(
+    keys(var.tenant_vars.servicenow_integration),
+    "notify_closed_problems"
+  ) ? var.tenant_vars.servicenow_integration.notify_closed_problems : "true"
 }
