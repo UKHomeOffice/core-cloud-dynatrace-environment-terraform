@@ -94,3 +94,13 @@ module "dynatrace_servicenow_integration" {
     "snow_integration_state"
   ) ? var.tenant_vars.servicenow_integration.snow_integration_state : "false"
 }
+
+module "dynatrace_log_storage_include_dynatrace_labelled_pods" {
+  source            = "./dynatrace_log_storage"
+  name              = "Include Dynatrace Labelled Pods"
+  enabled           = true
+  send_to_storage   = true
+  matcher_attribute = "k8s.label.dynatrace-logs"
+  matcher_operator  = "EQUALS"
+  matcher_values    = ["true"]
+}
