@@ -94,3 +94,18 @@ module "dynatrace_servicenow_integration" {
     "snow_integration_state"
   ) ? var.tenant_vars.servicenow_integration.snow_integration_state : "false"
 }
+
+module "dynatrace_aws_monitoring_profile_integration" {
+  source = "./alerts/aws_monitoring_profile"
+  count = contains(
+    keys(var.tenant_vars),
+    "aws_monitoring_profile_integration"
+  ) ? 1 : 0
+
+  aws_monitoring_profile_alerting_rules = contains(
+    keys(var.tenant_vars.aws_monitoring_profile_integration),
+    "aws_monitoring_profile_rules"
+  ) ? tomap(var.tenant_vars.aws_monitoring_profile.aws_monitoring_profile_rules) : tomap({})
+
+  awsmonitoringprofile_alert_config = var.tenant_vars.aws_monitoring_profile_integration
+}
