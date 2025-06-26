@@ -20,10 +20,9 @@ resource "dynatrace_alerting" "aws_monitoring_profile_alert" {
   name = "AWS Monitoring profile"
   rules {
      rule {
-        include_mode = rule.value.include_mode
-        tags = rule.value.tags
-        delay_in_minutes = rule.value.delay_in_minutes
-        severity_level = "ERRORS"
+        include_mode = "NONE"
+        delay_in_minutes = var.aws_monitoring_profile_alert_config.delay_in_minutes
+        severity_level = "ERRORS" 
       }
     }
   filters {

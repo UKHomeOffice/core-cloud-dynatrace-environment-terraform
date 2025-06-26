@@ -107,5 +107,6 @@ module "dynatrace_aws_monitoring_profile_integration" {
     "aws_monitoring_profile_rules"
   ) ? tomap(var.tenant_vars.aws_monitoring_profile.aws_monitoring_profile_rules) : tomap({})
 
-  awsmonitoringprofile_alert_config = var.tenant_vars.aws_monitoring_profile_integration
+  aws_monitoring_profile_alert_config = var.tenant_vars.aws_monitoring_profile_integration
 }
+

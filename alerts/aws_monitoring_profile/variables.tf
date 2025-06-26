@@ -6,7 +6,7 @@ variable "aws_monitoring_profile_alerting_rules" {
   }))
 }
 
-variable "awsmonitoringprofile_alert_config" {
+variable "aws_monitoring_profile_alert_config" {
   type = object({
     # generic config for aws monitoring profile alerts
     notify_closed_problem             = bool
@@ -17,5 +17,6 @@ variable "awsmonitoringprofile_alert_config" {
     channel_name                      = string
     samples                           = string
     violating_samples                 = string
+    delay_in_minutes                  = string
   })
 }
