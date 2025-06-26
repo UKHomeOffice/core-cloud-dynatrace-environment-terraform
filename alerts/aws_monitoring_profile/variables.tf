@@ -1,9 +1,9 @@
 variable "aws_monitoring_profile_alerting_rules" {
-  type = map(object({
+  type = object({
     include_mode = optional(string, "NONE") 
     tags = optional(list(string), []) 
     delay_in_minutes = optional(number, 0)
-  }))
+  })
 }
 
 variable "aws_monitoring_profile_alert_config" {
