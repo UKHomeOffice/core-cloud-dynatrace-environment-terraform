@@ -23,6 +23,7 @@ resource "dynatrace_alerting" "aws_monitoring_profile_alert" {
         include_mode = var.aws_monitoring_profile_alerting_rules.include_mode
         delay_in_minutes = var.aws_monitoring_profile_alerting_rules.delay_in_minutes
         severity_level = "ERRORS" 
+        tags= var.aws_monitoring_profile_alerting_rules.tags
       }
     }
   filters {
