@@ -104,3 +104,18 @@ module "dynatrace_log_storage_include_dynatrace_labelled_pods" {
   matcher_operator  = "EQUALS"
   matcher_values    = ["true"]
 }
+
+module "dynatrace_aws_monitoring_profile_integration" {
+  source = "./alerts/aws_monitoring_profile"
+  count = contains(
+    keys(var.tenant_vars),
+    "aws_monitoring_profile_integration"
+  ) ? 1 : 0
+
+  aws_monitoring_profile_alerting_rules = contains(
+    keys(var.tenant_vars.aws_monitoring_profile_integration),
+    "aws_monitoring_profile_rules"
+  ) ? tomap(var.tenant_vars.aws_monitoring_profile.aws_monitoring_profile_rules) : tomap({})
+
+  aws_monitoring_profile_alert_config = var.tenant_vars.aws_monitoring_profile_integration
+}
