@@ -95,6 +95,24 @@ module "dynatrace_servicenow_integration" {
   ) ? var.tenant_vars.servicenow_integration.snow_integration_state : "false"
 }
 
+module "dynatrace_log_storage_include_dynatrace_labelled_pods" {
+  source          = "./dynatrace_log_storage"
+  name            = "Include Dynatrace Labelled Pods"
+  enabled         = true
+  send_to_storage = true
+
+  matchers = [
+    {
+      matcher = {
+        // https://registry.terraform.io/providers/dynatrace-oss/dynatrace/latest/docs/resources/log_storage#nested-schema-for-matchersmatcher
+        attribute = "K8s_pod_label"
+        operator  = "MATCHES"
+        values    = ["dynatrace-logs:true"]
+      }
+    }
+  ]
+}
+
 module "dynatrace_aws_monitoring_profile_integration" {
   source = "./alerts/aws_monitoring_profile"
   count = contains(
@@ -104,4 +122,3 @@ module "dynatrace_aws_monitoring_profile_integration" {
 
   aws_monitoring_profile_alert_config = var.tenant_vars.aws_monitoring_profile_integration
 }
-
