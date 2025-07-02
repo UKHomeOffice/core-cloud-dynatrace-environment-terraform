@@ -10,3 +10,11 @@ variable "aws_monitoring_profile_alert_config" {
     enabled                           = bool
   })
 }
+
+variable "aws_monitoring_profile_alerting_rules" {
+  type = object({
+    include_mode = optional(string, "NONE") 
+    tags = optional(list(string), ["intentional_invalid_tag"]) 
+    delay_in_minutes = optional(number, 0)
+  })
+}
