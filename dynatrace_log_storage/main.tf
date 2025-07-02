@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    dynatrace = {
+      version = "~> 1.0"
+      source  = "dynatrace-oss/dynatrace"
+    }
+  }
+}
+
 resource "dynatrace_log_storage" "include_dynatrace_labelled_pods" {
   name            = var.name
   enabled         = var.enabled
