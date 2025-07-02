@@ -31,7 +31,7 @@ resource "dynatrace_alerting" "aws_monitoring_profile_alert" {
       custom{
         title {
         operator = "REGEX_MATCHES"
-        value    = "^AWS Monitoring profile (?>\w+) is in ERROR State"
+        value    = "^AWS Monitoring profile (?>w+) is in ERROR State"
         enabled  = var.aws_monitoring_profile_alert_config.enabled
         }
       }
