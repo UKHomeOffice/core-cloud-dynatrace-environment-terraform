@@ -101,16 +101,9 @@ module "dynatrace_log_storage_include_dynatrace_labelled_pods" {
   enabled         = true
   send_to_storage = true
 
-  matchers = [
-    {
-      matcher = {
-        // https://registry.terraform.io/providers/dynatrace-oss/dynatrace/latest/docs/resources/log_storage#nested-schema-for-matchersmatcher
-        attribute = "K8s_pod_label"
-        operator  = "MATCHES"
-        values    = ["dynatrace-logs:true"]
-      }
-    }
-  ]
+  matcher_attribute = "K8s_pod_label"
+  matcher_operator  = "MATCHES"
+  matcher_values    = ["dynatrace-logs:true"]
 }
 
 module "dynatrace_aws_monitoring_profile_integration" {
