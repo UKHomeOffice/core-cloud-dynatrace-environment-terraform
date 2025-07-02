@@ -13,7 +13,7 @@ variable "servicenow_alerting_rules" {
     # https://registry.terraform.io/providers/dynatrace-oss/dynatrace/latest/docs/resources/alerting#nestedblock--rules - 
     # potentially be a bug in the module - 
     # Issue discussed in this conversation - https://hod-dsp.slack.com/archives/C0807UKF7RP/p1746542824632969
-    tags = optional(list(string), ["intentional_invalid_tag"])
+    tags = optional(list(string), [])
     delay_in_minutes = optional(number, 0)
   }))
 }
