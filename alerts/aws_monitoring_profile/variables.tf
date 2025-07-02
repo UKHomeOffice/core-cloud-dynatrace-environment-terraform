@@ -14,7 +14,7 @@ variable "aws_monitoring_profile_alert_config" {
 variable "aws_monitoring_profile_alerting_rules" {
   type = object({
     include_mode = optional(string, "NONE") 
-    tags = optional(list(string), ["intentional_invalid_tag"]) 
+    tags = optional(list(string), []) 
     delay_in_minutes = optional(number, 0)
   })
 }
