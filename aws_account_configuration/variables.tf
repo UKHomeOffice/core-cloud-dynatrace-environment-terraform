@@ -27,5 +27,8 @@ variable "tags_to_monitor" {
     value = string
   }))
   description = "List of tag filters to apply to AWS integration"
-  default     = []
+  default     = [{
+      name        = "dynatrace"
+      value       = "true"
+    }]
 }
