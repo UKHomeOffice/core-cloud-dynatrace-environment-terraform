@@ -20,3 +20,15 @@ variable "activegate_deployment_type" {
     error_message = "ActiveGate deployment type must be either 'on_prem' or 'saas'"
   }
 }
+
+variable "tags_to_monitor" {
+  type = list(object({
+    name  = string
+    value = string
+  }))
+  description = "List of tag filters to apply to AWS integration"
+  default = [{
+    name  = "dynatrace"
+    value = "true"
+  }]
+}
