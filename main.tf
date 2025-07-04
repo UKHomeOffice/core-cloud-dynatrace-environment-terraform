@@ -121,5 +121,5 @@ module "dynatrace_aws_monitoring_profile_integration" {
   aws_monitoring_profile_alert_config = var.tenant_vars.aws_monitoring_profile_integration
 }
 module "anomaly_detection" {
-  source = "./anamoly_detection/"
+  source = "./anomaly_detection/"
 }
