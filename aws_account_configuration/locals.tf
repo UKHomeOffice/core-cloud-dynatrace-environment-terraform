@@ -11,4 +11,6 @@ locals {
   # Finally choose the exclusive service map *if it is not empty*
   # over the computed service map
   services_to_configure = length(local.exclusive_services) > 0 ? local.exclusive_services : local.computed_services
+
+  default_tags_to_monitor = var.tags_to_monitor
 }
