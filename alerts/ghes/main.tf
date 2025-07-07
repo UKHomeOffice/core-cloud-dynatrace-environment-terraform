@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    dynatrace = {
+      version = "~> 1.0"
+      source  = "dynatrace-oss/dynatrace"
+    }
+  }
+}
+
 module "alerts" {
   source = "./alert_profile"
   for_each           =  var.ghes_alert_configs
