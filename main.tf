@@ -101,7 +101,8 @@ module "dynatrace_log_storage_include_dynatrace_labelled_pods" {
   enabled         = true
   send_to_storage = true
 
-  matcher_attribute = "K8s_pod_label"
+// DT docs are wrong - Use https://github.com/dynatrace-oss/terraform-provider-dynatrace/blob/a02c5b5b61cfc1d216508202ec7e4f6bd4787069/dynatrace/api/builtin/logmonitoring/logstoragesettings/settings/enums.go#L47-L69 for valid values
+  matcher_attribute = "k8s.pod.label"
   matcher_operator  = "MATCHES"
   matcher_values    = ["dynatrace-logs:true"]
 }
