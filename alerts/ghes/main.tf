@@ -1,5 +1,5 @@
 module "alerts" {
-  source = "./alert_profile/"
+  source = "./alert_profile"
   for_each           =  var.ghes_alert_configs
   ghes_alert_configs = each.value
 }
