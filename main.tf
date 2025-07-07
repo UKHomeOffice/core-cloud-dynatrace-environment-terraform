@@ -29,15 +29,8 @@ module "ghes_alerts" {
     keys(var.tenant_vars.ghes_alert),
     "ghes_alert_profile"
   ) ? var.tenant_vars.ghes_alert.ghes_alert_profile : tomap({})
-  ghes_metrics       =  contains(
-    keys(var.tenant_vars.ghes_alert),
-    "ghes_metrics"
-  ) ? var.tenant_vars.ghes_alert.ghes_metrics : tomap({})
-  common_ghes_metrics = contains(
-    keys(var.tenant_vars.ghes_alert),
-    "common_ghes_metrics"
-  ) ? var.tenant_vars.ghes_alert.common_ghes_values : tomap({})
-  
+  ghes_metrics        =   var.tenant_vars.ghes_alert.ghes_metrics
+  common_ghes_metrics =  var.tenant_vars.ghes_alert.common_ghes_values  
 }
 
 module "ghes_dashboards" {
