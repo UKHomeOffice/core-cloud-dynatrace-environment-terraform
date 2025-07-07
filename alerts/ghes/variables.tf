@@ -1,5 +1,5 @@
 variable "ghes_alert_configs" {
-  type = map({
+  type = map(object({
     # generic config for ghes alerts
     enabled                           = bool
     alerting_profile_name             = string
@@ -13,7 +13,7 @@ variable "ghes_alert_configs" {
     channel_name                      = string
     tag_key                           = string
     tag_value                         = string
-  })
+  }))
 }
 
 variable "common_ghes_metrics"{
