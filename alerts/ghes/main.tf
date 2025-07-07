@@ -1,3 +1,12 @@
+module "alerts" {
+  source = "./alerts"
+
+  for_each           =  var.ghes_alert_configs
+  ghes_alert_configs = each.value
+}
+
+
+
 # memory warning alerts
 resource "dynatrace_metric_events" "freeable_memory_warning_alerts" {
   count                      = var.ghes_metrics.memory_usage.warning.enabled == true ? 1 : 0
