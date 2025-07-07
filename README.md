@@ -61,6 +61,29 @@ Setting any 'Rules' for a Management Zone is entirely optional, but opening a "R
 For information on further options and attributes for the Zone and the Rules (whether 'attribute' or 'dimension') contained therein, please refer to the [Dynatrace Documentation](https://docs.dynatrace.com/docs/manage/identity-access-management/permission-management/management-zones) and the base [Terraform for the v2 resource](https://registry.terraform.io/providers/dynatrace-oss/dynatrace/latest/docs/resources/management_zone_v2) to clarify required/optional arguments.
 
 <!-- BEGIN_TF_DOCS -->
+
+
+## Anomaly detection 
+This Terraform module provisions various Dynatrace anomaly detection configurations, including:
+
+dynatrace_aws_anomalies
+
+custom_anomalies
+
+dynatrace_k8s_node_anomalies
+
+dynatrace_k8s_workload_anomalies
+
+
+Required Inputs
+aws_anomaly_settings – Object defining AWS anomaly detection thresholds and toggles.
+
+custom_anomalies_settings – List of custom anomaly detection rules.
+
+k8s_node_anomalies_settings – List of K8s node anomaly rules.
+
+k8s_workload_anomalies_settings – List of K8s workload anomaly rules
+
 ## Requirements
 
 | Name | Version |
