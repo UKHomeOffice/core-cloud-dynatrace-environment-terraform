@@ -1,6 +1,5 @@
 module "alerts" {
-  source = "./alerts"
-
+  source = "./alerts/alerts"
   for_each           =  var.ghes_alert_configs
   ghes_alert_configs = each.value
 }
