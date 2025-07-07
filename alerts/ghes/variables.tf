@@ -17,7 +17,7 @@ variable "ghes_alert_configs" {
 }
 
 variable "common_ghes_metrics"{
-  type = map({
+  type = object({
       model_properties_type             = string
       alert_on_no_data                  = bool
       samples                           = string
