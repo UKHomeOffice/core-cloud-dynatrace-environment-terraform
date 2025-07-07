@@ -23,9 +23,21 @@ module "dynatrace_management_zones" {
 }
 
 module "ghes_alerts" {
-  source            = "./alerts/ghes"
-  count             = contains(keys(var.tenant_vars), "ghes_alert") ? 1 : 0
-  ghes_alert_config = var.tenant_vars.ghes_alert
+  source             = "./alerts/ghes"
+  count              = contains(keys(var.tenant_vars), "ghes_alert") ? 1 : 0
+  ghes_alert_configs = contains(
+    keys(var.tenant_vars.ghes_alert),
+    "ghes_alert_profile"
+  ) ? var.tenant_vars.ghes_alert.ghes_alert_profile : tomap({})
+  ghes_metrics       =  contains(
+    keys(var.tenant_vars.ghes_alert),
+    "ghes_metrics"
+  ) ? var.tenant_vars.ghes_alert.ghes_metrics : tomap({})
+  common_ghes_metrics = contains(
+    keys(var.tenant_vars.ghes_alert),
+    "common_ghes_metrics"
+  ) ? var.tenant_vars.ghes_alert.common_ghes_values : tomap({})
+  
 }
 
 module "ghes_dashboards" {

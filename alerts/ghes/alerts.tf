@@ -1,47 +1,66 @@
-resource "dynatrace_alerting" "cosmos-ghes-alerting-profile" {
-  name = var.ghes_alert_config.alerting_profile_name
+resource "dynatrace_slack_notification" "slack_alerts" {
+  for_each = tomap({
+    for k, v in var.ghes_alert_configs :
+    k => v
+    if try(v.slack_notification_enabled, false)
+  })
+
+  active  = each.value.slack_notification_enabled
+  name    = each.value.slack_notification_name
+  profile = dynatrace_alerting.ghes_alert_profiles[each.key].id
+  url     = each.value.slack_url
+  channel = each.value.channel_name
+  message = each.value.slack_message
+}
+
+
+
+resource "dynatrace_alerting" "ghes_alert_profiles" {
+  for_each = var.ghes_alert_configs
+
+  name = each.value.alerting_profile_name
 
   rules {
     rule {
-      include_mode     = var.ghes_alert_config.include_mode
-      delay_in_minutes = var.ghes_alert_config.delay_in_minutes
+      include_mode     = each.value.include_mode
+      delay_in_minutes = each.value.delay_in_minutes
       severity_level   = "AVAILABILITY"
     }
     rule {
-      include_mode     = var.ghes_alert_config.include_mode
-      delay_in_minutes = var.ghes_alert_config.delay_in_minutes
+      include_mode     = each.value.include_mode
+      delay_in_minutes = each.value.delay_in_minutes
       severity_level   = "CUSTOM_ALERT"
     }
     rule {
-      include_mode     = var.ghes_alert_config.include_mode
-      delay_in_minutes = var.ghes_alert_config.delay_in_minutes
+      include_mode     = each.value.include_mode
+      delay_in_minutes = each.value.delay_in_minutes
       severity_level   = "ERRORS"
     }
     rule {
-      include_mode     = var.ghes_alert_config.include_mode
-      delay_in_minutes = var.ghes_alert_config.delay_in_minutes
+      include_mode     = each.value.include_mode
+      delay_in_minutes = each.value.delay_in_minutes
       severity_level   = "MONITORING_UNAVAILABLE"
     }
     rule {
-      include_mode     = var.ghes_alert_config.include_mode
-      delay_in_minutes = var.ghes_alert_config.delay_in_minutes
+      include_mode     = each.value.include_mode
+      delay_in_minutes = each.value.delay_in_minutes
       severity_level   = "PERFORMANCE"
     }
     rule {
-      include_mode     = var.ghes_alert_config.include_mode
-      delay_in_minutes = var.ghes_alert_config.delay_in_minutes
+      include_mode     = each.value.include_mode
+      delay_in_minutes = each.value.delay_in_minutes
       severity_level   = "RESOURCE_CONTENTION"
     }
   }
-  # restrict this profile to as tagged
+
   filters {
     filter {
       custom {
         metadata {
           items {
             filter {
-              key = var.ghes_alert_config.tag_key
-              value = var.ghes_alert_config.tag_value
+              key   = each.value.tag_key
+              value = each.value.tag_value
             }
           }
         }
