@@ -27,13 +27,16 @@ module "ghes_alerts" {
   count              = (contains(keys(var.tenant_vars), "ghes_alert") &&
     contains(keys(try(var.tenant_vars.ghes_alert, {})), "ghes_alert_configs")) ? 1 : 0
   ghes_alert_configs  = var.tenant_vars.ghes_alert.ghes_alert_configs
+  common_ghes_metrics =    var.tenant_vars.ghes_alert.common_metric_values 
+  ghes_metrics = var.tenant_vars.ghes_alert.metrics
+
 }
 
-module "ghes_alerts" {
-  source             = "./ghes_metrics"
-  count              = contains(keys(var.tenant_vars), "ghes_metrics") ? 1 : 0
-  ghes_metrics        =   var.tenant_vars.metrics.ghes_metrics
-  common_ghes_metrics =  var.tenant_vars.metrics.common_ghes_values  
+module "metrics" {
+  source             = "./metrics_events"
+  count              = contains(keys(var.tenant_vars), "metric_events") ? 1 : 0
+  metrics_vars        =   var.tenant_vars.metric_events.metrics
+  common_metrics_vars =  var.tenant_vars.metric_events.common_metric_values  
 }
 
 module "ghes_dashboards" {
