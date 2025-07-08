@@ -25,7 +25,7 @@ module "dynatrace_management_zones" {
 module "ghes_alerts" {
   source            = "./alerts/ghes"
   count             = contains(keys(var.tenant_vars), "ghes_alert") ? 1 : 0
-  ghes_alert_configs = var.tenant_vars.ghes_alert_configs
+  ghes_alert_configs = var.tenant_vars.ghes_alert.ghes_alert_configs
   }
 
 
