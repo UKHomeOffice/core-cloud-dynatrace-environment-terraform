@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    dynatrace = {
+      version = "~> 1.0"
+      source  = "dynatrace-oss/dynatrace"
+    }
+  }
+}
+
 resource "dynatrace_slack_notification" "slack_alerts" {
   active  = each.value.slack_notification_enabled
   name    = each.value.slack_notification_name
