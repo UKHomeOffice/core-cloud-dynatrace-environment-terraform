@@ -9,7 +9,7 @@ terraform {
 
 resource "dynatrace_slack_notification" "slack_alerts" {
   for_each = var.ghes_alert_configs
-  
+
   active  = each.value.slack_notification_enabled
   name    = each.value.slack_notification_name
   profile = dynatrace_alerting.ghes_alert_profiles[each.key].id
@@ -72,4 +72,9 @@ resource "dynatrace_alerting" "ghes_alert_profiles" {
       }
     }
   }
+}
+
+
+output "debug_ghes_alert_configs" {
+  value = var.ghes_alert_configs
 }
