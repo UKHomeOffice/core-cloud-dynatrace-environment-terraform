@@ -29,7 +29,6 @@ module "ghes_alerts" {
   )? tomap(var.tenant_vars.ghes_alert.ghes_alert_configs) : tomap({})
   ghes_alert_configs = var.tenant_vars.ghes_alert_configs
   }
-}
 
 module "metric_events" {
   source            = "./metric_events"
