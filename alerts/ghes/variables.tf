@@ -13,5 +13,7 @@ variable "ghes_alert_configs" {
     channel_name                      = string
     tag_key                           = string
     tag_value                         = string
+    filter_enabled                    = string
+    message_status                    = string
   }))
 }

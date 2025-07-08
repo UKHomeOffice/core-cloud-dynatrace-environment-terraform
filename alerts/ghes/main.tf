@@ -71,6 +71,16 @@ resource "dynatrace_alerting" "ghes_alert_profiles" {
         }
       }
     }
+    filter {
+      custom{
+        title {
+        operator = "CONTAINS"
+        value    = each.value.message_status
+        enabled  = each.value.filter_enabled
+        }
+      }
+    }
+
   }
 }
 
