@@ -22,13 +22,34 @@ module "dynatrace_management_zones" {
   # Name reference for the zone within config yaml is used as the literal name of the MZ to be created
 }
 
+# module "ghes_alerts" {
+#   source            = "./alerts/ghes"
+#   count             = contains(keys(var.tenant_vars.ghees_alert),
+#   "alerting_profile_name"
+#   )? tomap(var.tenant_vars.ghes_alert.ghes_alert_configs) : tomap({})
+#   ghes_alert_configs = var.tenant_vars.ghes_alert_configs
+#   }
+
 module "ghes_alerts" {
-  source            = "./alerts/ghes"
-  count             = contains(keys(var.tenant_vars.ghees_alert),
-  "alerting_profile_name"
-  )? tomap(var.tenant_vars.ghes_alert.ghes_alert_configs) : tomap({})
-  ghes_alert_configs = var.tenant_vars.ghes_alert_configs
+  source = "./alerts/ghes"
+
+  ghes_alert_configs = {
+    ghes_alert_profile_warning = {
+      enabled                    = true
+      alerting_profile_name      = "cosmos_ghes_alerting_profile_warning"
+      notify_closed_problem      = false
+      include_mode               = "NONE"
+      delay_in_minutes           = "0"
+      slack_notification_enabled = true
+      slack_message              = "GHES alerting notification..."
+      slack_notification_name    = "cosmos_ghes_slack_alert_notification"
+      slack_url                  = "https://hooks.slack.com/services/..."
+      channel_name               = "core-cloud-test-alerts"
+      tag_key                    = "cc_team_owner"
+      tag_value                  = "cc_team_phoenix"
+    }
   }
+}
 
 module "metric_events" {
   source            = "./metric_events"
