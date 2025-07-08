@@ -294,8 +294,3 @@ resource "dynatrace_metric_events" "ghes_disk_utilization_critical_alerts" {
     }
   }
 }
-module "alerts" {
-  source = "./alert_profile"
-  for_each           =  var.ghes_alert_configs
-  ghes_alert_configs = each.value
-}
