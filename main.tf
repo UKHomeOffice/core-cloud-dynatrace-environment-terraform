@@ -32,8 +32,8 @@ module "ghes_alerts" {
 module "metric_events" {
   source            = "./metric_events"
   count             = contains(keys(var.tenant_vars), "metric_events") ? 1 : 0
-  common_metrics_vars = var.tenant_vars.metric_events.common_metrics_values
-  metrics_vars        =  var.tenant_vars.metric_events.metrics 
+  common_metrics_vars = var.tenant_vars.metric_events.common_metric_values
+  metrics_vars        = var.tenant_vars.metric_events.metrics 
 }
 
 module "ghes_dashboards" {
