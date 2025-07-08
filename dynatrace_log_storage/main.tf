@@ -1,6 +1,6 @@
 
 
-resource "dynatrace_log_storage" "include_dynatrace_labelled_pods" {
+resource "dynatrace_log_storage" "dynatrace_log_storage_rule" {
   name            = var.name
   enabled         = var.enabled
   send_to_storage = var.send_to_storage
