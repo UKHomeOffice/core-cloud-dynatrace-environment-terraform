@@ -200,7 +200,7 @@ resource "dynatrace_metric_events" "cpu_utilization_critical_alerts" {
 }
 
 # disk warning alerts
-resource "dynatrace_metric_events" "ghes_disk_utilization_warning_alerts" {
+resource "dynatrace_metric_events" "disk_utilization_warning_alerts" {
   count                      = var.metrics_vars.disk_usage.warning.enabled == true ? 1 : 0
   enabled                    = var.metrics_vars.disk_usage.warning.enabled
   event_entity_dimension_key = var.common_metrics_vars.event_entity_dimension_key
@@ -248,7 +248,7 @@ resource "dynatrace_metric_events" "ghes_disk_utilization_warning_alerts" {
 }
 
 # disk critical alerts
-resource "dynatrace_metric_events" "ghes_disk_utilization_critical_alerts" {
+resource "dynatrace_metric_events" "disk_utilization_critical_alerts" {
   count                      = var.metrics_vars.disk_usage.critical.enabled == true ? 1 : 0
   enabled                    = var.metrics_vars.disk_usage.critical.enabled
   event_entity_dimension_key = var.common_metrics_vars.event_entity_dimension_key
