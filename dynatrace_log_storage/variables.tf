@@ -1,31 +1,11 @@
-variable "name" {
-  description = "Name of the log storage rule."
-  type        = string
-}
-
-variable "enabled" {
-  description = "Whether the log storage rule is enabled."
-  type        = bool
-  default     = true
-}
-
-variable "send_to_storage" {
-  description = "Whether to send logs to storage."
-  type        = bool
-  default     = true
-}
-
-variable "matcher_attribute" {
-  description = "Attribute to match."
-  type        = string
-}
-
-variable "matcher_operator" {
-  description = "Operator for the matcher."
-  type        = string
-}
-
-variable "matcher_values" {
-  description = "Values for the matcher."
-  type        = list(string)
+variable "rules" {
+  description = "List of log storage rules."
+  type = list(object({
+    name              = string
+    enabled           = optional(bool, true)
+    send_to_storage   = optional(bool, true)
+    matcher_attribute = string
+    matcher_operator  = string
+    matcher_values    = list(string)
+  }))
 }

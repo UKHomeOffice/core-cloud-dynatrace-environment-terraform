@@ -23,19 +23,19 @@ module "dynatrace_management_zones" {
 }
 
 module "ghes_alerts" {
-  source             = "./alerts/ghes"
-  count              = contains(keys(var.tenant_vars), "ghes_alert") ? 1 : 0
+  source = "./alerts/ghes"
+  count  = contains(keys(var.tenant_vars), "ghes_alert") ? 1 : 0
   ghes_alert_configs = contains(keys(var.tenant_vars.ghes_alert), "ghes_alert_configs"
     ) && var.tenant_vars.ghes_alert.ghes_alert_configs != null ? tomap(var.tenant_vars.ghes_alert.ghes_alert_configs
   ) : tomap({})
 }
 
 module "metric_events" {
-  source              = "./metric_events"
-  count               = (contains(keys(var.tenant_vars), "metric_events"
+  source = "./metric_events"
+  count = (contains(keys(var.tenant_vars), "metric_events"
     ) && contains(keys(var.tenant_vars.metric_events), "common_metric_values"
     ) && contains(keys(var.tenant_vars.metric_events), "metrics"
-    ) && var.tenant_vars.metric_events.common_metric_values != null && var.tenant_vars.metric_events.metrics != null) ? 1 : 0
+  ) && var.tenant_vars.metric_events.common_metric_values != null && var.tenant_vars.metric_events.metrics != null) ? 1 : 0
   common_metrics_vars = var.tenant_vars.metric_events.common_metric_values
   metrics_vars        = var.tenant_vars.metric_events.metrics
 }
@@ -125,26 +125,26 @@ module "anomaly_detection" {
   source = "./anomaly_detection/"
 }
 
-module "dynatrace_log_storage_include_dynatrace_labelled_pods" {
-  source          = "./dynatrace_log_storage"
-  name            = "Include Dynatrace Labelled Pods"
-  enabled         = true
-  send_to_storage = true
 
-// DT docs are wrong - Use https://github.com/dynatrace-oss/terraform-provider-dynatrace/blob/a02c5b5b61cfc1d216508202ec7e4f6bd4787069/dynatrace/api/builtin/logmonitoring/logstoragesettings/settings/enums.go#L47-L69 for valid values
-  matcher_attribute = "k8s.pod.label"
-  matcher_operator  = "MATCHES"
-  matcher_values    = ["dynatrace-logs=true"]
-}
+module "dynatrace_log_storage_rules" {
+  source = "./dynatrace_log_storage"
 
-
-module "dynatrace_log_storage_include_kube_system_namespace" {
-  source          = "./dynatrace_log_storage"
-  name            = "Include Kube-System Namespace"
-  enabled         = true
-  send_to_storage = true
-
-  matcher_attribute = "k8s.namespace.name"
-  matcher_operator  = "MATCHES"
-  matcher_values    = ["kube-system"]
+  rules = [
+    {
+      name              = "include-dynatrace-pods"
+      enabled           = true
+      send_to_storage   = true
+      matcher_attribute = "k8s.namespace.name"
+      matcher_operator  = "EQUALS"
+      matcher_values    = ["kube-system"]
+    },
+    {
+      name              = "include-dt-containers"
+      enabled           = true
+      send_to_storage   = true
+      matcher_attribute = "k8s.pods.label"
+      matcher_operator  = "MATCHES"
+      matcher_values    = ["dynatrace-logs=true"]
+    }
+  ]
 }
