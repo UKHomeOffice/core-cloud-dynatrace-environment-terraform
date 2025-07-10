@@ -53,9 +53,19 @@ resource "terraform_data" "servicenow_integration" {
   }
   provisioner "local-exec" {
     when = destroy
-    command = "bash ${path.module}/integration_utils/integration_helper delete"
+    command = "bash ${path.module}/integration_utils/integration_helper"
     environment = {
       INTEGRATION_NAME = self.triggers_replace.integration_name
+      DELETE_INTEGRATION =  "true"
+      ENABLED = self.triggers_replace.state
+      ALERTING_PROFILE_ID = self.triggers_replace.alerting_profile_id
+      WEBHOOK_PAYLOAD = self.triggers_replace.integration_payload # TODO - Due to known issues (refer to README), this value is currently ignored.
+      SERVICENOW_END_POINT = self.triggers_replace.snow_end_point
+      SERVICENOW_ENV_ID = self.triggers_replace.snow_env_id
+      SERVICENOW_CLIENT_ID = self.triggers_replace.snow_client_id
+      ACCEPT_ANY_CERT = self.triggers_replace.accept_any_cert
+      NOTIFY_EVENT_MERGES = self.triggers_replace.notify_event_merges
+      NOTIFY_CLOSED_PROBLEMS = self.triggers_replace.notify_closed_problems
     }
   }
 }
