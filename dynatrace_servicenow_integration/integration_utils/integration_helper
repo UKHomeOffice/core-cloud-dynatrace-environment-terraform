@@ -23,7 +23,7 @@ if [[ $record_count -gt 1 ]]; then
   exit 1
 elif [[ $record_count -eq 1 ]]; then
   export OBJECT_ID=$(echo $json_content | jq -r '.items[0].objectId' | xargs)
-  if [[ $# -eq 1 && $1 == "delete" ]]; then
+  if [[ -n ${DELETE_INTEGRATION:-} ]]; then
     echo "Deleting ${INTEGRATION_NAME}..."
     the_api_call DELETE "objects/${OBJECT_ID}"
   else # NOTE: In terraform this logic will never be true. Including here for completion.
