@@ -142,7 +142,7 @@ module "dynatrace_log_storage_rules" {
       name              = "include-dt-containers"
       enabled           = true
       send_to_storage   = true
-      matcher_attribute = "k8s.pods.label"
+      matcher_attribute = "k8s.pod.label"
       matcher_operator  = "MATCHES"
       matcher_values    = ["dynatrace-logs=true"]
     }
