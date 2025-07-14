@@ -771,31 +771,31 @@ TransitGateway:
     statistic: SUM
     dimensions:
     - TransitGateway
-NATGateways:
-  - name: ActiveConnectionCount
-    statistic: Maximum
-    dimensions:
-    - NatGatewayId
-  - name: ConnectionAttemptCount
-    statistic: SUM
-    dimensions:
-    - NatGatewayId
-  - name: ConnectionEstablishedCount
-    statistic: SUM
-    dimensions:
-    - NatGatewayId
-  - name: ErrorPortAllocation
-    statistic: SUM
-    dimensions:
-    - NatGatewayId
-  - name: IdleTimeoutCount
-    statistic: SUM
-    dimensions:
-    - NatGatewayId
-  - name: PacketsDropCount
-    statistic: SUM
-    dimensions:
-    - NatGatewayId
+# NATGateways:
+#   - name: ActiveConnectionCount
+#     statistic: Maximum
+#     dimensions:
+#     - NatGatewayId
+#   - name: ConnectionAttemptCount
+#     statistic: SUM
+#     dimensions:
+#     - NatGatewayId
+#   - name: ConnectionEstablishedCount
+#     statistic: SUM
+#     dimensions:
+#     - NatGatewayId
+#   - name: ErrorPortAllocation
+#     statistic: SUM
+#     dimensions:
+#     - NatGatewayId
+#   - name: IdleTimeoutCount
+#     statistic: SUM
+#     dimensions:
+#     - NatGatewayId
+#   - name: PacketsDropCount
+#     statistic: SUM
+#     dimensions:
+#     - NatGatewayId
 Route53:
   - name: DNSQueries
     statistic: AVG_MIN_MAX
@@ -805,52 +805,49 @@ Route53:
     statistic: SUM
     dimensions:
     - HostedZoneId
-  - name: HealthCheckStatus
-    statistic: AVG_MIN_MAX
-    dimensions:
-    - Region and HealthCheckId
-  - name: TimeToFirstByte
-    statistic: AVG_MIN_MAX
-    dimensions:
-    - Region and HealthCheckId
-CloudwatchLogs:
-  - name: IncomingLogEvents
-    statistic: SUM
-    dimensions:
-    - LogGroupName
-    - Region
-  - name: IncomingBytes
-    statistic: SUM
-    dimensions:
-    - LogGroupName
-    - Region
-  - name: ForwardedLogEvents
-    statistic: SUM
-    dimensions:
-    - LogGroupName and DestinationType and FilterName
-  - name: ForwardedBytes
-    statistic: SUM
-    dimensions:
-    - LogGroupName and DestinationType and FilterName
-  - name: DeliveryThrottling
-    statistic: SUM
-    dimensions:
-    - LogGroupName and DestinationType and FilterName
-  - name:  DeliveryErrors
-    statistic: SUM
-    dimensions:
-    - LogGroupName and DestinationType and FilterName
-WAF:
-  - name:  AllowedRequests
-    statistic: SUM
-    dimensions:
-    - WebACL and Region and Rule
-    - WebACL and Rule
-  - name:  BlockedRequests
-    statistic: SUM
-    dimensions:
-    - WebACL and Region and Rule
-    - WebACL and Rule
-
-
-
+  # - name: HealthCheckStatus
+  #   statistic: AVG_MIN_MAX
+  #   dimensions:
+  #   - "Region and HealthCheckId"
+  # - name: TimeToFirstByte
+  #   statistic: AVG_MIN_MAX
+  #   dimensions:
+  #   - Region and HealthCheckId
+# CloudwatchLogs:
+#   - name: IncomingLogEvents
+#     statistic: SUM
+#     dimensions:
+#     - LogGroupName
+#     - Region
+#   - name: IncomingBytes
+#     statistic: SUM
+#     dimensions:
+#     - LogGroupName
+#     - Region
+#   - name: ForwardedLogEvents
+#     statistic: SUM
+#     dimensions:
+#     - "LogGroupName and DestinationType and FilterName"
+#   - name: ForwardedBytes
+#     statistic: SUM
+#     dimensions:
+#     - "LogGroupName and DestinationType and FilterName"
+#   - name: DeliveryThrottling
+#     statistic: SUM
+#     dimensions:
+#     - "LogGroupName and DestinationType and FilterName"
+#   - name:  DeliveryErrors
+#     statistic: SUM
+#     dimensions:
+#     - "LogGroupName and DestinationType and FilterName"
+# WAF:
+#   - name:  AllowedRequests
+#     statistic: SUM
+#     dimensions:
+#     - "WebACL and Region and Rule"
+#     - "WebACL and Rule"
+#   - name:  BlockedRequests
+#     statistic: SUM
+#     dimensions:
+#     - "WebACL and Region and Rule"
+#     - "WebACL and Rule"
