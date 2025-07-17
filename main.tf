@@ -150,16 +150,17 @@ module "dynatrace_log_storage_rules" {
 }
 module "web_application" {
   source = "./web_applications/"
-  web_application_name = var.tenant_vars.web_application_name
-  web_application_type = var.tenant_vars.web_application_type
-  load_action_key_performance_metric = var.tenant_vars.load_action_key_performance_metric
-  rum_enabled = var.tenant_vars.rum_enabled
-  xhr_action_key_performance_metric = var.tenant_vars.xhr_action_key_performance_metric
-  frustrating_fallback_threshold = var.tenant_vars.frustrating_fallback_threshold
-  frustrating_threshold = var.tenant_vars.frustrating_threshold
-  tolerated_fallback_threshold = var.tenant_vars.tolerated_fallback_threshold
-  tolerated_threshold = var.tenant_vars.tolerated_threshold
-  application_match_target = var.tenant_vars.application_match_target
-  application_match_type =  var.tenant_vars.application_match_type
-  hostname = var.tenant_vars.hostname
+  count  = contains(keys(var.tenant_vars), "web_application") ? 1 : 0
+  web_application_name = var.tenant_vars.web_application.web_application_name
+  web_application_type = var.tenant_vars.web_application.web_application_type
+  load_action_key_performance_metric = var.tenant_vars.web_application.load_action_key_performance_metric
+  rum_enabled = var.tenant_vars.web_application.rum_enabled
+  xhr_action_key_performance_metric = var.tenant_vars.web_application.xhr_action_key_performance_metric
+  frustrating_fallback_threshold = var.tenant_vars.web_application.frustrating_fallback_threshold
+  frustrating_threshold = var.tenant_vars.web_application.frustrating_threshold
+  tolerated_fallback_threshold = var.tenant_vars.web_application.tolerated_fallback_threshold
+  tolerated_threshold = var.tenant_vars.web_application.tolerated_threshold
+  application_match_target = var.tenant_vars.web_application.application_match_target
+  application_match_type =  var.tenant_vars.web_application.application_match_type
+  hostname = var.tenant_vars.web_application.hostname
 }
