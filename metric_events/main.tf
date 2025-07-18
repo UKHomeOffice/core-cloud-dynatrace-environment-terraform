@@ -36,12 +36,7 @@ resource "dynatrace_metric_events" "freeable_memory_warning_alerts" {
     type        = var.metrics_vars.memory_usage.query_definition_type
     aggregation = var.metrics_vars.memory_usage.aggregation
     metric_key  = var.metrics_vars.memory_usage.metric_key
-    dimension_filter {
-      filter {
-        dimension_key   = var.common_metrics_vars.dimension_key
-        dimension_value = var.common_metrics_vars.dimension_value
-      }
-    }
+
     entity_filter {
       dimension_key = var.common_metrics_vars.dimension_key
       conditions {
@@ -84,12 +79,7 @@ resource "dynatrace_metric_events" "freeable_memory_critical_alerts" {
     type        = var.metrics_vars.memory_usage.query_definition_type
     aggregation = var.metrics_vars.memory_usage.aggregation
     metric_key  = var.metrics_vars.memory_usage.metric_key
-    dimension_filter {
-      filter {
-        dimension_key   = var.common_metrics_vars.dimension_key
-        dimension_value = var.common_metrics_vars.dimension_value
-      }
-    }
+
     entity_filter {
       dimension_key = var.common_metrics_vars.dimension_key
       conditions {
@@ -132,12 +122,7 @@ resource "dynatrace_metric_events" "cpu_utilization_warning_alerts" {
     type        = var.metrics_vars.cpu_usage.query_definition_type
     aggregation = var.metrics_vars.cpu_usage.aggregation
     metric_key  = var.metrics_vars.cpu_usage.metric_key
-    dimension_filter {
-      filter {
-        dimension_key   = var.common_metrics_vars.dimension_key
-        dimension_value = var.common_metrics_vars.dimension_value
-      }
-    }
+
     entity_filter {
       dimension_key = var.common_metrics_vars.dimension_key
       conditions {
@@ -180,12 +165,7 @@ resource "dynatrace_metric_events" "cpu_utilization_critical_alerts" {
     type        = var.metrics_vars.cpu_usage.query_definition_type
     aggregation = var.metrics_vars.cpu_usage.aggregation
     metric_key  = var.metrics_vars.cpu_usage.metric_key
-    dimension_filter {
-      filter {
-        dimension_key   = var.common_metrics_vars.dimension_key
-        dimension_value = var.common_metrics_vars.dimension_value
-      }
-    }
+
     entity_filter {
       dimension_key = var.common_metrics_vars.dimension_key
       conditions {
@@ -228,12 +208,7 @@ resource "dynatrace_metric_events" "disk_utilization_warning_alerts" {
     type        = var.metrics_vars.disk_usage.query_definition_type
     aggregation = var.metrics_vars.disk_usage.aggregation
     metric_key  = var.metrics_vars.disk_usage.metric_key
-    dimension_filter {
-      filter {
-        dimension_key   = var.common_metrics_vars.dimension_key
-        dimension_value = var.common_metrics_vars.dimension_value
-      }
-    }
+
     entity_filter {
       dimension_key = var.common_metrics_vars.dimension_key
       conditions {
@@ -276,12 +251,7 @@ resource "dynatrace_metric_events" "disk_utilization_critical_alerts" {
     type        = var.metrics_vars.disk_usage.query_definition_type
     aggregation = var.metrics_vars.disk_usage.aggregation
     metric_key  = var.metrics_vars.disk_usage.metric_key
-    dimension_filter {
-      filter {
-        dimension_key   = var.common_metrics_vars.dimension_key
-        dimension_value = var.common_metrics_vars.dimension_value
-      }
-    }
+
     entity_filter {
       dimension_key = var.common_metrics_vars.dimension_key
       conditions {
