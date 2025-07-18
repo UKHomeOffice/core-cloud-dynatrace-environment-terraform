@@ -28,7 +28,19 @@ module "ghes_alerts" {
   ghes_alert_configs = contains(keys(var.tenant_vars.ghes_alert), "ghes_alert_configs"
     ) && var.tenant_vars.ghes_alert.ghes_alert_configs != null ? tomap(var.tenant_vars.ghes_alert.ghes_alert_configs
   ) : tomap({})
+  bcp_alerting = contains(keys(var.tenant_vars.ghes_alert), "bcp_alerting") ? var.tenant_vars.ghes_alert.bcp_alerting : {
+    enabled               = false
+    alerting_profile_name = ""
+    include_mode          = ""
+    delay_in_minutes      = 0
+    tag_key               = ""
+    tag_value             = ""
+    email_name            = ""
+    email_subject         = ""
+    email_to              = []
+  }
 }
+
 
 module "metric_events" {
   source = "./metric_events"
@@ -149,18 +161,18 @@ module "dynatrace_log_storage_rules" {
   ]
 }
 module "web_application" {
-  source = "./web_applications/"
-  count  = contains(keys(var.tenant_vars), "web_application") ? 1 : 0
-  web_application_name = var.tenant_vars.web_application.web_application_name
-  web_application_type = var.tenant_vars.web_application.web_application_type
+  source                             = "./web_applications/"
+  count                              = contains(keys(var.tenant_vars), "web_application") ? 1 : 0
+  web_application_name               = var.tenant_vars.web_application.web_application_name
+  web_application_type               = var.tenant_vars.web_application.web_application_type
   load_action_key_performance_metric = var.tenant_vars.web_application.load_action_key_performance_metric
-  rum_enabled = var.tenant_vars.web_application.rum_enabled
-  xhr_action_key_performance_metric = var.tenant_vars.web_application.xhr_action_key_performance_metric
-  frustrating_fallback_threshold = var.tenant_vars.web_application.frustrating_fallback_threshold
-  frustrating_threshold = var.tenant_vars.web_application.frustrating_threshold
-  tolerated_fallback_threshold = var.tenant_vars.web_application.tolerated_fallback_threshold
-  tolerated_threshold = var.tenant_vars.web_application.tolerated_threshold
-  application_match_target = var.tenant_vars.web_application.application_match_target
-  application_match_type =  var.tenant_vars.web_application.application_match_type
-  hostname = var.tenant_vars.web_application.hostname
+  rum_enabled                        = var.tenant_vars.web_application.rum_enabled
+  xhr_action_key_performance_metric  = var.tenant_vars.web_application.xhr_action_key_performance_metric
+  frustrating_fallback_threshold     = var.tenant_vars.web_application.frustrating_fallback_threshold
+  frustrating_threshold              = var.tenant_vars.web_application.frustrating_threshold
+  tolerated_fallback_threshold       = var.tenant_vars.web_application.tolerated_fallback_threshold
+  tolerated_threshold                = var.tenant_vars.web_application.tolerated_threshold
+  application_match_target           = var.tenant_vars.web_application.application_match_target
+  application_match_type             = var.tenant_vars.web_application.application_match_type
+  hostname                           = var.tenant_vars.web_application.hostname
 }
