@@ -1,7 +1,3 @@
-variable "hostname" {
-  type        = string
-  description = "The hostname pattern used for matching (e.g., 'example.com')."
-}
 variable "web_application_name" {
   description = "The name of the web application, displayed in the UI"
   type = string
@@ -39,13 +35,4 @@ variable "tolerated_fallback_threshold" {
 variable "tolerated_threshold" {
   type        = number
   description = "The primary threshold (in ms) at which user experience is considered tolerated. Typically set to 3000 ms."
-}
-variable "application_match_target" {
-  type        = string
-  description = "The target value to match in the application definition (e.g., domain name, URL path)."
-}
-
-variable "application_match_type" {
-  type        = string
-  description = "The type of match to apply against the application target. Possible values: 'DOMAIN', 'URL_PATH', 'URL', 'IP'."
 }

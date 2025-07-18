@@ -172,7 +172,12 @@ module "web_application" {
   frustrating_threshold              = var.tenant_vars.web_application.frustrating_threshold
   tolerated_fallback_threshold       = var.tenant_vars.web_application.tolerated_fallback_threshold
   tolerated_threshold                = var.tenant_vars.web_application.tolerated_threshold
-  application_match_target           = var.tenant_vars.web_application.application_match_target
-  application_match_type             = var.tenant_vars.web_application.application_match_type
-  hostname                           = var.tenant_vars.web_application.hostname
+}
+module "web_application_detection_rules" {
+  source                             = "./web_application_detection_rules/"
+  count                              = contains(keys(var.tenant_vars), "web_application_detection_rules") ? 1 : 0
+  web_application_id                 = var.tenant_vars.web_application_detection_rules.web_application_id
+  application_match_target           = var.tenant_vars.web_application_detection_rules.application_match_target
+  application_match_type             = var.tenant_vars.web_application_detection_rules.application_match_type
+  hostname                           = var.tenant_vars.web_application_detection_rules.hostname
 }
