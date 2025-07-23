@@ -1,15 +1,15 @@
 # This is the list of services monitored on an account
 # if *no other services* are defined in the specific account
-# in 'aws_connections:' section of an environment (within the 
+# in 'aws_connections:' section of an environment (within the
 # 'core-cloud-dynatrace-terragrunt' repository).
 # -----------------
 # The following set of services can be topped up
-# by defining 'optional_services_top_up' within 
-# an aws account section with the same format as the 
-# following with valid DT values from the API 
+# by defining 'optional_services_top_up' within
+# an aws account section with the same format as the
+# following with valid DT values from the API
 # page (https://docs.dynatrace.com/docs/dynatrace-api)
 # -----------------
-# The following values can be replaced by defining 
+# The following values can be replaced by defining
 # 'optional_exclusive_services' within the individual
 # account section.
 cloudfront:
@@ -471,19 +471,19 @@ kafka:
   - name: BytesInPerSec
     statistic: AVG_MIN_MAX
     dimensions:
-    - "Cluster Name" 
-    - "Broker ID" 
+    - "Cluster Name"
+    - "Broker ID"
     - "Topic"
   - name: BytesInPerSec
     statistic: SUM
     dimensions:
-    - "Cluster Name" 
+    - "Cluster Name"
     - "Broker ID"
   - name: BytesInPerSec
     statistic: SUM
     dimensions:
-    - "Cluster Name" 
-    - "Broker ID" 
+    - "Cluster Name"
+    - "Broker ID"
     - "Topic"
   - name: BytesOutPerSec
     statistic: AVG_MIN_MAX
@@ -499,18 +499,18 @@ kafka:
   - name: BytesOutPerSec
     statistic: SUM
     dimensions:
-    - "Cluster Name" 
+    - "Cluster Name"
     - "Broker ID"
   - name: BytesOutPerSec
     statistic: SUM
     dimensions:
-    - "Cluster Name" 
+    - "Cluster Name"
     - "Broker ID"
     - "Topic"
   - name: PartitionCount
     statistic: AVG_MIN_MAX
     dimensions:
-    - "Cluster Name" 
+    - "Cluster Name"
     - "Broker ID"
   - name: PartitionCount
     statistic: SUM
@@ -539,7 +539,7 @@ logs:
   - name: ForwardedLogEvents
     statistic: SUM
     dimensions:
-    - LogGroupName 
+    - LogGroupName
     - DestinationType
     - FilterName
   - name: IncomingBytes
@@ -703,7 +703,7 @@ s3:
     statistic: SUM
     dimensions:
     - BucketName
-    - FilterId  
+    - FilterId
   - name: BytesDownloaded
     statistic: SAMPLE_COUNT
     dimensions:
@@ -713,23 +713,23 @@ s3:
     statistic: AVG_MIN_MAX
     dimensions:
     - BucketName
-    - FilterId  
+    - FilterId
   - name: BytesUploaded
     statistic: SUM
     dimensions:
     - BucketName
-    - FilterId  
+    - FilterId
   - name: BytesUploaded
     statistic: SAMPLE_COUNT
     dimensions:
     - BucketName
-    - FilterId  
+    - FilterId
   - name: BytesUploaded
     statistic: AVG_MIN_MAX
     dimensions:
     - BucketName
-    - FilterId  
-  - name: GetRequests    
+    - FilterId
+  - name: GetRequests
     statistic: SUM
     dimensions:
     - BucketName
@@ -794,19 +794,19 @@ WAF:
   - name:  AllowedRequests
     statistic: SUM
     dimensions:
-    -  WebACL 
+    -  WebACL
     -  Region
     -  Rule
   - name:  BlockedRequests
     statistic: SUM
     dimensions:
-    -  WebACL 
+    -  WebACL
     -  Region
     -  Rule
   - name:  CountedRequests
     statistic: SUM
     dimensions:
-    -  WebACL 
+    -  WebACL
     -  Region
     -  Rule
 natgateway:
@@ -834,3 +834,19 @@ natgateway:
     statistic: SUM
     dimensions:
     - NatGatewayId
+VPN:
+  - name: TunnelState
+    statistic: AVG_MIN_MAX
+    dimensions:
+    -  VpnId
+    -  TunnelIpAddress
+  - name: TunnelDataIn
+    statistic: SUM
+    dimensions:
+    -  VpnId
+    -  TunnelIpAddress
+  - name: TunnelDataOut
+    statistic: SUM
+    dimensions:
+    -  VpnId
+    -  TunnelIpAddress
