@@ -834,7 +834,7 @@ natgateway:
     statistic: SUM
     dimensions:
     - NatGatewayId
-VPN:
+vpn:
   - name: TunnelState
     statistic: AVG_MIN_MAX
     dimensions:
