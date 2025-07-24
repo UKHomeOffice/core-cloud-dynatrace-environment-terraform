@@ -839,14 +839,14 @@ vpn:
     statistic: AVG_MIN_MAX
     dimensions:
     -  VpnId
-    -  TunnelIpAddress
+    -  Region
   - name: TunnelDataIn
     statistic: SUM
     dimensions:
     -  VpnId
-    -  TunnelIpAddress
+    -  Region
   - name: TunnelDataOut
     statistic: SUM
     dimensions:
     -  VpnId
-    -  TunnelIpAddress
+    -  Region
