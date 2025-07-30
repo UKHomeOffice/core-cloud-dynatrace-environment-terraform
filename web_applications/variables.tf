@@ -9,4 +9,3 @@ variable "web_application_type" {
 variable "rum_enabled" {
   description = "Real user monitoring enabled/disabled"
   type = bool
-}
