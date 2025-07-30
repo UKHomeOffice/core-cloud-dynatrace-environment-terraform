@@ -9,30 +9,3 @@ variable "web_application_type" {
 variable "rum_enabled" {
   description = "Real user monitoring enabled/disabled"
   type = bool
-}
-variable "load_action_key_performance_metric" {
-  description = "The key performance metric of load actions. Possible values are ACTION_DURATION, CUMULATIVE_LAYOUT_SHIFT, DOM_INTERACTIVE, FIRST_INPUT_DELAY, LARGEST_CONTENTFUL_PAINT, LOAD_EVENT_END, LOAD_EVENT_START, RESPONSE_END, RESPONSE_START, SPEED_INDEX and VISUALLY_COMPLETE"
-  type = string
-}
-variable "xhr_action_key_performance_metric" {
-  description = "The key performance metric of XHR actions. Possible values are ACTION_DURATION, RESPONSE_END, RESPONSE_START and VISUALLY_COMPLETE."
-  type = string
-}
-variable "frustrating_fallback_threshold" {
-  type        = number
-  description = "The fallback threshold (in ms) beyond which a user experience is considered frustrating. Typically set to 12000 ms."
-}
-variable "frustrating_threshold" {
-  type        = number
-  description = "The primary threshold (in ms) at which user experience is considered frustrating. Typically set to 12000 ms."
-}
-
-variable "tolerated_fallback_threshold" {
-  type        = number
-  description = "The fallback threshold (in ms) for tolerated user experience. Typically set to 3000 ms."
-}
-
-variable "tolerated_threshold" {
-  type        = number
-  description = "The primary threshold (in ms) at which user experience is considered tolerated. Typically set to 3000 ms."
-}

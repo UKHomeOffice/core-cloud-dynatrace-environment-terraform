@@ -1,5 +1,7 @@
 locals {
   default_services = yamldecode(file("default_metrics.yaml"))
+  web_application = var.tenant_vars.web_application
+  web_application_detection_rules = var.tenant_vars.web_application_detection_rules
 }
 
 module "aws_account_configurations" {
@@ -162,22 +164,17 @@ module "dynatrace_log_storage_rules" {
 }
 module "web_application" {
   source                             = "./web_applications/"
-  count                              = contains(keys(var.tenant_vars), "web_application") ? 1 : 0
-  web_application_name               = var.tenant_vars.web_application.web_application_name
-  web_application_type               = var.tenant_vars.web_application.web_application_type
-  load_action_key_performance_metric = var.tenant_vars.web_application.load_action_key_performance_metric
-  rum_enabled                        = var.tenant_vars.web_application.rum_enabled
-  xhr_action_key_performance_metric  = var.tenant_vars.web_application.xhr_action_key_performance_metric
-  frustrating_fallback_threshold     = var.tenant_vars.web_application.frustrating_fallback_threshold
-  frustrating_threshold              = var.tenant_vars.web_application.frustrating_threshold
-  tolerated_fallback_threshold       = var.tenant_vars.web_application.tolerated_fallback_threshold
-  tolerated_threshold                = var.tenant_vars.web_application.tolerated_threshold
+  for_each                           = local.web_application
+  web_application_name               = each.value.web_application_name
+  web_application_type               = each.value.web_application_type
+  rum_enabled                        = each.value.rum_enabled
+ 
 }
 module "web_application_detection_rules" {
   source                             = "./web_application_detection_rules/"
-  count                              = contains(keys(var.tenant_vars), "web_application_detection_rules") ? 1 : 0
-  web_application_id                 = var.tenant_vars.web_application_detection_rules.web_application_id
-  application_match_target           = var.tenant_vars.web_application_detection_rules.application_match_target
-  application_match_type             = var.tenant_vars.web_application_detection_rules.application_match_type
-  hostname                           = var.tenant_vars.web_application_detection_rules.hostname
+  for_each                           = local.web_application_detection_rules
+  web_application_id                 = each.value.web_application_id
+  application_match_target           = each.value.application_match_target
+  application_match_type             = each.value.application_match_type
+  hostname                           = each.value.hostname
 }

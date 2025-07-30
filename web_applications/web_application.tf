@@ -2,20 +2,20 @@ resource "dynatrace_web_application" "this" {
   name                                 = var.web_application_name
   type                                 = var.web_application_type
   cost_control_user_session_percentage = 100
-  load_action_key_performance_metric   = var.load_action_key_performance_metric
+  load_action_key_performance_metric   = "VISUALLY_COMPLETE"
   real_user_monitoring_enabled         = var.rum_enabled
-  xhr_action_key_performance_metric    = var.xhr_action_key_performance_metric
+  xhr_action_key_performance_metric    = "VISUALLY_COMPLETE"
   custom_action_apdex_settings {
-    frustrating_fallback_threshold = var.frustrating_fallback_threshold
-    frustrating_threshold          = var.frustrating_threshold
-    tolerated_fallback_threshold   = var.tolerated_fallback_threshold
-    tolerated_threshold            = var.tolerated_threshold
+    frustrating_fallback_threshold = 12000
+    frustrating_threshold          = 12000
+    tolerated_fallback_threshold   = 3000
+    tolerated_threshold            = 3000
   }
   load_action_apdex_settings {
-    frustrating_fallback_threshold = var.frustrating_fallback_threshold
-    frustrating_threshold          = var.frustrating_threshold
-    tolerated_fallback_threshold   = var.tolerated_fallback_threshold
-    tolerated_threshold            = var.tolerated_threshold
+    frustrating_fallback_threshold = 12000
+    frustrating_threshold          = 12000
+    tolerated_fallback_threshold   = 3000
+    tolerated_threshold            = 3000
   }
   meta_data_capture_settings {
     capture {
