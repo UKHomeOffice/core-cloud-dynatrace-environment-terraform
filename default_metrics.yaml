@@ -834,19 +834,19 @@ natgateway:
     statistic: SUM
     dimensions:
     - NatGatewayId
-vpn:
-  - name: TunnelState
-    statistic: AVG_MIN_MAX
-    dimensions:
-    -  VpnId
-    -  Region
-  - name: TunnelDataIn
-    statistic: SUM
-    dimensions:
-    -  VpnId
-    -  Region
-  - name: TunnelDataOut
-    statistic: SUM
-    dimensions:
-    -  VpnId
-    -  Region
+# vpn:
+#   - name: TunnelState
+#     statistic: AVG_MIN_MAX
+#     dimensions:
+#     -  VpnId
+#     -  Region
+#   - name: TunnelDataIn
+#     statistic: SUM
+#     dimensions:
+#     -  VpnId
+#     -  Region
+#   - name: TunnelDataOut
+#     statistic: SUM
+#     dimensions:
+#     -  VpnId
+#     -  Region
