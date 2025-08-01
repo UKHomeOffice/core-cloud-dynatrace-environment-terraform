@@ -1,4 +1,4 @@
-resource "dynatrace_application_detection_rule" "web_application" {
+resource "dynatrace_application_detection_rule" "this" {
   application_identifier = var.web_application_id
   filter_config {
     application_match_target = var.application_match_target

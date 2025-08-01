@@ -1,7 +1,7 @@
 locals {
   default_services = yamldecode(file("default_metrics.yaml"))
   web_application = var.tenant_vars.web_application
-  web_application_detection_rules = var.tenant_vars.web_application_detection_rules
+  existing_webapps_detection_rules = var.tenant_vars.existing_webapps_detection_rules
 }
 
 module "aws_account_configurations" {
@@ -168,11 +168,14 @@ module "web_application" {
   web_application_name               = each.value.web_application_name
   web_application_type               = each.value.web_application_type
   rum_enabled                        = each.value.rum_enabled
+  application_match_target           = each.value.application_match_target
+  application_match_type             = each.value.application_match_type
+  hostname                           = each.value.hostname
  
 }
-module "web_application_detection_rules" {
-  source                             = "./web_application_detection_rules/"
-  for_each                           = local.web_application_detection_rules
+module "existing_webapps_detection_rules" {
+  source                             = "./existing_webapps_detection_rules/"
+  for_each                           = local.existing_webapps_detection_rules
   web_application_id                 = each.value.web_application_id
   application_match_target           = each.value.application_match_target
   application_match_type             = each.value.application_match_type
