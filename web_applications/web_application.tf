@@ -1,4 +1,4 @@
-resource "dynatrace_web_application" "this" {
+resource "dynatrace_web_application" "web_application" {
   name                                 = var.web_application_name
   type                                 = var.web_application_type
   cost_control_user_session_percentage = 100
@@ -243,8 +243,8 @@ resource "dynatrace_web_application" "this" {
   }
 }
 
-resource "dynatrace_application_detection_rule" "web_application" {
-  application_identifier = dynatrace_web_application.this.id
+resource "dynatrace_application_detection_rule" "application_detection_rule" {
+  application_identifier = dynatrace_web_application.web_application.id
   filter_config {
     application_match_target = var.application_match_target
     application_match_type   = var.application_match_type
