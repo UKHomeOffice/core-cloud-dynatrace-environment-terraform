@@ -1,6 +1,6 @@
 locals {
-  default_services = yamldecode(file("default_metrics.yaml"))
-  existing_webapps_detection_rules = var.tenant_vars.existing_webapps_detection_rules
+  default_services                 = yamldecode(file("default_metrics.yaml"))
+  existing_webapps_detection_rules = (var.tenant_vars.existing_webapps_detection_rules != null) ? tomap(var.tenant_vars.existing_webapps_detection_rules) : tomap({})
 }
 
 module "aws_account_configurations" {
@@ -162,21 +162,21 @@ module "dynatrace_log_storage_rules" {
   ]
 }
 module "web_application" {
-  source                             = "./web_applications/"
-  for_each                           = var.tenant_vars.web_applications
-  web_application_name               = each.value.name
-  web_application_type               = each.value.type
-  rum_enabled                        = each.value.rum_enabled
+  source               = "./web_applications/"
+  for_each             = var.tenant_vars.web_applications
+  web_application_name = each.value.name
+  web_application_type = each.value.type
+  rum_enabled          = each.value.rum_enabled
 
   application_match_target = values(each.value.detection_rules)[0].application_match_target
   application_match_type   = values(each.value.detection_rules)[0].application_match_type
   hostname                 = values(each.value.detection_rules)[0].hostname
 }
 module "existing_webapps_detection_rules" {
-  source                             = "./existing_webapps_detection_rules/"
-  for_each                           = local.existing_webapps_detection_rules
-  web_application_id                 = each.value.web_application_id
-  application_match_target           = each.value.application_match_target
-  application_match_type             = each.value.application_match_type
-  hostname                           = each.value.hostname
+  source                   = "./existing_webapps_detection_rules/"
+  for_each                 = local.existing_webapps_detection_rules
+  web_application_id       = each.value.web_application_id
+  application_match_target = each.value.application_match_target
+  application_match_type   = each.value.application_match_type
+  hostname                 = each.value.hostname
 }
