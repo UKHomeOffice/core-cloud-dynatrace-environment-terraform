@@ -1,6 +1,5 @@
 locals {
   default_services                 = yamldecode(file("default_metrics.yaml"))
-  existing_webapps_detection_rules = (var.tenant_vars.existing_webapps_detection_rules != null) ? tomap(var.tenant_vars.existing_webapps_detection_rules) : tomap({})
 }
 
 module "aws_account_configurations" {
@@ -171,12 +170,4 @@ module "web_application" {
   application_match_target = values(each.value.detection_rules)[0].application_match_target
   application_match_type   = values(each.value.detection_rules)[0].application_match_type
   hostname                 = values(each.value.detection_rules)[0].hostname
-}
-module "existing_webapps_detection_rules" {
-  source                   = "./existing_webapps_detection_rules/"
-  for_each                 = local.existing_webapps_detection_rules
-  web_application_id       = each.value.web_application_id
-  application_match_target = each.value.application_match_target
-  application_match_type   = each.value.application_match_type
-  hostname                 = each.value.hostname
 }
