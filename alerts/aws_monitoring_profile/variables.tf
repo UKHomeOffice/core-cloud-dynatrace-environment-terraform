@@ -8,6 +8,7 @@ variable "aws_monitoring_profile_alert_config" {
     slack_url                         = string
     channel_name                      = string
     enabled                           = bool
+    management_zone_name              = optional(string, "corecloud")
   })
 }
 
