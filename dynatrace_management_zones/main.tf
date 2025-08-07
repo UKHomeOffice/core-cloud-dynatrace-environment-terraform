@@ -85,6 +85,6 @@ output "zone_var_output"{
 
 output "zone_ids" {
   value = {
-    for k, management_zone in dynatrace_management_zone_v2.zones : k => zone.id
+    for k, management_zone in dynatrace_management_zone_v2.zones : k => management_zone.id
   }
 }
