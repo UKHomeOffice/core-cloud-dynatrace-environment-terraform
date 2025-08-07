@@ -1,5 +1,5 @@
 locals {
-  default_services                 = yamldecode(file("default_metrics.yaml"))
+  default_services = yamldecode(file("default_metrics.yaml"))
 }
 
 module "aws_account_configurations" {
@@ -161,13 +161,13 @@ module "dynatrace_log_storage_rules" {
   ]
 }
 module "web_application" {
-  source               = "./web_applications/"
-  for_each             = var.tenant_vars.web_applications
-  web_application_name = each.value.name
-  web_application_type = each.value.type
-  rum_enabled          = each.value.rum_enabled
+  source   = "./web_applications/"
+  for_each = contains(keys(var.tenant_vars), "web_applications") ? var.tenant_vars.web_applications : {}
 
-  application_match_target = values(each.value.detection_rules)[0].application_match_target
-  application_match_type   = values(each.value.detection_rules)[0].application_match_type
-  hostname                 = values(each.value.detection_rules)[0].hostname
+  web_application_name     = each.value.name
+  web_application_type     = each.value.type
+  rum_enabled              = each.value.rum_enabled
+  application_match_target = each.value.detection_rules[0].application_match_target
+  application_match_type   = each.value.detection_rules[0].application_match_type
+  hostname                 = each.value.detection_rules[0].hostname
 }
