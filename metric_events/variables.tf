@@ -20,10 +20,6 @@ variable "common_metrics_vars" {
 # config related to metrics
 variable "metrics_vars" {
   type = object({
-    tags = list(object({
-      key   = string
-      value = string
-    }))
     memory_usage = object({
       summary               = string
       description           = string
@@ -36,11 +32,19 @@ variable "metrics_vars" {
         enabled   = bool
         title     = string
         threshold = string
+        tags = list(object({
+          key   = string
+          value = string
+        }))
       })
       critical = object({
         enabled   = bool
         title     = string
         threshold = string
+        tags = list(object({
+          key   = string
+          value = string
+        }))
       })
     })
     cpu_usage = object({
@@ -55,6 +59,10 @@ variable "metrics_vars" {
         enabled   = bool
         title     = string
         threshold = string
+        tags = list(object({
+          key   = string
+          value = string
+        }))
       })
       critical = object({
         enabled   = bool
