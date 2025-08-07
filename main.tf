@@ -166,10 +166,8 @@ module "web_application" {
   source   = "./web_applications/"
   for_each = contains(keys(var.tenant_vars), "web_applications") ? var.tenant_vars.web_applications : {}
 
-  web_application_name     = each.value.name
-  web_application_type     = each.value.type
-  rum_enabled              = each.value.rum_enabled
-  application_match_target = each.value.detection_rules[0].application_match_target
-  application_match_type   = each.value.detection_rules[0].application_match_type
-  hostname                 = each.value.detection_rules[0].hostname
+  web_application_name = each.value.name
+  web_application_type = each.value.type
+  rum_enabled          = each.value.rum_enabled
+  detection_rules      = each.value.detection_rules
 }

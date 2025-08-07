@@ -11,15 +11,11 @@ variable "rum_enabled" {
   type        = bool
   default     = true
 }
-variable "hostname" {
-  type        = string
-  description = "The hostname pattern used for matching (e.g., 'example.com')."
-}
-variable "application_match_target" {
-  type        = string
-  description = "The target value to match in the application definition (e.g., domain name, URL path)."
-}
-variable "application_match_type" {
-  type        = string
-  description = "The type of match to apply against the application target. Possible values: 'DOMAIN', 'URL_PATH', 'URL', 'IP'."
+variable "detection_rules" {
+  type = map(object({
+    application_match_target = string
+    application_match_type   = string
+    hostname                 = string
+  }))
+  description = "The detection rules for the web application. Each rule is defined by its application match target, application match type, and hostname."
 }
