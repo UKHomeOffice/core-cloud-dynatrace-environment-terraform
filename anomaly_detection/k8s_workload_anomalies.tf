@@ -65,7 +65,7 @@ resource "dynatrace_k8s_workload_anomalies" "core-cloud-k8s-workload-anomalies" 
     configuration {
       observation_period_in_minutes = 6
       sample_period_in_minutes      = 4
-      threshold                     = 2
+      threshold                     = 90
     }
   }
   job_failure_events {
