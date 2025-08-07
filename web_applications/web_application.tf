@@ -243,11 +243,18 @@ resource "dynatrace_web_application" "web_application" {
   }
 }
 
+# One detection rule per entry in the map
 resource "dynatrace_application_detection_rule" "application_detection_rule" {
+  for_each = var.detection_rules
+
   application_identifier = dynatrace_web_application.web_application.id
   filter_config {
-    application_match_target = var.application_match_target
-    application_match_type   = var.application_match_type
-    pattern                  = var.hostname
+    application_match_target = each.value.application_match_target
+    application_match_type   = each.value.application_match_type
+    pattern                  = each.value.hostname
   }
+}
+
+output "web_application_id" {
+  value = dynatrace_web_application.web_application.id
 }
