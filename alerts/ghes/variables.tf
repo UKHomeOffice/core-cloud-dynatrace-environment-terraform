@@ -11,10 +11,12 @@ variable "ghes_alert_configs" {
     slack_notification_name    = string
     slack_url                  = string
     channel_name               = string
-    tag_key                    = string
-    tag_value                  = string
-    filter_enabled             = string
-    message_status             = string
+    tags = list(object({
+      key   = string
+      value = string
+    }))
+    filter_enabled = string
+    message_status = string
   }))
 }
 

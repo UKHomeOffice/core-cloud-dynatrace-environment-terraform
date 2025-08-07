@@ -18,9 +18,12 @@ resource "dynatrace_metric_events" "freeable_memory_warning_alerts" {
     davis_merge = var.common_metrics_vars.davis_merge
     event_type  = var.common_metrics_vars.event_type
     title       = var.metrics_vars.memory_usage.warning.title
-    metadata {
-      metadata_key   = var.common_metrics_vars.tag_key
-      metadata_value = var.common_metrics_vars.tag_value
+    dynamic "metadata" {
+      for_each = var.metrics_vars.tags
+      content {
+        metadata_key   = metadata.value.key
+        metadata_value = metadata.value.value
+      }
     }
   }
   model_properties {

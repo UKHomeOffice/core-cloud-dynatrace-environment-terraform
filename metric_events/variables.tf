@@ -1,14 +1,13 @@
 variable "common_metrics_vars" {
   description = "Common metric configuration variables"
   type = object({
-    model_properties_type             = string
-    alert_on_no_data                  = bool
-    samples                           = string
-    violating_samples                 = string
-    davis_merge                       = bool
-    event_type                        = string
-    tag_key                           = string
-    tag_value                         = string
+    model_properties_type = string
+    alert_on_no_data      = bool
+    samples               = string
+    violating_samples     = string
+    davis_merge           = bool
+    event_type            = string
+
     event_entity_dimension_key        = string
     dimension_key                     = string
     entity_filter_condition1_type     = string
@@ -21,6 +20,10 @@ variable "common_metrics_vars" {
 # config related to metrics
 variable "metrics_vars" {
   type = object({
+    tags = list(object({
+      key   = string
+      value = string
+    }))
     memory_usage = object({
       summary               = string
       description           = string
