@@ -18,6 +18,7 @@ resource "dynatrace_slack_notification" "slack_alerts" {
 
 resource "dynatrace_alerting" "aws_monitoring_profile_alert" {
   name = "AWS Monitoring profile"
+  management_zone = dynatrace_management_zone_v2.management_zone["corecloud"].id
   rules {
     rule {
         include_mode = var.aws_monitoring_profile_alerting_rules.include_mode
