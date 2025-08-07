@@ -31,3 +31,10 @@ variable "bcp_alerting" {
     email_to              = list(string)
   })
 }
+
+variable "GHES_SLACK_URLS" {
+  type = map(string)
+  description = "Slack urls to send GHES notifications."
+  sensitive = true
+}
+

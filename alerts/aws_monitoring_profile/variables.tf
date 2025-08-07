@@ -18,3 +18,10 @@ variable "aws_monitoring_profile_alerting_rules" {
     delay_in_minutes = optional(number, 0)
   })
 }
+
+variable "AWS_MONITORING_PROFILE_SLACK_URL" {
+  type = string
+  description = "Slack url to send notification by the AWS_MONITORING module."
+  default = "Provided to ignore when the module is skipped in an environment."
+  sensitive = true
+}
