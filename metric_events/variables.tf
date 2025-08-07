@@ -68,6 +68,10 @@ variable "metrics_vars" {
         enabled   = bool
         title     = string
         threshold = string
+        tags = list(object({
+          key   = string
+          value = string
+        }))
       })
     })
     disk_usage = object({
@@ -82,11 +86,19 @@ variable "metrics_vars" {
         enabled   = bool
         title     = string
         threshold = string
+        tags = list(object({
+          key   = string
+          value = string
+        }))
       })
       critical = object({
         enabled   = bool
         title     = string
         threshold = string
+        tags = list(object({
+          key   = string
+          value = string
+        }))
       })
     })
   })
