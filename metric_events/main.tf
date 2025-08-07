@@ -18,9 +18,12 @@ resource "dynatrace_metric_events" "freeable_memory_warning_alerts" {
     davis_merge = var.common_metrics_vars.davis_merge
     event_type  = var.common_metrics_vars.event_type
     title       = var.metrics_vars.memory_usage.warning.title
-    metadata {
-      metadata_key   = var.common_metrics_vars.tag_key
-      metadata_value = var.common_metrics_vars.tag_value
+    dynamic "metadata" {
+      for_each = var.metrics_vars.memory_usage.warning.tags
+      content {
+        metadata_key   = metadata.value.key
+        metadata_value = metadata.value.value
+      }
     }
   }
   model_properties {
@@ -61,9 +64,12 @@ resource "dynatrace_metric_events" "freeable_memory_critical_alerts" {
     davis_merge = var.common_metrics_vars.davis_merge
     event_type  = var.common_metrics_vars.event_type
     title       = var.metrics_vars.memory_usage.critical.title
-    metadata {
-      metadata_key   = var.common_metrics_vars.tag_key
-      metadata_value = var.common_metrics_vars.tag_value
+    dynamic "metadata" {
+      for_each = var.metrics_vars.memory_usage.critical.tags
+      content {
+        metadata_key   = metadata.value.key
+        metadata_value = metadata.value.value
+      }
     }
   }
   model_properties {
@@ -104,9 +110,12 @@ resource "dynatrace_metric_events" "cpu_utilization_warning_alerts" {
     davis_merge = var.common_metrics_vars.davis_merge
     event_type  = var.common_metrics_vars.event_type
     title       = var.metrics_vars.cpu_usage.warning.title
-    metadata {
-      metadata_key   = var.common_metrics_vars.tag_key
-      metadata_value = var.common_metrics_vars.tag_value
+    dynamic "metadata" {
+      for_each = var.metrics_vars.cpu_usage.warning.tags
+      content {
+        metadata_key   = metadata.value.key
+        metadata_value = metadata.value.value
+      }
     }
   }
   model_properties {
@@ -147,9 +156,12 @@ resource "dynatrace_metric_events" "cpu_utilization_critical_alerts" {
     davis_merge = var.common_metrics_vars.davis_merge
     event_type  = var.common_metrics_vars.event_type
     title       = var.metrics_vars.cpu_usage.critical.title
-    metadata {
-      metadata_key   = var.common_metrics_vars.tag_key
-      metadata_value = var.common_metrics_vars.tag_value
+    dynamic "metadata" {
+      for_each = var.metrics_vars.cpu_usage.critical.tags
+      content {
+        metadata_key   = metadata.value.key
+        metadata_value = metadata.value.value
+      }
     }
   }
   model_properties {
@@ -190,9 +202,12 @@ resource "dynatrace_metric_events" "disk_utilization_warning_alerts" {
     davis_merge = var.common_metrics_vars.davis_merge
     event_type  = var.common_metrics_vars.event_type
     title       = var.metrics_vars.disk_usage.warning.title
-    metadata {
-      metadata_key   = var.common_metrics_vars.tag_key
-      metadata_value = var.common_metrics_vars.tag_value
+    dynamic "metadata" {
+      for_each = var.metrics_vars.disk_usage.warning.tags
+      content {
+        metadata_key   = metadata.value.key
+        metadata_value = metadata.value.value
+      }
     }
   }
   model_properties {
@@ -233,9 +248,12 @@ resource "dynatrace_metric_events" "disk_utilization_critical_alerts" {
     davis_merge = var.common_metrics_vars.davis_merge
     event_type  = var.common_metrics_vars.event_type
     title       = var.metrics_vars.disk_usage.critical.title
-    metadata {
-      metadata_key   = var.common_metrics_vars.tag_key
-      metadata_value = var.common_metrics_vars.tag_value
+    dynamic "metadata" {
+      for_each = var.metrics_vars.disk_usage.critical.tags
+      content {
+        metadata_key   = metadata.value.key
+        metadata_value = metadata.value.value
+      }
     }
   }
   model_properties {

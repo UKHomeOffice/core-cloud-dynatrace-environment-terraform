@@ -28,32 +28,7 @@ resource "dynatrace_alerting" "ghes_alert_profiles" {
     rule {
       include_mode     = each.value.include_mode
       delay_in_minutes = each.value.delay_in_minutes
-      severity_level   = "AVAILABILITY"
-    }
-    rule {
-      include_mode     = each.value.include_mode
-      delay_in_minutes = each.value.delay_in_minutes
       severity_level   = "CUSTOM_ALERT"
-    }
-    rule {
-      include_mode     = each.value.include_mode
-      delay_in_minutes = each.value.delay_in_minutes
-      severity_level   = "ERRORS"
-    }
-    rule {
-      include_mode     = each.value.include_mode
-      delay_in_minutes = each.value.delay_in_minutes
-      severity_level   = "MONITORING_UNAVAILABLE"
-    }
-    rule {
-      include_mode     = each.value.include_mode
-      delay_in_minutes = each.value.delay_in_minutes
-      severity_level   = "PERFORMANCE"
-    }
-    rule {
-      include_mode     = each.value.include_mode
-      delay_in_minutes = each.value.delay_in_minutes
-      severity_level   = "RESOURCE_CONTENTION"
     }
   }
 
@@ -62,24 +37,17 @@ resource "dynatrace_alerting" "ghes_alert_profiles" {
       custom {
         metadata {
           items {
-            filter {
-              key   = each.value.tag_key
-              value = each.value.tag_value
+            dynamic "filter" {
+              for_each = each.value.tags
+              content {
+                key   = filter.value.key
+                value = filter.value.value
+              }
             }
           }
         }
       }
     }
-    filter {
-      custom {
-        title {
-          operator = "CONTAINS"
-          value    = each.value.message_status
-          enabled  = each.value.filter_enabled
-        }
-      }
-    }
-
   }
 }
 
