@@ -82,3 +82,9 @@ resource "dynatrace_management_zone_v2" "management_zone" {
 output "zone_var_output"{
   value = "${var.zone_vars}"
 }
+
+output "zone_ids" {
+  value = {
+    for k, management_zone in dynatrace_management_zone_v2.zones : k => zone.id
+  }
+}
