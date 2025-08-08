@@ -13,7 +13,7 @@ resource "dynatrace_slack_notification" "slack_alerts" {
   active  = each.value.slack_notification_enabled
   name    = each.value.slack_notification_name
   profile = dynatrace_alerting.ghes_alert_profiles[each.key].id
-  url     = each.value.slack_url
+  url     = var.SLACK_NOTIFICATION_URL
   channel = each.value.channel_name
   message = each.value.slack_message
 }

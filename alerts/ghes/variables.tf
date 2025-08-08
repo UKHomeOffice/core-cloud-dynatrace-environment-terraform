@@ -9,7 +9,6 @@ variable "ghes_alert_configs" {
     slack_notification_enabled = bool
     slack_message              = string
     slack_notification_name    = string
-    slack_url                  = string
     channel_name               = string
     tags = list(object({
       key   = string
@@ -33,3 +32,11 @@ variable "bcp_alerting" {
     email_to              = list(string)
   })
 }
+
+variable "SLACK_NOTIFICATION_URL" {
+  type = string
+  description = "Slack url to send notification by the AWS_MONITORING module."
+  default = "Provided to ignore when the module is skipped in an environment."
+  sensitive = true
+}
+
