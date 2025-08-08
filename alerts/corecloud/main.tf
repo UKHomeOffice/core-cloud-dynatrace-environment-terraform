@@ -14,7 +14,7 @@ locals {
   }
 }
 
-data "dynatrace_management_zone" "zones" {
+data "dynatrace_management_zone_v2" "zones" {
   for_each = var.corecloud_profile_alerting_rules
   name     = each.value.management_zone
 }
@@ -33,7 +33,7 @@ resource "dynatrace_slack_notification" "slack_alerts" {
 resource "dynatrace_alerting" "corecloud_profile" {
     for_each        = var.corecloud_profile_alerting_rules
     name            = each.value.alerting_profile_name
-    management_zone = data.dynatrace_management_zone.zones[each.key].name
+    management_zone = data.dynatrace_management_zone_v2.zones[each.key].id
     rules {
         dynamic "rule" {
             for_each = each.value.rules
