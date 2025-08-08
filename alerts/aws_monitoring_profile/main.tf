@@ -11,7 +11,7 @@ resource "dynatrace_slack_notification" "slack_alerts" {
   active  = var.aws_monitoring_profile_alert_config.slack_notification_enabled
   name    = var.aws_monitoring_profile_alert_config.slack_notification_name
   profile = dynatrace_alerting.aws_monitoring_profile_alert.id
-  url     = var.AWS_MONITORING_PROFILE_SLACK_URL
+  url     = var.SLACK_NOTIFICATION_URL
   channel = var.aws_monitoring_profile_alert_config.channel_name
   message = var.aws_monitoring_profile_alert_config.slack_message
 }

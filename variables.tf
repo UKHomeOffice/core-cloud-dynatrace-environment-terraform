@@ -9,15 +9,9 @@ variable "tenant_vars" {
   type = any
 }
 
-variable "AWS_MONITORING_PROFILE_SLACK_URL" {
+variable "SLACK_NOTIFICATION_URL" {
   type = string
-  description = "Slack url to send notification by the AWS_MONITORING module."
+  description = "Slack url to send notifications."
   default = "Provided to ignore when the module is skipped in an environment."
   sensitive = true
-}
-variable "GHES_SLACK_URLS" {
-  type = map(string)
-  description = "Slack urls to send GHES notifications."
-  sensitive = true
-  default = {} # "Provided to ignore when the module is skipped in an environment."
 }

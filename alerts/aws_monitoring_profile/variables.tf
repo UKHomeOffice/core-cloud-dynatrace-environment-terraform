@@ -5,7 +5,6 @@ variable "aws_monitoring_profile_alert_config" {
     slack_notification_enabled        = bool
     slack_message                     = string
     slack_notification_name           = string
-    slack_url                         = string
     channel_name                      = string
     enabled                           = bool
   })
@@ -19,7 +18,7 @@ variable "aws_monitoring_profile_alerting_rules" {
   })
 }
 
-variable "AWS_MONITORING_PROFILE_SLACK_URL" {
+variable "SLACK_NOTIFICATION_URL" {
   type = string
   description = "Slack url to send notification by the AWS_MONITORING module."
   default = "Provided to ignore when the module is skipped in an environment."
