@@ -53,7 +53,7 @@ resource "dynatrace_k8s_workload_anomalies" "core-cloud-k8s-workload-anomalies" 
     }
   }
   high_cpu_usage {
-    enabled = true
+    enabled = false
     configuration {
       observation_period_in_minutes = 6
       sample_period_in_minutes      = 4
