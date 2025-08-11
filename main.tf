@@ -39,7 +39,7 @@ module "ghes_alerts" {
     email_subject         = ""
     email_to              = []
   }
-  SLACK_NOTIFICATION_URL = var.SLACK_NOTIFICATION_URL
+  SLACK_NOTIFICATION_URLS = var.GHES_SLACK_URLS
 }
 
 
@@ -133,7 +133,7 @@ module "dynatrace_aws_monitoring_profile_integration" {
   ) ? tomap(var.tenant_vars.aws_monitoring_profile.aws_monitoring_profile_rules) : tomap({})
 
   aws_monitoring_profile_alert_config = var.tenant_vars.aws_monitoring_profile_integration
-  SLACK_NOTIFICATION_URL = var.SLACK_NOTIFICATION_URL
+  SLACK_NOTIFICATION_URL = var.AWS_MONITORING_SLACK_URL
 }
 module "anomaly_detection" {
   source = "./anomaly_detection/"
