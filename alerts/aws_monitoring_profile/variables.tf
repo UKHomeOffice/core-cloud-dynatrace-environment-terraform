@@ -18,9 +18,8 @@ variable "aws_monitoring_profile_alerting_rules" {
   })
 }
 
-variable "SLACK_NOTIFICATION_URL" {
+variable "slack_webhook_url" {
   type = string
   description = "Slack url to send notification by the AWS_MONITORING module."
-  default = "Provided to ignore when the module is skipped in an environment."
   sensitive = true
 }

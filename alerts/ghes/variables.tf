@@ -33,7 +33,7 @@ variable "bcp_alerting" {
   })
 }
 
-variable "SLACK_NOTIFICATION_URLS" {
+variable "slack_webhook_urls" {
   type = map(string)
   description = "A map with keys matching the keys under 'ghes_alert_configs' with the relevant channels' urls."
   sensitive = true
