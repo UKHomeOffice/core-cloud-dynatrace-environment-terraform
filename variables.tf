@@ -9,9 +9,16 @@ variable "tenant_vars" {
   type = any
 }
 
-variable "SLACK_NOTIFICATION_URL" {
+variable AWS_MONITORING_SLACK_URL {
   type = string
-  description = "Slack url to send notifications."
+  description = "Slack webhook url for aws monitoring module to send alerts to."
   default = "Provided to ignore when the module is skipped in an environment."
+  sensitive = true
+}
+
+variable "GHES_SLACK_URLS" {
+  type = map(string)
+  description = "A map with keys matching the keys under 'ghes_alert_configs' with the relevant channels' urls."
+  default = {} # Provided to ignore when the module is skipped in an environment.
   sensitive = true
 }
