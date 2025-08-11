@@ -9,7 +9,6 @@ variable "ghes_alert_configs" {
     slack_notification_enabled = bool
     slack_message              = string
     slack_notification_name    = string
-    slack_url                  = string
     channel_name               = string
     tags = list(object({
       key   = string
@@ -33,3 +32,10 @@ variable "bcp_alerting" {
     email_to              = list(string)
   })
 }
+
+variable "slack_webhook_urls" {
+  type = map(string)
+  description = "A map with keys matching the keys under 'ghes_alert_configs' with the relevant channels' urls."
+  sensitive = true
+}
+

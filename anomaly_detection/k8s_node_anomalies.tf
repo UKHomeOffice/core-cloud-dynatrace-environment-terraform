@@ -5,7 +5,7 @@ resource "dynatrace_k8s_node_anomalies" "core-cloud-k8s-node-anomalies" {
     configuration {
       observation_period_in_minutes = 6
       sample_period_in_minutes      = 4
-      threshold                     = 95
+      threshold                     = 90
     }
   }
   memory_requests_saturation {

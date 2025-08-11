@@ -47,6 +47,7 @@ module "ghes_alerts" {
     email_subject         = ""
     email_to              = []
   }
+  slack_webhook_urls = var.slack_webhook_urls
 }
 
 
@@ -140,7 +141,9 @@ module "dynatrace_aws_monitoring_profile_integration" {
   ) ? tomap(var.tenant_vars.aws_monitoring_profile.aws_monitoring_profile_rules) : tomap({})
 
   aws_monitoring_profile_alert_config = var.tenant_vars.aws_monitoring_profile_integration
+  slack_webhook_url = var.slack_webhook_urls["aws_monitoring_profile"]
 }
+
 module "anomaly_detection" {
   source = "./anomaly_detection/"
 }
