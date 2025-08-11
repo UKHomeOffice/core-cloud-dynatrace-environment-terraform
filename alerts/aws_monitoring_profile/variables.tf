@@ -18,8 +18,9 @@ variable "aws_monitoring_profile_alerting_rules" {
   })
 }
 
-variable "SLACK_NOTIFICATION_URLS" {
-  type = map(string)
-  description = "A map with keys matching the keys under 'ghes_alert_configs' with the relevant channels' urls."
+variable "SLACK_NOTIFICATION_URL" {
+  type = string
+  description = "Slack url to send notification by the AWS_MONITORING module."
+  default = "Provided to ignore when the module is skipped in an environment."
   sensitive = true
 }
