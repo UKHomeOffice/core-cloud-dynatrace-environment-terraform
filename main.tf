@@ -185,3 +185,4 @@ module "dynatrace_corecloud_alerts" {
   corecloud_alert_configs          = try(var.tenant_vars.corecloud_alerts.corecloud_alert_configs, null)
   corecloud_profile_alerting_rules = try(var.tenant_vars.corecloud_alerts.corecloud_profile_alerting_rules, null)
 }
+
