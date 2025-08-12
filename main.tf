@@ -1,5 +1,13 @@
 locals {
   default_services = yamldecode(file("default_metrics.yaml"))
+  # Enable/disable check for corecloud_alerts module
+  corecloud_alerts_enabled = (
+    contains(keys(var.tenant_vars), "corecloud_alerts") &&
+    try(contains(keys(var.tenant_vars.corecloud_alerts), "corecloud_alert_configs"), false) &&
+    try(var.tenant_vars.corecloud_alerts.corecloud_alert_configs != null, false) &&
+    try(contains(keys(var.tenant_vars.corecloud_alerts), "corecloud_profile_alerting_rules"), false) &&
+    try(var.tenant_vars.corecloud_alerts.corecloud_profile_alerting_rules != null, false)
+  )
 }
 
 module "aws_account_configurations" {
@@ -163,6 +171,7 @@ module "dynatrace_log_storage_rules" {
     }
   ]
 }
+
 module "web_application" {
   source   = "./web_applications/"
   for_each = contains(keys(var.tenant_vars), "web_applications") ? var.tenant_vars.web_applications : {}
@@ -172,3 +181,11 @@ module "web_application" {
   rum_enabled          = each.value.rum_enabled
   detection_rules      = each.value.detection_rules
 }
+
+module "dynatrace_corecloud_alerts" {
+  source = "./alerts/corecloud"
+  count  = local.corecloud_alerts_enabled ? 1 : 0
+  corecloud_alert_configs          = try(var.tenant_vars.corecloud_alerts.corecloud_alert_configs, null)
+  corecloud_profile_alerting_rules = try(var.tenant_vars.corecloud_alerts.corecloud_profile_alerting_rules, null)
+}
+
