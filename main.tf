@@ -179,11 +179,9 @@ module "web_application" {
   web_application_name   = each.value.name
   web_application_type   = each.value.type
   rum_enabled            = each.value.rum_enabled
-  match_target           = try(each.value.match_target, "")
   matcher                = each.value.matcher
   pattern                = each.value.pattern
   description            = try(each.value.description, "")
-  use_v2_detection_rules = try(each.value.use_v2_detection_rules, false)
 }
 
 module "dynatrace_corecloud_alerts" {

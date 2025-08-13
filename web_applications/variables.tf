@@ -12,12 +12,6 @@ variable "rum_enabled" {
   default     = true
 }
 
-variable "match_target" {
-  type        = string
-  description = "The match target for the detection rule."
-  default     = ""
-}
-
 variable "matcher" {
   type = string
   description = "The matcher for the detection rule."
@@ -32,10 +26,4 @@ variable "description" {
   type        = string
   description = "The description for the detection rule."
   default     = ""
-}
-
-variable "use_v2_detection_rules" {
-  description = "Use v2 detection rules"
-  type        = bool
-  default     = false
 }
