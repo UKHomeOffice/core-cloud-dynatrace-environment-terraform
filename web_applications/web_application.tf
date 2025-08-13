@@ -243,16 +243,26 @@ resource "dynatrace_web_application" "web_application" {
   }
 }
 
-# One detection rule per entry in the map
 resource "dynatrace_application_detection_rule" "application_detection_rule" {
-  for_each = var.detection_rules
-
+  # v1 by default
+  count          = var.use_v2_detection_rules ? 0 : 1
+  depends_on     = [dynatrace_web_application.web_application]
   application_identifier = dynatrace_web_application.web_application.id
   filter_config {
-    application_match_target = each.value.application_match_target
-    application_match_type   = each.value.application_match_type
-    pattern                  = each.value.hostname
+    application_match_target = var.match_target
+    application_match_type   = var.matcher
+    pattern                  = var.pattern
   }
+}
+
+resource "dynatrace_application_detection_rule_v2" "application_detection_rule_v2" {
+  # v2 if enabled
+  count          = var.use_v2_detection_rules ? 1 : 0
+  depends_on     = [dynatrace_web_application.web_application]
+  application_id = dynatrace_web_application.web_application.id
+  matcher        = var.matcher
+  pattern        = var.pattern
+  description    = var.description != "" ? var.description : null
 }
 
 output "web_application_id" {

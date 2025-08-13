@@ -11,11 +11,31 @@ variable "rum_enabled" {
   type        = bool
   default     = true
 }
-variable "detection_rules" {
-  type = map(object({
-    application_match_target = string
-    application_match_type   = string
-    hostname                 = string
-  }))
-  description = "The detection rules for the web application. Each rule is defined by its application match target, application match type, and hostname."
+
+variable "match_target" {
+  type        = string
+  description = "The match target for the detection rule."
+  default     = ""
+}
+
+variable "matcher" {
+  type = string
+  description = "The matcher for the detection rule."
+}
+
+variable "pattern" {
+  type = string
+  description = "The pattern for the detection rule."
+}
+
+variable "description" {
+  type        = string
+  description = "The description for the detection rule."
+  default     = ""
+}
+
+variable "use_v2_detection_rules" {
+  description = "Use v2 detection rules"
+  type        = bool
+  default     = false
 }
