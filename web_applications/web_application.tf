@@ -244,7 +244,7 @@ resource "dynatrace_web_application" "web_application" {
 }
 
 resource "dynatrace_application_detection_rule_v2" "application_detection_rule_v2" {
-  # depends_on     = [dynatrace_web_application.web_application]
+  depends_on     = [dynatrace_web_application.web_application]
   application_id = dynatrace_web_application.web_application.id
   matcher        = var.matcher
   pattern        = var.pattern
