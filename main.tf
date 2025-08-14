@@ -189,3 +189,9 @@ module "dynatrace_corecloud_alerts" {
   corecloud_profile_alerting_rules = try(var.tenant_vars.corecloud_alerts.corecloud_profile_alerting_rules, null)
 }
 
+module "dynatrace_kafka_settings" {
+  source = "./settings/kafka"
+  count  = contains(keys(var.tenant_vars), "kafka_settings") ? 1 : 0
+  enabled =  var.tenant_vars.kafka_settings.enabled
+}
+
