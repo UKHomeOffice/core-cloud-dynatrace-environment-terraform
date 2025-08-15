@@ -176,10 +176,12 @@ module "web_application" {
   source   = "./web_applications/"
   for_each = contains(keys(var.tenant_vars), "web_applications") ? var.tenant_vars.web_applications : {}
 
-  web_application_name = each.value.name
-  web_application_type = each.value.type
-  rum_enabled          = each.value.rum_enabled
-  detection_rules      = each.value.detection_rules
+  web_application_name   = each.value.name
+  web_application_type   = each.value.type
+  rum_enabled            = each.value.rum_enabled
+  matcher                = each.value.matcher
+  pattern                = each.value.pattern
+  description            = try(each.value.description, "")
 }
 
 module "dynatrace_corecloud_alerts" {
