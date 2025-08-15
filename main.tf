@@ -141,7 +141,7 @@ module "dynatrace_aws_monitoring_profile_integration" {
   ) ? tomap(var.tenant_vars.aws_monitoring_profile.aws_monitoring_profile_rules) : tomap({})
 
   aws_monitoring_profile_alert_config = var.tenant_vars.aws_monitoring_profile_integration
-  slack_webhook_url = var.slack_webhook_urls["aws_monitoring_profile"]
+  slack_webhook_url                   = var.slack_webhook_urls["aws_monitoring_profile"]
 }
 
 module "anomaly_detection" {
@@ -185,9 +185,15 @@ module "web_application" {
 }
 
 module "dynatrace_corecloud_alerts" {
-  source = "./alerts/corecloud"
-  count  = local.corecloud_alerts_enabled ? 1 : 0
+  source                           = "./alerts/corecloud"
+  count                            = local.corecloud_alerts_enabled ? 1 : 0
   corecloud_alert_configs          = try(var.tenant_vars.corecloud_alerts.corecloud_alert_configs, null)
   corecloud_profile_alerting_rules = try(var.tenant_vars.corecloud_alerts.corecloud_profile_alerting_rules, null)
+}
+
+module "dynatrace_kafka_settings" {
+  source  = "./settings/kafka"
+  count   = contains(keys(var.tenant_vars), "kafka_settings") ? 1 : 0
+  enabled = var.tenant_vars.kafka_settings.enabled
 }
 
