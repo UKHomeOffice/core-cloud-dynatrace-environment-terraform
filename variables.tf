@@ -10,8 +10,8 @@ variable "tenant_vars" {
 }
 
 variable "slack_webhook_urls" {
-  type = map(string)
+  type        = map(string)
   description = "A map with slack webhook urls for various modules, appropriately keyed."
-  default = {} # Provided to ignore when the module is skipped in an environment.
-  sensitive = true
+  default     = {} # Provided to ignore when the module is skipped in an environment.
+  sensitive   = true
 }
