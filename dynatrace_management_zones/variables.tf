@@ -28,18 +28,16 @@ variable "zone_vars" {
         service_to_pgpropagation = optional(bool)
         entity_type = string
         attribute_conditions = list(object({
-          condition = object({
-            key = string
-            operator = string
-            case_sensitive = optional(bool)
-            dynamic_key = optional(string)
-            dynamic_key_source = optional(string)
-            entity_id = optional(string)
-            enum_value = optional(string)
-            integer_value = optional(number)
-            string_value = optional(string)
-            tag = optional(string)
-          })
+          key = string
+          operator = string
+          case_sensitive = optional(bool)
+          dynamic_key = optional(string)
+          dynamic_key_source = optional(string)
+          entity_id = optional(string)
+          enum_value = optional(string)
+          integer_value = optional(number)
+          string_value = optional(string)
+          tag = optional(string)
         }))
       }))
       dimension_rule = optional(object({
