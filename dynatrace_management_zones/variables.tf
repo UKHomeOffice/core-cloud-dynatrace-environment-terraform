@@ -27,7 +27,7 @@ variable "zone_vars" {
         service_to_host_propagation = optional(bool)
         service_to_pgpropagation = optional(bool)
         entity_type = string
-        attribute_conditions = object({
+        attribute_conditions = list(object({
           condition = object({
             key = string
             operator = string
@@ -40,7 +40,7 @@ variable "zone_vars" {
             string_value = optional(string)
             tag = optional(string)
           })
-        })
+        }))
       }))
       dimension_rule = optional(object({
         applies_to = string
