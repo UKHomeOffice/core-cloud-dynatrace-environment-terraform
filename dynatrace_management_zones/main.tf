@@ -39,18 +39,22 @@ resource "dynatrace_management_zone_v2" "management_zone" {
               service_to_host_propagation = attribute_rule.value.service_to_host_propagation
               service_to_pgpropagation = attribute_rule.value.service_to_pgpropagation
               entity_type = attribute_rule.value.entity_type
+              
               attribute_conditions {
-                condition {
-                  key = attribute_rule.value.attribute_conditions.condition.key
-                  operator = attribute_rule.value.attribute_conditions.condition.operator
-                  case_sensitive = attribute_rule.value.attribute_conditions.condition.case_sensitive
-                  dynamic_key = attribute_rule.value.attribute_conditions.condition.dynamic_key
-                  dynamic_key_source = attribute_rule.value.attribute_conditions.condition.dynamic_key_source
-                  entity_id = attribute_rule.value.attribute_conditions.condition.entity_id
-                  enum_value = attribute_rule.value.attribute_conditions.condition.enum_value
-                  integer_value = attribute_rule.value.attribute_conditions.condition.integer_value
-                  string_value = attribute_rule.value.attribute_conditions.condition.string_value
-                  tag = attribute_rule.value.attribute_conditions.condition.tag
+                dynamic "condition" {
+                  for_each = try(attribute_rule.value.attribute_conditions, [])
+                  content {
+                      key                 = condition.value.key
+                      operator            = condition.value.operator
+                      case_sensitive      = try(condition.value.case_sensitive, null)
+                      dynamic_key         = try(condition.value.dynamic_key, null)
+                      dynamic_key_source  = try(condition.value.dynamic_key_source, null)
+                      entity_id           = try(condition.value.entity_id, null)
+                      enum_value          = try(condition.value.enum_value, null)
+                      integer_value       = try(condition.value.integer_value, null)
+                      string_value        = try(condition.value.string_value, null)
+                      tag                 = try(condition.value.tag, null)
+                  }
                 }
               }
             }
