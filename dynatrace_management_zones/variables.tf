@@ -7,6 +7,11 @@ variable "zone_vars" {
   type = object({
     description           = optional(string)
     legacy_id            = optional(string)
+    project_id           = optional(string)
+    host_prefix          = optional(string)
+    webapp_prefix        = optional(string)
+    k8s_cluster_operator = optional(string)
+    k8s_cluster_value    = optional(string)
     rules = optional(map(object({
       enabled = bool
       type    = string
