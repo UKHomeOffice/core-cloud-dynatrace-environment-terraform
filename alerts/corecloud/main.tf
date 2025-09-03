@@ -25,7 +25,7 @@ resource "dynatrace_slack_notification" "slack_alerts" {
   active  = each.value.slack_notification_enabled
   name    = each.value.slack_notification_name
   profile = local.alerting_profile_ids_by_name[each.value.alerting_profile_name]
-  url     = each.value.slack_url
+  url     = var.slack_webhook_urls[each.key]
   channel = each.value.channel_name
   message = each.value.slack_message
 }
