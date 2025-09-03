@@ -24,3 +24,9 @@ variable "corecloud_profile_alerting_rules" {
     }))
   }))
 }
+
+variable "slack_webhook_urls" {
+  type = map(string)
+  description = "A map with keys matching the keys under 'core cloud' with the relevant channels' urls."
+  sensitive = true
+}
