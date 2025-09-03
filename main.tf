@@ -189,6 +189,7 @@ module "dynatrace_corecloud_alerts" {
   count                            = local.corecloud_alerts_enabled ? 1 : 0
   corecloud_alert_configs          = try(var.tenant_vars.corecloud_alerts.corecloud_alert_configs, null)
   corecloud_profile_alerting_rules = try(var.tenant_vars.corecloud_alerts.corecloud_profile_alerting_rules, null)
+  slack_webhook_urls               = var.slack_webhook_urls
 }
 
 module "dynatrace_kafka_settings" {
