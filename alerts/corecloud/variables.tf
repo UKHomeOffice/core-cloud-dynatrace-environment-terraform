@@ -5,7 +5,6 @@ variable "corecloud_alert_configs" {
     slack_notification_enabled        = bool
     slack_message                     = string
     slack_notification_name           = string
-    slack_url                         = string
     channel_name                      = string
     enabled                           = bool
     alerting_profile_name             = string
