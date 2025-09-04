@@ -87,11 +87,14 @@ resource "dynatrace_management_zone_v2" "management_zone" {
             content {
               applies_to = dimension_rule.value.applies_to
               dimension_conditions {
-                condition {
-                  condition_type = dimension_rule.value.dimension_conditions.condition.condition_type
-                  rule_matcher = dimension_rule.value.dimension_conditions.condition.rule_matcher
-                  value = dimension_rule.value.dimension_conditions.condition.value
-                  key = dimension_rule.value.dimension_conditions.condition.key
+                dynamic "condition" {
+                  for_each = try(dimension_rule.dimension_conditions[*],{})
+                  content {
+                    condition_type = condition.condition_type
+                    rule_matcher = condition.rule_matcher
+                    value = condition.value
+                    key = condition.key
+                  }
                 }
               }
             }

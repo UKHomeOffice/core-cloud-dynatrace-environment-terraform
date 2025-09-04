@@ -7,6 +7,7 @@ variable "zone_vars" {
   type = object({
     description          = optional(string)
     legacy_id            = optional(string)
+    test = optional(string)
     project_id           = string
     host_prefix          = string
     webapp_prefix        = string
