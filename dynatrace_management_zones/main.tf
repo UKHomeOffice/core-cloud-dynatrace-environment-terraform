@@ -8,30 +8,41 @@ terraform {
 }
 
 locals {
-  default_rules_raw = yamldecode(
-    templatefile("${path.module}/rules.tftpl", {
-      project_id           = try(var.zone_vars.project_id, "")
-      host_prefix          = try(var.zone_vars.host_prefix, "")
-      webapp_prefix        = try(var.zone_vars.webapp_prefix, "")
-      k8s_cluster_operator = try(var.zone_vars.k8s_cluster_operator, "EXISTS")
-      k8s_cluster_value    = try(var.zone_vars.k8s_cluster_value, "")
-      account_id           = try(var.zone_vars.account_id, "992382599151")
-    })
-  ).default_rules
+  default_rules_raw = merge([
+    for template in var.zone_vars.rules_templates :
+    yamldecode(
+      templatefile("${path.module}/${template}", {
+        project_id           = try(var.zone_vars.project_id, "")
+        host_prefix          = try(var.zone_vars.host_prefix, "")
+        webapp_prefix        = try(var.zone_vars.webapp_prefix, "")
+        k8s_cluster_operator = try(var.zone_vars.k8s_cluster_operator, "EXISTS")
+        k8s_cluster_value    = try(var.zone_vars.k8s_cluster_value, "")
+        account_id           = try(var.zone_vars.account_id, "992382599151")
+      })
+    ).default_rules
+  ]...)
 
   rules_map = {
-    for rule_key, rule_value in try(var.zone_vars.rules, {}) :
+    for rule_key, rule_value in try(var.zone_vars.tenant_exclusive_rules, {}) :
     rule_key => merge(
       try(local.default_rules_raw[rule_key], {}),
       try(rule_value, {}),
       {
         enabled = try(local.default_rules_raw[rule_key].enabled, true)
         type    = try(local.default_rules_raw[rule_key].type, "SELECTOR")
+        attribute_rule = try(local.default_rules_raw[rule_key].attribute_rule, null) != null ? merge(
+          try(local.default_rules_raw[rule_key].attribute_rule, {}),
+          try(rule_value.attribute_rule, {}),
+          {
+            entity_type = try(local.default_rules_raw[rule_key].attribute_rule.entity_type, rule_value.attribute_rule.entity_type, null)
+          }
+        ) : null
       }
     )
   }
 
   zone_vars_preprocessed = merge(
+    { rules_templates = var.zone_vars.rules_templates },
     var.zone_vars,
     { rules = local.rules_map }
   )
@@ -53,7 +64,7 @@ resource "dynatrace_management_zone_v2" "management_zone" {
           entity_selector = try(rule.value.entity_selector, null)
 
           dynamic "attribute_rule" {
-            for_each = try(rule.value.attribute_rule, []) != [] ? [rule.value.attribute_rule] : []
+            for_each = try(rule.value.attribute_rule, null) != null ? [rule.value.attribute_rule] : []
             content {
               azure_to_pgpropagation                  = try(attribute_rule.value.azure_to_pgpropagation, null)
               azure_to_service_propagation            = try(attribute_rule.value.azure_to_service_propagation, null)
@@ -63,7 +74,7 @@ resource "dynatrace_management_zone_v2" "management_zone" {
               pg_to_service_propagation               = try(attribute_rule.value.pg_to_service_propagation, null)
               service_to_host_propagation             = try(attribute_rule.value.service_to_host_propagation, null)
               service_to_pgpropagation                = try(attribute_rule.value.service_to_pgpropagation, null)
-              entity_type                             = attribute_rule.value.entity_type
+              entity_type                             = try(attribute_rule.value.entity_type, null)
 
               dynamic "attribute_conditions" {
                 for_each = try(attribute_rule.value.attribute_conditions, [])
@@ -89,7 +100,7 @@ resource "dynatrace_management_zone_v2" "management_zone" {
           }
 
           dynamic "dimension_rule" {
-            for_each = try(rule.value.dimension_rule, []) != [] ? [rule.value.dimension_rule] : []
+            for_each = try(rule.value.dimension_rule, null) != null ? [rule.value.dimension_rule] : []
             content {
               applies_to = dimension_rule.value.applies_to
               dimension_conditions {

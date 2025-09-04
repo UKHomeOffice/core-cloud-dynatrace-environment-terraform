@@ -12,7 +12,8 @@ variable "zone_vars" {
     webapp_prefix        = optional(string)
     k8s_cluster_operator = optional(string)
     k8s_cluster_value    = optional(string)
-    rules = optional(map(object({
+    rules_templates      = list(string)
+    tenant_exclusive_rules = optional(map(object({
       enabled = bool
       type    = string
       entity_selector = optional(string)
@@ -54,3 +55,4 @@ variable "zone_vars" {
   })
   description = "Configuration for Dynatrace management zone"
 }
+
