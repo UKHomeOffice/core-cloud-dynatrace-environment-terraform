@@ -86,7 +86,7 @@ resource "dynatrace_management_zone_v2" "management_zone" {
             # Creates a dimension rule block with conditions as defined - either this or attribute_rule
             content {
               applies_to = dimension_rule.value.applies_to
-              dimension_conditions {
+              dynamic "dimension_conditions" {
                 for_each = dimension_rule.dimension_conditions != null ? dimension_rule.dimension_conditions[*] : []
                 content {
                   dynamic "condition" {
