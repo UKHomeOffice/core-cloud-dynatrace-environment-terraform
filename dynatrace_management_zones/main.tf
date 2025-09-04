@@ -51,14 +51,14 @@ resource "dynatrace_management_zone_v2" "management_zone" {
             for_each = try(rule.value.attribute_rule[*], {})
             # Creates an attribute rule block with conditions as defined - either this or dimension_rule
             content {
-              azure_to_pgpropagation = try(attribute_rule.value.azure_to_pgpropagation, null)
-              azure_to_service_propagation = try(attribute_rule.value.azure_to_service_propagation, null)
-              custom_device_group_to_custom_device_propagation = try(attribute_rule.value.custom_device_group_to_custom_device_propagation, null)
-              host_to_pgpropagation = try(attribute_rule.value.host_to_pgpropagation, null)
-              pg_to_host_propagation = try(attribute_rule.value.pg_to_host_propagation, null)
-              pg_to_service_propagation = try(attribute_rule.value.pg_to_service_propagation, null)
-              service_to_host_propagation = try(attribute_rule.value.service_to_host_propagation, null)
-              service_to_pgpropagation = try(attribute_rule.value.service_to_pgpropagation, null)
+              azure_to_pgpropagation = try(attribute_rule.value.azure_to_pgpropagation, false)
+              azure_to_service_propagation = try(attribute_rule.value.azure_to_service_propagation, false)
+              custom_device_group_to_custom_device_propagation = try(attribute_rule.value.custom_device_group_to_custom_device_propagation, false)
+              host_to_pgpropagation = try(attribute_rule.value.host_to_pgpropagation, false)
+              pg_to_host_propagation = try(attribute_rule.value.pg_to_host_propagation, false)
+              pg_to_service_propagation = try(attribute_rule.value.pg_to_service_propagation, false)
+              service_to_host_propagation = try(attribute_rule.value.service_to_host_propagation, false)
+              service_to_pgpropagation = try(attribute_rule.value.service_to_pgpropagation, false)
               entity_type = try(attribute_rule.value.entity_type, null)
               
               attribute_conditions {
