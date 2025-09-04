@@ -43,7 +43,7 @@ variable "zone_vars" {
         }))
       }))
       dimension_rule = optional(object({
-        applies_to = optional(string)
+        applies_to = optional(string, "ANY")
         dimension_conditions = optional(object({
           condition = object({
             condition_type = string
