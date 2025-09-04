@@ -87,6 +87,7 @@ resource "dynatrace_management_zone_v2" "management_zone" {
             content {
               applies_to = dimension_rule.value.applies_to
               dimension_conditions {
+                for_each = dimension_rule.dimension_conditions != null ? dimension_rule.dimension_conditions[*] : []
                 dynamic "condition" {
                   for_each = try(dimension_rule.dimension_conditions[*],{})
                   content {
