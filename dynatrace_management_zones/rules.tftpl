@@ -27,6 +27,7 @@ default_rules:
     type: "SELECTOR"
     enabled: true
     entity_selector: type(CUSTOM_DEVICE),tag([AWS]project-id:${project_id})
+%{ if can(k8s_cluster_operator) != "" ~}
   k8s_clusters_name_type_clusters:
     type: "ME"
     enabled: true
@@ -45,6 +46,7 @@ default_rules:
         - key: "KUBERNETES_CLUSTER_NAME"
           operator: "${k8s_cluster_operator}"
           string_value: "${k8s_cluster_value}"
+%{ endif ~}
   k8s_namespace:
     type: "ME"
     enabled: true
@@ -120,15 +122,16 @@ default_rules:
           operator: "BEGINS_WITH"
           string_value: "${webapp_prefix}"
           case_sensitive: true
+%{ if can(acc_id) != "" ~}
   exclude_account:
     type: "ME"
     enabled: true
     attribute_rule:
       entity_type: "AWS_ACCOUNT"
       attribute_conditions:
-        - key: "AWS_ACCOUNT_ID"
+        - key: "AWS_acc_id"
           operator: "NOT_EQUALS"
-          string_value: "${account_id}"
+          string_value: "${acc_id}"
           case_sensitive: true
   match_account:
     type: "ME"
@@ -136,7 +139,8 @@ default_rules:
     attribute_rule:
       entity_type: "AWS_ACCOUNT"
       attribute_conditions:
-        - key: "AWS_ACCOUNT_ID"
+        - key: "AWS_acc_id"
           operator: "EQUALS"
-          string_value: "${account_id}"
+          string_value: "${acc_id}"
           case_sensitive: true
+%{ endif ~}

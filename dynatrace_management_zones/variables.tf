@@ -5,13 +5,14 @@ variable "zone_name" {
 
 variable "zone_vars" {
   type = object({
-    description           = optional(string)
+    description          = optional(string)
     legacy_id            = optional(string)
-    project_id           = optional(string)
-    host_prefix          = optional(string)
-    webapp_prefix        = optional(string)
-    k8s_cluster_operator = optional(string)
-    k8s_cluster_value    = optional(string)
+    project_id           = string
+    host_prefix          = string
+    webapp_prefix        = string
+    k8s_cluster_operator = optional(string, "")
+    k8s_cluster_value    = optional(string, "")
+    aws_account_id           = optional(string,"")
     rules_templates      = list(string)
     tenant_exclusive_rules = optional(map(object({
       enabled = bool
@@ -41,7 +42,7 @@ variable "zone_vars" {
         }))
       }))
       dimension_rule = optional(object({
-        applies_to = string
+        applies_to = optional(string)
         dimension_conditions = optional(object({
           condition = object({
             condition_type = string
@@ -50,9 +51,8 @@ variable "zone_vars" {
             key            = optional(string)
           })
         }))
-      }))
+      }), {})
     })))
   })
-  description = "Configuration for Dynatrace management zone"
 }
 
