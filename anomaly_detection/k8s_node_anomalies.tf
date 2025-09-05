@@ -1,12 +1,7 @@
 resource "dynatrace_k8s_node_anomalies" "core-cloud-k8s-node-anomalies" {
   scope = "environment"
   cpu_requests_saturation {
-    enabled = true
-    configuration {
-      observation_period_in_minutes = 6
-      sample_period_in_minutes      = 4
-      threshold                     = 90
-    }
+    enabled = false
   }
   memory_requests_saturation {
     enabled = false
