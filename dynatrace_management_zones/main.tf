@@ -13,7 +13,7 @@ locals {
         project_id           = var.zone_vars.project_id
         host_prefix          = var.zone_vars.host_prefix
         webapp_prefix        = var.zone_vars.webapp_prefix
-        k8s_cluster_operator = var.zone_vars.k8s_cluster_operator
+        operator             = var.zone_vars.operator
         k8s_cluster_value    = var.zone_vars.k8s_cluster_value
         acc_id           = var.zone_vars.aws_account_id
       })

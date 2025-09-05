@@ -5,16 +5,15 @@ variable "zone_name" {
 
 variable "zone_vars" {
   type = object({
-    description          = optional(string)
-    legacy_id            = optional(string)
-    test = optional(string)
-    project_id           = string
-    host_prefix          = string
-    webapp_prefix        = string
-    k8s_cluster_operator = optional(string, "")
-    k8s_cluster_value    = optional(string, "")
-    aws_account_id           = optional(string,"")
-    rules_templates      = list(string)
+    description            = optional(string)
+    legacy_id              = optional(string)
+    project_id             = string
+    host_prefix            = string
+    webapp_prefix          = string
+    operator               = optional(string, "")
+    k8s_cluster_value      = optional(string, "")
+    aws_account_id         = optional(string,"")
+    rules_templates        = list(string)
     tenant_exclusive_rules = optional(map(object({
       enabled = bool
       type    = string

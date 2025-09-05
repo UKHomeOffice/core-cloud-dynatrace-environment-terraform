@@ -27,7 +27,7 @@ default_rules:
     type: "SELECTOR"
     enabled: true
     entity_selector: type(CUSTOM_DEVICE),tag([AWS]project-id:${project_id})
-%{ if can(k8s_cluster_operator) != "" ~}
+%{ if can(${operator}) != "" ~}
   k8s_clusters_name_type_clusters:
     type: "ME"
     enabled: true
@@ -35,7 +35,7 @@ default_rules:
       entity_type: "KUBERNETES_CLUSTER"
       attribute_conditions:
         - key: "KUBERNETES_CLUSTER_NAME"
-          operator: "${k8s_cluster_operator}"
+          operator: "${operator}"
           string_value: "${k8s_cluster_value}"
   k8s_node:
     type: "ME"
@@ -44,7 +44,7 @@ default_rules:
       entity_type: "HOST"
       attribute_conditions:
         - key: "KUBERNETES_CLUSTER_NAME"
-          operator: "${k8s_cluster_operator}"
+          operator: "${operator}"
           string_value: "${k8s_cluster_value}"
 %{ endif ~}
   k8s_namespace:
@@ -55,7 +55,7 @@ default_rules:
       attribute_conditions:
         - key: "CLOUD_APPLICATION_NAMESPACE_LABELS"
           dynamic_key: "project-id"
-          operator: "EQUALS"
+          operator: "${operator}"
           string_value: "${project_id}"
           case_sensitive: true
   k8s_pg:
@@ -68,7 +68,7 @@ default_rules:
       attribute_conditions:
         - key: "CLOUD_APPLICATION_NAMESPACE_LABELS"
           dynamic_key: "project-id"
-          operator: "EQUALS"
+          operator: "${operator}"
           string_value: "${project_id}"
           case_sensitive: true
   k8s_workloads:
@@ -79,7 +79,7 @@ default_rules:
       attribute_conditions:
         - key: "CLOUD_APPLICATION_NAMESPACE_LABELS"
           dynamic_key: "project-id"
-          operator: "EQUALS"
+          operator: "${operator}"
           string_value: "${project_id}"
   k8s_service:
     type: "ME"
@@ -89,7 +89,7 @@ default_rules:
       attribute_conditions:
         - key: "CLOUD_APPLICATION_NAMESPACE_LABELS"
           dynamic_key: "project-id"
-          operator: "EQUALS"
+          operator: "${operator}"
           string_value: "${project_id}"
   k8s_hostgroups:
     type: "ME"
@@ -98,7 +98,7 @@ default_rules:
       entity_type: "HOST_GROUP"
       attribute_conditions:
         - key: "HOST_GROUP_NAME"
-          operator: "BEGINS_WITH"
+          operator: "${operator}"
           string_value: "${host_prefix}"
           case_sensitive: true
   k8s_hosts:
@@ -109,7 +109,7 @@ default_rules:
       host_to_pgpropagation: true
       attribute_conditions:
         - key: "HOST_GROUP_NAME"
-          operator: "BEGINS_WITH"
+          operator: "${operator}"
           string_value: "${host_prefix}"
           case_sensitive: true
   include_web_apps:
@@ -119,10 +119,10 @@ default_rules:
       entity_type: "WEB_APPLICATION"
       attribute_conditions:
         - key: "WEB_APPLICATION_NAME"
-          operator: "BEGINS_WITH"
+          operator: "${operator}"
           string_value: "${webapp_prefix}"
           case_sensitive: true
-%{ if can(acc_id) != "" ~}
+%{ if can(acc_id) != "" && can(operator)  != "" ~}
   exclude_account:
     type: "ME"
     enabled: true
@@ -130,7 +130,7 @@ default_rules:
       entity_type: "AWS_ACCOUNT"
       attribute_conditions:
         - key: "AWS_acc_id"
-          operator: "NOT_EQUALS"
+          operator: "${operator}"
           string_value: "${acc_id}"
           case_sensitive: true
   match_account:
@@ -140,7 +140,7 @@ default_rules:
       entity_type: "AWS_ACCOUNT"
       attribute_conditions:
         - key: "AWS_acc_id"
-          operator: "EQUALS"
+          operator: "${operator}"
           string_value: "${acc_id}"
           case_sensitive: true
 %{ endif ~}
