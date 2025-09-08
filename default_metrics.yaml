@@ -874,3 +874,70 @@ vpn:
     statistic: SUM
     dimensions:
     -  Region
+lambda:
+  - name: Duration
+    statistic: AVG_MIN_MAX
+    dimensions:
+      - FunctionName
+  - name: Duration
+    statistic: AVG_MIN_MAX
+    dimensions:
+      - Region
+  - name: ConcurrentExecutions
+    statistic: SUM
+    dimensions:
+      - FunctionName
+  - name: ConcurrentExecutions
+    statistic: SUM
+    dimensions:
+      - Region
+  - name: Invocations
+    statistic: SUM
+    dimensions:
+      - Region
+  - name: Invocations
+    statistic: SUM
+    dimensions:
+      - FunctionName
+  - name: Throttles
+    statistic: SUM
+    dimensions:
+      - FunctionName
+  - name: Throttles
+    statistic: SUM
+    dimensions:
+      - Region
+  - name: Errors
+    statistic: SUM
+    dimensions:
+      - FunctionName
+  - name: Errors
+    statistic: SUM
+    dimensions:
+      - Region
+  - name: ProvisionedConcurrencyInvocations
+    statistic: SUM
+    dimensions:
+      - Region
+  - name: ProvisionedConcurrencyInvocations
+    statistic: SUM
+    dimensions:
+      - FunctionName
+      - Resource
+  - name: PostRuntimeExtensionsDuration
+    statistic: AVG_MIN_MAX
+    dimensions:
+      - Region
+  - name: PostRuntimeExtensionsDuration
+    statistic: AVG_MIN_MAX
+    dimensions:
+      - FunctionName
+      - Resource
+  - name: ProvisionedConcurrentExecutions
+    statistic: SUM
+    dimensions:
+      - FunctionName
+  - name: ProvisionedConcurrentExecutions
+    statistic: SUM
+    dimensions:
+      - Region
