@@ -13,7 +13,6 @@ locals {
         project_id           = var.zone_vars.project_id
         host_prefix          = var.zone_vars.host_prefix
         webapp_prefix        = var.zone_vars.webapp_prefix
-        k8s_cluster_operator = var.zone_vars.k8s_cluster_operator
         k8s_cluster_value    = var.zone_vars.k8s_cluster_value
         aws_account_id       = var.zone_vars.aws_account_id
       })
@@ -67,12 +66,12 @@ resource "dynatrace_management_zone_v2" "management_zone" {
                   content {
                       key                 = condition.value.key
                       operator            = condition.value.operator
-                      case_sensitive      = try(condition.value.case_sensitive, true)
+                      case_sensitive      = try(condition.value.case_sensitive, false)
                       dynamic_key         = try(condition.value.dynamic_key, null)
                       dynamic_key_source  = try(condition.value.dynamic_key_source, null)
                       entity_id           = try(condition.value.entity_id, null)
                       enum_value          = try(condition.value.enum_value, null)
-                      integer_value       = try(condition.value.integer_value, null)
+                      integer_value       = try(condition.value.integer_value, 0)
                       string_value        = try(condition.value.string_value, null)
                       tag                 = try(condition.value.tag, null)
                   }
@@ -92,10 +91,10 @@ resource "dynatrace_management_zone_v2" "management_zone" {
                   dynamic "condition" {
                     for_each = try(dimension_rule.value.dimension_conditions[*],{})
                     content {
-                      condition_type = condition.value.condition_type
-                      rule_matcher = condition.value.rule_matcher
-                      value = condition.value.value
-                      key = condition.value.key
+                      condition_type = try(condition.value.condition_type, null)
+                      rule_matcher = try(condition.value.rule_matcher, null)
+                      value = try(condition.value.value, null)  
+                      key = try(condition.value.key, null)
                     }
                   }
                 }
