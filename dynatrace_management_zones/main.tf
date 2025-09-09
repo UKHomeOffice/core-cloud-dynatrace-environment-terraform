@@ -82,7 +82,7 @@ resource "dynatrace_management_zone_v2" "management_zone" {
 
           dynamic "dimension_rule" {
 #            for_each = try(rule.value.dimension_rule[*],{})
-            for_each = ((rule.value.dimension_rule != null) && (rule.value.dimension_rule != {})) ? rule.value.dimension_rule[*] : []
+            for_each = ((try(rule.value.dimension_rule, null) != null) && (rule.value.dimension_rule != {})) ? rule.value.dimension_rule[*] : []
             # Creates a dimension rule block with conditions as defined - either this or attribute_rule
             content {
               applies_to = dimension_rule.value.applies_to
