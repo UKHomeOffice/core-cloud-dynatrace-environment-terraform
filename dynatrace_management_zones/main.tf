@@ -91,9 +91,9 @@ resource "dynatrace_management_zone_v2" "management_zone" {
                   dynamic "condition" {
                     for_each = try(dimension_rule.value.dimension_conditions[*],{})
                     content {
-                      condition_type = try(condition.value.condition_type, null)
-                      rule_matcher = try(condition.value.rule_matcher, null)
-                      value = try(condition.value.value, null)  
+                      condition_type = try(condition.value.condition.condition_type, null)
+                      rule_matcher = try(condition.value.condition.rule_matcher, null)
+                      value = try(condition.value.condition.value, null)  
                       key = try(condition.value.key, null)
                     }
                   }
