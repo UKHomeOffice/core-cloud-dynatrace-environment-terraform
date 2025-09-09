@@ -143,4 +143,17 @@ default_rules:
           operator: "EQUALS"
           string_value: "${acc_id}"
           case_sensitive: true
+  staticsite:
+    rules:
+      match_account:
+        type: "ME"
+        enabled: true
+        attribute_rule:
+          entity_type: "AWS_ACCOUNT"
+          attribute_conditions:
+            - key: "AWS_ACCOUNT_ID"
+              operator: "EQUALS"
+              string_value: "%{acc_id}"
+              case_sensitive: true
 %{ endif ~}
+  
