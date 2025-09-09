@@ -50,7 +50,7 @@ variable "zone_vars" {
             key            = optional(string)
           })
         }))
-      }), {})
+      }))
     })))
   })
 }
