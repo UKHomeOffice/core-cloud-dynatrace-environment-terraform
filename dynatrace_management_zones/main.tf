@@ -13,8 +13,8 @@ locals {
         project_id           = var.zone_vars.project_id
         host_prefix          = var.zone_vars.host_prefix
         webapp_prefix        = var.zone_vars.webapp_prefix
-        operator             = var.zone_vars.operator
-        k8s_cluster_value    = var.zone_vars.k8s_cluster_value
+        k8s_cluster_operator = var.zone_vars.k8s_cluster_operator
+        k8s_cluster_value   = var.zone_vars.k8s_cluster_value
         acc_id           = var.zone_vars.aws_account_id
       })
   ).default_rules
@@ -55,8 +55,8 @@ resource "dynatrace_management_zone_v2" "management_zone" {
               azure_to_service_propagation = try(attribute_rule.value.azure_to_service_propagation, false)
               custom_device_group_to_custom_device_propagation = try(attribute_rule.value.custom_device_group_to_custom_device_propagation, false)
               host_to_pgpropagation = try(attribute_rule.value.host_to_pgpropagation, false)
-              pg_to_host_propagation = try(attribute_rule.value.pg_to_host_propagation, false)
-              pg_to_service_propagation = try(attribute_rule.value.pg_to_service_propagation, false)
+              pg_to_host_propagation = try(attribute_rule.value.pg_to_host_propagation, true)
+              pg_to_service_propagation = try(attribute_rule.value.pg_to_service_propagation, true)
               service_to_host_propagation = try(attribute_rule.value.service_to_host_propagation, false)
               service_to_pgpropagation = try(attribute_rule.value.service_to_pgpropagation, false)
               entity_type = try(attribute_rule.value.entity_type, null)
@@ -67,7 +67,7 @@ resource "dynatrace_management_zone_v2" "management_zone" {
                   content {
                       key                 = condition.value.key
                       operator            = condition.value.operator
-                      case_sensitive      = try(condition.value.case_sensitive, null)
+                      case_sensitive      = try(condition.value.case_sensitive, true)
                       dynamic_key         = try(condition.value.dynamic_key, null)
                       dynamic_key_source  = try(condition.value.dynamic_key_source, null)
                       entity_id           = try(condition.value.entity_id, null)

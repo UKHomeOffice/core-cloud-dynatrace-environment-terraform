@@ -10,7 +10,7 @@ variable "zone_vars" {
     project_id             = string
     host_prefix            = string
     webapp_prefix          = string
-    operator               = optional(string, "")
+    k8s_cluster_operator  = optional(string, "")
     k8s_cluster_value      = optional(string, "")
     aws_account_id         = optional(string,"")
     rules_templates        = list(string)

@@ -27,7 +27,7 @@ default_rules:
     type: "SELECTOR"
     enabled: true
     entity_selector: type(CUSTOM_DEVICE),tag([AWS]project-id:${project_id})
-%{ if can(k8s_cluster_operator) != "" ~}
+%{ if can(k8s_cluster_value) != "" ~}
   k8s_clusters_name_type_clusters:
     type: "ME"
     enabled: true
@@ -35,7 +35,7 @@ default_rules:
       entity_type: "KUBERNETES_CLUSTER"
       attribute_conditions:
         - key: "KUBERNETES_CLUSTER_NAME"
-          operator: "${k8s_cluster_operator}"
+          operator: "BEGINS_WITH"
           string_value: "${k8s_cluster_value}"
   k8s_node:
     type: "ME"
@@ -44,7 +44,7 @@ default_rules:
       entity_type: "HOST"
       attribute_conditions:
         - key: "KUBERNETES_CLUSTER_NAME"
-          operator: "${k8s_cluster_operator}"
+          operator: "BEGINS_WITH"
           string_value: "${k8s_cluster_value}"
 %{ endif ~}
   k8s_namespace:
