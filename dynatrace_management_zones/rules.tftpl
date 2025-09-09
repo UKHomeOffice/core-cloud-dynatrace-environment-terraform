@@ -122,7 +122,7 @@ default_rules:
           operator: "BEGINS_WITH"
           string_value: "${webapp_prefix}"
           case_sensitive: true
-%{ if can(acc_id) != "" ~}
+%{ if can(aws_account_id) != "" ~}
   exclude_account:
     type: "ME"
     enabled: true
@@ -131,7 +131,7 @@ default_rules:
       attribute_conditions:
         - key: "AWS_acc_id"
           operator: "NOT_EQUALS"
-          string_value: "${acc_id}"
+          string_value: "${aws_account_id}"
           case_sensitive: true
   match_account:
     type: "ME"
@@ -141,7 +141,7 @@ default_rules:
       attribute_conditions:
         - key: "AWS_acc_id"
           operator: "EQUALS"
-          string_value: "${acc_id}"
+          string_value: "${aws_account_id}"
           case_sensitive: true
   staticsite:
     rules:
@@ -153,7 +153,7 @@ default_rules:
           attribute_conditions:
             - key: "AWS_ACCOUNT_ID"
               operator: "EQUALS"
-              string_value: "%{acc_id}"
+              string_value: "%{aws_account_id}"
               case_sensitive: true
 %{ endif ~}
   

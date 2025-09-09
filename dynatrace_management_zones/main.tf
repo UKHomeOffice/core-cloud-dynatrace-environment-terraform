@@ -14,8 +14,8 @@ locals {
         host_prefix          = var.zone_vars.host_prefix
         webapp_prefix        = var.zone_vars.webapp_prefix
         k8s_cluster_operator = var.zone_vars.k8s_cluster_operator
-        k8s_cluster_value   = var.zone_vars.k8s_cluster_value
-        acc_id           = var.zone_vars.aws_account_id
+        k8s_cluster_value    = var.zone_vars.k8s_cluster_value
+        aws_account_id       = var.zone_vars.aws_account_id
       })
   ).default_rules
 
