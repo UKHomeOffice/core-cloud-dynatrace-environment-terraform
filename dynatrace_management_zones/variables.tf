@@ -7,12 +7,12 @@ variable "zone_vars" {
   type = object({
     description            = optional(string)
     legacy_id              = optional(string)
+    env_name               = optional(string, "")
     project_id             = optional(string, "")
     service_id             = optional(string, "")
     tag_name               = optional(string, "")
     tag_value              = optional(string, "")
-    dynamic_key            = string
-    webapp_prefix          = string
+    webapp_prefix          = optional(string, "")
     k8s_cluster_value      = optional(string, "")
     k8s_cluster_name_begins_with       = optional(string, "")
     k8s_cluster_name      = optional(string, "")

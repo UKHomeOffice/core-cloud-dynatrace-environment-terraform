@@ -11,10 +11,10 @@ locals {
   default_rules_raw = yamldecode(
       templatefile("${path.module}/rules.tftpl", {
         project_id                           = var.zone_vars.project_id
+        env_name                             = var.zone_vars.env_name
         tag_name                             = var.zone_vars.tag_name
         tag_value                            = var.zone_vars.tag_value 
         service_id                           = var.zone_vars.service_id
-        dynamic_key                          = var.zone_vars.dynamic_key
         webapp_prefix                        = var.zone_vars.webapp_prefix
         k8s_cluster_value                    = var.zone_vars.k8s_cluster_value
         k8s_cluster_name_begins_with         = var.zone_vars.k8s_cluster_name_begins_with
