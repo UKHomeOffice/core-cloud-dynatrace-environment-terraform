@@ -10,11 +10,19 @@ terraform {
 locals {
   default_rules_raw = yamldecode(
       templatefile("${path.module}/rules.tftpl", {
-        project_id           = var.zone_vars.project_id
-        host_prefix          = var.zone_vars.host_prefix
-        webapp_prefix        = var.zone_vars.webapp_prefix
-        k8s_cluster_value    = var.zone_vars.k8s_cluster_value
-        aws_account_id       = var.zone_vars.aws_account_id
+        project_id                           = var.zone_vars.project_id
+        tag_name                             = var.zone_vars.tag_name
+        tag_value                            = var.zone_vars.tag_value 
+        service_id                           = var.zone_vars.service_id
+        dynamic_key                          = var.zone_vars.dynamic_key
+        webapp_prefix                        = var.zone_vars.webapp_prefix
+        k8s_cluster_value                    = var.zone_vars.k8s_cluster_value
+        k8s_cluster_name_begins_with         = var.zone_vars.k8s_cluster_name_begins_with
+        k8s_cluster_name                     = var.zone_vars.k8s_cluster_name
+        host_group_begins_with               = var.zone_vars.host_group_begins_with
+        aws_account_id                       = var.zone_vars.aws_account_id
+        pg_to_host_propagation               = var.zone_vars.pg_to_host_propagation
+        pg_to_service_propagation            = var.zone_vars.pg_to_host_propagation
       })
   ).default_rules
 
