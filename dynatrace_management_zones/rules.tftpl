@@ -23,6 +23,14 @@ default_rules:
     type: "SELECTOR"
     enabled: true
     entity_selector: type(RELATIONAL_DATABASE_SERVICE),%{ if tag_name != "" }tag([AWS]${tag_name}:${tag_value}%{ endif }%{ if service_id != "" },[AWS]service-id:${service_id}%{endif})
+  lambda:
+    type: "SELECTOR"
+    enabled: true
+    entity_selector: type(AWS_LAMBDA_FUNCTION),%{ if tag_name != "" }tag([AWS]${tag_name}:${tag_value}%{ endif }%{ if service_id != "" },[AWS]service-id:${service_id}%{endif})
+  msk:
+    type: "SELECTOR"
+    enabled: true
+    entity_selector: type(CUSTOM_DEVICE),%{ if tag_name != "" }tag([AWS]${tag_name}:${tag_value}%{ endif }%{ if service_id != "" },[AWS]service-id:${service_id}%{endif})
   custom:
     type: "SELECTOR"
     enabled: true
@@ -30,20 +38,20 @@ default_rules:
   application:
     type: "SELECTOR"
     enabled: true
-    entity_selector: type(APPLICATION),tag([AWS]service-id:${service_id})
+    entity_selector: type(APPLICATION),tag([AWS]service-id:${service_id}%{ if project_service != "" },PROJECT-SERVICE:${project_service}%{endif})
   host:
     type: "SELECTOR"
     enabled: true
-    entity_selector: type(HOST),tag([AWS]service-id:${service_id})
+    entity_selector: type(HOST),tag([AWS]service-id:${service_id}%{ if project_service != "" },PROJECT-SERVICE:${project_service}%{endif})
   service:
     type: "SELECTOR"
     enabled: true
-    entity_selector: type(HOST),tag([AWS]service-id:${service_id})
-  K8s_filters:
+    entity_selector: type(SERVICE),tag([AWS]service-id:${service_id}%{ if project_service != "" },PROJECT-SERVICE:${project_service}%{endif})
+  k8s_filters:
     type: "SELECTOR"
     enabled: true
-    entity_selector: type(CLOUD_APPLICATION),%{ if tag_name != "" } tag([KUBERNETES]${tag_name}:${tag_value},%{ endif })
-  K8s_node_short_version:
+    entity_selector: type(CLOUD_APPLICATION),%{ if tag_name != "" }tag([KUBERNETES]${tag_name}:${tag_value},%{ endif })
+  k8s_node_notprod:
     type: "SELECTOR"
     enabled: true
     entity_selector: type(KUBERNETES_NODE),toRelationships.isClusterOfNode(type(KUBERNETES_CLUSTER),entityName.in("${k8s_cluster_name}"))
@@ -75,34 +83,37 @@ default_rules:
     type: "SELECTOR"
     enabled: true
     entity_selector: type("CUSTOM_DEVICE"),not(tag([AWS]dynatrace-all:false))
-  asg_notprod:
+  asg_with_envtags:
     type: "SELECTOR"
     enabled: true
-    entity_selector: type(AUTO_SCALING_GROUP),tag([AWS]project-id:apa),tag([AWS]environment-type:notprod)
-  alb_notprod:
+    entity_selector: type(AUTO_SCALING_GROUP)%{ if tag_name != "" },tag([AWS]${tag_name}:${tag_value}%{ endif }%{ if tag_env_name != "" },tag([AWS]environment-type:${tag_env_name}%{ endif }))
+  alb_with_envtags:
     type: "SELECTOR"
     enabled: true
-    entity_selector: type(AWS_APPLICATION_LOAD_BALANCER),tag([AWS]project-id:apa),tag([AWS]environment-type:notprod)
-  nlb_notprod:
+    entity_selector: type(AWS_APPLICATION_LOAD_BALANCER)%{ if tag_name != "" },tag([AWS]${tag_name}:${tag_value}%{ endif }%{ if tag_env_name != "" },tag([AWS]environment-type:${tag_env_name}%{ endif }))
+  nlb_with_envtags:
     type: "SELECTOR"
     enabled: true
-    entity_selector: type(AWS_NETWORK_LOAD_BALANCER),tag([AWS]project-id:apa),tag([AWS]environment-type:notprod)
-  ec2_notprod:
+    entity_selector: type(AWS_NETWORK_LOAD_BALANCER)%{ if tag_name != "" },tag([AWS]${tag_name}:${tag_value}%{ endif }%{ if tag_env_name != "" },tag([AWS]environment-type:${tag_env_name}%{ endif }))
+  ec2_with_envtags:
     type: "SELECTOR"
     enabled: true
-    entity_selector: type(EC2_INSTANCE),tag([AWS]project-id:apa),tag([AWS]environment-type:notprod)
-  elb_notprod:
+    entity_selector: type(EC2_INSTANCE)%{ if tag_name != "" },tag([AWS]${tag_name}:${tag_value}%{ endif }%{ if tag_env_name != "" },tag([AWS]environment-type:${tag_env_name}%{ endif }))
     type: "SELECTOR"
     enabled: true
-    entity_selector: type(ELASTIC_LOAD_BALANCER),tag([AWS]project-id:apa),tag([AWS]environment-type:notprod)
-  rds_notprod:
+    entity_selector: type(ELASTIC_LOAD_BALANCER)%{ if tag_name != "" },tag([AWS]${tag_name}:${tag_value}%{ endif }%{ if tag_env_name != "" },tag([AWS]environment-type:${tag_env_name}%{ endif }))
+  rds_with_envtags:
     type: "SELECTOR"
     enabled: true
-    entity_selector: type(RELATIONAL_DATABASE_SERVICE),tag([AWS]project-id:apa),tag([AWS]environment-type:notprod)
-  custom_notprod:
+    entity_selector: type(RELATIONAL_DATABASE_SERVICE)%{ if tag_name != "" },tag([AWS]${tag_name}:${tag_value}%{ endif }%{ if tag_env_name != "" },tag([AWS]environment-type:${tag_env_name}%{ endif }))
+  custom_with_envtags:
     type: "SELECTOR"
     enabled: true
-    entity_selector: type(CUSTOM_DEVICE),tag([AWS]project-id:apa),tag([AWS]environment-type:notprod)
+    entity_selector: type(CUSTOM_DEVICE)%{ if tag_name != "" },tag([AWS]${tag_name}:${tag_value}%{ endif }%{ if tag_env_name != "" },tag([AWS]environment-type:${tag_env_name}%{ endif }))
+  match:
+    type: "SELECTOR"
+    enabled: true
+    entity_selector: "type(host),entityName.StartsWith(da-ec2-mtca)"
   k8s_clusters_name_type_clusters_begins_with:
     type: "ME"
     enabled: true
@@ -115,7 +126,7 @@ default_rules:
 %{ if env_name != ""  ~}
         - key: "KUBERNETES_CLUSTER_NAME"
           operator: "CONTAINS"
-          string_value: "${env_name}""
+          string_value: "${env_name}"
 %{ endif ~}
 %{ if pg_to_host_propagation && pg_to_service_propagation ~}
       pg_to_host_propagation: ${pg_to_host_propagation}
@@ -141,7 +152,7 @@ default_rules:
 %{ if env_name != ""  ~}
         - key: "KUBERNETES_CLUSTER_NAME"
           operator: "CONTAINS"
-          string_value: ${env_name}"
+          string_value: "${env_name}"
 %{ endif ~}
 %{ if pg_to_host_propagation && pg_to_service_propagation ~}
       pg_to_host_propagation: ${pg_to_host_propagation}
@@ -169,7 +180,7 @@ default_rules:
 %{ if env_name != ""  ~}
         - key: "CLOUD_APPLICATION_NAMESPACE_LABELS"
           dynamic_key: "environment-type"
-          operator: "CONTAINS"
+          operator: "EQUALS"
           string_value: "${env_name}"
           case_sensitive: true
 %{ endif ~}
@@ -193,7 +204,7 @@ default_rules:
 %{ if env_name != ""  ~}
         - key: "CLOUD_APPLICATION_NAMESPACE_LABELS"
           dynamic_key: "environment-type"
-          operator: "CONTAINS"
+          operator: "EQUALS"
           string_value: "${env_name}"
           case_sensitive: true
 %{ endif ~}
@@ -214,6 +225,34 @@ default_rules:
           operator: "EQUALS"
           string_value: "${project_id}"
           case_sensitive: true
+  k8s_pg_predefined_metadata_equals:
+        type: "ME"
+        enabled: true
+        attribute_rule:
+          entity_type: "PROCESS_GROUP"
+          attribute_conditions:
+            - key: "PROCESS_GROUP_PREDEFINED_METADATA"
+              dynamic_key: "KUBERNETES_NAMESPACE"
+              operator: "EQUALS"
+              string_value: "${k8s_namespace}"
+              case_sensitive: true
+          pg_to_host_propagation: true
+          pg_to_service_propagation: true
+  k8s_pg_predefined_metadata_beginswith:
+      type: "ME"
+      enabled: true
+      attribute_rule:
+        entity_type: "PROCESS_GROUP"
+        attribute_conditions:
+          - key: "PROCESS_GROUP_PREDEFINED_METADATA"
+            dynamic_key: "KUBERNETES_NAMESPACE"
+            operator: "BEGINS_WITH"
+            string_value: "${k8s_namespace}"
+            case_sensitive: true
+%{ if pg_to_host_propagation && pg_to_service_propagation ~}
+        pg_to_host_propagation: ${pg_to_host_propagation}
+        pg_to_service_propagation: ${pg_to_service_propagation}
+%{ endif ~}
   k8s_workloads:
     type: "ME"
     enabled: true
@@ -227,7 +266,7 @@ default_rules:
 %{ if env_name != ""  ~}
         - key: "CLOUD_APPLICATION_NAMESPACE_LABELS"
           dynamic_key: "environment-type"
-          operator: "CONTAINS"
+          operator: "EQUALS"
           string_value: "${env_name}"
           case_sensitive: true
 %{ endif ~}
@@ -248,7 +287,7 @@ default_rules:
 %{ if env_name != ""  ~}
         - key: "CLOUD_APPLICATION_NAMESPACE_LABELS"
           dynamic_key: "environment-type"
-          operator: "CONTAINS"
+          operator: "EQUALS"
           string_value: "${env_name}"
           case_sensitive: true
 %{ endif ~}
@@ -277,7 +316,7 @@ default_rules:
       entity_type: "HOST"
       host_to_pgpropagation: true
       attribute_conditions:
-        - key: "HOST_GROUP_NAME"
+        - key: "HOST_NAME"
           operator: "BEGINS_WITH"
           string_value: "${host_group_begins_with}"
           case_sensitive: true
@@ -295,6 +334,12 @@ default_rules:
           operator: "BEGINS_WITH"
           string_value: "${webapp_prefix}"
           case_sensitive: true
+%{ if env_name != ""  ~}
+        - key: "WEB_APPLICATION_NAME"
+          operator: "CONTAINS"
+          string_value: "${env_name}"
+          case_sensitive: true
+%{ endif ~}
 %{ if can(aws_account_id) != "" ~}
   exclude_account:
     type: "ME"
