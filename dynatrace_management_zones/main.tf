@@ -12,8 +12,6 @@ locals {
       templatefile("${path.module}/rules.tftpl", {
         project_id                           = var.zone_vars.project_id
         env_name                             = var.zone_vars.env_name
-        tag_name                             = var.zone_vars.tag_name
-        tag_value                            = var.zone_vars.tag_value
         tag_env_name                         = var.zone_vars.env_name
         service_id                           = var.zone_vars.service_id
         webapp_prefix                        = var.zone_vars.webapp_prefix
