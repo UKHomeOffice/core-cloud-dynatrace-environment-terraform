@@ -90,11 +90,11 @@ default_rules:
   alb_with_envtags:
     type: "SELECTOR"
     enabled: true
-    entity_selector: type(AWS_APPLICATION_LOAD_BALANCER)%{ if project-id != "" },tag([AWS]project_id:${project_id}%{ endif }%{ if tag_env_name != "" },tag([AWS]environment-type:${tag_env_name}%{ endif }))
+    entity_selector: type(AWS_APPLICATION_LOAD_BALANCER)%{ if project_id != "" },tag([AWS]project-id:${project_id}%{ endif }%{ if tag_env_name != "" },tag([AWS]environment-type:${tag_env_name}%{ endif }))
   nlb_with_envtags:
     type: "SELECTOR"
     enabled: true
-    entity_selector: type(AWS_NETWORK_LOAD_BALANCER)%{ if project-id != "" },tag([AWS]project_id:${project_id}%{ endif }%{ if tag_env_name != "" },tag([AWS]environment-type:${tag_env_name}%{ endif }))
+    entity_selector: type(AWS_NETWORK_LOAD_BALANCER)%{ if project_id != "" },tag([AWS]project-id:${project_id}%{ endif }%{ if tag_env_name != "" },tag([AWS]environment-type:${tag_env_name}%{ endif }))
   ec2_with_envtags:
     type: "SELECTOR"
     enabled: true
