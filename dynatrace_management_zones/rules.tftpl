@@ -212,19 +212,6 @@ default_rules:
       pg_to_host_propagation: ${pg_to_host_propagation}
       pg_to_service_propagation: ${pg_to_service_propagation}
 %{ endif ~}
-  #k8s_pg_notprod:
-  #  type: "ME"
-  #  enabled: true
-  #  attribute_rule:
-  #   entity_type: "PROCESS_GROUP"
-  #    pg_to_host_propagation: true
-  #    pg_to_service_propagation: true
-  #   attribute_conditions:
-  #     - key: "CLOUD_APPLICATION_NAMESPACE_LABELS"
-  #       dynamic_key: "project-id"
-  #        operator: "EQUALS"
-  #       string_value: "${project_id}"
-  #       case_sensitive: true
   k8s_pg_predefined_metadata_equals:
         type: "ME"
         enabled: true
