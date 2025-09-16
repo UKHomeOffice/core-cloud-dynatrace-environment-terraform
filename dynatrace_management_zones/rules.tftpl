@@ -95,7 +95,6 @@ default_rules:
     type: "SELECTOR"
     enabled: true
     entity_selector: type(EC2_INSTANCE)%{ if project_id != "" },tag([AWS]project-id:${project_id})%{ endif }%{ if tag_env_name != "" },tag([AWS]environment-type:${tag_env_name})%{ endif }
-    entity_selector = "type(EC2_INSTANCE),tag([AWS]project-id:apa),tag([AWS]environment-type:prod)"
     type: "SELECTOR"
     enabled: true
     entity_selector: type(ELASTIC_LOAD_BALANCER)%{ if project_id != "" },tag([AWS]project-id:${project_id})%{ endif }%{ if tag_env_name != "" },tag([AWS]environment-type:${tag_env_name})%{ endif }
