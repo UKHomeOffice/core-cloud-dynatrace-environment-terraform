@@ -50,11 +50,7 @@ default_rules:
   k8s_filters:
     type: "SELECTOR"
     enabled: true
-    entity_selector: type(CLOUD_APPLICATION),%{ if project_id != "" }tag([KUBERNETES]project-id:${project_id},%{ endif })
-  k8s_node_notprod:
-    type: "SELECTOR"
-    enabled: true
-    entity_selector: type(KUBERNETES_NODE),toRelationships.isClusterOfNode(type(KUBERNETES_CLUSTER),entityName.in("${k8s_cluster_name}"))
+    entity_selector: type(CLOUD_APPLICATION),%{ if project_id != "" }tag([KUBERNETES]project-id:${project_id}%{ endif })
   exclude_asg:
     type: "SELECTOR"
     enabled: true
