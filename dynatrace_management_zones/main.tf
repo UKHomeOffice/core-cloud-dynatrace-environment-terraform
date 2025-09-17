@@ -7,37 +7,6 @@ terraform {
   }
 }
 
-locals {
-  default_rules_raw = yamldecode(
-      templatefile("${path.module}/rules.tftpl", {
-        project_id                           = var.zone_vars.project_id
-        env_name                             = var.zone_vars.env_name
-        tag_env_name                         = var.zone_vars.env_name
-        service_id                           = var.zone_vars.service_id
-        webapp_prefix                        = var.zone_vars.webapp_prefix
-        # k8s_cluster_value                    = var.zone_vars.k8s_cluster_value
-        k8s_cluster_name_begins_with         = var.zone_vars.k8s_cluster_name_begins_with
-        k8s_cluster_name                     = var.zone_vars.k8s_cluster_name
-        k8s_namespace                        = var.zone_vars.k8s_namespace
-        host_group_begins_with               = var.zone_vars.host_group_begins_with
-        aws_account_id                       = var.zone_vars.aws_account_id
-        project_service                      = var.zone_vars.project_service
-        pg_to_host_propagation               = var.zone_vars.pg_to_host_propagation
-        pg_to_service_propagation            = var.zone_vars.pg_to_host_propagation
-      })
-  ).default_rules
-
-  zone_rules_processed = merge(
-    {
-      for k, v in local.default_rules_raw :
-      k => v
-      if try(contains(var.zone_vars.rules_templates, k), false)
-    },
-    var.zone_vars.tenant_exclusive_rules
-  )
-
-}
-
 resource "dynatrace_management_zone_v2" "management_zone" {
   name        = var.zone_name
   description = try(var.zone_vars.description, "Management zone for ${var.zone_name}")
@@ -59,15 +28,15 @@ resource "dynatrace_management_zone_v2" "management_zone" {
             for_each = try(rule.value.attribute_rule[*], {})
             # Creates an attribute rule block with conditions as defined - either this or dimension_rule
             content {
-              azure_to_pgpropagation = try(attribute_rule.value.azure_to_pgpropagation, false)
-              azure_to_service_propagation = try(attribute_rule.value.azure_to_service_propagation, false)
+              azure_to_pgpropagation                           = try(attribute_rule.value.azure_to_pgpropagation, false)
+              azure_to_service_propagation                     = try(attribute_rule.value.azure_to_service_propagation, false)
               custom_device_group_to_custom_device_propagation = try(attribute_rule.value.custom_device_group_to_custom_device_propagation, false)
-              host_to_pgpropagation = try(attribute_rule.value.host_to_pgpropagation, false)
-              pg_to_host_propagation = try(attribute_rule.value.pg_to_host_propagation, false)
-              pg_to_service_propagation = try(attribute_rule.value.pg_to_service_propagation, false)
-              service_to_host_propagation = try(attribute_rule.value.service_to_host_propagation, false)
-              service_to_pgpropagation = try(attribute_rule.value.service_to_pgpropagation, false)
-              entity_type = try(attribute_rule.value.entity_type, null)
+              host_to_pgpropagation                            = try(attribute_rule.value.host_to_pgpropagation, false)
+              pg_to_host_propagation                           = try(attribute_rule.value.pg_to_host_propagation, false)
+              pg_to_service_propagation                        = try(attribute_rule.value.pg_to_service_propagation, false)
+              service_to_host_propagation                      = try(attribute_rule.value.service_to_host_propagation, false)
+              service_to_pgpropagation                         = try(attribute_rule.value.service_to_pgpropagation, false)
+              entity_type                                      = try(attribute_rule.value.entity_type, null)
               
               attribute_conditions {
                 dynamic "condition" {
@@ -102,9 +71,9 @@ resource "dynatrace_management_zone_v2" "management_zone" {
                     for_each = try(dimension_rule.value.dimension_conditions[*],{})
                     content {
                       condition_type = try(condition.value.condition.condition_type, null)
-                      rule_matcher = try(condition.value.condition.rule_matcher, null)
-                      value = try(condition.value.condition.value, null)  
-                      key = try(condition.value.key, null)
+                      rule_matcher   = try(condition.value.condition.rule_matcher, null)
+                      value          = try(condition.value.condition.value, null)  
+                      key            = try(condition.value.key, null)
                     }
                   }
                 }

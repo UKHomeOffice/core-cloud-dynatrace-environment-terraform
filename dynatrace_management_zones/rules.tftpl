@@ -129,14 +129,6 @@ default_rules:
       pg_to_host_propagation: ${pg_to_host_propagation}
       pg_to_service_propagation: ${pg_to_service_propagation}
 %{ endif ~}
-  # k8s_clusters_name_type_clusters_exists:
-  #       type: "ME"
-  #       enabled: true
-  #       attribute_rule:
-  #         entity_type: "KUBERNETES_CLUSTER"
-  #         attribute_conditions:
-  #           - key: "KUBERNETES_CLUSTER_NAME"
-  #             operator: "EXISTS"
   k8s_node:
     type: "ME"
     enabled: true
@@ -155,14 +147,6 @@ default_rules:
       pg_to_host_propagation: ${pg_to_host_propagation}
       pg_to_service_propagation: ${pg_to_service_propagation}
 %{ endif ~}
- # k8s_node_exists:
- #   type: "ME"
- #   enabled: true
- #   attribute_rule:
- #     entity_type: "HOST"
- #     attribute_conditions:
- #      - key: "KUBERNETES_CLUSTER_NAME"
- #         operator: "EXISTS"
   k8s_namespace:
     type: "ME"
     enabled: true

@@ -5,24 +5,23 @@ variable "zone_name" {
 
 variable "zone_vars" {
   type = object({
-    description            = optional(string)
-    legacy_id              = optional(string)
-    env_name               = optional(string, "")
-    project_id             = optional(string, "")
-    service_id             = optional(string, "")
-    tag_env_name           = optional(string, "")
-    webapp_prefix          = optional(string, "")
-    # k8s_cluster_value      = optional(string, "")
-    k8s_cluster_name_begins_with       = optional(string, "")
-    k8s_cluster_name      = optional(string, "")
-    k8s_namespace         = optional(string, "")
-    host_group_begins_with = optional(string, "")
-    aws_account_id         = optional(string,"")
-    project_service        = optional(string, "")
-    pg_to_host_propagation = optional(bool, false)
-    pg_to_service_propagation = optional(bool, false) 
-    rules_templates        = list(string)
-    tenant_exclusive_rules = optional(map(object({
+    description                  = optional(string)
+    legacy_id                    = optional(string)
+    env_name                     = optional(string, "")
+    project_id                   = optional(string, "")
+    service_id                   = optional(string, "")
+    tag_env_name                 = optional(string, "")
+    webapp_prefix                = optional(string, "")
+    k8s_cluster_name_begins_with = optional(string, "")
+    k8s_cluster_name             = optional(string, "")
+    k8s_namespace                = optional(string, "")
+    host_group_begins_with       = optional(string, "")
+    aws_account_id               = optional(string,"")
+    project_service              = optional(string, "")
+    pg_to_host_propagation       = optional(bool, false)
+    pg_to_service_propagation    = optional(bool, false) 
+    rules_templates              = list(string)
+    tenant_exclusive_rules       = optional(map(object({
       enabled = bool
       type    = string
       entity_selector = optional(string)
@@ -50,7 +49,7 @@ variable "zone_vars" {
         }))
       }))
       dimension_rule = optional(object({
-        applies_to = optional(string, "ANY")
+        applies_to   = optional(string, "ANY")
         dimension_conditions = optional(object({
           condition = object({
             condition_type = string
