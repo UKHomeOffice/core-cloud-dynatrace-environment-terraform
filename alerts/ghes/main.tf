@@ -7,17 +7,18 @@ terraform {
   }
 }
 
-resource "dynatrace_slack_notification" "slack_alerts" {
-  for_each = var.ghes_alert_configs
-
-  active  = each.value.slack_notification_enabled
-  name    = each.value.slack_notification_name
-  profile = dynatrace_alerting.ghes_alert_profiles[each.key].id
-  url     = var.slack_webhook_urls[each.key]
-  channel = each.value.channel_name
-  message = each.value.slack_message
+resource "dynatrace_webhook_notification" "custom_slack_alerts" { 
+  for_each               = var.ghes_alert_configs
+  active                 = each.value.slack_notification_enabled
+  name                   = each.value.slack_notification_name
+  profile                = dynatrace_alerting.ghes_alert_profiles[each.key].id
+  secret_url             = var.slack_webhook_urls[each.key]
+  url_contains_secret    = true
+  insecure               = false
+  notify_event_merges    = false
+  notify_closed_problems = true
+  payload                = each.value.slack_message
 }
-
 
 resource "dynatrace_alerting" "ghes_alert_profiles" {
   for_each = var.ghes_alert_configs
