@@ -7,13 +7,16 @@ terraform {
   }
 }
 
-resource "dynatrace_slack_notification" "slack_alerts" {
-  active  = var.aws_monitoring_profile_alert_config.slack_notification_enabled
-  name    = var.aws_monitoring_profile_alert_config.slack_notification_name
-  profile = dynatrace_alerting.aws_monitoring_profile_alert.id
-  url     = var.slack_webhook_url
-  channel = var.aws_monitoring_profile_alert_config.channel_name
-  message = var.aws_monitoring_profile_alert_config.slack_message
+resource "dynatrace_webhook_notification" "custom_slack_alerts" { 
+  active                 = var.aws_monitoring_profile_alert_config.slack_notification_enabled
+  name                   = var.aws_monitoring_profile_alert_config.slack_notification_name
+  profile                = dynatrace_alerting.aws_monitoring_profile_alert.id
+  secret_url             = var.slack_webhook_url
+  url_contains_secret    = true
+  insecure               = false
+  notify_event_merges    = false
+  notify_closed_problems = true
+  payload                = var.aws_monitoring_profile_alert_config.slack_message
 }
 
 resource "dynatrace_alerting" "aws_monitoring_profile_alert" {
