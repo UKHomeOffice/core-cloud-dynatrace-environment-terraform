@@ -19,15 +19,17 @@ data "dynatrace_management_zone_v2" "zones" {
   name     = each.value.management_zone
 }
 
-resource "dynatrace_slack_notification" "slack_alerts" {
-  for_each = var.corecloud_alert_configs
-
-  active  = each.value.slack_notification_enabled
-  name    = each.value.slack_notification_name
-  profile = local.alerting_profile_ids_by_name[each.value.alerting_profile_name]
-  url     = var.slack_webhook_urls[each.key]
-  channel = each.value.channel_name
-  message = each.value.slack_message
+resource "dynatrace_webhook_notification" "custom_slack_alerts" { 
+  for_each               = var.corecloud_alert_configs
+  active                 = each.value.slack_notification_enabled
+  name                   = each.value.slack_notification_name 
+  profile                = local.alerting_profile_ids_by_name[each.value.alerting_profile_name]
+  secret_url             = var.slack_webhook_urls[each.key]
+  url_contains_secret    = true
+  insecure               = false
+  notify_event_merges    = false
+  notify_closed_problems = true
+  payload                = each.value.slack_message
 }
 
 resource "dynatrace_alerting" "corecloud_profile" {
