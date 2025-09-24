@@ -1,5 +1,5 @@
 default_rules:
-  asg:
+ asg:
     type: "SELECTOR"
     enabled: true
     entity_selector: type(AUTO_SCALING_GROUP)%{ if project_id != "" },tag([AWS]project-id:${project_id})%{ endif }%{ if service_id != "" },tag([AWS]service-id:${service_id})%{endif}
