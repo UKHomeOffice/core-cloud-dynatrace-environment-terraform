@@ -34,12 +34,7 @@ variable "featureSets" {
 }
 
 variable "activationTags" {
-  type = list(object({
-    tag = string
-  }))
+  type = list(string)
   description = "List of activationTags to apply to this extension"
   # Expected format for tag: "[PROVIDER]key: value", e.g., "[AWS]dynatrace: true"
-  default = [{
-    tag = "[AWS]dynatrace: true"
-  }]
 }

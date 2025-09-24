@@ -210,5 +210,5 @@ module "hub_extensions" {
   featureSets     = each.value.featureSets
   extension_name  = each.value.extension_name
   enabled         = try(each.value.enabled, true)
-  activationTags  = each.value.activationTags != null ? each.value.activationTags : [{ tag = "[AWS]dynatrace: true" }]
+  activationTags  = each.value.activationTags != null ? each.value.activationTags : ["[AWS]dynatrace: true"]
 }
