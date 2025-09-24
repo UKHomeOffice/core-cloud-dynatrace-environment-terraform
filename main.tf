@@ -200,7 +200,7 @@ module "dynatrace_kafka_settings" {
 
 module "hub_extensions" {
 
-  source   = "./hub_extension"
+  source   = "./hub_extensions"
   for_each = contains(keys(var.tenant_vars), "hub_extensions") ? var.tenant_vars.hub_extensions : {}
 
   tenant_vars     = each.value
