@@ -2,39 +2,39 @@ default_rules:
   asg:
     type: "SELECTOR"
     enabled: true
-    entity_selector: type(AUTO_SCALING_GROUP),%{ if project_id != "" }tag([AWS]project-id:${project_id}%{ endif })%{ if service_id != "" },tag([AWS]service-id:${service_id})%{endif}
+    entity_selector: type(AUTO_SCALING_GROUP)%{ if project_id != "" },tag([AWS]project-id:${project_id})%{ endif }%{ if service_id != "" },tag([AWS]service-id:${service_id})%{endif}
   alb:
     type: "SELECTOR"
     enabled: true
-    entity_selector: type(AWS_APPLICATION_LOAD_BALANCER),%{ if project_id != "" }tag([AWS]project-id:${project_id}%{ endif })%{ if service_id != "" },tag([AWS]service-id:${service_id})%{endif}
+    entity_selector: type(AWS_APPLICATION_LOAD_BALANCER)%{ if project_id != "" },tag([AWS]project-id:${project_id})%{ endif }%{ if service_id != "" },tag([AWS]service-id:${service_id})%{endif}
   nlb:
     type: "SELECTOR"
     enabled: true
-    entity_selector: type(AWS_NETWORK_LOAD_BALANCER),%{ if project_id != "" }tag([AWS]project-id:${project_id}%{ endif })%{ if service_id != "" },tag([AWS]service-id:${service_id})%{endif}
+    entity_selector: type(AWS_NETWORK_LOAD_BALANCER)%{ if project_id != "" },tag([AWS]project-id:${project_id})%{ endif }%{ if service_id != "" },tag([AWS]service-id:${service_id})%{endif}
   ec2:
     type: "SELECTOR"
     enabled: true
-    entity_selector: type(EC2_INSTANCE),%{ if project_id != "" }tag([AWS]project-id:${project_id}%{ endif })%{ if service_id != "" },tag([AWS]service-id:${service_id})%{endif}
+    entity_selector: type(EC2_INSTANCE)%{ if project_id != "" },tag([AWS]project-id:${project_id})%{ endif }%{ if service_id != "" },tag([AWS]service-id:${service_id})%{endif}
   elb:
     type: "SELECTOR"
     enabled: true
-    entity_selector: type(ELASTIC_LOAD_BALANCER),%{ if project_id != "" }tag([AWS]project-id:${project_id}%{ endif })%{ if service_id != "" },tag([AWS]service-id:${service_id})%{endif}
+    entity_selector: type(ELASTIC_LOAD_BALANCER)%{ if project_id != "" },tag([AWS]project-id:${project_id})%{ endif }%{ if service_id != "" },tag([AWS]service-id:${service_id})%{endif}
   rds:
     type: "SELECTOR"
     enabled: true
-    entity_selector: type(RELATIONAL_DATABASE_SERVICE),%{ if project_id != "" }tag([AWS]project-id:${project_id}%{ endif })%{ if service_id != "" },tag([AWS]service-id:${service_id})%{endif}
+    entity_selector: type(RELATIONAL_DATABASE_SERVICE)%{ if project_id != "" },tag([AWS]project-id:${project_id})%{ endif }%{ if service_id != "" },tag([AWS]service-id:${service_id})%{endif}
   lambda:
     type: "SELECTOR"
     enabled: true
-    entity_selector: type(AWS_LAMBDA_FUNCTION),%{ if project_id != "" }tag([AWS]project-id:${project_id}%{ endif })%{ if service_id != "" },tag([AWS]service-id:${service_id})%{endif}
+    entity_selector: type(AWS_LAMBDA_FUNCTION)%{ if project_id != "" },tag([AWS]project-id:${project_id})%{ endif }%{ if service_id != "" },tag([AWS]service-id:${service_id})%{endif}
   msk:
     type: "SELECTOR"
     enabled: true
-    entity_selector: type(CUSTOM_DEVICE),%{ if project_id != "" }tag([AWS]project-id:${project_id}%{ endif })%{ if service_id != "" },tag([AWS]service-id:${service_id})%{endif}
+    entity_selector: type(CUSTOM_DEVICE)%{ if project_id != "" },tag([AWS]project-id:${project_id})%{ endif }%{ if service_id != "" },tag([AWS]service-id:${service_id})%{endif}
   custom:
     type: "SELECTOR"
     enabled: true
-    entity_selector: type(CUSTOM_DEVICE),%{ if project_id != "" }tag([AWS]project-id:${project_id}%{ endif })%{ if service_id != "" },tag([AWS]service-id:${service_id})%{endif}
+    entity_selector: type(CUSTOM_DEVICE)%{ if project_id != "" },tag([AWS]project-id:${project_id})%{ endif }%{ if service_id != "" },tag([AWS]service-id:${service_id})%{endif}
   application:
     type: "SELECTOR"
     enabled: true
@@ -95,7 +95,7 @@ default_rules:
     type: "SELECTOR"
     enabled: true
     entity_selector: type(EC2_INSTANCE)%{ if project_id != "" },tag([AWS]project-id:${project_id})%{ endif }%{ if tag_env_name != "" },tag([AWS]environment-type:${tag_env_name})%{ endif }
-  elb_with_envtags: 
+  elb_with_envtags:
     type: "SELECTOR"
     enabled: true
     entity_selector: type(ELASTIC_LOAD_BALANCER)%{ if project_id != "" },tag([AWS]project-id:${project_id})%{ endif }%{ if tag_env_name != "" },tag([AWS]environment-type:${tag_env_name})%{ endif }
@@ -340,4 +340,3 @@ default_rules:
           string_value: "${aws_account_id}"
           case_sensitive: true
 %{ endif ~}
-  
