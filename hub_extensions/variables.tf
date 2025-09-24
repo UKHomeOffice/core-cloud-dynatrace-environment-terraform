@@ -23,7 +23,7 @@ variable "management_zone" {
   type        = string
 }
 
-variable "version" {
+variable "extn_version" {
   description = "Version for the Dynatrace hub extension config"
   type        = string
 }

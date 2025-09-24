@@ -204,7 +204,7 @@ module "hub_extensions" {
   for_each = contains(keys(var.tenant_vars), "hub_extensions") ? var.tenant_vars.hub_extensions : {}
 
   tenant_vars     = each.value
-  version         = each.value.version
+  extn_version    = each.value.extn_version
   management_zone = each.value.management_zone
   description     = try(each.value.description, "")
   featureSets     = each.value.featureSets

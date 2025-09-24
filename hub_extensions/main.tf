@@ -6,7 +6,7 @@ resource "dynatrace_hub_extension_config" "hub_extension" {
     {
       "enabled" : var.enabled,
       "description" : var.description,
-      "version" : var.version,
+      "version" : var.extn_version,
 
       # List of feature sets
       "featureSets" : [
