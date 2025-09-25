@@ -198,3 +198,17 @@ module "dynatrace_kafka_settings" {
   enabled = var.tenant_vars.kafka_settings.enabled
 }
 
+module "hub_extensions" {
+
+  source   = "./hub_extensions"
+  for_each = contains(keys(var.tenant_vars), "hub_extensions") ? var.tenant_vars.hub_extensions : {}
+
+  tenant_vars     = each.value
+  extn_version    = each.value.extn_version
+  management_zone = each.value.management_zone
+  description     = try(each.value.description, "")
+  featureSets     = each.value.featureSets
+  extension_name  = each.value.extension_name
+  enabled         = try(each.value.enabled, true)
+  activationTags  = each.value.activationTags != null ? each.value.activationTags : ["[AWS]dynatrace: true"]
+}
