@@ -158,7 +158,6 @@ module "dynatrace_log_storage_rules" {
       enabled           = true
       send_to_storage   = true
       matcher_attribute = "k8s.namespace.name"
-      matcher_operator  = "EQUALS"
       matcher_values    = ["kube-system"]
     },
     {
@@ -166,7 +165,6 @@ module "dynatrace_log_storage_rules" {
       enabled           = true
       send_to_storage   = true
       matcher_attribute = "k8s.pod.label"
-      matcher_operator  = "MATCHES"
       matcher_values    = ["dynatrace-logs=true"]
     }
   ]
