@@ -9,7 +9,7 @@ resource "dynatrace_log_storage" "dynatrace_log_storage_rule" {
   matchers {
     matcher {
       attribute = each.value.matcher_attribute
-      operator  = each.value.matcher_operator
+      operator  = "MATCHES" # According to https://registry.terraform.io/providers/dynatrace-oss/dynatrace/latest/docs/resources/log_storage this is the only possible value for this block and better be hardcoded here.
       values    = each.value.matcher_values
     }
   }

@@ -5,7 +5,6 @@ variable "rules" {
     enabled           = optional(bool, true)
     send_to_storage   = optional(bool, true)
     matcher_attribute = string
-    matcher_operator  = string
     matcher_values    = list(string)
   }))
 }
