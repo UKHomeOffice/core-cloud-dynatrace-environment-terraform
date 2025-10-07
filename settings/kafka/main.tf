@@ -19,6 +19,4 @@ resource "dynatrace_generic_setting" "java_kafka_discover_listeners" {
 resource "dynatrace_oneagent_features" "java_kafka_streams" {
   enabled = var.kafka_streams
   key     = "JAVA_KAFKA_STREAMS"
-  scope = "environment"
-
 }
