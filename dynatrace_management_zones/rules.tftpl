@@ -50,15 +50,15 @@ default_rules:
   application:
     type: "SELECTOR"
     enabled: true
-    entity_selector: type(APPLICATION)%{ if project_id != "" },tag([AWS]project-id:${project_id})%{ endif }%{ if service_id != "" },tag([AWS]service-id:${service_id})%{ endif }%{ if project_service != "" },(PROJECT-SERVICE:${project_service}%{endif})
+    entity_selector: type(APPLICATION)%{ if project_id != "" },tag([AWS]project-id:${project_id})%{ endif }%{ if service_id != "" },tag([AWS]service-id:${service_id})%{ endif }%{ if project_service != "" },(PROJECT-SERVICE:${project_service})%{endif}
   host:
     type: "SELECTOR"
     enabled: true
-    entity_selector: type(HOST)%{ if project_id != "" },tag([AWS]project-id:${project_id})%{ endif }%{ if service_id != "" },tag([AWS]service-id:${service_id})%{ endif }%{ if project_service != "" },(PROJECT-SERVICE:${project_service}%{endif})
+    entity_selector: type(HOST)%{ if project_id != "" },tag([AWS]project-id:${project_id})%{ endif }%{ if service_id != "" },tag([AWS]service-id:${service_id})%{ endif }%{ if project_service != "" },(PROJECT-SERVICE:${project_service})%{endif}
   service:
     type: "SELECTOR"
     enabled: true
-    entity_selector: type(SERVICE)%{ if project_id != "" },tag([AWS]project-id:${project_id})%{ endif }%{ if service_id != "" },tag([AWS]service-id:${service_id})%{ endif }%{ if project_service != "" },(PROJECT-SERVICE:${project_service}%{endif})
+    entity_selector: type(SERVICE)%{ if project_id != "" },tag([AWS]project-id:${project_id})%{ endif }%{ if service_id != "" },tag([AWS]service-id:${service_id})%{ endif }%{ if project_service != "" },(PROJECT-SERVICE:${project_service})%{endif}
   k8s_filters:
     type: "SELECTOR"
     enabled: true
