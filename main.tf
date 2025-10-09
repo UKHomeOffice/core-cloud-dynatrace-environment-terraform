@@ -76,6 +76,7 @@ module "dynatrace_privatelink_aws_accounts_allowlist" {
 }
 
 module "golden_dashboards" {
+  count = contains(keys(var.tenant_vars), "golden_dashboards") ? 1:0
   source = "./dashboards/golden_dashboards"
 }
 
@@ -145,11 +146,13 @@ module "dynatrace_aws_monitoring_profile_integration" {
 }
 
 module "anomaly_detection" {
+  count = contains(keys(var.tenant_vars), "anomaly_detection") ? 1:0
   source = "./anomaly_detection/"
 }
 
 
 module "dynatrace_log_storage_rules" {
+  count = contains(keys(var.tenant_vars), "dynatrace_log_storage_rules") ? 1:0
   source = "./dynatrace_log_storage"
 
   rules = [
