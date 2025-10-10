@@ -1,12 +1,18 @@
-# --- S3 backup bucket ---
+
+# --- S3 Backup Bucket ---
 resource "aws_s3_bucket" "backup" {
   bucket        = "CC-CW-Logs-Firehose-Bucket-${var.env}-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}"
   force_destroy = true
-  server_side_encryption_configuration {
-    rule {
-      apply_server_side_encryption_by_default {
-        sse_algorithm = "aws:kms"  # Enable SSE using CMK
-      }
+}
+
+# --- Server-Side Encryption Configuration ---
+resource "aws_s3_bucket_server_side_encryption_configuration" "backup_encryption" {
+  bucket = aws_s3_bucket.backup.id
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "aws:kms"
+
     }
   }
 }
