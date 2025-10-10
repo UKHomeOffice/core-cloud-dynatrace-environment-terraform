@@ -1,17 +1,43 @@
 locals {
-  # Ensure exclusive_services is a list
-  exclusive_services = lookup(var.tenant_vars, "optional_exclusive_services", [])
+  # ------------------------------
+  # 1️⃣ Optional exclusive services (map of lists)
+  #    - Overrides defaults if defined
+  # ------------------------------
+  exclusive_services = lookup(var.tenant_vars, "optional_exclusive_services", {})
 
-  # Filter defaults safely
+  # ------------------------------
+  # 2️⃣ Optional exclude services (list)
+  #    - Will remove these services from the default service list
+  #    - Only applies if exclusive_services is not defined
+  #    - Default: empty list
+  # ------------------------------
+  optional_exclude_services = lookup(var.tenant_vars, "optional_exclude_services", [])
+
+  # ------------------------------
+  # 3️⃣ Filter defaults by optional exclude services
+  # ------------------------------
   filtered_defaults = {
     for k, v in var.default_services :
-    k => v if !(contains(local.exclusive_services, k))
+    k => v if !(contains(local.optional_exclude_services, k))
   }
 
-  # Optional top-up services
+  # ------------------------------
+  # 4️⃣ Optional top-up services (map)
+  #    - Merge on top of filtered defaults
+  #    - Default: empty map
+  # ------------------------------
   top_up_services = lookup(var.tenant_vars, "optional_services_top_up", {})
+  computed_services = merge(local.filtered_defaults, local.top_up_services)
 
-  # Final services
-  services_to_configure = merge(local.filtered_defaults, local.top_up_services)
+  # ------------------------------
+  # 5️⃣ Final services to configure
+  #    - If exclusive_services has keys → use it
+  #    - Otherwise → use computed_services (filtered defaults + top-up)
+  #    - Ensure type consistency with tomap()
+  # ------------------------------
+  services_to_configure = (
+    length(keys(local.exclusive_services)) > 0
+      ? local.exclusive_services
+      : tomap(local.computed_services)
+  )
 }
-
