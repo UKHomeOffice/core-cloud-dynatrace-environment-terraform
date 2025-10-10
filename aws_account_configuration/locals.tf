@@ -35,9 +35,5 @@ locals {
   #    - Otherwise → use computed_services (filtered defaults + top-up)
   #    - Ensure type consistency with tomap()
   # ------------------------------
-  services_to_configure = (
-    length(keys(local.exclusive_services)) > 0
-      ? local.exclusive_services
-      : tomap(local.computed_services)
-  )
+  services_to_configure = length(local.exclusive_services) > 0 ? local.exclusive_services : local.computed_services
 }
