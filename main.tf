@@ -232,6 +232,20 @@ module "oam_link" {
     ""
   )
 }
+module "firehose_dynatrace" {
+  source = "./firehose_dynatrace/"
+  for_each = contains(keys(var.tenant_vars), "firehose_dynatrace") ? var.tenant_vars.firehose_dynatrace : {}
+  
+  tenant_vars                     = each.value
+  s3_backup_bucket_name           = each.value.s3_backup_bucket_name
+  delivery_endpoint               = each.value.delivery_endpoint
+  env                             = each.value.env
+  dynatrace_api_url               = each.value.dynatrace_api_url
+  firehose_name                   = each.value.firehose_name
+  dynatrace_env_url_secret        = each.value.dynatrace_env_url_secret
+  dynatrace_api_token_secret_arn  = each.value.dynatrace_api_token_secret_arn
+
+} 
 # module "metric_stream" {
 #   source = "./metric_stream/"
 #   for_each = contains(keys(var.tenant_vars), "metric_stream") ? var.tenant_vars.metric_stream : {}
@@ -243,17 +257,3 @@ module "oam_link" {
 #   firehose_arn        = each.value.firehose_arn
 
 # }
-# module "firehose_dynatrace" {
-#   source = "./firehose_dynatrace/"
-#   for_each = contains(keys(var.tenant_vars), "firehose_dynatrace") ? var.tenant_vars.firehose_dynatrace : {}
-  
-#   tenant_vars                     = each.value
-#   s3_backup_bucket_name           = each.value.s3_backup_bucket_name
-#   delivery_endpoint               = each.value.delivery_endpoint
-#   env                             = each.value.env
-#   dynatrace_api_url               = each.value.dynatrace_api_url
-#   firehose_name                   = each.value.firehose_name
-#   dynatrace_env_url_secret        = each.value.dynatrace_env_url_secret
-#   dynatrace_api_token_secret_arn  = each.value.dynatrace_api_token_secret_arn
-
-# } 
