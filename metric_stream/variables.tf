@@ -23,7 +23,7 @@ variable "output_format" {
 variable "include_linked_accounts_metrics" {
   type        = bool
   description = "Include metrics from linked accounts (Cross Account Observability)"
-  default     = false
+  
 }
 
 variable "include_filter" {

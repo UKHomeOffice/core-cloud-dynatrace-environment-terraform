@@ -246,14 +246,14 @@ module "firehose_dynatrace" {
   dynatrace_api_token_secret_arn  = each.value.dynatrace_api_token_secret_arn
 
 } 
-# module "metric_stream" {
-#   source = "./metric_stream/"
-#   for_each = contains(keys(var.tenant_vars), "metric_stream") ? var.tenant_vars.metric_stream : {}
+module "metric_stream" {
+  source = "./metric_stream/"
+  for_each = contains(keys(var.tenant_vars), "metric_stream") ? var.tenant_vars.metric_stream : {}
   
-#   tenant_vars         = each.value
-#   output_format       = each.value.output_format
-#   env_name            = each.value.env_name
-#   metrics_stream_name = each.value.metrics_stream_name
-#   firehose_arn        = each.value.firehose_arn
+  tenant_vars         = each.value
+  output_format       = each.value.output_format
+  env_name            = each.value.env_name
+  metrics_stream_name = each.value.metrics_stream_name
+  firehose_arn        = each.value.firehose_arn
 
-# }
+}
