@@ -21,10 +21,14 @@ resource "aws_s3_bucket_lifecycle_configuration" "this" {
 
 resource "aws_s3_bucket_lifecycle_configuration" "this" {
   bucket = aws_s3_bucket.backup.id
+
   rule {
     id     = "expire-quickly"
     status = "Enabled"
-    expiration { days = 1 } # keep failed rows briefly
+
+    expiration {
+      days = var.lifecycle_expiration_days
+    }
   }
 }
 
