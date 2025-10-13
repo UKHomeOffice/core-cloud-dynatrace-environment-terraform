@@ -30,5 +30,9 @@ variable "dynatrace_api_url" {
    type = string 
 }  # e.g., https://<env>.live.dynatrace.com
 
-
+variable "lifecycle_expiration_days" {
+  description = "Number of days to keep failed Firehose backup objects before expiration"
+  type        = number
+  default     = 1
+}
 

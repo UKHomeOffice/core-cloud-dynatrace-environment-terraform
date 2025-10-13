@@ -6,20 +6,17 @@ resource "aws_s3_bucket" "backup" {
 }
 
 # --- Server-Side Encryption Configuration ---
-resource "aws_s3_bucket_server_side_encryption_configuration" "backup_encryption" {
+resource "aws_s3_bucket_lifecycle_configuration" "this" {
   bucket = aws_s3_bucket.backup.id
 
   rule {
-    apply_server_side_encryption_by_default {
-      sse_algorithm = "aws:kms"
+    id     = "expire-quickly"
+    status = "Enabled"
 
+    expiration {
+      days = var.lifecycle_expiration_days
     }
   }
-}
-
-resource "aws_s3_bucket_versioning" "this" {
-  bucket = aws_s3_bucket.backup.id
-  versioning_configuration { status = "Enabled" }
 }
 
 resource "aws_s3_bucket_lifecycle_configuration" "this" {
