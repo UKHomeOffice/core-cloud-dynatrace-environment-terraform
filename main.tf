@@ -191,9 +191,10 @@ module "dynatrace_corecloud_alerts" {
 }
 
 module "dynatrace_kafka_settings" {
-  source  = "./settings/kafka"
-  count   = contains(keys(var.tenant_vars), "kafka_settings") ? 1 : 0
-  enabled = var.tenant_vars.kafka_settings.enabled
+  source         = "./settings/kafka"
+  count          = contains(keys(var.tenant_vars), "kafka_settings") ? 1 : 0
+  enabled        = try(var.tenant_vars.kafka_settings.enabled, false)
+  kafka_streams  = try(var.tenant_vars.kafka_settings.kafka_streams, false)
 }
 
 module "hub_extensions" {
