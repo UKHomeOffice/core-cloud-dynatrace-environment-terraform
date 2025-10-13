@@ -1,9 +1,6 @@
 variable "tenant_vars" {
   type = any
 }
-variable "firehose_name" { 
-type = string 
-}
 variable "env" {
   description = "Environment name (test, preprod, prod, etc.)"
   type        = string

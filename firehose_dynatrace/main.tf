@@ -19,7 +19,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "backup_encryption
 
 resource "aws_s3_bucket_versioning" "this" {
   bucket = aws_s3_bucket.backup.id
-  versioning_configuration { status = "Suspended" }
+  versioning_configuration { status = "Enabled" }
 }
 
 resource "aws_s3_bucket_lifecycle_configuration" "this" {
@@ -33,7 +33,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "this" {
 
 # --- IAM Role for Firehose ---
 resource "aws_iam_role" "firehose" {
-  name               = "${var.firehose_name}-role-${var.env}"
+  name               = "CC-CW-firehose-role-${var.env}"
   assume_role_policy = data.aws_iam_policy_document.assume.json
 }
 
@@ -44,8 +44,14 @@ resource "aws_iam_role_policy" "firehose_inline" {
 
 # --- Firehose delivery stream to Dynatrace ---
 resource "aws_kinesis_firehose_delivery_stream" "this" {
-  name        = var.firehose_name
+  name        = "CC-CW-firehose-delivery-stream-${var.env}"
   destination = "http_endpoint"
+
+  server_side_encryption {
+    enabled = true
+    key_arn = aws_kms_key.firehose.arn 
+  }
+
 
   http_endpoint_configuration {
     url            = var.delivery_endpoint
@@ -77,4 +83,41 @@ resource "aws_kinesis_firehose_delivery_stream" "this" {
     # Pull API token from Secrets Manager
     access_key = data.aws_secretsmanager_secret_version.dt_token.secret_string
   }
+}
+
+resource "aws_kms_key" "firehose" {
+  description         = "CMK for Firehose SSE (${var.env})"
+  enable_key_rotation = true
+  policy = jsonencode({
+    Version : "2012-10-17",
+    Statement : [
+      {
+        Sid      : "EnableRoot",
+        Effect   : "Allow",
+        Principal: { AWS : "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root" },
+        Action   : "kms:*",
+        Resource : "*"
+      },
+      {
+        Sid      : "AllowFirehoseService",
+        Effect   : "Allow",
+        Principal: { Service : "firehose.amazonaws.com" },
+        Action   : ["kms:Encrypt","kms:Decrypt","kms:ReEncrypt*","kms:GenerateDataKey*","kms:DescribeKey"],
+        Resource : "*",
+        Condition: { StringEquals : { "aws:SourceAccount" : data.aws_caller_identity.current.account_id } }
+      },
+      {
+        Sid      : "AllowFirehoseRole",
+        Effect   : "Allow",
+        Principal: { AWS : aws_iam_role.firehose.arn },
+        Action   : ["kms:Encrypt","kms:Decrypt","kms:ReEncrypt*","kms:GenerateDataKey*","kms:DescribeKey"],
+        Resource : "*"
+      }
+    ]
+  })
+}
+
+resource "aws_kms_alias" "firehose" {
+  name          = "alias/cc-cw-firehose-${var.env}"
+  target_key_id = aws_kms_key.firehose.key_id
 }

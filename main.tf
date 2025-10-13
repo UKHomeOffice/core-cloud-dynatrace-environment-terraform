@@ -241,7 +241,6 @@ module "firehose_dynatrace" {
   delivery_endpoint               = each.value.delivery_endpoint
   env                             = each.value.env
   dynatrace_api_url               = each.value.dynatrace_api_url
-  firehose_name                   = each.value.firehose_name
   dynatrace_env_url_secret        = each.value.dynatrace_env_url_secret
   dynatrace_api_token_secret_arn  = each.value.dynatrace_api_token_secret_arn
 
