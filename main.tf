@@ -235,8 +235,7 @@ module "oam_link" {
 }
 module "firehose_dynatrace" {
   source = "./firehose_dynatrace/"
-  for_each = contains(keys(var.tenant_vars), "firehose_dynatrace") ? var.tenant_vars.firehose_dynatrace : {}
-  
+  for_each                        = var.tenant_vars.firehose_dynatrace
   tenant_vars                     = each.value
   s3_backup_bucket_name           = each.value.s3_backup_bucket_name
   delivery_endpoint               = each.value.delivery_endpoint
