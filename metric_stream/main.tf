@@ -13,7 +13,7 @@ resource "aws_iam_role_policy" "ms_policy" {
 # CloudWatch Metric Stream
 resource "aws_cloudwatch_metric_stream" "this" {
   name                            = "${var.metrics_stream_name}-${var.env_name}"
-  firehose_arn                    = module.firehose_dynatrace.firehose_arn
+  firehose_arn                    = var.firehose_arn
   role_arn                        = aws_iam_role.metric_stream_to_firehose.arn
   output_format                   = var.output_format
   include_linked_accounts_metrics = var.include_linked_accounts_metrics

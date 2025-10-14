@@ -32,3 +32,9 @@ variable "exclude_filter" {
   description = "Map of namespaces → metric names to exclude"
   default     = {}
 }
+
+variable "firehose_arn" {
+  type        = string
+  description = "ARN of the Kinesis Firehose stream"
+}
+
