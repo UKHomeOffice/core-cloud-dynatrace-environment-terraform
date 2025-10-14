@@ -18,6 +18,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "this" {
     }
   }
 }
+<<<<<<< HEAD
 
 resource "aws_s3_bucket_lifecycle_configuration" "this" {
   bucket = aws_s3_bucket.backup.id
@@ -32,6 +33,8 @@ resource "aws_s3_bucket_lifecycle_configuration" "this" {
   }
 }
 
+=======
+>>>>>>> 35a78e3 (changes to module)
 # --- IAM Role for Firehose ---
 resource "aws_iam_role" "firehose" {
   name               = "CC-CW-firehose-role-${var.env}"

@@ -244,7 +244,8 @@ module "firehose_dynatrace" {
   dynatrace_api_url               = each.value.dynatrace_api_url
   dynatrace_env_url_secret        = each.value.dynatrace_env_url_secret
   dynatrace_api_token_secret_arn  = each.value.dynatrace_api_token_secret_arn
-
+  lifecycle_expiration_days       = each.value.lifecycle_expiration_days
+  
 } 
 module "metric_stream" {
   source = "./metric_stream/"
