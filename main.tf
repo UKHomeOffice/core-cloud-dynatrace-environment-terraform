@@ -254,5 +254,5 @@ module "metric_stream" {
   env_name                        = each.value.env_name
   metrics_stream_name             = each.value.metrics_stream_name
   include_linked_accounts_metrics = each.value.include_linked_accounts_metrics
-  firehose_arn                    = module.firehose.firehose_arn
+  firehose_arn                    = module.firehose_dynatrace.firehose_arn
 }
