@@ -15,3 +15,7 @@ variable "slack_webhook_urls" {
   default     = {} # Provided to ignore when the module is skipped in an environment.
   sensitive   = true
 }
+variable "metric_stream_to_firehose_map" {
+  type = map(string)
+  description = "Mapping between metric stream keys and firehose keys"
+}
