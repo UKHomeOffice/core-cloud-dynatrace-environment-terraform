@@ -1,4 +1,3 @@
-
 # --- S3 Backup Bucket ---
 resource "aws_s3_bucket" "backup" {
   bucket        = "CC-CW-Logs-Firehose-Bucket-${var.env}-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}"
@@ -18,23 +17,6 @@ resource "aws_s3_bucket_lifecycle_configuration" "this" {
     }
   }
 }
-<<<<<<< HEAD
-
-resource "aws_s3_bucket_lifecycle_configuration" "this" {
-  bucket = aws_s3_bucket.backup.id
-
-  rule {
-    id     = "expire-quickly"
-    status = "Enabled"
-
-    expiration {
-      days = var.lifecycle_expiration_days
-    }
-  }
-}
-
-=======
->>>>>>> 35a78e3 (changes to module)
 # --- IAM Role for Firehose ---
 resource "aws_iam_role" "firehose" {
   name               = "CC-CW-firehose-role-${var.env}"
