@@ -15,6 +15,6 @@ data "aws_iam_policy_document" "allow_firehose_put" {
   statement {
     effect    = "Allow"
     actions   = ["firehose:PutRecord", "firehose:PutRecordBatch"]
-    resources = [var.firehose_arn]
+    resources = [module.firehose_dynatrace.firehose_arn]
   }
 }

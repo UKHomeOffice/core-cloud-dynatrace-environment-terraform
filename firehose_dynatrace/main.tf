@@ -1,7 +1,7 @@
 # --- S3 Backup Bucket ---
 resource "aws_s3_bucket" "backup" {
   bucket        = "CC-CW-Logs-Firehose-Bucket-${var.env}-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}"
-  force_destroy = true
+  force_destroy = false
 }
 
 # --- Server-Side Encryption Configuration ---
@@ -38,7 +38,6 @@ resource "aws_kinesis_firehose_delivery_stream" "this" {
     key_arn = aws_kms_key.firehose.arn 
   }
 
-
   http_endpoint_configuration {
     url            = var.delivery_endpoint
     name           = "Dynatrace"
@@ -58,7 +57,7 @@ resource "aws_kinesis_firehose_delivery_stream" "this" {
       content_encoding = "GZIP"
       common_attributes {
         name  = "dt-url"
-        value = var.dynatrace_api_url
+        value = var.delivery_endpoint
       }
       common_attributes {
         name  = "require-valid-certificate"

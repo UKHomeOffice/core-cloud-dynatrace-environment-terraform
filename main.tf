@@ -241,8 +241,6 @@ module "firehose_dynatrace" {
   s3_backup_bucket_name           = each.value.s3_backup_bucket_name
   delivery_endpoint               = each.value.delivery_endpoint
   env                             = each.value.env
-  dynatrace_api_url               = each.value.dynatrace_api_url
-  dynatrace_env_url_secret        = each.value.dynatrace_env_url_secret
   dynatrace_api_token_secret_arn  = each.value.dynatrace_api_token_secret_arn
   lifecycle_expiration_days       = each.value.lifecycle_expiration_days
   
@@ -255,7 +253,5 @@ module "metric_stream" {
   output_format                   = each.value.output_format
   env_name                        = each.value.env_name
   metrics_stream_name             = each.value.metrics_stream_name
-  firehose_arn                    = each.value.firehose_arn
   include_linked_accounts_metrics = each.value.include_linked_accounts_metrics
-
 }
