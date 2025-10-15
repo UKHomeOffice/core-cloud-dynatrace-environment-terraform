@@ -1,6 +1,6 @@
 # --- S3 Backup Bucket ---
 resource "aws_s3_bucket" "backup" {
-  bucket        = "cc-cw-Logs-Firehose-Bucket-${var.env}-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.id}"
+  bucket        = "cc-cw-logs-firehose-bucket-${var.env}-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.id}"
   force_destroy = false
 }
 resource "aws_s3_bucket_public_access_block" "this" {
