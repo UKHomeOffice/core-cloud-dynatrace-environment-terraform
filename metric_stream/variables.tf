@@ -10,11 +10,6 @@ variable "metrics_stream_name" {
   description = "Name of the CloudWatch Metric Stream"
 }
 
-variable "firehose_arn" {
-  type        = string
-  description = "ARN of the Kinesis Firehose to send metrics to"
-}
-
 variable "output_format" {
   type        = string
   description = "Format for the metric stream output (e.g., json)"
@@ -37,3 +32,9 @@ variable "exclude_filter" {
   description = "Map of namespaces → metric names to exclude"
   default     = {}
 }
+
+variable "firehose_arn" {
+  type        = string
+  description = "ARN of the Kinesis Firehose stream"
+}
+
