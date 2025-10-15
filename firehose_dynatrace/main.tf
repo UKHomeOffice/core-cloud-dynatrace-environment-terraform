@@ -1,6 +1,6 @@
 # --- S3 Backup Bucket ---
 resource "aws_s3_bucket" "backup" {
-  bucket        = "CC-CW-Logs-Firehose-Bucket-${var.env}-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.id}"
+  bucket        = "cc-cw-Logs-Firehose-Bucket-${var.env}-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.id}"
   force_destroy = false
 }
 resource "aws_s3_bucket_public_access_block" "this" {
@@ -44,7 +44,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "this" {
 }
 # --- IAM Role for Firehose ---
 resource "aws_iam_role" "firehose" {
-  name               = "CC-CW-firehose-role-${var.env}"
+  name               = "cc-cw-firehose-role-${var.env}"
   assume_role_policy = data.aws_iam_policy_document.assume.json
 }
 
@@ -55,7 +55,7 @@ resource "aws_iam_role_policy" "firehose_inline" {
 
 # --- Firehose delivery stream to Dynatrace ---
 resource "aws_kinesis_firehose_delivery_stream" "this" {
-  name        = "CC-CW-firehose-delivery-stream-${var.env}"
+  name        = "cc-cw-firehose-delivery-stream-${var.env}"
   destination = "http_endpoint"
 
   server_side_encryption {
