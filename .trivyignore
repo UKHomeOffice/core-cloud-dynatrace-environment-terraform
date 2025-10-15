@@ -1,0 +1,7 @@
+AVD-KSV-0039
+AVD-KSV-0040
+AVD-AZU-0012 # expection added due to error after upgrading to v0.33.1 (AVD-AZU-0012 (CRITICAL): No network rules defined and default action allows access.)
+AVD-AWS-0090
+AVD-AWS-0089
+AVD-AWS-0132
+AVD-AWS-0057
