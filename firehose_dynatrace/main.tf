@@ -3,6 +3,14 @@ resource "aws_s3_bucket" "backup" {
   bucket        = "CC-CW-Logs-Firehose-Bucket-${var.env}-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.id}"
   force_destroy = false
 }
+resource "aws_s3_bucket_public_access_block" "this" {
+  bucket = aws_s3_bucket.backup.id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
 
 # --- Server-Side Encryption Configuration ---
 resource "aws_s3_bucket_lifecycle_configuration" "this" {
