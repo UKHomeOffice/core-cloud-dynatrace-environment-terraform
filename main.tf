@@ -212,46 +212,46 @@ module "hub_extensions" {
   activationTags  = each.value.activationTags != null ? each.value.activationTags : ["[AWS]dynatrace: true"]
 }
 
-module "oam_sink" {
-  source   = "./oam_sink/"
-  for_each = contains(keys(var.tenant_vars), "oam_sink") ? var.tenant_vars.oam_sink : {}
+# module "oam_sink" {
+#   source   = "./oam_sink/"
+#   for_each = contains(keys(var.tenant_vars), "oam_sink") ? var.tenant_vars.oam_sink : {}
 
-  tenant_vars     = each.value
-  org_id          = each.value.org_id
-  sink_name       = each.value.sink_name
-  ou_paths        = each.value.ou_paths
-}
+#   tenant_vars     = each.value
+#   org_id          = each.value.org_id
+#   sink_name       = each.value.sink_name
+#   ou_paths        = each.value.ou_paths
+# }
 
-module "oam_link" {
-  source = "./oam_link/"
-  for_each = contains(keys(var.tenant_vars), "oam_link") ? var.tenant_vars.oam_link : {}
-  label_template = each.value.label_template
-  metric_filter = each.value.metric_filter
-  tenant_vars = each.value
-  sink_arn = try(
-    values(module.oam_sink)[0].sink_arn,
-    ""
-  )
-}
-module "firehose_dynatrace" {
-  source = "./firehose_dynatrace/"
-  for_each                        = var.tenant_vars.firehose_dynatrace
-  tenant_vars                     = each.value
-  s3_backup_bucket_name           = each.value.s3_backup_bucket_name
-  delivery_endpoint               = each.value.delivery_endpoint
-  env                             = each.value.env
-  dynatrace_api_token_secret_arn  = each.value.dynatrace_api_token_secret_arn
-  lifecycle_expiration_days       = each.value.lifecycle_expiration_days
+# module "oam_link" {
+#   source = "./oam_link/"
+#   for_each = contains(keys(var.tenant_vars), "oam_link") ? var.tenant_vars.oam_link : {}
+#   label_template = each.value.label_template
+#   metric_filter = each.value.metric_filter
+#   tenant_vars = each.value
+#   sink_arn = try(
+#     values(module.oam_sink)[0].sink_arn,
+#     ""
+#   )
+# }
+# module "firehose_dynatrace" {
+#   source = "./firehose_dynatrace/"
+#   for_each                        = var.tenant_vars.firehose_dynatrace
+#   tenant_vars                     = each.value
+#   s3_backup_bucket_name           = each.value.s3_backup_bucket_name
+#   delivery_endpoint               = each.value.delivery_endpoint
+#   env                             = each.value.env
+#   dynatrace_api_token_secret_arn  = each.value.dynatrace_api_token_secret_arn
+#   lifecycle_expiration_days       = each.value.lifecycle_expiration_days
   
-} 
-module "metric_stream" {
-  source = "./metric_stream/"
-  for_each = contains(keys(var.tenant_vars), "metric_stream") ? var.tenant_vars.metric_stream : {}
+# } 
+# module "metric_stream" {
+#   source = "./metric_stream/"
+#   for_each = contains(keys(var.tenant_vars), "metric_stream") ? var.tenant_vars.metric_stream : {}
   
-  tenant_vars                     = each.value
-  output_format                   = each.value.output_format
-  env_name                        = each.value.env_name
-  metrics_stream_name             = each.value.metrics_stream_name
-  include_linked_accounts_metrics = each.value.include_linked_accounts_metrics
-  firehose_arn                    = module.firehose_dynatrace[var.tenant_vars.metric_stream_to_firehose_map[each.key]].firehose_arn
-}
+#   tenant_vars                     = each.value
+#   output_format                   = each.value.output_format
+#   env_name                        = each.value.env_name
+#   metrics_stream_name             = each.value.metrics_stream_name
+#   include_linked_accounts_metrics = each.value.include_linked_accounts_metrics
+#   firehose_arn                    = module.firehose_dynatrace[var.tenant_vars.metric_stream_to_firehose_map[each.key]].firehose_arn
+# }
