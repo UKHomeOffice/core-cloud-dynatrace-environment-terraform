@@ -211,7 +211,6 @@ module "hub_extensions" {
   enabled         = try(each.value.enabled, true)
   activationTags  = each.value.activationTags != null ? each.value.activationTags : ["[AWS]dynatrace: true"]
 }
-
 # module "oam_sink" {
 #   source   = "./oam_sink/"
 #   for_each = contains(keys(var.tenant_vars), "oam_sink") ? var.tenant_vars.oam_sink : {}
