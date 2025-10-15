@@ -61,6 +61,7 @@ resource "aws_kinesis_firehose_delivery_stream" "this" {
   server_side_encryption {
     enabled = true
     key_arn = aws_kms_key.firehose.arn 
+    key_type = "CUSTOMER_MANAGED_CMK"
   }
 
   http_endpoint_configuration {
