@@ -6,13 +6,14 @@ variable "env" {
   type        = string
 }
 
-variable "delivery_endpoint" { 
-type = string 
-} 
-
 variable "dynatrace_api_token_secret_arn" { 
 type = string 
 } 
+
+variable "dynatrace_delivery_endpoint_secret_arn" {
+  type = string
+}
+
 
 variable "s3_backup_bucket_name" {
 type = string 
