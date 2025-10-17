@@ -10,6 +10,15 @@ data "aws_secretsmanager_secret_version" "dt_token" {
   secret_id = data.aws_secretsmanager_secret.dt.id
 }
 
+# Pull Dynatrace delivery endpoint from Secrets Manager
+data "aws_secretsmanager_secret" "dt_endpoint" {
+  arn = var.dynatrace_delivery_endpoint_secret_arn
+}
+
+data "aws_secretsmanager_secret_version" "dt_endpoint_value" {
+  secret_id = data.aws_secretsmanager_secret.dt_endpoint.id
+}
+
 # Assume role for Firehose
 data "aws_iam_policy_document" "assume" {
   statement {
@@ -48,4 +57,12 @@ data "aws_iam_policy_document" "firehose_permissions" {
     actions   = ["secretsmanager:GetSecretValue"]
     resources = [var.dynatrace_api_token_secret_arn]
   }
+  statement {
+    effect    = "Allow"
+    actions   = ["secretsmanager:GetSecretValue"]
+    resources = [
+                var.dynatrace_api_token_secret_arn,
+                var.dynatrace_delivery_endpoint_secret_arn
+  ]
+ }
 }

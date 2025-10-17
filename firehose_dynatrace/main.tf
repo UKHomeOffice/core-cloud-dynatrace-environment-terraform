@@ -65,7 +65,7 @@ resource "aws_kinesis_firehose_delivery_stream" "this" {
   }
 
   http_endpoint_configuration {
-    url            = var.delivery_endpoint
+    url            = data.aws_secretsmanager_secret_version.dt_endpoint_value.secret_string    
     name           = "Dynatrace"
     role_arn       = aws_iam_role.firehose.arn
     s3_backup_mode = "FailedDataOnly"
@@ -83,7 +83,8 @@ resource "aws_kinesis_firehose_delivery_stream" "this" {
       content_encoding = "GZIP"
       common_attributes {
         name  = "dt-url"
-        value = var.delivery_endpoint
+        value = data.aws_secretsmanager_secret_version.dt_endpoint_value.secret_string
+
       }
       common_attributes {
         name  = "require-valid-certificate"
