@@ -941,3 +941,131 @@ lambda:
     statistic: SUM
     dimensions:
       - Region
+msk:
+#default
+  - name: LeaderCount
+    statistic: SUM
+    dimensions:
+    -  ClusterName
+    -  BrokerId
+  - name: LeaderCount
+    statistic: MULTI
+    dimensions:
+    -  ClusterName
+    -  BrokerId
+  - name: MaxOffsetLag
+    statistic: SUM
+    dimensions:
+    -  ClusterName
+    -  ConsumerGroup
+    -  Topic
+  - name: MaxOffsetLag
+    statistic: MULTI
+    dimensions:
+    -  ClusterName
+    -  ConsumerGroup
+    -  Topic
+  - name: MessagesInPerSec
+    statistic: SUM
+    dimensions:
+    -  ClusterName
+    -  BrokerId
+  - name: MessagesInPerSec
+    statistic: MULTI
+    dimensions:
+    -  ClusterName
+    -  BrokerId
+  - name: RequestTime
+    statistic: SUM
+    dimensions:
+    -  ClusterName
+    -  BrokerId
+  - name: RequestTime
+    statistic: MULTI
+    dimensions:
+    -  ClusterName
+    -  BrokerId
+  - name: SumOffsetLag
+    statistic: MULTI
+    dimensions:
+    -  ClusterName
+    -  ConsumerGroup
+    -  Topic
+#perBroker
+  - name: FetchConsumerRequestQueueTimeMsMean
+    statistic: SUM
+    dimensions:
+    -  ClusterName
+    -  BrokerId
+  - name: FetchConsumerRequestQueueTimeMsMean
+    statistic: MULTI
+    dimensions:
+    -  ClusterName
+    -  BrokerId
+  - name: FetchConsumerResponseQueueTimeMsMean
+    statistic: SUM
+    dimensions:
+    -  ClusterName
+    -  BrokerId
+  - name: FetchConsumerResponseQueueTimeMsMean
+    statistic: MULTI
+    dimensions:
+    -  ClusterName
+    -  BrokerId
+  - name: FetchMessageConversionsPerSec
+    statistic: SUM
+    dimensions:
+    -  ClusterName
+    -  BrokerId
+  - name: FetchMessageConversionsPerSec
+    statistic: MULTI
+    dimensions:
+    -  ClusterName
+    -  BrokerId
+  - name: FetchThrottleQueueSize
+    statistic: SUM
+    dimensions:
+    -  ClusterName
+    -  BrokerId
+  - name: FetchThrottleQueueSize
+    statistic: MULTI
+    dimensions:
+    -  ClusterName
+    -  BrokerId
+#perTopicPerBroker
+  - name: FetchMessageConversionsPerSec
+    statistic: SUM
+    dimensions:
+    -  ClusterName
+    -  BrokerId
+    -  Topic
+  - name: FetchMessageConversionsPerSec
+    statistic: MULTI
+    dimensions:
+    -  ClusterName
+    -  BrokerId
+    -  Topic
+  - name: MessagesInPerSec
+    statistic: SUM
+    dimensions:
+    -  ClusterName
+    -  BrokerId
+    -  Topic
+  - name: MessagesInPerSec
+    statistic: MULTI
+    dimensions:
+    -  ClusterName
+    -  BrokerId
+    -  Topic
+  - name: ProduceMessageConversionsPerSec
+    statistic: SUM
+    dimensions:
+    -  ClusterName
+    -  BrokerId
+    -  Topic
+  - name: ProduceMessageConversionsPerSec
+    statistic: MULTI
+    dimensions:
+    -  ClusterName
+    -  BrokerId
+    -  Topic
