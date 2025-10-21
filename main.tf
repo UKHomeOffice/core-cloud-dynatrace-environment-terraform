@@ -19,6 +19,10 @@ module "aws_account_configurations" {
   default_services = local.default_services
 }
 
+module "aws_account_configurations" {
+  source = "./dynatrace_generic_types"
+}
+
 module "dynatrace_management_zones" {
   source = "./dynatrace_management_zones"
 
