@@ -1,4 +1,4 @@
-resource "dynatrace_generic_types"{
+resource "dynatrace_generic_types" "aws_connection_credential"{
     display_name = "AWS Connection Credentials"
     name = "aws:connection-credential"
     created_by   = "Core Cloud Cosmos"

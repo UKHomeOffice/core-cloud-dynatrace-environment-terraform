@@ -19,7 +19,7 @@ module "aws_account_configurations" {
   default_services = local.default_services
 }
 
-module "aws_account_configurations" {
+module "dynatrace_generic_types" {
   source = "./dynatrace_generic_types"
 }
 
