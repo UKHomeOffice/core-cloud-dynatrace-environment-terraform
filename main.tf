@@ -263,3 +263,12 @@ module "metric_stream" {
   include_linked_accounts_metrics = each.value.include_linked_accounts_metrics
   firehose_arn                    = module.firehose_dynatrace[var.tenant_vars.metric_stream_to_firehose_map[each.key]].firehose_arn
 }
+
+module "aws_cwl_s3_bucket" {
+  source   = "./aws_cw_logs/s3/"
+  for_each = contains(keys(var.tenant_vars), "aws_cloudwatch_logs") ? var.tenant_vars.aws_cloudwatch_logs : {}
+
+  tenant_vars               = each.value
+  s3_backup_bucket_name     = each.value.s3_backup_bucket_name
+  lifecycle_expiration_days = each.value.lifecycle_expiration_days
+}
