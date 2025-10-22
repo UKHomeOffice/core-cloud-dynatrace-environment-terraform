@@ -80,7 +80,7 @@ module "dynatrace_privatelink_aws_accounts_allowlist" {
 }
 
 module "golden_dashboards" {
-  count = contains(keys(var.tenant_vars), "golden_dashboards") ? 1:0
+  count  = contains(keys(var.tenant_vars), "golden_dashboards") ? 1 : 0
   source = "./dashboards/golden_dashboards"
 }
 
@@ -150,13 +150,13 @@ module "dynatrace_aws_monitoring_profile_integration" {
 }
 
 module "anomaly_detection" {
-  count = contains(keys(var.tenant_vars), "anomaly_detection") ? 1:0
+  count  = contains(keys(var.tenant_vars), "anomaly_detection") ? 1 : 0
   source = "./anomaly_detection/"
 }
 
 
 module "dynatrace_log_storage_rules" {
-  count = contains(keys(var.tenant_vars), "dynatrace_log_storage_rules") ? 1:0
+  count  = contains(keys(var.tenant_vars), "dynatrace_log_storage_rules") ? 1 : 0
   source = "./dynatrace_log_storage"
 
   rules = [
@@ -198,10 +198,10 @@ module "dynatrace_corecloud_alerts" {
 }
 
 module "dynatrace_kafka_settings" {
-  source         = "./settings/kafka"
-  count          = contains(keys(var.tenant_vars), "kafka_settings") ? 1 : 0
-  enabled        = try(var.tenant_vars.kafka_settings.enabled, false)
-  kafka_streams  = try(var.tenant_vars.kafka_settings.kafka_streams, false)
+  source        = "./settings/kafka"
+  count         = contains(keys(var.tenant_vars), "kafka_settings") ? 1 : 0
+  enabled       = try(var.tenant_vars.kafka_settings.enabled, false)
+  kafka_streams = try(var.tenant_vars.kafka_settings.kafka_streams, false)
 }
 
 module "hub_extensions" {
@@ -248,12 +248,12 @@ module "hub_extensions" {
 #   dynatrace_api_token_secret_arn  = each.value.dynatrace_api_token_secret_arn
 #   dynatrace_delivery_endpoint_secret_arn = each.value.dynatrace_delivery_endpoint_secret_arn
 #   lifecycle_expiration_days       = each.value.lifecycle_expiration_days
-  
+
 # } 
 # module "metric_stream" {
 #   source = "./metric_stream/"
 #   for_each = contains(keys(var.tenant_vars), "metric_stream") ? var.tenant_vars.metric_stream : {}
-  
+
 #   tenant_vars                     = each.value
 #   output_format                   = each.value.output_format
 #   env_name                        = each.value.env_name
