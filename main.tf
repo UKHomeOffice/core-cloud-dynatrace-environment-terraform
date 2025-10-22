@@ -270,6 +270,7 @@ module "aws_cwl_s3_bucket" {
 
   s3_backup_bucket_name     = each.value.s3_backup_bucket_name
   lifecycle_expiration_days = each.value.lifecycle_expiration_days
+  s3_encryption_algorithm   = each.value.s3_encryption_algorithm
   tags                      = each.value.tags
   versioning_status         = each.value.versioning_status
 }
