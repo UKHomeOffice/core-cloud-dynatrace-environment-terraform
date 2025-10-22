@@ -7,7 +7,7 @@
 
 set -eu
 
-curl "${DYNATRACE_ENV_URL}/api/v2/settings/objects/${OBJECT_ID}" \
+curl "${DYNATRACE_ENV_URL}api/v2/settings/objects/${OBJECT_ID}" \
 -X PUT \
 -H 'Accept: application/json; charset=utf-8' \
 -H 'Content-Type: application/json; charset=utf-8' \
