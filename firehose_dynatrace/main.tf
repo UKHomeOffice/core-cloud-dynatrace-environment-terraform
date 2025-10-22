@@ -86,10 +86,6 @@ resource "aws_kinesis_firehose_delivery_stream" "this" {
         value = data.aws_secretsmanager_secret_version.dt_endpoint_value.secret_string
 
       }
-      common_attributes {
-        name  = "require-valid-certificate"
-        value = "true"
-      }
     }
 
     # Pull API token from Secrets Manager
