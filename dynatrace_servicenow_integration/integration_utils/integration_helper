@@ -17,7 +17,7 @@ the_api_call(){
 #servicenow_integration_through_api
 json_content=$(the_api_call GET "objects?schemaIds=builtin%3Aproblem.notifications&scopes=environment&filter=value.displayName%20%3D%20%27${INTEGRATION_NAME}%27")
 record_count=$(echo $json_content | jq '.totalCount')
-record_count="${record_count:-0}"
+record_count=${record_count:-0}
 echo $record_count
 if [[ $record_count -gt 1 ]]; then
   echo "More than one resource found with the same name. Please check." >&2
