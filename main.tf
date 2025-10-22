@@ -20,6 +20,7 @@ module "aws_account_configurations" {
 }
 
 module "dynatrace_generic_types" {
+  count  = contains(keys(var.tenant_vars), "generic_types") ? 1 : 0
   source = "./dynatrace_generic_types"
 }
 
