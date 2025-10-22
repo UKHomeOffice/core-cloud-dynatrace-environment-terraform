@@ -268,7 +268,8 @@ module "aws_cwl_s3_bucket" {
   source   = "./aws_cw_logs/s3/"
   for_each = contains(keys(var.tenant_vars), "aws_cloudwatch_logs") ? var.tenant_vars.aws_cloudwatch_logs : {}
 
-  tenant_vars               = each.value
   s3_backup_bucket_name     = each.value.s3_backup_bucket_name
   lifecycle_expiration_days = each.value.lifecycle_expiration_days
+  tags                      = each.value.tags
+  versioning_status         = each.value.versioning_status
 }

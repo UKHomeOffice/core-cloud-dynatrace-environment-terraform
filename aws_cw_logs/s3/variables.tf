@@ -1,7 +1,3 @@
-variable "tenant_vars" {
-  type = any
-}
-
 variable "s3_backup_bucket_name" {
   type        = string
   default     = "cc-cosmos-cwl-bucket-s3"
