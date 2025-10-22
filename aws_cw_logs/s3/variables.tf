@@ -23,13 +23,6 @@ variable "versioning_status" {
 variable "tags" {
   description = "A map of tags to assign to the resource."
   type        = map(string)
-  default = {
-    account-code : "521835"
-    cost-centre : 1709144
-    portfolio-id : "CTO"
-    project-id : "CC"
-    service-id : "Dynatrace"
-  }
 }
 
 variable "lifecycle_expiration_days" {
