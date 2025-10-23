@@ -15,9 +15,6 @@ the_api_call(){
 }
 # ----------------------------------------------------------------------
 #servicenow_integration_through_api
-
-echo "${DYNATRACE_ENV_URL}api/v2/settings/objects"
-
 json_content=$(the_api_call GET "objects?schemaIds=builtin%3Aproblem.notifications&scopes=environment&filter=value.displayName%20%3D%20%27${INTEGRATION_NAME}%27")
 record_count=$(echo $json_content | jq '.totalCount')
 if [ "$record_count" = "null" ] || [ -z "$record_count" ]; then
