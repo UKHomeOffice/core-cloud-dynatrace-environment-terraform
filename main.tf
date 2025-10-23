@@ -266,7 +266,7 @@ module "metric_stream" {
 }
 
 module "aws_cwl_s3_bucket" {
-  source   = "./aws_cw_logs/s3/"
+  source   = "./aws_cw_logs"
   for_each = contains(keys(var.tenant_vars), "aws_cloudwatch_logs") ? var.tenant_vars.aws_cloudwatch_logs : {}
 
   s3_backup_bucket_name     = each.value.s3_backup_bucket_name
