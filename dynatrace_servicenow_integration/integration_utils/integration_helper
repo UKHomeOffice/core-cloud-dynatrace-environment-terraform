@@ -7,7 +7,7 @@ the_api_call(){
   local method="$1"
   local item_spec="$2"
 
-  curl "https://core-cloud-test.live.dynatrace.com/api/v2/settings/${item_spec}" \
+  curl "${DYNATRACE_ENV_URL}api/v2/settings/${item_spec}" \
   -X ${method} \
   -H 'Accept: application/json; charset=utf-8' \
   -H 'Content-Type: application/json; charset=utf-8' \
