@@ -22,16 +22,16 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       #Check formatting
-      # - name: Check Terraform formatting
-      #   run: |
-      #     terraform fmt -check -diff -recursive | tee fmt.log
-      #     exit_code=${PIPESTATUS[0]}
+      - name: Check Terraform formatting
+        run: |
+          terraform fmt -check -diff -recursive | tee fmt.log
+          exit_code=${PIPESTATUS[0]}
 
-      #     if [ $exit_code -ne 0 ]; then
-      #       echo "The following Terraform files are misformatted or invalid, run 'terraform fmt -recursive' to fix:"
-      #       grep -E '^\S+\.tf' fmt.log || true
-      #       exit 1
-      #     fi
+          if [ $exit_code -ne 0 ]; then
+            echo "The following Terraform files are misformatted or invalid, run 'terraform fmt -recursive' to fix:"
+            grep -E '^\S+\.tf' fmt.log || true
+            exit 1
+          fi
 
       - name: Validate all modules (skipping .terraform directories)
         run: |
