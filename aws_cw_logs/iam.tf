@@ -63,6 +63,7 @@ resource "aws_iam_policy" "cc_cosmos_cwl_firehose_s3_kms_policy" {
       }
     ]
   })
+  tags = "var.tags"
 }
 
 resource "aws_iam_role_policy_attachment" "firehose_s3_policy_attachment" {

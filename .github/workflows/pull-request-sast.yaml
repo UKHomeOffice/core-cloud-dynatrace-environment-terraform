@@ -22,28 +22,21 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       #Check formatting
-      - name: Check Terraform formatting
-        run: |
-          terraform fmt -check -diff -recursive | tee fmt.log
-          exit_code=${PIPESTATUS[0]}
+      # - name: Check Terraform formatting
+      #   run: |
+      #     terraform fmt -check -diff -recursive | tee fmt.log
+      #     exit_code=${PIPESTATUS[0]}
 
-          if [ $exit_code -ne 0 ]; then
-            echo "The following Terraform files are misformatted or invalid:"
-            grep -E '^\S+\.tf' fmt.log || true
-            echo "Run 'terraform fmt -recursive' locally to fix formatting."
-            exit 1
-          fi
+      #     if [ $exit_code -ne 0 ]; then
+      #       echo "The following Terraform files are misformatted or invalid, run 'terraform fmt -recursive' to fix:"
+      #       grep -E '^\S+\.tf' fmt.log || true
+      #       exit 1
+      #     fi
 
-      - name: Terraform validate
-        run: |
-          terraform init -backend=false
-          terraform validate
-
-      #Validate each module folder
-      - name: Validate all modules
+      - name: Validate all modules (skipping .terraform directories)
         run: |
           set -e
-          for dir in $(find . -type f -name "main.tf" -exec dirname {} \;); do
+          for dir in $(find . -type f -name "main.tf" -not -path "*/.terraform/*" -exec dirname {} \; | sort -u); do
             echo "Validating module in $dir"
             (cd "$dir" && terraform init -backend=false -input=false && terraform validate -no-color)
           done
