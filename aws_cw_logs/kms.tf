@@ -55,6 +55,7 @@ resource "aws_kms_key" "cc_cosmos_s3_kms_key" {
       }
     ]
   })
+  tags = var.tags
 }
 
 resource "aws_kms_alias" "cc_cosmos_firehose_s3_kms_alias" {
