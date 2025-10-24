@@ -21,8 +21,18 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
+      #Check formatting
       - name: Terraform fmt check
-        run: terraform fmt -check -recursive
+        run: |
+          terraform fmt -check -recursive || {
+            echo "Terraform formatting check failed. Run 'terraform fmt -recursive' locally to fix it.!"
+            exit 1
+          }
+
+      - name: Terraform validate
+        run: |
+          terraform init -backend=false
+          terraform validate
 
       #Validate each module folder
       - name: Validate all modules
