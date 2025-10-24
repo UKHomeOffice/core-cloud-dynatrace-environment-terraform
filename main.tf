@@ -248,6 +248,10 @@ module "firehose_dynatrace" {
   tenant_vars                            = each.value
   s3_backup_bucket_name                  = each.value.s3_backup_bucket_name
   env                                    = each.value.env
+  destination                            = each.value.destination
+  dynatarce_eu_url                       = each.value.dynatarce_eu_url
+  log_group_name                         = each.value.log_group_name
+  log_stream_name                        = each.value.log_stream_name
   dynatrace_api_token_secret_arn         = each.value.dynatrace_api_token_secret_arn
   dynatrace_delivery_endpoint_secret_arn = each.value.dynatrace_delivery_endpoint_secret_arn
   lifecycle_expiration_days              = each.value.lifecycle_expiration_days
