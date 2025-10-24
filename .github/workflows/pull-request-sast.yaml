@@ -22,11 +22,17 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       #Check formatting
-      - name: Terraform fmt check
+      - name: Check Terraform formatting
         run: |
-          terraform fmt -check -recursive || {
-            echo "Terraform formatting check failed. Run 'terraform fmt -recursive' locally to fix it.!"
-          }
+          terraform fmt -check -diff -recursive | tee fmt.log
+          exit_code=${PIPESTATUS[0]}
+
+          if [ $exit_code -ne 0 ]; then
+            echo "The following Terraform files are misformatted or invalid:"
+            grep -E '^\S+\.tf' fmt.log || true
+            echo "Run 'terraform fmt -recursive' locally to fix formatting."
+            exit 1
+          fi
 
       - name: Terraform validate
         run: |
