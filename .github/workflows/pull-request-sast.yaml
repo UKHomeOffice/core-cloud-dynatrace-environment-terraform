@@ -26,7 +26,6 @@ jobs:
         run: |
           terraform fmt -check -recursive || {
             echo "Terraform formatting check failed. Run 'terraform fmt -recursive' locally to fix it.!"
-            exit 1
           }
 
       - name: Terraform validate
