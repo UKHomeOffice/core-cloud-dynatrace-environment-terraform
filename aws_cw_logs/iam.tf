@@ -18,7 +18,7 @@ resource "aws_iam_role" "cc_cosmos_cwl_firehose_access_role" {
 
 resource "aws_iam_policy" "cc_cosmos_cwl_firehose_s3_kms_policy" {
   name        = "cc-cosmos-cwl-firehose-s3-kms-policy"
-  description   = "Policy for Firehose roles to access S3 bucket and KMS key"
+  description = "Policy for Firehose roles to access S3 bucket and KMS key"
 
   policy = jsonencode({
     Version = "2012-10-17"
