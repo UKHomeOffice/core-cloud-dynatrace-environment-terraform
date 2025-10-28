@@ -18,7 +18,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "cwl_backup_bucket
   rule {
     apply_server_side_encryption_by_default {
       sse_algorithm     = var.s3_encryption_algorithm
-      kms_master_key_id = aws_kms_alias.cc_cosmos_firehose_s3_kms_alias.name
+      kms_master_key_id = aws_kms_alias.cc_cosmos_firehose_s3_kms_alias.target_key_id
     }
   }
 }

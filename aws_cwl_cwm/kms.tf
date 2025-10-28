@@ -32,7 +32,7 @@ resource "aws_kms_key" "cc_cosmos_s3_kms_key" {
         Resource = "*",
         Condition = {
           StringEquals = {
-            "aws:SourceAccount" = data.aws_caller_identity.current.account_id
+            "aws:SourceAccount" = "${data.aws_caller_identity.current.account_id}"
           }
         }
       },
