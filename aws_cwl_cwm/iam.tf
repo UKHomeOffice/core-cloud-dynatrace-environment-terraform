@@ -16,8 +16,8 @@ resource "aws_iam_role" "cc_cosmos_cwl_firehose_access_role" {
   tags = var.tags
 }
 
-resource "aws_iam_policy" "cc_cosmos_cwl_firehose_s3_kms_policy" {
-  name        = "cc-cosmos-cwl-firehose-s3-kms-policy"
+resource "aws_iam_policy" "cc_cosmos_cwl_firehose_s3_logs_kms_policy" {
+  name        = "cc-cosmos-cwl-firehose-s3-logs-kms-policy"
   description = "Policy for Firehose roles to access S3 bucket and KMS key"
 
   policy = jsonencode({
@@ -69,5 +69,5 @@ resource "aws_iam_policy" "cc_cosmos_cwl_firehose_s3_kms_policy" {
 
 resource "aws_iam_role_policy_attachment" "firehose_s3_policy_attachment" {
   role       = aws_iam_role.cc_cosmos_cwl_firehose_access_role.name
-  policy_arn = aws_iam_policy.cc_cosmos_cwl_firehose_s3_kms_policy.arn
+  policy_arn = aws_iam_policy.cc_cosmos_cwl_firehose_s3_logs_kms_policy.arn
 }

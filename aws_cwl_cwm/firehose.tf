@@ -50,6 +50,11 @@ resource "aws_kinesis_firehose_delivery_stream" "dynatrace_http_stream" {
       log_stream_name = var.cw_log_stream_name
     }
   }
+  server_side_encryption {
+    enabled  = true
+    key_arn  = aws_kms_key.cc_cosmos_s3_kms_key.arn
+    key_type = "CUSTOMER_MANAGED_CMK"
+  }
 
   tags = var.tags
 }
