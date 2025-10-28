@@ -1,6 +1,6 @@
 # Cloudwatch Logs DT API token
 data "aws_secretsmanager_secret" "cw_logs_api_token" {
-  name = var.dt_cwl_api_token
+  name = var.dt_cwl_api_token_name
 }
 
 data "aws_secretsmanager_secret_version" "cw_logs_api_token" {
@@ -9,7 +9,7 @@ data "aws_secretsmanager_secret_version" "cw_logs_api_token" {
 
 # CloudWatch Metrics DT API token
 data "aws_secretsmanager_secret" "cw_metrics_api_token" {
-  name = var.dt_cwm_api_token
+  name = var.dt_cwm_api_token_name
 }
 
 data "aws_secretsmanager_secret_version" "cw_metrics_api_token" {
@@ -18,7 +18,7 @@ data "aws_secretsmanager_secret_version" "cw_metrics_api_token" {
 
 # DT destination endpoint
 data "aws_secretsmanager_secret" "dt_endpoint" {
-  name = var.dt_endpoint
+  name = var.dt_endpoint_name
 }
 
 data "aws_secretsmanager_secret_version" "dt_endpoint" {

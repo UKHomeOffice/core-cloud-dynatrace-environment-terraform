@@ -32,16 +32,16 @@ variable "firehose_name" {
   description = "Name of the Firehose delivery stream"
 }
 
-variable "dt_cwl_api_token" {
+variable "dt_cwl_api_token_name" {
   description = "The name of the CWL Dynatrace API token in AWS Secrets Manager"
   type        = string
 }
 
-variable "dt_cwm_api_token" {
+variable "dt_cwm_api_token_name" {
   description = "The name of the CWM Dynatrace API token in AWS Secrets Manager"
   type        = string
 }
-variable "dt_endpoint" {
+variable "dt_endpoint_name" {
   description = "The destination endpoint of the Dynatrace"
   type        = string
 }

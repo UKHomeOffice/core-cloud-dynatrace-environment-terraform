@@ -8,7 +8,7 @@ output "firehose_destination" {
 }
 output "kms_key_arn" {
   description = "The ARN of the KMS key used for S3 encryption."
-  value       = aws_kms_key.cc_cosmos_firehose_s3_kms_key.arn
+  value       = aws_kms_key.cc_cosmos_s3_kms_key.arn
 }
 
 output "firehose_stream_arn" {

@@ -291,7 +291,7 @@ module "aws_cwl_s3_bucket" {
   ingestion_type      = each.value.ingestion_type
   common_attributes   = try(each.value.common_attributes, [])
   #dt config
-  dt_cwl_api_token    = each.value.dt_cwl_api_token
-  dt_endpoint         = each.value.dt_endpoint
-  dt_cwm_api_token    = each.value.dt_cwm_api_token
+  dt_cwl_api_token_name    = each.value.dt_cwl_api_token_name
+  dt_endpoint_name         = each.value.dt_endpoint_name
+  dt_cwm_api_token_name    = each.value.dt_cwm_api_token_name
 }
