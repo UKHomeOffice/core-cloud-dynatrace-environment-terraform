@@ -1069,3 +1069,60 @@ msk:
     -  ClusterName
     -  BrokerId
     -  Topic
+rds:
+  - name: Deadlocks
+    dimensions:
+    - Region
+    - DatabaseClass
+  - name: Deadlocks
+    dimensions:
+    - Region
+    - EngineName
+  - name: Deadlocks
+    dimensions:
+    - DBInstanceIdentifier
+  - name: DeleteThroughput
+    dimensions:
+    - DBInstanceIdentifier
+  - name: NetworkThroughput
+    dimensions:
+    - DBInstanceIdentifier
+  - name: NetworkTransmitThroughput
+    dimensions:
+    - Region
+    - DBClusterIdentifier
+  - name: Queries
+    dimensions:
+    - DBInstanceIdentifier
+  - name: Queries
+    dimensions:
+    - Region
+    - EngineName
+  - name: ReadIOPS
+    dimensions:
+    - Region
+    - EngineName
+  - name: ReadIOPS
+    dimensions:
+    - DBInstanceIdentifier
+  - name: ReadLatency
+    dimensions:
+    - Region
+    - EngineName
+  - name: StorageNetworkReceiveThroughput
+    dimensions:
+    - Region
+    - EngineName
+  - name: StorageNetworkReceiveThroughput
+    dimensions:
+    - DBInstanceIdentifier
+  - name: SwapUsage
+    dimensions:
+    - DBInstanceIdentifier
+  - name: WriteIOPS
+    dimensions:
+    - Region
+    - EngineName
+  - name: WriteIOPS
+    dimensions:
+    - DBInstanceIdentifier
