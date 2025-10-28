@@ -270,12 +270,28 @@ module "metric_stream" {
 }
 
 module "aws_cwl_s3_bucket" {
-  source   = "./aws_cw_logs"
-  for_each = contains(keys(var.tenant_vars), "aws_cloudwatch_logs") ? var.tenant_vars.aws_cloudwatch_logs : {}
+  source   = "./aws_cwl_cwm"
+  for_each = contains(keys(var.tenant_vars), "aws_cwl_cwm") ? var.tenant_vars.aws_cwl_cwm : {}
+  tags                      = each.value.tags
 
+  #s3 config
   s3_backup_bucket_name     = each.value.s3_backup_bucket_name
   lifecycle_expiration_days = each.value.lifecycle_expiration_days
   s3_encryption_algorithm   = each.value.s3_encryption_algorithm
-  tags                      = each.value.tags
   versioning_status         = each.value.versioning_status
+  s3_backup_prefix          = each.value.s3_backup_prefix
+  s3_error_prefix           = each.value.s3_error_prefix
+  #firehose config
+  cw_log_group_name   = each.value.cw_log_group_name
+  cw_log_stream_name  = each.value.cw_log_stream_name
+  firehose_name       = each.value.firehose_name
+  buffering_size      = each.value.buffering_size
+  buffering_interval  = each.value.buffering_interval
+  retry_duration      = each.value.retry_duration
+  ingestion_type      = each.value.ingestion_type
+  common_attributes   = try(each.value.common_attributes, [])
+  #dt config
+  dt_cwl_api_token    = each.value.dt_cwl_api_token
+  dt_endpoint         = each.value.dt_endpoint
+  dt_cwm_api_token    = each.value.dt_cwm_api_token
 }
