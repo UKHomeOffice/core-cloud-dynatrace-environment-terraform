@@ -56,7 +56,7 @@ resource "aws_iam_role_policy" "firehose_inline" {
 # --- Firehose delivery stream to Dynatrace ---
 resource "aws_kinesis_firehose_delivery_stream" "this" {
   name        = "cc-cw-firehose-delivery-stream-${var.env}"
-  destination = "http_endpoint"
+  destination = var.destination
 
   server_side_encryption {
     enabled = true
@@ -65,7 +65,7 @@ resource "aws_kinesis_firehose_delivery_stream" "this" {
   }
 
   http_endpoint_configuration {
-    url            = data.aws_secretsmanager_secret_version.dt_endpoint_value.secret_string    
+    url            = var.dynatarce_eu_url
     name           = "Dynatrace"
     role_arn       = aws_iam_role.firehose.arn
     s3_backup_mode = "FailedDataOnly"
@@ -86,10 +86,13 @@ resource "aws_kinesis_firehose_delivery_stream" "this" {
         value = data.aws_secretsmanager_secret_version.dt_endpoint_value.secret_string
 
       }
-      common_attributes {
-        name  = "require-valid-certificate"
-        value = "true"
-      }
+    }
+    
+    # error logging
+    cloudwatch_logging_options {
+      enabled = true
+      log_group_name = var.log_group_name
+      log_stream_name = var.log_stream_name
     }
 
     # Pull API token from Secrets Manager

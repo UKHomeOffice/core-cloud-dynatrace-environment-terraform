@@ -19,6 +19,11 @@ module "aws_account_configurations" {
   default_services = local.default_services
 }
 
+module "dynatrace_generic_types" {
+  count  = contains(keys(var.tenant_vars), "generic_types") ? 1 : 0
+  source = "./dynatrace_generic_types"
+}
+
 module "dynatrace_management_zones" {
   source = "./dynatrace_management_zones"
 
@@ -76,7 +81,7 @@ module "dynatrace_privatelink_aws_accounts_allowlist" {
 }
 
 module "golden_dashboards" {
-  count = contains(keys(var.tenant_vars), "golden_dashboards") ? 1:0
+  count  = contains(keys(var.tenant_vars), "golden_dashboards") ? 1 : 0
   source = "./dashboards/golden_dashboards"
 }
 
@@ -146,13 +151,13 @@ module "dynatrace_aws_monitoring_profile_integration" {
 }
 
 module "anomaly_detection" {
-  count = contains(keys(var.tenant_vars), "anomaly_detection") ? 1:0
+  count  = contains(keys(var.tenant_vars), "anomaly_detection") ? 1 : 0
   source = "./anomaly_detection/"
 }
 
 
 module "dynatrace_log_storage_rules" {
-  count = contains(keys(var.tenant_vars), "dynatrace_log_storage_rules") ? 1:0
+  count  = contains(keys(var.tenant_vars), "dynatrace_log_storage_rules") ? 1 : 0
   source = "./dynatrace_log_storage"
 
   rules = [
@@ -194,10 +199,10 @@ module "dynatrace_corecloud_alerts" {
 }
 
 module "dynatrace_kafka_settings" {
-  source         = "./settings/kafka"
-  count          = contains(keys(var.tenant_vars), "kafka_settings") ? 1 : 0
-  enabled        = try(var.tenant_vars.kafka_settings.enabled, false)
-  kafka_streams  = try(var.tenant_vars.kafka_settings.kafka_streams, false)
+  source        = "./settings/kafka"
+  count         = contains(keys(var.tenant_vars), "kafka_settings") ? 1 : 0
+  enabled       = try(var.tenant_vars.kafka_settings.enabled, false)
+  kafka_streams = try(var.tenant_vars.kafka_settings.kafka_streams, false)
 }
 
 module "hub_extensions" {
@@ -214,46 +219,79 @@ module "hub_extensions" {
   enabled         = try(each.value.enabled, true)
   activationTags  = each.value.activationTags != null ? each.value.activationTags : ["[AWS]dynatrace: true"]
 }
-# module "oam_sink" {
-#   source   = "./oam_sink/"
-#   for_each = contains(keys(var.tenant_vars), "oam_sink") ? var.tenant_vars.oam_sink : {}
+module "oam_sink" {
+  source   = "./oam_sink/"
+  for_each = contains(keys(var.tenant_vars), "oam_sink") ? var.tenant_vars.oam_sink : {}
 
-#   tenant_vars     = each.value
-#   org_id          = each.value.org_id
-#   sink_name       = each.value.sink_name
-#   ou_paths        = each.value.ou_paths
-# }
+  tenant_vars = each.value
+  org_id      = each.value.org_id
+  sink_name   = each.value.sink_name
+  ou_paths    = each.value.ou_paths
+}
 
-# module "oam_link" {
-#   source = "./oam_link/"
-#   for_each = contains(keys(var.tenant_vars), "oam_link") ? var.tenant_vars.oam_link : {}
-#   label_template = each.value.label_template
-#   metric_filter = each.value.metric_filter
-#   tenant_vars = each.value
-#   sink_arn = try(
-#     values(module.oam_sink)[0].sink_arn,
-#     ""
-#   )
-# }
-# module "firehose_dynatrace" {
-#   source = "./firehose_dynatrace/"
-#   for_each                        = var.tenant_vars.firehose_dynatrace
-#   tenant_vars                     = each.value
-#   s3_backup_bucket_name           = each.value.s3_backup_bucket_name
-#   env                             = each.value.env
-#   dynatrace_api_token_secret_arn  = each.value.dynatrace_api_token_secret_arn
-#   dynatrace_delivery_endpoint_secret_arn = each.value.dynatrace_delivery_endpoint_secret_arn
-#   lifecycle_expiration_days       = each.value.lifecycle_expiration_days
-  
-# } 
-# module "metric_stream" {
-#   source = "./metric_stream/"
-#   for_each = contains(keys(var.tenant_vars), "metric_stream") ? var.tenant_vars.metric_stream : {}
-  
-#   tenant_vars                     = each.value
-#   output_format                   = each.value.output_format
-#   env_name                        = each.value.env_name
-#   metrics_stream_name             = each.value.metrics_stream_name
-#   include_linked_accounts_metrics = each.value.include_linked_accounts_metrics
-#   firehose_arn                    = module.firehose_dynatrace[var.tenant_vars.metric_stream_to_firehose_map[each.key]].firehose_arn
-# }
+module "oam_link" {
+  source   = "./oam_link/"
+  for_each = contains(keys(var.tenant_vars), "oam_link") ? var.tenant_vars.oam_link : {}
+
+  label_template = each.value.label_template
+  metric_filter  = each.value.metric_filter
+  tenant_vars    = each.value
+  sink_arn = try(
+    values(module.oam_sink)[0].sink_arn,
+    ""
+  )
+}
+module "firehose_dynatrace" {
+  source   = "./firehose_dynatrace/"
+  for_each = contains(keys(var.tenant_vars), "firehose_dynatrace") ? var.tenant_vars.firehose_dynatrace : {}
+
+  tenant_vars                            = each.value
+  s3_backup_bucket_name                  = each.value.s3_backup_bucket_name
+  env                                    = each.value.env
+  destination                            = each.value.destination
+  dynatarce_eu_url                       = each.value.dynatarce_eu_url
+  log_group_name                         = each.value.log_group_name
+  log_stream_name                        = each.value.log_stream_name
+  dynatrace_api_token_secret_arn         = each.value.dynatrace_api_token_secret_arn
+  dynatrace_delivery_endpoint_secret_arn = each.value.dynatrace_delivery_endpoint_secret_arn
+  lifecycle_expiration_days              = each.value.lifecycle_expiration_days
+
+}
+module "metric_stream" {
+  source   = "./metric_stream/"
+  for_each = contains(keys(var.tenant_vars), "metric_stream") ? var.tenant_vars.metric_stream : {}
+
+  tenant_vars                     = each.value
+  output_format                   = each.value.output_format
+  env_name                        = each.value.env_name
+  metrics_stream_name             = each.value.metrics_stream_name
+  include_linked_accounts_metrics = each.value.include_linked_accounts_metrics
+  firehose_arn                    = module.firehose_dynatrace[var.tenant_vars.metric_stream_to_firehose_map[each.key]].firehose_arn
+}
+
+module "aws_cwl_s3_bucket" {
+  source   = "./aws_cwl_cwm"
+  for_each = contains(keys(var.tenant_vars), "aws_cwl_cwm") ? var.tenant_vars.aws_cwl_cwm : {}
+  tags     = each.value.tags
+
+  #s3 config
+  s3_backup_bucket_name     = each.value.s3_backup_bucket_name
+  lifecycle_expiration_days = each.value.lifecycle_expiration_days
+  s3_encryption_algorithm   = each.value.s3_encryption_algorithm
+  versioning_status         = each.value.versioning_status
+  s3_backup_prefix          = each.value.s3_backup_prefix
+  s3_error_prefix           = each.value.s3_error_prefix
+  #firehose config
+  cw_log_group_name   = each.value.cw_log_group_name
+  cw_log_stream_name  = each.value.cw_log_stream_name
+  firehose_name       = each.value.firehose_name
+  buffering_size      = each.value.buffering_size
+  buffering_interval  = each.value.buffering_interval
+  retry_duration      = each.value.retry_duration
+  ingestion_type      = each.value.ingestion_type
+  common_attributes   = try(each.value.common_attributes, [])
+  #dt config
+  dt_cwl_api_token_name    = each.value.dt_cwl_api_token_name
+  dt_endpoint_name         = each.value.dt_endpoint_name
+  dt_cwm_api_token_name    = each.value.dt_cwm_api_token_name
+}
