@@ -44,12 +44,13 @@ resource "dynatrace_k8s_workload_anomalies" "core-cloud-k8s-workload-anomalies" 
       sample_period_in_minutes      = 4
     }
   }
+
   high_cpu_throttling {
     enabled = true
     configuration {
-      observation_period_in_minutes = 6
+      observation_period_in_minutes = 10
       sample_period_in_minutes      = 4
-      threshold                     = 2
+      threshold                     = 10
     }
   }
   high_cpu_usage {
