@@ -266,7 +266,7 @@ module "metric_stream" {
   env_name                        = each.value.env_name
   metrics_stream_name             = each.value.metrics_stream_name
   include_linked_accounts_metrics = each.value.include_linked_accounts_metrics
-  firehose_arn                    = module.firehose_dynatrace[var.tenant_vars.metric_stream_to_firehose_map[each.key]].firehose_arn
+  firehose_arn                    = module.aws_cwl_s3_bucket[var.tenant_vars.metric_stream_to_firehose_map[each.key]].firehose_arn
 }
 
 module "aws_cwl_s3_bucket" {
