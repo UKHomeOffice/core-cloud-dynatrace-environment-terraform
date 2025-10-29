@@ -94,6 +94,7 @@ variable "retry_duration" {
 variable "ingestion_type" {
   description = "Type of ingestion, e.g., metrics or logs"
   type        = string
+  default     = "logs"
 }
 
 variable "common_attributes" {
