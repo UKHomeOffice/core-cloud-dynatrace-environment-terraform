@@ -15,3 +15,8 @@ output "firehose_stream_arn" {
   description = "ARN of the Kinesis Firehose delivery stream"
   value       = aws_kinesis_firehose_delivery_stream.dynatrace_http_stream.arn
 }
+
+output "ingestion_type" {
+  description = "The ingestion type for the Firehose delivery stream"
+  value       = var.ingestion_type
+}

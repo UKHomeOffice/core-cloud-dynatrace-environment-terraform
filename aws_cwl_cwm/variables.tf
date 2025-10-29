@@ -46,6 +46,11 @@ variable "dt_endpoint_name" {
   type        = string
 }
 
+variable "dt_logs_api_endpoint_name" {
+  description = "The destination endpoint for the Dynatrace logs ingestion"
+  type        = string
+}
+
 variable "s3_backup_prefix" {
   type        = string
   default     = "backup/failed/"
@@ -89,7 +94,6 @@ variable "retry_duration" {
 variable "ingestion_type" {
   description = "Type of ingestion, e.g., metrics or logs"
   type        = string
-  default     = "metrics"
 }
 
 variable "common_attributes" {

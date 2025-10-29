@@ -24,3 +24,12 @@ data "aws_secretsmanager_secret" "dt_endpoint" {
 data "aws_secretsmanager_secret_version" "dt_endpoint" {
   secret_id = data.aws_secretsmanager_secret.dt_endpoint.id
 }
+
+# DT logs ingestion endpoint
+data "aws_secretsmanager_secret" "dt_logs_api_endpoint" {
+  name = var.dt_logs_api_endpoint_name
+}
+
+data "aws_secretsmanager_secret_version" "dt_logs_api_endpoint" {
+  secret_id = data.aws_secretsmanager_secret.dt_logs_api_endpoint.id
+}
