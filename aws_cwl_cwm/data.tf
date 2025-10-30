@@ -20,6 +20,10 @@ data "aws_secretsmanager_secret_version" "cw_metrics_api_token" {
 data "aws_secretsmanager_secret" "dt_endpoint" {
   name = var.dt_endpoint_name
 }
+# DT destination endpoint internal
+data "aws_secretsmanager_secret" "dt_endpoint_internal" {
+  name = var.dt_endpoint_internal_name
+}
 
 data "aws_secretsmanager_secret_version" "dt_endpoint" {
   secret_id = data.aws_secretsmanager_secret.dt_endpoint.id
