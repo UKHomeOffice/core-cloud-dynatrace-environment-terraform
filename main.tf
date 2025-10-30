@@ -291,6 +291,7 @@ module "aws_cwl_s3_bucket" {
   retry_duration            = each.value.retry_duration
   ingestion_type            = each.value.ingestion_type
   firehose_access_role_name = each.value.firehose_access_role_name
+  aws_kms_alias_firehose    = each.value.aws_kms_alias_firehose
   common_attributes   = try(each.value.common_attributes, [])
   #dt config
   dt_logs_api_endpoint_name = each.value.dt_logs_api_endpoint_name

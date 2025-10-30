@@ -59,6 +59,6 @@ resource "aws_kms_key" "cc_cosmos_s3_kms_key" {
 }
 
 resource "aws_kms_alias" "cc_cosmos_firehose_s3_kms_alias" {
-  name          = "alias/cc-cosmos-firehose-s3-key"
+  name          = var.aws_kms_alias_firehose
   target_key_id = aws_kms_key.cc_cosmos_s3_kms_key.id
 }

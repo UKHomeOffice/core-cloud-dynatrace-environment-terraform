@@ -108,3 +108,9 @@ variable "firehose_access_role_name" {
   type = string
   
 }
+
+variable "aws_kms_alias_firehose" {
+  description = "kms alias name"
+  type = string
+  
+}
