@@ -102,3 +102,9 @@ variable "common_attributes" {
   default     = []
   description = "Optional common attributes to attach to each record"
 }
+
+variable "firehose_access_role_name" {
+  description = "name of the iam role used by firehose"
+  type = string
+  
+}

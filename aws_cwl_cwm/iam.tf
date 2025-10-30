@@ -1,5 +1,5 @@
 resource "aws_iam_role" "cc_cosmos_cwl_firehose_access_role" {
-  name = "cc-cosmos-cwl-firehose-access-role"
+  name = var.firehose_access_role_name
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"

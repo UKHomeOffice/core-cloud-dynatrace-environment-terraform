@@ -283,13 +283,14 @@ module "aws_cwl_s3_bucket" {
   s3_backup_prefix          = each.value.s3_backup_prefix
   s3_error_prefix           = each.value.s3_error_prefix
   #firehose config
-  cw_log_group_name   = each.value.cw_log_group_name
-  cw_log_stream_name  = each.value.cw_log_stream_name
-  firehose_name       = each.value.firehose_name
-  buffering_size      = each.value.buffering_size
-  buffering_interval  = each.value.buffering_interval
-  retry_duration      = each.value.retry_duration
-  ingestion_type      = each.value.ingestion_type
+  cw_log_group_name         = each.value.cw_log_group_name
+  cw_log_stream_name        = each.value.cw_log_stream_name
+  firehose_name             = each.value.firehose_name
+  buffering_size            = each.value.buffering_size
+  buffering_interval        = each.value.buffering_interval
+  retry_duration            = each.value.retry_duration
+  ingestion_type            = each.value.ingestion_type
+  firehose_access_role_name = each.value.firehose_access_role_name
   common_attributes   = try(each.value.common_attributes, [])
   #dt config
   dt_logs_api_endpoint_name = each.value.dt_logs_api_endpoint_name
