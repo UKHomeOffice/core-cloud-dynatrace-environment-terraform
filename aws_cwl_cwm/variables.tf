@@ -102,3 +102,20 @@ variable "common_attributes" {
   default     = []
   description = "Optional common attributes to attach to each record"
 }
+
+variable "firehose_access_role_name" {
+  description = "name of the iam role used by firehose"
+  type = string
+  
+}
+
+variable "aws_kms_alias_firehose" {
+  description = "kms alias name"
+  type = string
+
+}
+variable "cc_cosmos_firehose_s3_logs_kms_policy_name" {
+
+  description = "name of the kms policy"
+  type = string
+}

@@ -1,5 +1,5 @@
 resource "aws_iam_role" "cc_cosmos_cwl_firehose_access_role" {
-  name = "cc-cosmos-cwl-firehose-access-role"
+  name = var.firehose_access_role_name
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -17,7 +17,7 @@ resource "aws_iam_role" "cc_cosmos_cwl_firehose_access_role" {
 }
 
 resource "aws_iam_policy" "cc_cosmos_cwl_firehose_s3_logs_kms_policy" {
-  name        = "cc-cosmos-cwl-firehose-s3-logs-kms-policy"
+  name        = var.cc_cosmos_firehose_s3_logs_kms_policy_name
   description = "Policy for Firehose roles to access S3 bucket and KMS key"
 
   policy = jsonencode({
