@@ -21,7 +21,7 @@ data "aws_secretsmanager_secret" "dt_endpoint" {
   name = var.dt_endpoint_name
 }
 # DT destination endpoint internal
-data "aws_secretsmanager_secret" "dt_endpoint_internal" {
+data "aws_secretsmanager_secret_verison" "dt_endpoint_internal" {
   name = var.dt_endpoint_internal_name
 }
 
