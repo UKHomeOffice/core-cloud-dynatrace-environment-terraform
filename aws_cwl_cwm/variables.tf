@@ -112,5 +112,10 @@ variable "firehose_access_role_name" {
 variable "aws_kms_alias_firehose" {
   description = "kms alias name"
   type = string
-  
+
+}
+variable "cc_cosmos_firehose_s3_logs_kms_policy_name" {
+
+  description = "name of the kms policy"
+  type = string
 }
