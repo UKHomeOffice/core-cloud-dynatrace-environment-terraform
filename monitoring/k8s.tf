@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    dynatrace = {
+      version = "~> 1.0"
+      source  = "dynatrace-oss/dynatrace"
+    }
+  }
+}
+
 resource "dynatrace_k8s_monitoring" "k8s_monitoring_config" {
   cloud_application_pipeline_enabled = var.metrics_enabled
 

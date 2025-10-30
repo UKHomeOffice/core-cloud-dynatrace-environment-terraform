@@ -299,7 +299,7 @@ module "aws_cwl_s3_bucket" {
 }
 
 module "monitoring_k8s_clusters" {
-  source          = "./monitoring/k8s"
+  source          = "./monitoring"
   count           = contains(keys(var.tenant_vars), "k8s_monitoring") ? 1 : 0
   metrics_enabled = var.tenant_vars.k8s_monitoring.enabled
   event_patterns  = var.tenant_vars.k8s_monitoring.event_patterns
