@@ -283,17 +283,24 @@ module "aws_cwl_s3_bucket" {
   s3_backup_prefix          = each.value.s3_backup_prefix
   s3_error_prefix           = each.value.s3_error_prefix
   #firehose config
-  cw_log_group_name   = each.value.cw_log_group_name
-  cw_log_stream_name  = each.value.cw_log_stream_name
-  firehose_name       = each.value.firehose_name
-  buffering_size      = each.value.buffering_size
-  buffering_interval  = each.value.buffering_interval
-  retry_duration      = each.value.retry_duration
-  ingestion_type      = each.value.ingestion_type
-  common_attributes   = try(each.value.common_attributes, [])
+  cw_log_group_name  = each.value.cw_log_group_name
+  cw_log_stream_name = each.value.cw_log_stream_name
+  firehose_name      = each.value.firehose_name
+  buffering_size     = each.value.buffering_size
+  buffering_interval = each.value.buffering_interval
+  retry_duration     = each.value.retry_duration
+  ingestion_type     = each.value.ingestion_type
+  common_attributes  = try(each.value.common_attributes, [])
   #dt config
   dt_logs_api_endpoint_name = each.value.dt_logs_api_endpoint_name
   dt_cwl_api_token_name     = each.value.dt_cwl_api_token_name
   dt_endpoint_name          = each.value.dt_endpoint_name
   dt_cwm_api_token_name     = each.value.dt_cwm_api_token_name
+}
+
+module "monitoring_k8s_clusters" {
+  source          = "./monitoring/k8s"
+  count           = contains(keys(var.tenant_vars), "k8s_monitoring") ? 1 : 0
+  metrics_enabled = var.tenant_vars.k8s_monitoring.enabled
+  event_patterns  = var.tenant_vars.k8s_monitoring.event_patterns
 }
