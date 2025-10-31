@@ -301,3 +301,10 @@ module "aws_cwl_s3_bucket" {
   dt_endpoint_internal_name = each.value.dt_endpoint_internal_name
   dt_cwm_api_token_name     = each.value.dt_cwm_api_token_name
 }
+
+module "monitoring_k8s_clusters" {
+  source          = "./monitoring"
+  count           = contains(keys(var.tenant_vars), "k8s_monitoring_config") ? 1 : 0
+  metrics_enabled = var.tenant_vars.k8s_monitoring_config.enabled
+  event_patterns  = var.tenant_vars.k8s_monitoring_config.event_patterns
+}
