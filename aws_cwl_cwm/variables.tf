@@ -45,6 +45,10 @@ variable "dt_endpoint_name" {
   description = "The destination endpoint of the Dynatrace"
   type        = string
 }
+variable "dt_endpoint_internal_name" {
+  type = string
+  
+}
 
 variable "dt_logs_api_endpoint_name" {
   description = "The destination endpoint for the Dynatrace logs ingestion"
