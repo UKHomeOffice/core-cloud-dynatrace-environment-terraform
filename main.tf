@@ -298,6 +298,7 @@ module "aws_cwl_s3_bucket" {
   dt_logs_api_endpoint_name = each.value.dt_logs_api_endpoint_name
   dt_cwl_api_token_name     = each.value.dt_cwl_api_token_name
   dt_endpoint_name          = each.value.dt_endpoint_name
+  dt_endpoint_internal_name = each.value.dt_endpoint_internal_name
   dt_cwm_api_token_name     = each.value.dt_cwm_api_token_name
 }
 
