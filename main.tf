@@ -267,6 +267,9 @@ module "metric_stream" {
   metrics_stream_name             = each.value.metrics_stream_name
   include_linked_accounts_metrics = each.value.include_linked_accounts_metrics
   firehose_arn                    = module.aws_cwl_s3_bucket[var.tenant_vars.metric_stream_to_firehose_map[each.key]].firehose_stream_arn
+  include_filter                  = try(each.value.include_filter, {})
+  exclude_filter                  = try(each.value.exclude_filter, {})
+
 
 }
 
