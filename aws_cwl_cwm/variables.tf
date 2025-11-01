@@ -103,7 +103,7 @@ variable "ingestion_type" {
 
 variable "common_attributes" {
   type        = list(object({ name = string, value = string }))
-  default     = []
+  # default     = []
   description = "Optional common attributes to attach to each record"
 }
 
