@@ -26,19 +26,14 @@ resource "aws_kinesis_firehose_delivery_stream" "dynatrace_http_stream" {
       content_encoding = "GZIP"
 
       # only for CloudWatch metrics
-      dynamic "common_attributes" {
-       for_each = var.ingestion_type == "metrics" ? [
-    {
-      name  = local.dynatrace_url_param_name
-      value = data.aws_secretsmanager_secret_version.dt_endpoint_internal.secret_string
-    }
-  ] : []
-  content {
-    name  = common_attributes.value.name
-    value = common_attributes.value.value
+        dynamic "common_attributes" {
+        for_each = var.ingestion_type == "metrics" ? var.common_attributes : []
+        content {
+          name  = local.dynatrace_url_param_name
+          value = data.aws_secretsmanager_secret_version.dt_endpoint_internal.secret_string
         }
-      } 
-  }
+      }
+    }
     # for failed puts to destination 
     s3_configuration {
       role_arn            = aws_iam_role.cc_cosmos_cwl_firehose_access_role.arn
