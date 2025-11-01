@@ -45,7 +45,7 @@ variable "dt_endpoint_name" {
   description = "The destination endpoint of the Dynatrace"
   type        = string
 }
-variable "dt_endpoint_internal_name" {
+variable "dt_endpoint_internal" {
   type = string
   
 }

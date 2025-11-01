@@ -22,10 +22,10 @@ data "aws_secretsmanager_secret" "dt_endpoint" {
 }
 # DT destination endpoint internal
 data "aws_secretsmanager_secret_version" "dt_endpoint_internal" {
-  secret_id = data.aws_secretsmanager_secret.dt_endpoint_internal_name.id
+  secret_id = data.aws_secretsmanager_secret.dt_endpoint_internal.id
 }
 data "aws_secretsmanager_secret" "dt_endpoint_internal"{
-  name = var.dt_endpoint_internal_name
+  name = var.dt_endpoint_internal
 }
 
 data "aws_secretsmanager_secret_version" "dt_endpoint" {
