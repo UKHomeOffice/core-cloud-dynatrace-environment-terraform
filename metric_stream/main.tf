@@ -18,7 +18,6 @@ resource "aws_cloudwatch_metric_stream" "this" {
   output_format                   = var.output_format
   include_linked_accounts_metrics = var.include_linked_accounts_metrics
 
-
 dynamic "include_filter" {
   for_each = var.include_filter
   content {
