@@ -7,17 +7,20 @@ resource "dynatrace_k8s_node_anomalies" "core-cloud-k8s-node-anomalies" {
     enabled = false
   }
   pods_saturation {
-    enabled = true
-    configuration {
-      observation_period_in_minutes = 6
-      sample_period_in_minutes      = 4
-      threshold                     = 95
-    }
+    enabled = false
   }
   readiness_issues {
-    enabled = false
+    enabled = true
+    configuration {
+      observation_period_in_minutes = 5
+      sample_period_in_minutes      = 3
+    }
   }
   node_problematic_condition {
-    enabled = false
+    enabled = true
+    configuration {
+      observation_period_in_minutes = 5
+      sample_period_in_minutes      = 3
+    }
   }
 }

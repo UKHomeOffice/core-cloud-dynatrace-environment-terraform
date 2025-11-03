@@ -241,22 +241,22 @@ module "oam_link" {
     ""
   )
 }
-module "firehose_dynatrace" {
-  source   = "./firehose_dynatrace/"
-  for_each = contains(keys(var.tenant_vars), "firehose_dynatrace") ? var.tenant_vars.firehose_dynatrace : {}
+# module "firehose_dynatrace" {
+#   source   = "./firehose_dynatrace/"
+#   for_each = contains(keys(var.tenant_vars), "firehose_dynatrace") ? var.tenant_vars.firehose_dynatrace : {}
 
-  tenant_vars                            = each.value
-  s3_backup_bucket_name                  = each.value.s3_backup_bucket_name
-  env                                    = each.value.env
-  destination                            = each.value.destination
-  dynatarce_eu_url                       = each.value.dynatarce_eu_url
-  log_group_name                         = each.value.log_group_name
-  log_stream_name                        = each.value.log_stream_name
-  dynatrace_api_token_secret_arn         = each.value.dynatrace_api_token_secret_arn
-  dynatrace_delivery_endpoint_secret_arn = each.value.dynatrace_delivery_endpoint_secret_arn
-  lifecycle_expiration_days              = each.value.lifecycle_expiration_days
+#   tenant_vars                            = each.value
+#   s3_backup_bucket_name                  = each.value.s3_backup_bucket_name
+#   env                                    = each.value.env
+#   destination                            = each.value.destination
+#   dynatarce_eu_url                       = each.value.dynatarce_eu_url
+#   log_group_name                         = each.value.log_group_name
+#   log_stream_name                        = each.value.log_stream_name
+#   dynatrace_api_token_secret_arn         = each.value.dynatrace_api_token_secret_arn
+#   dynatrace_delivery_endpoint_secret_arn = each.value.dynatrace_delivery_endpoint_secret_arn
+#   lifecycle_expiration_days              = each.value.lifecycle_expiration_days
 
-}
+# }
 module "metric_stream" {
   source   = "./metric_stream/"
   for_each = contains(keys(var.tenant_vars), "metric_stream") ? var.tenant_vars.metric_stream : {}
@@ -266,7 +266,11 @@ module "metric_stream" {
   env_name                        = each.value.env_name
   metrics_stream_name             = each.value.metrics_stream_name
   include_linked_accounts_metrics = each.value.include_linked_accounts_metrics
-  firehose_arn                    = module.firehose_dynatrace[var.tenant_vars.metric_stream_to_firehose_map[each.key]].firehose_arn
+  firehose_arn                    = module.aws_cwl_s3_bucket[var.tenant_vars.metric_stream_to_firehose_map[each.key]].firehose_stream_arn
+  include_filter                  = try(each.value.include_filter, {})
+  exclude_filter                  = try(each.value.exclude_filter, {})
+
+
 }
 
 module "aws_cwl_s3_bucket" {
@@ -282,16 +286,28 @@ module "aws_cwl_s3_bucket" {
   s3_backup_prefix          = each.value.s3_backup_prefix
   s3_error_prefix           = each.value.s3_error_prefix
   #firehose config
-  cw_log_group_name   = each.value.cw_log_group_name
-  cw_log_stream_name  = each.value.cw_log_stream_name
-  firehose_name       = each.value.firehose_name
-  buffering_size      = each.value.buffering_size
-  buffering_interval  = each.value.buffering_interval
-  retry_duration      = each.value.retry_duration
-  ingestion_type      = each.value.ingestion_type
+  cw_log_group_name                          = each.value.cw_log_group_name
+  cw_log_stream_name                         = each.value.cw_log_stream_name
+  firehose_name                              = each.value.firehose_name
+  buffering_size                             = each.value.buffering_size
+  buffering_interval                         = each.value.buffering_interval
+  retry_duration                             = each.value.retry_duration
+  ingestion_type                             = each.value.ingestion_type
+  firehose_access_role_name                  = each.value.firehose_access_role_name
+  aws_kms_alias_firehose                     = each.value.aws_kms_alias_firehose
+  cc_cosmos_firehose_s3_logs_kms_policy_name = each.value.cc_cosmos_firehose_s3_logs_kms_policy_name
   common_attributes   = try(each.value.common_attributes, [])
   #dt config
-  dt_cwl_api_token_name    = each.value.dt_cwl_api_token_name
-  dt_endpoint_name         = each.value.dt_endpoint_name
-  dt_cwm_api_token_name    = each.value.dt_cwm_api_token_name
+  dt_logs_api_endpoint_name = each.value.dt_logs_api_endpoint_name
+  dt_cwl_api_token_name     = each.value.dt_cwl_api_token_name
+  dt_endpoint_name          = each.value.dt_endpoint_name
+  dt_endpoint_internal_name = each.value.dt_endpoint_internal_name
+  dt_cwm_api_token_name     = each.value.dt_cwm_api_token_name
+}
+
+module "monitoring_k8s_clusters" {
+  source          = "./monitoring"
+  count           = contains(keys(var.tenant_vars), "k8s_monitoring_config") ? 1 : 0
+  metrics_enabled = var.tenant_vars.k8s_monitoring_config.enabled
+  event_patterns  = var.tenant_vars.k8s_monitoring_config.event_patterns
 }
