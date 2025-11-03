@@ -45,6 +45,15 @@ variable "dt_endpoint_name" {
   description = "The destination endpoint of the Dynatrace"
   type        = string
 }
+variable "dt_endpoint_internal_name" {
+  type = string
+  
+}
+
+variable "dt_logs_api_endpoint_name" {
+  description = "The destination endpoint for the Dynatrace logs ingestion"
+  type        = string
+}
 
 variable "s3_backup_prefix" {
   type        = string
@@ -89,11 +98,28 @@ variable "retry_duration" {
 variable "ingestion_type" {
   description = "Type of ingestion, e.g., metrics or logs"
   type        = string
-  default     = "metrics"
+  default     = "logs"
 }
 
 variable "common_attributes" {
   type        = list(object({ name = string, value = string }))
   default     = []
   description = "Optional common attributes to attach to each record"
+}
+
+variable "firehose_access_role_name" {
+  description = "name of the iam role used by firehose"
+  type = string
+  
+}
+
+variable "aws_kms_alias_firehose" {
+  description = "kms alias name"
+  type = string
+
+}
+variable "cc_cosmos_firehose_s3_logs_kms_policy_name" {
+
+  description = "name of the kms policy"
+  type = string
 }
