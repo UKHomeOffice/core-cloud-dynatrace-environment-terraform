@@ -517,6 +517,132 @@ kafka:
     dimensions:
     - "Cluster Name"
     - "Broker ID"
+  - name: LeaderCount
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: LeaderCount
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: MaxOffsetLag
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+    - "Consumer Group"
+    - "Topic"
+  - name: MaxOffsetLag
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Consumer Group"
+    - "Topic"
+  - name: MessagesInPerSec
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: MessagesInPerSec
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: RequestTime
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: RequestTime
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: SumOffsetLag
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Consumer Group"
+    - "Topic"
+#perBroker
+  - name: FetchConsumerRequestQueueTimeMsMean
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: FetchConsumerRequestQueueTimeMsMean
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: FetchConsumerResponseQueueTimeMsMean
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: FetchConsumerResponseQueueTimeMsMean
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: FetchMessageConversionsPerSec
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: FetchMessageConversionsPerSec
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: FetchThrottleQueueSize
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+  - name: FetchThrottleQueueSize
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+#perTopicPerBroker
+  - name: FetchMessageConversionsPerSec
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+    - "Topic"
+  - name: FetchMessageConversionsPerSec
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+    - "Topic"
+  - name: MessagesInPerSec
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+    - "Topic"
+  - name: MessagesInPerSec
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+    - "Topic"
+  - name: ProduceMessageConversionsPerSec
+    statistic: SUM
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+    - "Topic"
+  - name: ProduceMessageConversionsPerSec
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - "Cluster Name"
+    - "Broker ID"
+    - "Topic"
 logs:
   - name: DeliveryErrors
     statistic: SUM
