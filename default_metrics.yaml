@@ -520,129 +520,129 @@ kafka:
   - name: LeaderCount
     statistic: SUM
     dimensions:
-    -  ClusterName
-    -  BrokerId
+    - "Cluster Name"
+    - "Broker ID"
   - name: LeaderCount
     statistic: MULTI
     dimensions:
-    -  ClusterName
-    -  BrokerId
+    - "Cluster Name"
+    - "Broker ID"
   - name: MaxOffsetLag
     statistic: SUM
     dimensions:
-    -  ClusterName
-    -  ConsumerGroup
-    -  Topic
+    - "Cluster Name"
+    - "Consumer Group"
+    - "Topic"
   - name: MaxOffsetLag
     statistic: MULTI
     dimensions:
-    -  ClusterName
-    -  ConsumerGroup
-    -  Topic
+    - "Cluster Name"
+    - "Consumer Group"
+    - "Topic"
   - name: MessagesInPerSec
     statistic: SUM
     dimensions:
-    -  ClusterName
-    -  BrokerId
+    - "Cluster Name"
+    - "Broker ID"
   - name: MessagesInPerSec
     statistic: MULTI
     dimensions:
-    -  ClusterName
-    -  BrokerId
+    - "Cluster Name"
+    - "Broker ID"
   - name: RequestTime
     statistic: SUM
     dimensions:
-    -  ClusterName
-    -  BrokerId
+    - "Cluster Name"
+    - "Broker ID"
   - name: RequestTime
     statistic: MULTI
     dimensions:
-    -  ClusterName
-    -  BrokerId
+    - "Cluster Name"
+    - "Broker ID"
   - name: SumOffsetLag
     statistic: MULTI
     dimensions:
-    -  ClusterName
-    -  ConsumerGroup
-    -  Topic
+    - "Cluster Name"
+    - "Consumer Group"
+    - "Topic"
 #perBroker
   - name: FetchConsumerRequestQueueTimeMsMean
     statistic: SUM
     dimensions:
-    -  ClusterName
-    -  BrokerId
+    - "Cluster Name"
+    - "Broker ID"
   - name: FetchConsumerRequestQueueTimeMsMean
     statistic: MULTI
     dimensions:
-    -  ClusterName
-    -  BrokerId
+    - "Cluster Name"
+    - "Broker ID"
   - name: FetchConsumerResponseQueueTimeMsMean
     statistic: SUM
     dimensions:
-    -  ClusterName
-    -  BrokerId
+    - "Cluster Name"
+    - "Broker ID"
   - name: FetchConsumerResponseQueueTimeMsMean
     statistic: MULTI
     dimensions:
-    -  ClusterName
-    -  BrokerId
+    - "Cluster Name"
+    - "Broker ID"
   - name: FetchMessageConversionsPerSec
     statistic: SUM
     dimensions:
-    -  ClusterName
-    -  BrokerId
+    - "Cluster Name"
+    - "Broker ID"
   - name: FetchMessageConversionsPerSec
     statistic: MULTI
     dimensions:
-    -  ClusterName
-    -  BrokerId
+    - "Cluster Name"
+    - "Broker ID"
   - name: FetchThrottleQueueSize
     statistic: SUM
     dimensions:
-    -  ClusterName
-    -  BrokerId
+    - "Cluster Name"
+    - "Broker ID"
   - name: FetchThrottleQueueSize
     statistic: MULTI
     dimensions:
-    -  ClusterName
-    -  BrokerId
+    - "Cluster Name"
+    - "Broker ID"
 #perTopicPerBroker
   - name: FetchMessageConversionsPerSec
     statistic: SUM
     dimensions:
-    -  ClusterName
-    -  BrokerId
-    -  Topic
+    - "Cluster Name"
+    - "Broker ID"
+    - "Topic"
   - name: FetchMessageConversionsPerSec
     statistic: MULTI
     dimensions:
-    -  ClusterName
-    -  BrokerId
-    -  Topic
+    - "Cluster Name"
+    - "Broker ID"
+    - "Topic"
   - name: MessagesInPerSec
     statistic: SUM
     dimensions:
-    -  ClusterName
-    -  BrokerId
-    -  Topic
+    - "Cluster Name"
+    - "Broker ID"
+    - "Topic"
   - name: MessagesInPerSec
     statistic: MULTI
     dimensions:
-    -  ClusterName
-    -  BrokerId
-    -  Topic
+    - "Cluster Name"
+    - "Broker ID"
+    - "Topic"
   - name: ProduceMessageConversionsPerSec
     statistic: SUM
     dimensions:
-    -  ClusterName
-    -  BrokerId
-    -  Topic
+    - "Cluster Name"
+    - "Broker ID"
+    - "Topic"
   - name: ProduceMessageConversionsPerSec
     statistic: MULTI
     dimensions:
-    -  ClusterName
-    -  BrokerId
-    -  Topic
+    - "Cluster Name"
+    - "Broker ID"
+    - "Topic"
 logs:
   - name: DeliveryErrors
     statistic: SUM
