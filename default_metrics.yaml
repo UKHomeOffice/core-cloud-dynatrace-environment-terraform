@@ -523,7 +523,7 @@ kafka:
     - "Cluster Name"
     - "Broker ID"
   - name: LeaderCount
-    statistic: MULTI
+    statistic: AVG_MIN_MAX
     dimensions:
     - "Cluster Name"
     - "Broker ID"
@@ -534,7 +534,7 @@ kafka:
     - "Consumer Group"
     - "Topic"
   - name: MaxOffsetLag
-    statistic: MULTI
+    statistic: AVG_MIN_MAX
     dimensions:
     - "Cluster Name"
     - "Consumer Group"
@@ -545,7 +545,7 @@ kafka:
     - "Cluster Name"
     - "Broker ID"
   - name: MessagesInPerSec
-    statistic: MULTI
+    statistic: AVG_MIN_MAX
     dimensions:
     - "Cluster Name"
     - "Broker ID"
@@ -555,12 +555,12 @@ kafka:
     - "Cluster Name"
     - "Broker ID"
   - name: RequestTime
-    statistic: MULTI
+    statistic: AVG_MIN_MAX
     dimensions:
     - "Cluster Name"
     - "Broker ID"
   - name: SumOffsetLag
-    statistic: MULTI
+    statistic: AVG_MIN_MAX
     dimensions:
     - "Cluster Name"
     - "Consumer Group"
@@ -572,7 +572,7 @@ kafka:
     - "Cluster Name"
     - "Broker ID"
   - name: FetchConsumerRequestQueueTimeMsMean
-    statistic: MULTI
+    statistic: AVG_MIN_MAX
     dimensions:
     - "Cluster Name"
     - "Broker ID"
@@ -582,7 +582,7 @@ kafka:
     - "Cluster Name"
     - "Broker ID"
   - name: FetchConsumerResponseQueueTimeMsMean
-    statistic: MULTI
+    statistic: AVG_MIN_MAX
     dimensions:
     - "Cluster Name"
     - "Broker ID"
@@ -592,7 +592,7 @@ kafka:
     - "Cluster Name"
     - "Broker ID"
   - name: FetchMessageConversionsPerSec
-    statistic: MULTI
+    statistic: AVG_MIN_MAX
     dimensions:
     - "Cluster Name"
     - "Broker ID"
@@ -602,7 +602,7 @@ kafka:
     - "Cluster Name"
     - "Broker ID"
   - name: FetchThrottleQueueSize
-    statistic: MULTI
+    statistic: AVG_MIN_MAX
     dimensions:
     - "Cluster Name"
     - "Broker ID"
@@ -614,7 +614,7 @@ kafka:
     - "Broker ID"
     - "Topic"
   - name: FetchMessageConversionsPerSec
-    statistic: MULTI
+    statistic: AVG_MIN_MAX
     dimensions:
     - "Cluster Name"
     - "Broker ID"
@@ -626,7 +626,7 @@ kafka:
     - "Broker ID"
     - "Topic"
   - name: MessagesInPerSec
-    statistic: MULTI
+    statistic: AVG_MIN_MAX
     dimensions:
     - "Cluster Name"
     - "Broker ID"
@@ -638,7 +638,7 @@ kafka:
     - "Broker ID"
     - "Topic"
   - name: ProduceMessageConversionsPerSec
-    statistic: MULTI
+    statistic: AVG_MIN_MAX
     dimensions:
     - "Cluster Name"
     - "Broker ID"
