@@ -827,25 +827,25 @@ TransitGateway:
     statistic: SUM
     dimensions:
     - TransitGateway
-Route53:
-  - name: DNSQueries
-    statistic: AVG_MIN_MAX
-    dimensions:
-    - HostedZoneId
-  - name: DNSQueries
-    statistic: SUM
-    dimensions:
-    - HostedZoneId
-  - name: HealthCheckStatus
-    statistic: AVG_MIN_MAX
-    dimensions:
-    - Region
-    - HealthCheckId
-  - name: TimeToFirstByte
-    statistic: AVG_MIN_MAX
-    dimensions:
-    - Region
-    - HealthCheckId
+# Route53:
+#   - name: DNSQueries
+#     statistic: AVG_MIN_MAX
+#     dimensions:
+#     - HostedZoneId
+#   - name: DNSQueries
+#     statistic: SUM
+#     dimensions:
+#     - HostedZoneId
+#   - name: HealthCheckStatus
+#     statistic: AVG_MIN_MAX
+#     dimensions:
+#     - Region
+#     - HealthCheckId
+#   - name: TimeToFirstByte
+#     statistic: AVG_MIN_MAX
+#     dimensions:
+#     - Region
+#     - HealthCheckId
 WAF:
   - name:  AllowedRequests
     statistic: SUM
