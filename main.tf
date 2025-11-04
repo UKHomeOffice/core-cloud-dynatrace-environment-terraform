@@ -179,9 +179,12 @@ module "dynatrace_log_storage_rules" {
 }
 
 module "web_application" {
-  source   = "./web_applications/"
-  for_each = contains(keys(var.tenant_vars), "web_applications") ? var.tenant_vars.web_applications : {}
-
+  source               = "./web_applications/"
+  for_each             = contains(keys(var.tenant_vars), "web_applications") ? var.tenant_vars.web_applications : {}
+  project_id           = var.tenant_vars.project_id
+  service_id           = each.value.service_id
+  application_id       = each.value.application_id
+  environment_type     = each.value.environment_type
   web_application_name = each.value.name
   web_application_type = each.value.type
   rum_enabled          = each.value.rum_enabled
@@ -296,7 +299,7 @@ module "aws_cwl_s3_bucket" {
   firehose_access_role_name                  = each.value.firehose_access_role_name
   aws_kms_alias_firehose                     = each.value.aws_kms_alias_firehose
   cc_cosmos_firehose_s3_logs_kms_policy_name = each.value.cc_cosmos_firehose_s3_logs_kms_policy_name
-  common_attributes   = try(each.value.common_attributes, [])
+  common_attributes                          = try(each.value.common_attributes, [])
   #dt config
   dt_logs_api_endpoint_name = each.value.dt_logs_api_endpoint_name
   dt_cwl_api_token_name     = each.value.dt_cwl_api_token_name
