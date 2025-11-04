@@ -267,6 +267,9 @@ module "metric_stream" {
   metrics_stream_name             = each.value.metrics_stream_name
   include_linked_accounts_metrics = each.value.include_linked_accounts_metrics
   firehose_arn                    = module.aws_cwl_s3_bucket[var.tenant_vars.metric_stream_to_firehose_map[each.key]].firehose_stream_arn
+  include_filter                  = try(each.value.include_filter, {})
+  exclude_filter                  = try(each.value.exclude_filter, {})
+
 
 }
 
@@ -298,5 +301,13 @@ module "aws_cwl_s3_bucket" {
   dt_logs_api_endpoint_name = each.value.dt_logs_api_endpoint_name
   dt_cwl_api_token_name     = each.value.dt_cwl_api_token_name
   dt_endpoint_name          = each.value.dt_endpoint_name
+  dt_endpoint_internal_name = each.value.dt_endpoint_internal_name
   dt_cwm_api_token_name     = each.value.dt_cwm_api_token_name
+}
+
+module "monitoring_k8s_clusters" {
+  source          = "./monitoring"
+  count           = contains(keys(var.tenant_vars), "k8s_monitoring_config") ? 1 : 0
+  metrics_enabled = var.tenant_vars.k8s_monitoring_config.enabled
+  event_patterns  = var.tenant_vars.k8s_monitoring_config.event_patterns
 }
