@@ -251,7 +251,7 @@ resource "dynatrace_application_detection_rule_v2" "application_detection_rule_v
   description    = var.description != "" ? var.description : null
 }
 
-resource "dynatrace_custom_tags" "" {
+resource "dynatrace_custom_tags" "web_application_tags" {
   entity_selector = "entityId(\"${dynatrace_web_application.web_application.id}\")"
   tags {
     filter {
