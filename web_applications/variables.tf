@@ -1,3 +1,7 @@
+variable "project_id" {
+  description = "The project ID to use for the tag"
+  type        = string
+}
 variable "service_id" {
   description = "The service ID the web app belongs too"
   type        = string
