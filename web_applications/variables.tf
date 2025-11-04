@@ -1,3 +1,16 @@
+variable "service_id" {
+  description = "The service ID the web app belongs too"
+  type        = string
+}
+
+variable "application_id" {
+  description = "The id of the web_application"
+  type        = string
+}
+variable "environment_type" {
+  description = "The id of the web_application"
+  type        = string
+}
 variable "web_application_name" {
   description = "The name of the web application, displayed in the UI"
   type        = string
@@ -13,12 +26,12 @@ variable "rum_enabled" {
 }
 
 variable "matcher" {
-  type = string
+  type        = string
   description = "The matcher for the detection rule."
 }
 
 variable "pattern" {
-  type = string
+  type        = string
   description = "The pattern for the detection rule."
 }
 

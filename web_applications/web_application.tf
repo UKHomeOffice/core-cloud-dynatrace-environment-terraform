@@ -251,6 +251,31 @@ resource "dynatrace_application_detection_rule_v2" "application_detection_rule_v
   description    = var.description != "" ? var.description : null
 }
 
+resource "dynatrace_custom_tags" "" {
+  entity_selector = "entityId(\"${dynatrace_web_application.web_application.id}\")"
+  tags {
+    filter {
+      context = "CONTEXTLESS"
+      key     = "project-id"
+      value   = var.project_id
+    }
+    filter {
+      context = "CONTEXTLESS"
+      key     = "service-id"
+      value   = var.service_id
+    }
+    filter {
+      context = "CONTEXTLESS"
+      key     = "application-id"
+      value   = var.application_id
+    }
+    filter {
+      context = "CONTEXTLESS"
+      key     = "environment-type"
+      value   = var.environment_type
+    }
+  }
+}
 output "web_application_id" {
   value = dynatrace_web_application.web_application.id
 }
