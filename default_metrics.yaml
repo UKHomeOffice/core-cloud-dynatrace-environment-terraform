@@ -809,6 +809,73 @@ rds:
     dimensions:
     - Region
     - EngineName
+  - name: "Deadlocks"
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - Region
+    - DatabaseClass
+  - name: "Deadlocks"
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - Region
+    - EngineName
+  - name: "Deadlocks"
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - DBInstanceIdentifier
+  - name: "DeleteThroughput"
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - DBInstanceIdentifier
+  - name: "NetworkThroughput"
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - DBInstanceIdentifier
+  - name: "Queries"
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - DBInstanceIdentifier
+  - name: "Queries"
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - Region
+    - EngineName
+  - name: "ReadIOPS"
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - Region
+    - EngineName
+  - name: "ReadIOPS"
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - DBInstanceIdentifier
+  - name: "ReadLatency"
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - Region
+    - EngineName
+  - name: "StorageNetworkReceiveThroughput"
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - Region
+    - EngineName
+  - name: "StorageNetworkReceiveThroughput"
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - DBInstanceIdentifier
+  - name: "SwapUsage"
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - DBInstanceIdentifier
+  - name: "WriteIOPS"
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - Region
+    - EngineName
+  - name: "WriteIOPS"
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - DBInstanceIdentifier
 s3:
   - name: 4xxErrors
     statistic: AVG_MIN_MAX
