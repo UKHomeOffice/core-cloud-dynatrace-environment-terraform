@@ -1,5 +1,5 @@
 resource "dynatrace_json_dashboard" "this" {
-  contents = file("${path.module}/files/${var.filename}.json")
+  contents = file("${path.module}/files/${var.filename}")
 }
 
 resource "dynatrace_dashboard_sharing" "this" {
