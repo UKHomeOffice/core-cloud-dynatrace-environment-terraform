@@ -316,6 +316,7 @@ module "monitoring_k8s_clusters" {
 }
 
 module "platform_dashboards" {
+  source        = "./dashboards/platform_dashboards"
   #var.tenant_vars.platform_dashboards: true is the toggle
   for_each = { for file in local.files : file => file }
   filename = each.key
