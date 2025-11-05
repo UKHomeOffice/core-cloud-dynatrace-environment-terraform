@@ -317,9 +317,9 @@ module "monitoring_k8s_clusters" {
 
 module "platform_dashboards" {
   source        = "./dashboards/platform_dashboards"
-  #var.tenant_vars.platform_dashboards: true is the toggle
+  #var.tenant_vars.platform_dashboards.enabled: true is the toggle
   for_each = { for file in local.files : file => file }
   filename = each.key
   #mandatory if enabled with var.tenant_vars.platform_dashboards hence no checks
-  groups_to_share = var.tenant_vars.platform_dashboards_sharegroups
+  groups_to_share = var.tenant_vars.platform_dashboards.sharegroups
 }
