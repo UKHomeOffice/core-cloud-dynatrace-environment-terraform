@@ -321,5 +321,5 @@ module "platform_dashboards" {
   for_each = { for file in local.files : file => file }
   filename = each.key
   #mandatory if enabled with var.tenant_vars.platform_dashboards hence no checks
-  groups_to_share = var.tenant_vars.platform_dashboards.sharegroups
+  groups_to_share = var.tenant_vars.platform_dashboards.groups
 }
