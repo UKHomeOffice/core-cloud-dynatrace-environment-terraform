@@ -9,7 +9,7 @@ resource "dynatrace_dashboard_sharing" "this" {
   permissions {
     permission {
       id    = each.key
-      level = "EDIT"
+      level = "VIEW"
       type  = "GROUP"
     }
   }
