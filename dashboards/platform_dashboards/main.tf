@@ -10,7 +10,7 @@ resource "dynatrace_dashboard_sharing" "this" {
   enabled      = true
   permissions {
     permission {
-      id    = each.key
+      id    = each.value
       level = "VIEW"
       type  = "GROUP"
     }
@@ -18,3 +18,5 @@ resource "dynatrace_dashboard_sharing" "this" {
 }
 
 # Gen3 dashboards
+
+# count    = local.gen2 ? 0 : 1
