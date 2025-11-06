@@ -1,6 +1,10 @@
 # core-cloud-dynatrace-environment-terraform
-
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
 This terraform module is used to create Dynatrace environment specific resources.
+
+## Developer setup
+
+This repository is designed to use pre commit hooks as part of the [pre-commit framework](https://pre-commit.com). To setup please follow the instructions on the pre-commit website to install it locally and then run `pre-commit install` to install the hooks. These are managed in [.pre-commit-config.yaml](.pre-commit-config.yaml)
 
 ## Metrics to monitor
 
@@ -59,6 +63,7 @@ corecloud_dynatracetest:
 Setting any 'Rules' for a Management Zone is entirely optional, but opening a "Rules" block will require at least one contained rule to be created, or else the pipeline will fail.
 
 For information on further options and attributes for the Zone and the Rules (whether 'attribute' or 'dimension') contained therein, please refer to the [Dynatrace Documentation](https://docs.dynatrace.com/docs/manage/identity-access-management/permission-management/management-zones) and the base [Terraform for the v2 resource](https://registry.terraform.io/providers/dynatrace-oss/dynatrace/latest/docs/resources/management_zone_v2) to clarify required/optional arguments.
+
 
 <!-- BEGIN_TF_DOCS -->
 
