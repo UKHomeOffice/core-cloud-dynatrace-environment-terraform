@@ -1,6 +1,6 @@
 # Classic (gen2) dashboards
 resource "dynatrace_json_dashboard" "this" {
-  count    = startswith(var.filename, "classic_") ? 1 : 0
+  count    = local.gen2 ? 1 : 0
   contents = file("${path.module}/files/${var.filename}")
 }
 
