@@ -6,7 +6,7 @@ resource "dynatrace_json_dashboard" "this" {
 
 resource "dynatrace_dashboard_sharing" "this" {
   for_each     = local.groups_to_share_map
-  dashboard_id = dynatrace_json_dashboard.this.id
+  dashboard_id = dynatrace_json_dashboard.this[0].id
   enabled      = true
   permissions {
     permission {
