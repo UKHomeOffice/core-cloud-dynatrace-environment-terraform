@@ -18,5 +18,3 @@ resource "dynatrace_dashboard_sharing" "this" {
 }
 
 # Gen3 dashboards
-
-# count    = local.gen2 ? 0 : 1
