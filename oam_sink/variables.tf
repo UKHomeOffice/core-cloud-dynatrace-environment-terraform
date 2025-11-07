@@ -13,4 +13,3 @@ variable "ou_paths" {
   description = "OU paths"
   type        = list(string)
 }
-
