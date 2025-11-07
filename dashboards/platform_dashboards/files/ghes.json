@@ -1,0 +1,197 @@
+{
+  "version": 18,
+  "tiles": {
+    "0": {
+      "type": "markdown",
+      "title": "",
+      "content": "## Kubernetes Pod & Team Runner Monitoring\n\n**Active Teams:** cc-apa | cc-apc | cc-ghec | cc-cerberus | apa-runners  \n**Pod Filters:** runner, actions"
+    },
+    "1": {
+      "type": "data",
+      "title": "Total Pod Count (All Teams)",
+      "query": "fetch dt.entity.cloud_application_instance\n| filter contains(entity.name, \"runner\") or contains(entity.name, \"actions\")\n| summarize count()",
+      "visualizationType": "singleValue"
+    },
+    "2": {
+      "type": "data",
+      "title": "cc-apa: Total Pods",
+      "query": "fetch dt.entity.cloud_application_instance\n| filter contains(entity.name, \"cc-apa\")\n| summarize count()",
+      "visualizationType": "singleValue"
+    },
+    "3": {
+      "type": "data",
+      "title": "cc-apc: Total Pods",
+      "query": "fetch dt.entity.cloud_application_instance\n| filter contains(entity.name, \"cc-apc\")\n| summarize count()",
+      "visualizationType": "singleValue"
+    },
+    "4": {
+      "type": "data",
+      "title": "cc-ghec: Total Pods",
+      "query": "fetch dt.entity.cloud_application_instance\n| filter contains(entity.name, \"cc-ghec\")\n| summarize count()",
+      "visualizationType": "singleValue"
+    },
+    "5": {
+      "type": "data",
+      "title": "cc-cerberus: Total Pods",
+      "query": "fetch dt.entity.cloud_application_instance\n| filter contains(entity.name, \"cc-cerberus\")\n| summarize count()",
+      "visualizationType": "singleValue"
+    },
+    "6": {
+      "type": "data",
+      "title": "apa-runners: Total Pods",
+      "query": "fetch dt.entity.cloud_application_instance\n| filter contains(entity.name, \"apa-runners\")\n| summarize count()",
+      "visualizationType": "singleValue"
+    },
+    "7": {
+      "type": "data",
+      "title": "Team Distribution",
+      "query": "fetch dt.entity.cloud_application_instance\n| filter contains(entity.name, \"runner\") or contains(entity.name, \"actions\")\n| fieldsAdd team = if(contains(entity.name, \"cc-apa\"), \"cc-apa\", else:if(contains(entity.name, \"cc-apc\"), \"cc-apc\", else:if(contains(entity.name, \"cc-ghec\"), \"cc-ghec\", else:if(contains(entity.name, \"cc-cerberus\"), \"cc-cerberus\", else:if(contains(entity.name, \"apa-runners\"), \"apa-runners\", else:\"other\")))))\n| summarize pod_count = count(), by:{team}",
+      "visualizationType": "pieChart"
+    },
+    "8": {
+      "type": "data",
+      "title": "Pod Count by Team",
+      "query": "fetch dt.entity.cloud_application_instance\n| filter contains(entity.name, \"runner\") or contains(entity.name, \"actions\")\n| fieldsAdd team = if(contains(entity.name, \"cc-apa\"), \"cc-apa\", else:if(contains(entity.name, \"cc-apc\"), \"cc-apc\", else:if(contains(entity.name, \"cc-ghec\"), \"cc-ghec\", else:if(contains(entity.name, \"cc-cerberus\"), \"cc-cerberus\", else:if(contains(entity.name, \"apa-runners\"), \"apa-runners\", else:\"other\")))))\n| summarize pod_count = count(), by:{team}\n| sort pod_count desc",
+      "visualizationType": "table"
+    },
+    "9": {
+      "type": "data",
+      "title": "Pods by Team Comparison",
+      "query": "fetch dt.entity.cloud_application_instance\n| filter contains(entity.name, \"runner\") or contains(entity.name, \"actions\")\n| fieldsAdd team = if(contains(entity.name, \"cc-apa\"), \"cc-apa\", else:if(contains(entity.name, \"cc-apc\"), \"cc-apc\", else:if(contains(entity.name, \"cc-ghec\"), \"cc-ghec\", else:if(contains(entity.name, \"cc-cerberus\"), \"cc-cerberus\", else:if(contains(entity.name, \"apa-runners\"), \"apa-runners\", else:\"other\")))))\n| summarize pod_count = count(), by:{team}\n| sort pod_count desc",
+      "visualizationType": "barChart"
+    },
+    "50": {
+      "type": "markdown",
+      "title": "",
+      "content": "---\n### 📋 Team Pod Details\nDetailed pod listings for each team"
+    },
+    "10": {
+      "type": "data",
+      "title": "cc-apa Pods",
+      "query": "fetch dt.entity.cloud_application_instance\n| filter contains(entity.name, \"cc-apa\")\n| fields pod_name = entity.name\n| sort pod_name asc\n| limit 100",
+      "visualizationType": "table"
+    },
+    "11": {
+      "type": "data",
+      "title": "cc-apc Pods",
+      "query": "fetch dt.entity.cloud_application_instance\n| filter contains(entity.name, \"cc-apc\")\n| fields pod_name = entity.name\n| sort pod_name asc\n| limit 100",
+      "visualizationType": "table"
+    },
+    "12": {
+      "type": "data",
+      "title": "cc-ghec Pods",
+      "query": "fetch dt.entity.cloud_application_instance\n| filter contains(entity.name, \"cc-ghec\")\n| fields pod_name = entity.name\n| sort pod_name asc\n| limit 100",
+      "visualizationType": "table"
+    },
+    "13": {
+      "type": "data",
+      "title": "cc-cerberus Pods",
+      "query": "fetch dt.entity.cloud_application_instance\n| filter contains(entity.name, \"cc-cerberus\")\n| fields pod_name = entity.name\n| sort pod_name asc\n| limit 100",
+      "visualizationType": "table"
+    },
+    "14": {
+      "type": "data",
+      "title": "apa-runners Pods",
+      "query": "fetch dt.entity.cloud_application_instance\n| filter contains(entity.name, \"apa-runners\")\n| fields pod_name = entity.name\n| sort pod_name asc\n| limit 100",
+      "visualizationType": "table"
+    }
+  },
+  "layouts": {
+    "0": {
+      "x": 0,
+      "y": 0,
+      "w": 24,
+      "h": 4
+    },
+    "1": {
+      "x": 0,
+      "y": 4,
+      "w": 4,
+      "h": 4
+    },
+    "2": {
+      "x": 4,
+      "y": 4,
+      "w": 4,
+      "h": 4
+    },
+    "3": {
+      "x": 8,
+      "y": 4,
+      "w": 4,
+      "h": 4
+    },
+    "4": {
+      "x": 12,
+      "y": 4,
+      "w": 4,
+      "h": 4
+    },
+    "5": {
+      "x": 16,
+      "y": 4,
+      "w": 4,
+      "h": 4
+    },
+    "6": {
+      "x": 20,
+      "y": 4,
+      "w": 4,
+      "h": 4
+    },
+    "7": {
+      "x": 0,
+      "y": 8,
+      "w": 8,
+      "h": 8
+    },
+    "9": {
+      "x": 8,
+      "y": 8,
+      "w": 16,
+      "h": 8
+    },
+    "8": {
+      "x": 0,
+      "y": 16,
+      "w": 24,
+      "h": 8
+    },
+    "50": {
+      "x": 0,
+      "y": 24,
+      "w": 24,
+      "h": 1
+    },
+    "10": {
+      "x": 0,
+      "y": 25,
+      "w": 8,
+      "h": 10
+    },
+    "11": {
+      "x": 8,
+      "y": 25,
+      "w": 8,
+      "h": 10
+    },
+    "12": {
+      "x": 16,
+      "y": 25,
+      "w": 8,
+      "h": 10
+    },
+    "13": {
+      "x": 0,
+      "y": 35,
+      "w": 12,
+      "h": 10
+    },
+    "14": {
+      "x": 12,
+      "y": 35,
+      "w": 12,
+      "h": 10
+    }
+  }
+}

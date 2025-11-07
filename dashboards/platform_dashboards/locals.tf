@@ -1,4 +1,5 @@
 
 locals {
-  groups_to_share_map = { for group in var.groups_to_share : group => group }
+  gen2 = startswith(var.filename, "classic_") ? true : false
+  groups_to_share_map = local.gen2 ? var.groups_to_share : {}
 }
