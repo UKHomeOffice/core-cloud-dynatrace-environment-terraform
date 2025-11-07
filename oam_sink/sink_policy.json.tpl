@@ -4,7 +4,10 @@
     {
       "Effect": "Allow",
       "Principal": "*",
-      "Action": ["oam:CreateLink", "oam:UpdateLink"],
+      "Action": [
+        "oam:CreateLink",
+        "oam:UpdateLink"
+      ],
       "Resource": "*",
       "Condition": {
         "ForAllValues:StringEquals": {
