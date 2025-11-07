@@ -4,10 +4,7 @@
     {
       "Effect": "Allow",
       "Principal": "*",
-      "Action": [
-        "oam:CreateLink",
-        "oam:UpdateLink"
-      ],
+      "Action": ["oam:CreateLink", "oam:UpdateLink"],
       "Resource": "*",
       "Condition": {
         "ForAllValues:StringEquals": {
@@ -23,8 +20,8 @@
         },
         "ForAnyValue:StringLike": {
           "aws:PrincipalOrgPaths": [
-            %{ for ou in ou_paths ~}
-              "o-${org_id[0]}/*/${ou}/*"%{ if length(ou_paths) > count.index + 1 },%{ endif }
+            %{ for i, ou in ou_paths ~}
+              "o-${org_id[0]}/*/${ou}/*"%{ if i < length(ou_paths) - 1 },%{ endif }
             %{ endfor ~}
           ]
         },
