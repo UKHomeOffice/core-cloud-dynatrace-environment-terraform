@@ -4,10 +4,8 @@ resource "aws_oam_sink" "this" {
 
 resource "aws_oam_sink_policy" "this" {
   sink_identifier = aws_oam_sink.this.id
-  policy          = templatefile("${path.module}/sink_policy.json.tpl", {
-  org_id          = join(",", var.org_id)
-  ou_paths        = join(",", var.ou_paths)
-
-
+   policy = templatefile("${path.module}/sink_policy.json.tpl", {
+    org_id   = var.org_id
+    ou_paths = var.ou_paths
   })
 }
