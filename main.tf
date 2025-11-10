@@ -248,9 +248,9 @@ module "metric_stream" {
 
 }
 
-module "aws_cwl_cwm_firehose" {
-  source   = "./aws_cwl_cwm_firehose"
-  for_each = contains(keys(var.tenant_vars), "aws_cwl_cwm_firehose") ? var.tenant_vars.aws_cwl_cwm_firehose : {}
+module "aws_cwl_cwm" {
+  source   = "./aws_cwl_cwm"
+  for_each = contains(keys(var.tenant_vars), "aws_cwl_cwm") ? var.tenant_vars.aws_cwl_cwm : {}
   tags     = each.value.tags
 
   #s3 config
