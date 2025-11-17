@@ -1134,35 +1134,31 @@ lambda:
     statistic: SUM
     dimensions:
       - Region
-firehose:
+kinesisFirehose:
   - name: DeliveryToS3.DataFreshness
-    statistic: AVG_MIN_MAX
+    statistic: MAXIMUM
     dimensions:
       - DeliveryStreamName
-      - Region
   - name: DeliveryToS3.Records
     statistic: SUM
     dimensions:
       - DeliveryStreamName
-      - Region
   - name: DeliveryToS3.Success
-    statistic: AVERAGE
+    statistic: SUM
     dimensions:
       - DeliveryStreamName
-      - Region
   - name: IncomingRecords
     statistic: SUM
     dimensions:
       - DeliveryStreamName
-      - Region
   - name: ThrottledGetRecords
-    statistic: SUM
-    dimensions:
-      - DeliveryStreamName
-      - Region
-  - name: ExecuteProcessing.Success
     statistic: AVERAGE
     dimensions:
       - DeliveryStreamName
-      - Region
+  - name: ExecuteProcessing.Success
+    statistic: SAMPLE_COUNT
+    dimensions:
+      - DeliveryStreamName
+
+
 
