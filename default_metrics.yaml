@@ -1159,6 +1159,3 @@ kinesisFirehose:
     statistic: SAMPLE_COUNT
     dimensions:
       - DeliveryStreamName
-
-
-
