@@ -19,8 +19,24 @@ variable "description" {
 }
 
 variable "management_zone" {
-  description = "Management Zone this configuration will be defined for"
+  description = "Management Zone this configuration will be scoped to (optional)"
   type        = string
+  default     = null
+}
+
+variable "host_group" {
+  description = "The host group this configuration will be scoped to (optional)"
+  type        = string
+  default     = null
+}
+
+variable "host" {
+  description = "The host this configuration will be scoped to (optional)"
+  default     = null
+}
+variable "active_gate_group" {
+  description = "The active gate group this configuration will be scope to (optional)"
+  default     = null
 }
 
 variable "extn_version" {
@@ -34,7 +50,7 @@ variable "featureSets" {
 }
 
 variable "activationTags" {
-  type = list(string)
+  type        = list(string)
   description = "List of activationTags to apply to this extension"
   # Expected format for tag: "[PROVIDER]key: value", e.g., "[AWS]dynatrace: true"
 }
