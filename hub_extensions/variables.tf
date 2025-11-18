@@ -54,3 +54,9 @@ variable "activationTags" {
   description = "List of activationTags to apply to this extension"
   # Expected format for tag: "[PROVIDER]key: value", e.g., "[AWS]dynatrace: true"
 }
+
+variable "activationContext"{
+  type = string 
+  description = "The activation context e.g. REMOTE for active gate based or LOCAL for oneagent based"
+  default = "LOCAL"
+}

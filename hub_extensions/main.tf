@@ -18,7 +18,8 @@ resource "dynatrace_hub_extension_config" "hub_extension" {
       "featureSets" : [
         for feature_set in var.featureSets : feature_set
       ],
-      "activationTags" : [for tag in var.activationTags : tag]
+      "activationTags" : [for tag in var.activationTags : tag],
+      "activationContext": var.activationContext 
     }
   )
 
