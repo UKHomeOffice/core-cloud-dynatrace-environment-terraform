@@ -305,21 +305,9 @@ default_rules:
       pg_to_service_propagation: ${pg_to_service_propagation}
 %{ endif ~}
   include_web_apps:
-    type: "ME"
+    type: "SELECTOR"
     enabled: true
-    attribute_rule:
-      entity_type: "WEB_APPLICATION"
-      attribute_conditions:
-        - key: "WEB_APPLICATION_NAME"
-          operator: "BEGINS_WITH"
-          string_value: "${webapp_prefix}"
-          case_sensitive: true
-%{ if env_name != ""  ~}
-        - key: "WEB_APPLICATION_NAME"
-          operator: "CONTAINS"
-          string_value: "${env_name}"
-          case_sensitive: true
-%{ endif ~}
+    entity_selector: type(APPLICATION),tag(project-id:${project_id})%{ if service_id != "" },tag(service-id:${service_id})%{ endif }%{if env_name!= ""},tag(environment-type:${env_name})%{endif}
 %{ if can(aws_account_id) != "" ~}
   exclude_account:
     type: "ME"
