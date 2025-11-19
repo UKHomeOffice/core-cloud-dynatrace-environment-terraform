@@ -216,6 +216,7 @@ module "hub_extensions" {
   tenant_vars  = each.value
   extn_version = each.value.extn_version
   # Optional scoping
+  project_id        = var.tenant_vars.project_id
   management_zone   = try(each.value.management_zone, null)
   host_group        = try(each.value.host_group, null)
   host              = try(each.value.host, null)
