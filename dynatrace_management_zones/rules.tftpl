@@ -307,7 +307,7 @@ default_rules:
   include_web_apps:
     type: "SELECTOR"
     enabled: true
-    entity_selector: type(HOST),%{ if project_id != "" },tag(project-id:${project_id})%{ endif }%{ if service_id != "" },tag(service-id:${service_id})%{if env_name!= ""},tag(environment-type:${env_name})%{endif}
+    entity_selector: type(HOST),tag(project-id:${project_id})%{ if service_id != "" },tag(service-id:${service_id})%{ endif }%{if env_name!= ""},tag(environment-type:${env_name})%{endif}
 %{ if can(aws_account_id) != "" ~}
   exclude_account:
     type: "ME"
