@@ -7,18 +7,21 @@ resource "dynatrace_json_dashboard" "this" {
     ],
     "clusterVersion": "1.328.38.20251118-072621"
   },
-  "id": "5ddfac19-9b56-42ec-95c0-7a3e5f9bbde6",
   "dashboardMetadata": {
     "name": "KinesisFirehose",
     "shared": true,
-    "owner": "Dynatrace",
+    "owner": "Cosmos",
+    "tags": [
+      "cosmos"
+    ],
     "dashboardFilter": {
       "managementZone": {
         "id": "all",
         "name": "All"
       }
     },
-    "popularity": 6,
+    "preset": true,
+    "popularity": 2,
     "hasConsistentColors": false
   },
   "tiles": [
@@ -637,15 +640,7 @@ EOT
 # }
 # oauth client required for this data source, will bring back this into conifg once we have oauth client configured.
 
-
 resource "dynatrace_dashboard_sharing" "this" {
   dashboard_id = dynatrace_json_dashboard.this.id
   enabled = true
-  permissions {
-    permission {
-      id    = var.dt_admin_group_id
-      level = "EDIT"
-      type  = "GROUP"
-    }
-  }
 }
