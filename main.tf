@@ -28,6 +28,7 @@ module "dynatrace_management_zones" {
   source = "./dynatrace_management_zones"
 
   for_each = var.tenant_vars.management_zones
+  project_id = var.tenant_vars.project_id
   # Create one management zone per named entry under the "management_zones" block of the config.yaml
   zone_vars = each.value
   # Value is the attribute/parameter content of each named entry
@@ -211,16 +212,22 @@ module "dynatrace_kafka_settings" {
 module "hub_extensions" {
 
   source   = "./hub_extensions"
-  for_each = contains(keys(var.tenant_vars), "hub_extensions") ? var.tenant_vars.hub_extensions : {}
+  for_each = contains(keys(var.tenant_vars), "hub_extensions") ? var.tenant_vars.hub_extensions : tomap({})
 
-  tenant_vars     = each.value
-  extn_version    = each.value.extn_version
-  management_zone = each.value.management_zone
-  description     = try(each.value.description, "")
-  featureSets     = each.value.featureSets
-  extension_name  = each.value.extension_name
-  enabled         = try(each.value.enabled, true)
-  activationTags  = each.value.activationTags != null ? each.value.activationTags : ["[AWS]dynatrace: true"]
+  tenant_vars  = each.value
+  extn_version = each.value.extn_version
+  # Optional scoping
+  management_zone   = try(each.value.management_zone, null)
+  host_group        = try(each.value.host_group, null)
+  host              = try(each.value.host, null)
+  active_gate_group = try(each.value.active_gate_group, null)
+  #end of optional scoping
+
+  description    = try(each.value.description, "")
+  featureSets    = each.value.featureSets
+  extension_name = each.value.extension_name
+  enabled        = try(each.value.enabled, true)
+  activationTags = each.value.activationTags != null ? each.value.activationTags : ["[AWS]dynatrace: true"]
 }
 module "oam_sink" {
   source   = "./oam_sink/"
@@ -316,7 +323,7 @@ module "monitoring_k8s_clusters" {
 }
 
 module "platform_dashboards" {
-  source        = "./dashboards/platform_dashboards"
+  source = "./dashboards/platform_dashboards"
   #var.tenant_vars.platform_dashboards.enabled: true is the toggle
   for_each = { for file in local.files : file => file }
   filename = each.key
