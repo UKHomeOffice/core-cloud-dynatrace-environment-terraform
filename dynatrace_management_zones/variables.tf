@@ -2,7 +2,9 @@ variable "zone_name" {
   type        = string
   description = "Name of the management zone"
 }
-
+variable "project_id" {
+  type = string
+}
 variable "zone_vars" {
   type = object({
     description                  = optional(string)

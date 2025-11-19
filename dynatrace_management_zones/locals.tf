@@ -1,7 +1,7 @@
 locals {
   default_rules_raw = yamldecode(
     templatefile("${path.module}/rules.tftpl", {
-      project_id                   = var.zone_vars.project_id
+      project_id                   = var.project_id
       env_name                     = var.zone_vars.env_name
       tag_env_name                 = var.zone_vars.env_name
       service_id                   = var.zone_vars.service_id
