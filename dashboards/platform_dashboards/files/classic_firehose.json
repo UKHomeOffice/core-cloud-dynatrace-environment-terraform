@@ -1,14 +1,12 @@
-resource "dynatrace_json_dashboard" "cosmos_firehose_dashboard" {
-  contents = jsonencode(
 {
   "dashboardMetadata": {
     "name": "KinesisFirehose",
-    "shared" = true
-    "owner": "Cosmos",
+    "shared" : true,
+    "owner" : "Cosmos",
     "tags": [
       "cosmos"
     ],
-    "preset" = true,
+    "preset" : true
   },
   "tiles": [
     {
@@ -618,6 +616,4 @@ resource "dynatrace_json_dashboard" "cosmos_firehose_dashboard" {
       ]
     }
   ]
-})
 }
-
