@@ -5,8 +5,7 @@
     "owner" : "Cosmos",
     "tags": [
       "cosmos"
-    ],
-    "preset" : true
+    ]
   },
   "tiles": [
     {
