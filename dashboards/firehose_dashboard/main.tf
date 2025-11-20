@@ -1,27 +1,14 @@
-resource "dynatrace_json_dashboard" "this" {
-  contents = <<EOT
+resource "dynatrace_json_dashboard" "cosmos_firehose_dashboard" {
+  contents = jsonencode(
 {
-  "metadata": {
-    "configurationVersions": [
-      7
-    ],
-    "clusterVersion": "1.328.38.20251118-072621"
-  },
-  "id": "1ba2b925-3631-4df9-8ae8-a30826f824f1",
   "dashboardMetadata": {
     "name": "KinesisFirehose",
+    "shared" = true
     "owner": "Cosmos",
-    "dashboardFilter": {
-      "managementZone": {
-        "id": "all",
-        "name": "All"
-      }
-    },
     "tags": [
       "cosmos"
     ],
-    "preset": true,
-    "hasConsistentColors": false
+    "preset" = true,
   },
   "tiles": [
     {
@@ -631,15 +618,6 @@ resource "dynatrace_json_dashboard" "this" {
       ]
     }
   ]
+})
 }
-EOT
-}
-# data "dynatrace_iam_group" "ho_cc_platform_engineer_env_admin" {
-#   name = var.dt_admin_group_name
-# }
-# oauth client required for this data source, will bring back this into conifg once we have oauth client configured.
 
-resource "dynatrace_dashboard_sharing" "this" {
-  dashboard_id = dynatrace_json_dashboard.this.id
-  enabled = true
-}

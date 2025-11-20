@@ -331,6 +331,8 @@ module "platform_dashboards" {
   groups_to_share = var.tenant_vars.platform_dashboards.groups
 }
 module "firehose_dashboard" {
-  source            = "./dashboards/firehose_dashboard"
-  count             = contains(keys(var.tenant_vars), "firehose_dashboard") ? 1 : 0
+  source                       = "./dashboards/firehose_dashboard"
+  count                        = contains(keys(var.tenant_vars), "firehose_dashboard") ? 1 : 0
+  dt_dashboard_sharing_enabled = try(var.tenant_vars.firehose_dashboard.dt_dashboard_sharing_enabled, true)
+
 }
