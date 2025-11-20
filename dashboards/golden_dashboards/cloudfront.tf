@@ -3,6 +3,7 @@ resource "dynatrace_json_dashboard" "cosmo_cloudfront_dashboard_template" {
     {
     "dashboardMetadata": {
       "name": "cloudfront_dashboard_template",
+      "shared": true,
       "owner": "Cosmos",
       "tags" : [
           "cosmos"
