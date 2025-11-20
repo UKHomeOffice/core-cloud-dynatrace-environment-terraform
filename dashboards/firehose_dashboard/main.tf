@@ -7,19 +7,20 @@ resource "dynatrace_json_dashboard" "this" {
     ],
     "clusterVersion": "1.328.38.20251118-072621"
   },
+  "id": "1ba2b925-3631-4df9-8ae8-a30826f824f1",
   "dashboardMetadata": {
     "name": "KinesisFirehose",
-    "preset": true,
     "owner": "Cosmos",
     "dashboardFilter": {
       "managementZone": {
-        "id": "560722537042164140",
-        "name": "cc"
+        "id": "all",
+        "name": "All"
       }
     },
     "tags": [
       "cosmos"
     ],
+    "preset": true,
     "hasConsistentColors": false
   },
   "tiles": [
