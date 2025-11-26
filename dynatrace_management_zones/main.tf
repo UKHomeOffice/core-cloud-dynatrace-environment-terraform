@@ -13,19 +13,19 @@ resource "dynatrace_management_zone_v2" "management_zone" {
   legacy_id   = try(var.zone_vars.legacy_id, null)
 
   dynamic "rules" {
-    for_each = local.zone_rules_processed != null ? { for idx, r in local.zone_rules_processed : idx => r } : {}
+    # Outer block must exist if there are any rules
+    for_each = length(keys(local.zone_rules_processed)) > 0 ? [1] : []
     content {
       dynamic "rule" {
-        # Use a stable key per rule: name if available, else index
-        for_each = { for idx, r in local.zone_rules_processed : r.name != null ? r.name : idx => r }
+        # Iterate over actual rules map
+        for_each = local.zone_rules_processed
         content {
           type            = rule.value.type
           enabled         = rule.value.enabled
           entity_selector = try(rule.value.entity_selector, null)
 
           dynamic "attribute_rule" {
-            # Use stable keys for attribute rules
-            for_each = try({ for idx, ar in rule.value.attribute_rule : idx => ar }, {})
+            for_each = try(rule.value.attribute_rule, [])
             content {
               azure_to_pgpropagation                           = try(attribute_rule.value.azure_to_pgpropagation, false)
               azure_to_service_propagation                     = try(attribute_rule.value.azure_to_service_propagation, false)
@@ -39,7 +39,7 @@ resource "dynatrace_management_zone_v2" "management_zone" {
 
               attribute_conditions {
                 dynamic "condition" {
-                  for_each = try({ for idx, c in attribute_rule.value.attribute_conditions : idx => c }, {})
+                  for_each = try(attribute_rule.value.attribute_conditions, [])
                   content {
                     key                = condition.value.key
                     operator           = condition.value.operator
@@ -58,15 +58,14 @@ resource "dynatrace_management_zone_v2" "management_zone" {
           }
 
           dynamic "dimension_rule" {
-            for_each = ((try(rule.value.dimension_rule, null) != null) && (rule.value.dimension_rule != {})) ? { for idx, dr in rule.value.dimension_rule : idx => dr } : {}
+            for_each = try(rule.value.dimension_rule, [])
             content {
               applies_to = dimension_rule.value.applies_to
-
               dynamic "dimension_conditions" {
-                for_each = dimension_rule.value.dimension_conditions != null ? { for idx, dc in dimension_rule.value.dimension_conditions : idx => dc } : {}
+                for_each = try(dimension_rule.value.dimension_conditions, [])
                 content {
                   dynamic "condition" {
-                    for_each = try({ for idx, c in dimension_conditions.value : idx => c }, {})
+                    for_each = try(dimension_rule.value.dimension_conditions, [])
                     content {
                       condition_type = try(condition.value.condition.condition_type, null)
                       rule_matcher   = try(condition.value.condition.rule_matcher, null)
