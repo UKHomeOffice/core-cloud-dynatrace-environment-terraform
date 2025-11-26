@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    dynatrace = {
+      version = "~> 1.0"
+      source  = "dynatrace-oss/dynatrace"
+    }
+  }
+}
+
 resource "dynatrace_management_zone_v2" "management_zone" {
   name        = var.zone_name
   description = try(var.zone_vars.description, "Management zone for ${var.zone_name}")
@@ -19,7 +28,7 @@ resource "dynatrace_management_zone_v2" "management_zone" {
 
           dynamic "attribute_rule" {
             for_each = try(rule.value.attribute_rule[*], {})
-
+            # Creates an attribute rule block with conditions as defined - either this or dimension_rule
             content {
               azure_to_pgpropagation                           = try(attribute_rule.value.azure_to_pgpropagation, false)
               azure_to_service_propagation                     = try(attribute_rule.value.azure_to_service_propagation, false)
@@ -29,13 +38,10 @@ resource "dynatrace_management_zone_v2" "management_zone" {
               pg_to_service_propagation                        = try(attribute_rule.value.pg_to_service_propagation, false)
               service_to_host_propagation                      = try(attribute_rule.value.service_to_host_propagation, false)
               service_to_pgpropagation                         = try(attribute_rule.value.service_to_pgpropagation, false)
-
               entity_type = try(attribute_rule.value.entity_type, null)
-
               attribute_conditions {
                 dynamic "condition" {
                   for_each = try(attribute_rule.value.attribute_conditions, [])
-
                   content {
                     key                = condition.value.key
                     operator           = condition.value.operator
@@ -58,17 +64,14 @@ resource "dynatrace_management_zone_v2" "management_zone" {
               try(rule.value.dimension_rule, null) != null &&
               rule.value.dimension_rule != {}
             ) ? rule.value.dimension_rule[*] : []
-
             content {
               applies_to = dimension_rule.value.applies_to
 
               dynamic "dimension_conditions" {
                 for_each = dimension_rule.value.dimension_conditions != null ? dimension_rule.value.dimension_conditions[*] : []
-
                 content {
                   dynamic "condition" {
                     for_each = try(dimension_rule.value.dimension_conditions[*], {})
-
                     content {
                       condition_type = try(condition.value.condition.condition_type, null)
                       rule_matcher   = try(condition.value.condition.rule_matcher, null)
@@ -84,4 +87,8 @@ resource "dynatrace_management_zone_v2" "management_zone" {
       }
     }
   }
+}
+
+output "zone_var_output" {
+  value = local.zone_rules_processed
 }
