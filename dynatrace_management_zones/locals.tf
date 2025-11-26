@@ -1,4 +1,5 @@
 locals {
+  # Load rules template YAML
   default_rules_raw = yamldecode(
     templatefile("${path.module}/rules.tftpl", {
       project_id                   = var.project_id
@@ -17,6 +18,7 @@ locals {
     })
   ).default_rules
 
+  # Merge default template rules with tenant overrides
   zone_rules_processed = merge(
     {
       for k, v in local.default_rules_raw :
@@ -26,4 +28,9 @@ locals {
     var.zone_vars.tenant_exclusive_rules
   )
 
+  # Convert map → stable sorted list
+  rules_list = [
+    for key in sort(keys(local.zone_rules_processed)) :
+    local.zone_rules_processed[key]
+  ]
 }
