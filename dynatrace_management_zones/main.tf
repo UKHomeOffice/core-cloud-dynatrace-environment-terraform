@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    dynatrace = {
+      version = "~> 1.0"
+      source  = "dynatrace-oss/dynatrace"
+    }
+  }
+}
+
 resource "dynatrace_management_zone_v2" "management_zone" {
   name        = var.zone_name
   description = try(var.zone_vars.description, "Management zone for ${var.zone_name}")
