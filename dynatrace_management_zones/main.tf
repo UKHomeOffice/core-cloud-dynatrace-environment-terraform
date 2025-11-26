@@ -13,32 +13,28 @@ resource "dynatrace_management_zone_v2" "management_zone" {
   legacy_id   = try(var.zone_vars.legacy_id, null)
 
   dynamic "rules" {
-    for_each = local.zone_rules_sorted != null ? [local.zone_rules_sorted] : []
+    for_each = local.zone_rules_processed != null ? local.zone_rules_processed[*] : []
     content {
       dynamic "rule" {
-        for_each = {
-          for idx, rule in local.zone_rules_sorted :
-          idx => rule
-        }
-
+        for_each = rules.value
         content {
           type            = rule.value.type
           enabled         = rule.value.enabled
           entity_selector = try(rule.value.entity_selector, null)
 
           dynamic "attribute_rule" {
-            for_each = try(rule.value.attribute_rule[*], {})
+            for_each = try(rule.value.attribute_rule[*], [])
             content {
-              entity_type = try(attribute_rule.value.entity_type, null)
+              entity_type = lookup(attribute_rule.value, "entity_type", null)
 
-              azure_to_pgpropagation                           = try(attribute_rule.value.azure_to_pgpropagation, false)
-              azure_to_service_propagation                     = try(attribute_rule.value.azure_to_service_propagation, false)
-              custom_device_group_to_custom_device_propagation = try(attribute_rule.value.custom_device_group_to_custom_device_propagation, false)
-              host_to_pgpropagation                            = try(attribute_rule.value.host_to_pgpropagation, false)
-              pg_to_host_propagation                           = try(attribute_rule.value.pg_to_host_propagation, false)
-              pg_to_service_propagation                        = try(attribute_rule.value.pg_to_service_propagation, false)
-              service_to_host_propagation                      = try(attribute_rule.value.service_to_host_propagation, false)
-              service_to_pgpropagation                         = try(attribute_rule.value.service_to_pgpropagation, false)
+              azure_to_pgpropagation                           = lookup(attribute_rule.value, "azure_to_pgpropagation", null)
+              azure_to_service_propagation                     = lookup(attribute_rule.value, "azure_to_service_propagation", null)
+              custom_device_group_to_custom_device_propagation = lookup(attribute_rule.value, "custom_device_group_to_custom_device_propagation", null)
+              host_to_pgpropagation                            = lookup(attribute_rule.value, "host_to_pgpropagation", null)
+              pg_to_host_propagation                           = lookup(attribute_rule.value, "pg_to_host_propagation", null)
+              pg_to_service_propagation                        = lookup(attribute_rule.value, "pg_to_service_propagation", null)
+              service_to_host_propagation                      = lookup(attribute_rule.value, "service_to_host_propagation", null)
+              service_to_pgpropagation                         = lookup(attribute_rule.value, "service_to_pgpropagation", null)
 
               attribute_conditions {
                 dynamic "condition" {
@@ -61,10 +57,7 @@ resource "dynatrace_management_zone_v2" "management_zone" {
           }
 
           dynamic "dimension_rule" {
-            for_each = (
-              try(rule.value.dimension_rule, null) != null &&
-              rule.value.dimension_rule != {}
-            ) ? rule.value.dimension_rule[*] : []
+            for_each = try(rule.value.dimension_rule, []) != null ? rule.value.dimension_rule[*] : []
             content {
               applies_to = dimension_rule.value.applies_to
 
@@ -72,7 +65,7 @@ resource "dynatrace_management_zone_v2" "management_zone" {
                 for_each = dimension_rule.value.dimension_conditions != null ? dimension_rule.value.dimension_conditions[*] : []
                 content {
                   dynamic "condition" {
-                    for_each = try(dimension_rule.value.dimension_conditions[*], {})
+                    for_each = try(dimension_conditions.value, [])
                     content {
                       condition_type = try(condition.value.condition.condition_type, null)
                       rule_matcher   = try(condition.value.condition.rule_matcher, null)
