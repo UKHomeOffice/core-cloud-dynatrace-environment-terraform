@@ -12,7 +12,6 @@ resource "dynatrace_management_zone_v2" "management_zone" {
   description = try(var.zone_vars.description, "Management zone for ${var.zone_name}")
   legacy_id   = try(var.zone_vars.legacy_id, null)
 
-  # Top-level rules block (mandatory)
   rules {
     dynamic "rule" {
       for_each = length(local.zone_rules_sorted) > 0 ? local.zone_rules_sorted : [
