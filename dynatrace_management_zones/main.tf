@@ -28,19 +28,26 @@ resource "dynatrace_management_zone_v2" "management_zone" {
 
           dynamic "attribute_rule" {
             for_each = try(rule.value.attribute_rule[*], {})
-            # Creates an attribute rule block with conditions as defined - either this or dimension_rule
             content {
               entity_type = try(attribute_rule.value.entity_type, null)
 
-              # Only render propagation flags if true
-              azure_to_pgpropagation                           = try(attribute_rule.value.azure_to_pgpropagation, false) ? true : null
-              azure_to_service_propagation                     = try(attribute_rule.value.azure_to_service_propagation, false) ? true : null
-              custom_device_group_to_custom_device_propagation = try(attribute_rule.value.custom_device_group_to_custom_device_propagation, false) ? true : null
-              host_to_pgpropagation                            = try(attribute_rule.value.host_to_pgpropagation, false) ? true : null
-              pg_to_host_propagation                           = try(attribute_rule.value.pg_to_host_propagation, false) ? true : null
-              pg_to_service_propagation                        = try(attribute_rule.value.pg_to_service_propagation, false) ? true : null
-              service_to_host_propagation                      = try(attribute_rule.value.service_to_host_propagation, false) ? true : null
-              service_to_pgpropagation                         = try(attribute_rule.value.service_to_pgpropagation, false) ? true : null
+              # Only include propagation flags if true
+              dynamic "prop_flag" {
+                for_each = {
+                  azure_to_pgpropagation                           = try(attribute_rule.value.azure_to_pgpropagation, false)
+                  azure_to_service_propagation                     = try(attribute_rule.value.azure_to_service_propagation, false)
+                  custom_device_group_to_custom_device_propagation = try(attribute_rule.value.custom_device_group_to_custom_device_propagation, false)
+                  host_to_pgpropagation                            = try(attribute_rule.value.host_to_pgpropagation, false)
+                  pg_to_host_propagation                           = try(attribute_rule.value.pg_to_host_propagation, false)
+                  pg_to_service_propagation                        = try(attribute_rule.value.pg_to_service_propagation, false)
+                  service_to_host_propagation                      = try(attribute_rule.value.service_to_host_propagation, false)
+                  service_to_pgpropagation                         = try(attribute_rule.value.service_to_pgpropagation, false)
+                } : k, v
+                if prop_flag.value == true
+                content {
+                  "${prop_flag.key}" = true
+                }
+              }
 
               attribute_conditions {
                 dynamic "condition" {
