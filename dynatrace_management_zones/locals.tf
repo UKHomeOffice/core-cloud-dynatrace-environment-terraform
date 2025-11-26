@@ -13,23 +13,20 @@ locals {
       aws_account_id               = var.zone_vars.aws_account_id
       project_service              = var.zone_vars.project_service
       pg_to_host_propagation       = var.zone_vars.pg_to_host_propagation
-      pg_to_service_propagation    = var.zone_vars.pg_to_host_propagation
+      pg_to_service_propagation    = var.zone_vars.pg_to_service_propagation
     })
   ).default_rules
 
   zone_rules_processed = merge(
     {
       for k, v in local.default_rules_raw :
-      k => v
-      if try(contains(var.zone_vars.rules_templates, k), false)
+      k => v if try(contains(var.zone_vars.rules_templates, k), false)
     },
     var.zone_vars.tenant_exclusive_rules
   )
 
-  # Sort key ensures deterministic ordering
   zone_rules_sorted = [
     for k in sort(keys(local.zone_rules_processed)) :
     local.zone_rules_processed[k]
   ]
-
 }

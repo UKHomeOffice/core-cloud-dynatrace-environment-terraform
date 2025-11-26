@@ -92,3 +92,4 @@ resource "dynatrace_management_zone_v2" "management_zone" {
 output "zone_var_output" {
   value = local.zone_rules_processed
 }
+
