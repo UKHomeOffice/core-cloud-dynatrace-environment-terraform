@@ -26,4 +26,10 @@ locals {
     var.zone_vars.tenant_exclusive_rules
   )
 
+  # Sort key ensures deterministic ordering
+  zone_rules_sorted = [
+    for k in sort(keys(local.zone_rules_processed)) :
+    local.zone_rules_processed[k]
+  ]
+
 }
