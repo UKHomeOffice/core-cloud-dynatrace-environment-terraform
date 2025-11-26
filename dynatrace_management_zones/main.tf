@@ -13,20 +13,19 @@ resource "dynatrace_management_zone_v2" "management_zone" {
   legacy_id   = try(var.zone_vars.legacy_id, null)
 
   dynamic "rules" {
-    for_each = local.zone_rules_processed != null ? local.zone_rules_processed[*] : []
-    # Create a 'rules' block if defined in the config.yaml, else skips all following dynamic blocks
+    for_each = local.zone_rules_processed != null ? { for idx, r in local.zone_rules_processed : idx => r } : {}
     content {
       dynamic "rule" {
-        for_each = local.zone_rules_processed
-        # Creates one rule definition per entry inside the 'rules' section of the MZ config (name not used)
+        # Use a stable key per rule: name if available, else index
+        for_each = { for idx, r in local.zone_rules_processed : r.name != null ? r.name : idx => r }
         content {
           type            = rule.value.type
           enabled         = rule.value.enabled
           entity_selector = try(rule.value.entity_selector, null)
 
           dynamic "attribute_rule" {
-            for_each = try(rule.value.attribute_rule[*], {})
-            # Creates an attribute rule block with conditions as defined - either this or dimension_rule
+            # Use stable keys for attribute rules
+            for_each = try({ for idx, ar in rule.value.attribute_rule : idx => ar }, {})
             content {
               azure_to_pgpropagation                           = try(attribute_rule.value.azure_to_pgpropagation, false)
               azure_to_service_propagation                     = try(attribute_rule.value.azure_to_service_propagation, false)
@@ -40,7 +39,7 @@ resource "dynatrace_management_zone_v2" "management_zone" {
 
               attribute_conditions {
                 dynamic "condition" {
-                  for_each = try(attribute_rule.value.attribute_conditions, [])
+                  for_each = try({ for idx, c in attribute_rule.value.attribute_conditions : idx => c }, {})
                   content {
                     key                = condition.value.key
                     operator           = condition.value.operator
@@ -59,16 +58,15 @@ resource "dynatrace_management_zone_v2" "management_zone" {
           }
 
           dynamic "dimension_rule" {
-            #            for_each = try(rule.value.dimension_rule[*],{})
-            for_each = ((try(rule.value.dimension_rule, null) != null) && (rule.value.dimension_rule != {})) ? rule.value.dimension_rule[*] : []
-            # Creates a dimension rule block with conditions as defined - either this or attribute_rule
+            for_each = ((try(rule.value.dimension_rule, null) != null) && (rule.value.dimension_rule != {})) ? { for idx, dr in rule.value.dimension_rule : idx => dr } : {}
             content {
               applies_to = dimension_rule.value.applies_to
+
               dynamic "dimension_conditions" {
-                for_each = dimension_rule.value.dimension_conditions != null ? dimension_rule.value.dimension_conditions[*] : []
+                for_each = dimension_rule.value.dimension_conditions != null ? { for idx, dc in dimension_rule.value.dimension_conditions : idx => dc } : {}
                 content {
                   dynamic "condition" {
-                    for_each = try(dimension_rule.value.dimension_conditions[*], {})
+                    for_each = try({ for idx, c in dimension_conditions.value : idx => c }, {})
                     content {
                       condition_type = try(condition.value.condition.condition_type, null)
                       rule_matcher   = try(condition.value.condition.rule_matcher, null)
