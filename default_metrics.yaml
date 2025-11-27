@@ -876,6 +876,24 @@ rds:
     statistic: AVG_MIN_MAX
     dimensions:
     - DBInstanceIdentifier
+  - name: "WriteThroughput"
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - DBInstanceIdentifier
+  - name: "WriteThroughput"
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - Region
+  - name: "WriteThroughput"
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - Region
+    - DatabaseClass
+  - name: "WriteThroughput"
+    statistic: AVG_MIN_MAX
+    dimensions:
+    - Region
+    - EngineName
 s3:
   - name: 4xxErrors
     statistic: AVG_MIN_MAX
