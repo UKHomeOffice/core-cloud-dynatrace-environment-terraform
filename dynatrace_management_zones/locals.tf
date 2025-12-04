@@ -8,6 +8,7 @@ locals {
       webapp_prefix                = var.zone_vars.webapp_prefix
       k8s_cluster_name_begins_with = var.zone_vars.k8s_cluster_name_begins_with
       k8s_cluster_name             = var.zone_vars.k8s_cluster_name
+      k8s_cluster_env              = var.zone_vars.k8s_cluster_env 
       k8s_namespace                = var.zone_vars.k8s_namespace
       host_group_begins_with       = var.zone_vars.host_group_begins_with
       aws_account_id               = var.zone_vars.aws_account_id

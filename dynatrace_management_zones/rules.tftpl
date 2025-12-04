@@ -132,7 +132,12 @@ default_rules:
         - key: "KUBERNETES_CLUSTER_NAME"
           operator: "BEGINS_WITH"
           string_value: "${k8s_cluster_name_begins_with}"
-%{ if env_name != ""  ~}
+%{ if k8s_cluster_env!="" ~}
+        - key: "KUBERNETES_CLUSTER_NAME"
+          operator: "CONTAINS"
+          string_value: "${k8s_cluster_env}"
+%{ endif ~}
+%{ if k8s_cluster_env=="" && env_name != ""  ~}
         - key: "KUBERNETES_CLUSTER_NAME"
           operator: "CONTAINS"
           string_value: "${env_name}"
