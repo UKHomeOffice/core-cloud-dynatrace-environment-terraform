@@ -16,7 +16,7 @@ locals {
       pg_to_service_propagation    = var.zone_vars.pg_to_host_propagation
     })
   ).default_rules
-  rules_templates = var.zone_vars.rules_templates ? var.zone_vars.rules_templates : var.default_rules
+  rules_templates = length(try(var.zone_vars.rules_templates, [])) > 0 ? var.zone_vars.rules_templates : var.default_rules
   zone_rules_processed = merge(
     {
       for k, v in local.default_rules_raw :
