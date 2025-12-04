@@ -28,7 +28,6 @@ variable "default_rules"{
     "k8s_workloads",
     "k8s_service",
     "include_web_apps",
-
   ]
 }
 variable "zone_vars" {
@@ -48,7 +47,7 @@ variable "zone_vars" {
     project_service              = optional(string, "")
     pg_to_host_propagation       = optional(bool, false)
     pg_to_service_propagation    = optional(bool, false)
-    rules_templates              = list(string)
+    rules_templates              = optional(list(string))
     tenant_exclusive_rules = optional(map(object({
       enabled         = bool
       type            = string
