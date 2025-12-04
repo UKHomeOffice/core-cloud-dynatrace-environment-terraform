@@ -276,14 +276,14 @@ module "metric_stream" {
   env_name                        = each.value.env_name
   metrics_stream_name             = each.value.metrics_stream_name
   include_linked_accounts_metrics = each.value.include_linked_accounts_metrics
-  firehose_arn                    = module.aws_cwl_cwm[var.tenant_vars.metric_stream_to_firehose_map[each.key]].firehose_stream_arn
+  firehose_arn                    = module.aws_cwl_s3_bucket[var.tenant_vars.metric_stream_to_firehose_map[each.key]].firehose_stream_arn
   include_filter                  = try(each.value.include_filter, {})
   exclude_filter                  = try(each.value.exclude_filter, {})
 
 
 }
 
-module "aws_cwl_cwm" {
+module "aws_cwl_s3_bucket" {
   source   = "./aws_cwl_cwm"
   for_each = contains(keys(var.tenant_vars), "aws_cwl_cwm") ? var.tenant_vars.aws_cwl_cwm : {}
   tags     = each.value.tags
