@@ -5,6 +5,32 @@ variable "zone_name" {
 variable "project_id" {
   type = string
 }
+
+variable "default_rules"{
+  type = list(string)
+  default = [
+    "asg",
+    "alb",
+    "nlb",
+    "elb",
+    "ec2",
+    "rds",
+    "lambda",
+    "msk",
+    "custom",
+    "application",
+    "host",
+    "service",
+    "k8s_clusters_name_type_clusters",
+    "k8s_node",
+    "k8s_namespace",
+    "k8s_pg",
+    "k8s_workloads",
+    "k8s_service",
+    "include_web_apps",
+
+  ]
+}
 variable "zone_vars" {
   type = object({
     description                  = optional(string)
