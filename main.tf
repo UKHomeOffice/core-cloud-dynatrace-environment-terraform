@@ -12,7 +12,7 @@ locals {
 
 module "aws_account_configurations" {
   source = "./aws_account_configuration"
-  for_each         = tomap(coalesce(try(var.tenant_vars.aws_connections, null), {}))
+  for_each         = try(tomap(var.tenant_vars.aws_connections), tomap({}))
   tenant_vars      = each.value
   connection_name  = each.key
   default_services = local.default_services
