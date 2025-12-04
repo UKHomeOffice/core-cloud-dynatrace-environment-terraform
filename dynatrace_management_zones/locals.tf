@@ -21,7 +21,7 @@ locals {
     {
       for k, v in local.default_rules_raw :
       k => v
-      if try(contains(var.zone_vars.rules_templates, k), false)
+      if try(contains(local.rules_templates, k), false)
     },
     var.zone_vars.tenant_exclusive_rules
   )
