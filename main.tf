@@ -239,19 +239,6 @@ module "oam_sink" {
   ou_paths    = each.value.ou_paths
 }
 
-module "oam_link" {
-  source   = "./oam_link/"
-  for_each = contains(keys(var.tenant_vars), "oam_link") ? var.tenant_vars.oam_link : {}
-
-  label_template = each.value.label_template
-  metric_filter  = each.value.metric_filter
-  tenant_vars    = each.value
-  sink_arn = try(
-    values(module.oam_sink)[0].sink_arn,
-    ""
-  )
-}
-
 module "metric_stream" {
   source   = "./metric_stream/"
   for_each = contains(keys(var.tenant_vars), "metric_stream") ? var.tenant_vars.metric_stream : {}
