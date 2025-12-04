@@ -27,7 +27,7 @@ module "dynatrace_generic_types" {
 module "dynatrace_management_zones" {
   source = "./dynatrace_management_zones"
 
-  for_each = var.tenant_vars.management_zones
+  for_each   = var.tenant_vars.management_zones
   project_id = var.tenant_vars.project_id
   # Create one management zone per named entry under the "management_zones" block of the config.yaml
   zone_vars = each.value
