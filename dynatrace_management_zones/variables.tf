@@ -40,6 +40,7 @@ variable "zone_vars" {
     tag_env_name                 = optional(string, "")
     webapp_prefix                = optional(string, "")
     k8s_cluster_name_begins_with = optional(string, "")
+    k8s_cluster_env              = optional(string, "")
     k8s_cluster_name             = optional(string, "")
     k8s_namespace                = optional(string, "")
     host_group_begins_with       = optional(string, "")
