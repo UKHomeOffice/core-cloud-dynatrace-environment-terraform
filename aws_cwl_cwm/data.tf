@@ -69,8 +69,8 @@ data "aws_iam_policy_document" "cwl_assume_role" {
 data "aws_iam_policy_document" "allow_firehose_put" {
   count = var.ingestion_type == "logs" ? 1 : 0
   statement {
-    effect  = "Allow"
-    actions = ["firehose:PutRecord", "firehose:PutRecordBatch"]
-    resources = [aws_kinesis_firehose_delivery_stream.cwl_firehose.arn]
+    effect    = "Allow"
+    actions   = ["firehose:PutRecord", "firehose:PutRecordBatch"]
+    resources = [aws_kinesis_firehose_delivery_stream.cwl_firehose[0].arn]
   }
 }

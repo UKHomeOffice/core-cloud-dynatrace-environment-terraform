@@ -78,6 +78,7 @@ resource "aws_iam_role" "cwl_to_firehose_role" {
   count              = var.ingestion_type == "logs" ? 1 : 0
   name               = "CloudWatchLogsToFirehoseRole"
   assume_role_policy = data.aws_iam_policy_document.cwl_assume_role[0].json
+  tags               = var.tags
 }
 
 # IAM role policy
