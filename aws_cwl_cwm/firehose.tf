@@ -77,6 +77,6 @@ resource "aws_cloudwatch_log_subscription_filter" "cwl_to_firehose" {
   name            = "CWL_Firehose_Subscription"
   log_group_name  = aws_cloudwatch_log_group.cloudwatch_log_group[0].name
   filter_pattern  = "{$.userIdentity.type = Root}"
-  destination_arn = aws_kinesis_firehose_delivery_stream.cwl_firehose[0].arn
+  destination_arn = aws_kinesis_firehose_delivery_stream.dynatrace_http_stream[0].arn
   role_arn        = aws_iam_role.cwl_to_firehose_role[0].arn
 }
