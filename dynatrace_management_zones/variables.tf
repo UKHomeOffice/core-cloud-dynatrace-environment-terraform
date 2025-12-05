@@ -5,6 +5,31 @@ variable "zone_name" {
 variable "project_id" {
   type = string
 }
+
+variable "default_rules"{
+  type = list(string)
+  default = [
+    "asg",
+    "alb",
+    "nlb",
+    "elb",
+    "ec2",
+    "rds",
+    "lambda",
+    "msk",
+    "custom",
+    "application",
+    "host",
+    "service",
+    "k8s_clusters_name_type_clusters",
+    "k8s_node",
+    "k8s_namespace",
+    "k8s_pg",
+    "k8s_workloads",
+    "k8s_service",
+    "include_web_apps",
+  ]
+}
 variable "zone_vars" {
   type = object({
     description                  = optional(string)
@@ -15,6 +40,7 @@ variable "zone_vars" {
     tag_env_name                 = optional(string, "")
     webapp_prefix                = optional(string, "")
     k8s_cluster_name_begins_with = optional(string, "")
+    k8s_cluster_env              = optional(string, "")
     k8s_cluster_name             = optional(string, "")
     k8s_namespace                = optional(string, "")
     host_group_begins_with       = optional(string, "")
@@ -22,7 +48,7 @@ variable "zone_vars" {
     project_service              = optional(string, "")
     pg_to_host_propagation       = optional(bool, false)
     pg_to_service_propagation    = optional(bool, false)
-    rules_templates              = list(string)
+    rules_templates              = optional(list(string))
     tenant_exclusive_rules = optional(map(object({
       enabled         = bool
       type            = string
