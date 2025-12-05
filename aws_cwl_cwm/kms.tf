@@ -50,7 +50,22 @@ resource "aws_kms_key" "cc_cosmos_s3_kms_key" {
           "kms:DescribeKey"
         ],
         Resource = "*"
+      },
+      {
+        Sid    = "AllowCloudWatchLogsToUseKey",
+        Effect = "Allow",
+        Principal = {
+          Service = "logs.${data.aws_region.current.name}.amazonaws.com"
+        },
+        Action = [
+          "kms:Encrypt",
+          "kms:Decrypt",
+          "kms:GenerateDataKey*",
+          "kms:DescribeKey"
+        ],
+        Resource = "*"
       }
+
     ]
   })
   tags = var.tags
