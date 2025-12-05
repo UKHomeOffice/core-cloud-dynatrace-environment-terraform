@@ -69,6 +69,7 @@ resource "aws_cloudwatch_log_group" "cloudwatch_log_group" {
   count             = var.ingestion_type == "logs" ? 1 : 0
   name              = "/aws/dynatrace_cwl"
   retention_in_days = 3 #tbc
+  kms_key_id        = "alias/aws/logs"
   tags              = var.tags
 }
 
