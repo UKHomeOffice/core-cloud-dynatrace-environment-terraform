@@ -8,6 +8,7 @@ locals {
       webapp_prefix                = var.zone_vars.webapp_prefix
       k8s_cluster_name_begins_with = var.zone_vars.k8s_cluster_name_begins_with
       k8s_cluster_name             = var.zone_vars.k8s_cluster_name
+      k8s_cluster_env              = var.zone_vars.k8s_cluster_env 
       k8s_namespace                = var.zone_vars.k8s_namespace
       host_group_begins_with       = var.zone_vars.host_group_begins_with
       aws_account_id               = var.zone_vars.aws_account_id
@@ -16,12 +17,12 @@ locals {
       pg_to_service_propagation    = var.zone_vars.pg_to_host_propagation
     })
   ).default_rules
-
+  rules_templates = length(coalesce(try(var.zone_vars.rules_templates, null), [])) > 0 ? var.zone_vars.rules_templates : var.default_rules
   zone_rules_processed = merge(
     {
       for k, v in local.default_rules_raw :
       k => v
-      if try(contains(var.zone_vars.rules_templates, k), false)
+      if try(contains(local.rules_templates, k), false)
     },
     var.zone_vars.tenant_exclusive_rules
   )
