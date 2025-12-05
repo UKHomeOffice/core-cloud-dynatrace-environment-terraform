@@ -238,34 +238,6 @@ module "oam_sink" {
   ou_paths    = each.value.ou_paths
 }
 
-module "oam_link" {
-  source   = "./oam_link/"
-  for_each = contains(keys(var.tenant_vars), "oam_link") ? var.tenant_vars.oam_link : {}
-
-  label_template = each.value.label_template
-  metric_filter  = each.value.metric_filter
-  tenant_vars    = each.value
-  sink_arn = try(
-    values(module.oam_sink)[0].sink_arn,
-    ""
-  )
-}
-# module "firehose_dynatrace" {
-#   source   = "./firehose_dynatrace/"
-#   for_each = contains(keys(var.tenant_vars), "firehose_dynatrace") ? var.tenant_vars.firehose_dynatrace : {}
-
-#   tenant_vars                            = each.value
-#   s3_backup_bucket_name                  = each.value.s3_backup_bucket_name
-#   env                                    = each.value.env
-#   destination                            = each.value.destination
-#   dynatarce_eu_url                       = each.value.dynatarce_eu_url
-#   log_group_name                         = each.value.log_group_name
-#   log_stream_name                        = each.value.log_stream_name
-#   dynatrace_api_token_secret_arn         = each.value.dynatrace_api_token_secret_arn
-#   dynatrace_delivery_endpoint_secret_arn = each.value.dynatrace_delivery_endpoint_secret_arn
-#   lifecycle_expiration_days              = each.value.lifecycle_expiration_days
-
-# }
 module "metric_stream" {
   source   = "./metric_stream/"
   for_each = contains(keys(var.tenant_vars), "metric_stream") ? var.tenant_vars.metric_stream : {}
