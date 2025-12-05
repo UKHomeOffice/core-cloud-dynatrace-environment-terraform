@@ -44,33 +44,3 @@ data "aws_secretsmanager_secret" "dt_logs_api_endpoint" {
 data "aws_secretsmanager_secret_version" "dt_logs_api_endpoint" {
   secret_id = data.aws_secretsmanager_secret.dt_logs_api_endpoint.id
 }
-
-# Trust policy to allow CWL to write to Firehose stream
-data "aws_iam_policy_document" "cwl_assume_role" {
-  count = var.ingestion_type == "logs" ? 1 : 0
-  statement {
-    effect  = "Allow"
-    actions = ["sts:AssumeRole"]
-    principals {
-      type        = "Service"
-      identifiers = ["logs.${data.aws_region.current.name}.amazonaws.com"]
-    }
-    condition {
-      test     = "StringLike"
-      variable = "aws:SourceArn"
-      values = [
-        "arn:aws:logs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:log-group:*"
-      ]
-    }
-  }
-}
-
-# Permissions policy allowing logs to write to Firehose
-data "aws_iam_policy_document" "allow_firehose_put" {
-  count = var.ingestion_type == "logs" ? 1 : 0
-  statement {
-    effect    = "Allow"
-    actions   = ["firehose:PutRecord", "firehose:PutRecordBatch"]
-    resources = [aws_kinesis_firehose_delivery_stream.cwl_firehose[0].arn]
-  }
-}
