@@ -1,3 +1,7 @@
+data "aws_caller_identity" "current" {}
+
+data "aws_region" "current" {}
+
 # Cloudwatch Logs DT API token
 data "aws_secretsmanager_secret" "cw_logs_api_token" {
   name = var.dt_cwl_api_token_name
@@ -24,7 +28,7 @@ data "aws_secretsmanager_secret" "dt_endpoint" {
 data "aws_secretsmanager_secret_version" "dt_endpoint_internal" {
   secret_id = data.aws_secretsmanager_secret.dt_endpoint_internal.id
 }
-data "aws_secretsmanager_secret" "dt_endpoint_internal"{
+data "aws_secretsmanager_secret" "dt_endpoint_internal" {
   name = var.dt_endpoint_internal_name
 }
 
