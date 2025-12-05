@@ -119,6 +119,6 @@ resource "aws_iam_policy" "logs_to_firehose_policy" {
 
 resource "aws_iam_role_policy_attachment" "cwl_to_firehose_attach" {
   count      = var.ingestion_type == "logs" ? 1 : 0
-  role       = aws_iam_role.cwl_to_firehose_role[0].name
+  role       = aws_iam_role.cwl_to_firehose_role[0].id
   policy_arn = aws_iam_policy.logs_to_firehose_policy[0].arn
 }
