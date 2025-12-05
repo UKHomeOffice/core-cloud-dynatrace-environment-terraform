@@ -110,7 +110,7 @@ resource "aws_iam_policy" "logs_to_firehose_policy" {
           "firehose:PutRecord",
           "firehose:PutRecordBatch"
         ]
-        Resource = [aws_kinesis_firehose_delivery_stream.dynatrace_http_stream[0].arn]
+        Resource = [aws_kinesis_firehose_delivery_stream.dynatrace_http_stream.arn]
       }
     ]
   })
