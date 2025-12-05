@@ -71,3 +71,18 @@ resource "aws_iam_role_policy_attachment" "firehose_s3_policy_attachment" {
   role       = aws_iam_role.cc_cosmos_cwl_firehose_access_role.name
   policy_arn = aws_iam_policy.cc_cosmos_cwl_firehose_s3_logs_kms_policy.arn
 }
+
+## Trust policy to allow CWL to write to Firehose stream
+# IAM role
+resource "aws_iam_role" "cwl_to_firehose_role" {
+  count              = var.ingestion_type == "logs" ? 1 : 0
+  name               = "CloudWatchLogsToFirehoseRole"
+  assume_role_policy = data.aws_iam_policy_document.cwl_assume_role[0].json
+}
+
+# IAM role policy
+resource "aws_iam_role_policy" "cwl_to_firehose_policy" {
+  count  = var.ingestion_type == "logs" ? 1 : 0
+  role   = aws_iam_role.cwl_to_firehose_role[0].id
+  policy = data.aws_iam_policy_document.allow_firehose_put[0].json
+}

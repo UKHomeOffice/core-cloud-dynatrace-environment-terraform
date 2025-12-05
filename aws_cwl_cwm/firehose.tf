@@ -20,15 +20,15 @@ resource "aws_kinesis_firehose_delivery_stream" "dynatrace_http_stream" {
     buffering_interval = var.buffering_interval
     retry_duration     = var.retry_duration
 
-    role_arn    = aws_iam_role.cc_cosmos_cwl_firehose_access_role.arn
-    access_key  = local.dynatrace_access_key
+    role_arn   = aws_iam_role.cc_cosmos_cwl_firehose_access_role.arn
+    access_key = local.dynatrace_access_key
     request_configuration {
       content_encoding = "GZIP"
 
       # only for CloudWatch metrics
       dynamic "common_attributes" {
         for_each = var.ingestion_type == "metrics" ? [1] : []
-       content {
+        content {
           name  = local.dynatrace_url_param_name
           value = data.aws_secretsmanager_secret_version.dt_endpoint_internal.secret_string
         }
@@ -65,5 +65,18 @@ resource "aws_kinesis_firehose_delivery_stream" "dynatrace_http_stream" {
   tags = var.tags
 }
 
+resource "aws_cloudwatch_log_group" "cloudwatch_log_group" {
+  count             = var.ingestion_type == "logs" ? 1 : 0
+  name              = "/aws/dynatrace_cwl"
+  retention_in_days = 3 #tbc
+  tags              = var.tags
+}
 
-
+resource "aws_cloudwatch_log_subscription_filter" "cwl_to_firehose" {
+  count           = var.ingestion_type == "logs" ? 1 : 0
+  name            = "CWL_Firehose_Subscription"
+  log_group_name  = aws_cloudwatch_log_group.cloudwatch_log_group[0].name
+  filter_pattern  = "{$.userIdentity.type = Root}"
+  destination_arn = aws_kinesis_firehose_delivery_stream.cwl_firehose[0].arn
+  role_arn        = aws_iam_role.cwl_to_firehose_role[0].arn
+}
