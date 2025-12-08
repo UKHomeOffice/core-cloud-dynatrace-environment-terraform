@@ -126,7 +126,7 @@ variable "cc_cosmos_firehose_s3_logs_kms_policy_name" {
 
 variable "log_retention_days" {
   type        = number
-  default     = 3 #tbc but intentionally using short retention as logs are exported to Dynatrace
+  default     = 1 #tbc but intentionally short retention as logs are exported to Dynatrace
   description = "CloudWatch log retention period"
 }
 
