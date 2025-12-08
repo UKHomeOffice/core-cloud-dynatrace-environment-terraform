@@ -67,8 +67,8 @@ resource "aws_kinesis_firehose_delivery_stream" "dynatrace_http_stream" {
 
 resource "aws_cloudwatch_log_group" "cloudwatch_log_group" {
   count             = var.ingestion_type == "logs" ? 1 : 0
-  name              = "/aws/dynatrace_cwl"
-  retention_in_days = 3 #tbc
+  name              = var.cloudwatch_log_group_name
+  retention_in_days = var.log_retention_days
   kms_key_id        = aws_kms_key.cc_cosmos_s3_kms_key.arn
   tags              = var.tags
 }
