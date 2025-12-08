@@ -55,7 +55,7 @@ resource "aws_kms_key" "cc_cosmos_s3_kms_key" {
         Sid    = "AllowCloudWatchLogsToUseKey",
         Effect = "Allow",
         Principal = {
-          Service = "logs.${data.aws_region.current.name}.amazonaws.com"
+          Service = "logs.${data.aws_region.current.region}.amazonaws.com"
         },
         Action = [
           "kms:Encrypt",
