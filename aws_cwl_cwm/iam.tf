@@ -131,7 +131,7 @@ resource "aws_iam_role_policy_attachment" "cwl_to_firehose_attach" {
 resource "aws_cloudwatch_log_destination_policy" "cwl_dt_subscription_policy" {
   count = var.ingestion_type == "logs" ? 1 : 0
 
-  destination_name = aws_cloudwatch_log_destination.cloudwatch_logs_destination.name
+  destination_name = aws_cloudwatch_log_destination.cloudwatch_logs_destination[0].name
   access_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
