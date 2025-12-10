@@ -302,19 +302,4 @@ module "platform_dashboards" {
   groups_to_share = var.tenant_vars.platform_dashboards.groups
 }
 
-module "prometheus" {
-  source = "./prometheus"
-  count = contains(keys(var.tenant_vars), "prometheus") ? 1 : 0
-
-  # The child module variables (all booleans)
-  cloud_application_pipeline_enabled = try(var.tenant_vars.cloud_application_pipeline_enabled, true)
-  event_processing_active            = try(var.tenant_vars.event_processing_active, true)
-  filter_events                      = try(var.tenant_vars.filter_events, true)
-  include_all_fdi_events             = try(var.tenant_vars.include_all_fdi_events, true)
-  open_metrics_builtin_enabled       = try(var.tenant_vars.open_metrics_builtin_enabled, true)
-  open_metrics_pipeline_enabled      = try(var.tenant_vars.open_metrics_pipeline_enabled, true)
-
-  # List of event patterns
-  # event_patterns = try(var.tenant_vars.prometheus.event_patterns, [])
-}
 
