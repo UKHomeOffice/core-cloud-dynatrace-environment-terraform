@@ -315,6 +315,6 @@ module "prometheus" {
   open_metrics_pipeline_enabled      = try(var.tenant_vars.open_metrics_pipeline_enabled, true)
 
   # List of event patterns
-  event_patterns = try(var.tenant_vars.prometheus.event_patterns, [])
+  # event_patterns = try(var.tenant_vars.prometheus.event_patterns, [])
 }
 

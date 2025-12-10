@@ -20,11 +20,11 @@ resource "dynatrace_k8s_monitoring" "prometheus_monitoring" {
   #     }
   #   }
   # }
-  event_patterns {
-    event_pattern {
-      active  = true
-      label   = "Node events"
-      pattern = "involvedObject.kind=Node"
-    }
-  }
+  # event_patterns {
+  #   event_pattern {
+  #     active  = true
+  #     label   = "Node events"
+  #     pattern = "involvedObject.kind=Node"
+  #   }
+  # }
 }
