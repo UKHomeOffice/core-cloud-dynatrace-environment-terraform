@@ -121,5 +121,17 @@ variable "aws_kms_alias_firehose" {
 variable "cc_cosmos_firehose_s3_logs_kms_policy_name" {
 
   description = "name of the kms policy"
-  type = string
+  type        = string
+}
+
+variable "log_retention_days" {
+  type        = number
+  default     = 1 #tbc but intentionally short retention as logs are exported to Dynatrace
+  description = "CloudWatch log retention period"
+}
+
+variable "cloudwatch_log_group_name" {
+  type        = string
+  default     = "/aws/dynatrace_cwl"
+  description = "CloudWatch log group name"
 }

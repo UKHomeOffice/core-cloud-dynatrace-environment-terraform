@@ -284,6 +284,9 @@ module "aws_cwl_s3_bucket" {
   dt_endpoint_name          = each.value.dt_endpoint_name
   dt_endpoint_internal_name = each.value.dt_endpoint_internal_name
   dt_cwm_api_token_name     = each.value.dt_cwm_api_token_name
+  #cwl config
+  cloudwatch_log_group_name = try(each.value.cloudwatch_log_group_name, null)
+  log_retention_days        = try(each.value.log_retention_days, 1)
 }
 
 module "monitoring_k8s_clusters" {

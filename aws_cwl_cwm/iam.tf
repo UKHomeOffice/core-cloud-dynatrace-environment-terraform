@@ -71,3 +71,54 @@ resource "aws_iam_role_policy_attachment" "firehose_s3_policy_attachment" {
   role       = aws_iam_role.cc_cosmos_cwl_firehose_access_role.name
   policy_arn = aws_iam_policy.cc_cosmos_cwl_firehose_s3_logs_kms_policy.arn
 }
+
+## IAM policy to allow CWL to assume role to Firehose stream
+resource "aws_iam_role" "cwl_to_firehose_role" {
+  count = var.ingestion_type == "logs" ? 1 : 0
+  name  = "CloudWatchLogsToFirehoseRole"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = "sts:AssumeRole"
+        Principal = {
+          Service = "logs.${data.aws_region.current.region}.amazonaws.com"
+        }
+        Condition = {
+          StringLike = {
+            "aws:SourceArn" = "arn:aws:logs:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:log-group:*"
+          }
+        }
+      }
+    ]
+  })
+  tags = var.tags
+}
+
+resource "aws_iam_policy" "logs_to_firehose_policy" {
+  count       = var.ingestion_type == "logs" ? 1 : 0
+  name        = "CloudWatchLogsToFirehosePolicy"
+  description = "Allows CloudWatch Logs to put records into Firehose"
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "firehose:PutRecord",
+          "firehose:PutRecordBatch"
+        ]
+        Resource = [aws_kinesis_firehose_delivery_stream.dynatrace_http_stream.arn]
+      }
+    ]
+  })
+  tags = var.tags
+}
+
+resource "aws_iam_role_policy_attachment" "cwl_to_firehose_attach" {
+  count      = var.ingestion_type == "logs" ? 1 : 0
+  role       = aws_iam_role.cwl_to_firehose_role[0].id
+  policy_arn = aws_iam_policy.logs_to_firehose_policy[0].arn
+}
