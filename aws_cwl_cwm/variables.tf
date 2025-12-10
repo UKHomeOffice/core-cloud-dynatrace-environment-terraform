@@ -47,7 +47,7 @@ variable "dt_endpoint_name" {
 }
 variable "dt_endpoint_internal_name" {
   type = string
-  
+
 }
 
 variable "dt_logs_api_endpoint_name" {
@@ -109,13 +109,13 @@ variable "common_attributes" {
 
 variable "firehose_access_role_name" {
   description = "name of the iam role used by firehose"
-  type = string
-  
+  type        = string
+
 }
 
 variable "aws_kms_alias_firehose" {
   description = "kms alias name"
-  type = string
+  type        = string
 
 }
 variable "cc_cosmos_firehose_s3_logs_kms_policy_name" {
@@ -134,4 +134,10 @@ variable "cloudwatch_log_group_name" {
   type        = string
   default     = "/aws/dynatrace_cwl"
   description = "CloudWatch log group name"
+}
+
+variable "destination_name" {
+  description = "Name for the CloudWatch Logs destination"
+  default     = "cc-cosmos-dynatrace-firehose"
+  type        = string
 }
