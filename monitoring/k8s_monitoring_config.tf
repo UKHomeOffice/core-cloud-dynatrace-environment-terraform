@@ -20,7 +20,7 @@ resource "dynatrace_k8s_monitoring" "k8s_monitoring_config" {
   open_metrics_builtin_enabled = true
 
   # Prometheus exporters
-  open_metrics_pipeline_enabled = false
+  open_metrics_pipeline_enabled = true
 
   # Dynamically render event_patterns → event_pattern blocks
   dynamic "event_patterns" {

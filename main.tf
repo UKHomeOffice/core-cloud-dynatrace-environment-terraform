@@ -304,3 +304,5 @@ module "platform_dashboards" {
   #mandatory if enabled with var.tenant_vars.platform_dashboards hence no checks
   groups_to_share = var.tenant_vars.platform_dashboards.groups
 }
+
+
