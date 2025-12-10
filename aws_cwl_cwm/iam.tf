@@ -145,7 +145,7 @@ resource "aws_cloudwatch_log_destination_policy" "cwl_dt_subscription_policy" {
           }
         }
         Action   = "logs:PutSubscriptionFilter"
-        Resource = aws_cloudwatch_log_destination.cloudwatch_logs_destination.arn
+        Resource = aws_cloudwatch_log_destination.cloudwatch_logs_destination[0].arn
       }
     ]
   })
