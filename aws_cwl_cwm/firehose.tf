@@ -76,7 +76,7 @@ resource "aws_cloudwatch_log_group" "cloudwatch_log_group" {
 resource "aws_cloudwatch_log_destination" "cloudwatch_logs_destination" {
   count      = var.ingestion_type == "logs" ? 1 : 0
   name       = var.destination_name
-  role_arn   = aws_iam_role.cwl_to_firehose_role.arn
+  role_arn   = aws_iam_role.cwl_to_firehose_role[0].arn
   target_arn = aws_kinesis_firehose_delivery_stream.dynatrace_http_stream.arn
   tags       = var.tags
 }
