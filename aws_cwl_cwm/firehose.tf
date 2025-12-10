@@ -78,4 +78,5 @@ resource "aws_cloudwatch_log_destination" "cloudwatch_logs_destination" {
   name       = var.destination_name
   role_arn   = aws_iam_role.cwl_to_firehose_role.arn
   target_arn = aws_kinesis_firehose_delivery_stream.dynatrace_http_stream.arn
+  tags       = var.tags
 }
