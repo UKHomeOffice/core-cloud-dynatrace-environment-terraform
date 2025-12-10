@@ -2,6 +2,8 @@ data "aws_caller_identity" "current" {}
 
 data "aws_region" "current" {}
 
+data "aws_organizations_organization" "current" {}
+
 # Cloudwatch Logs DT API token
 data "aws_secretsmanager_secret" "cw_logs_api_token" {
   name = var.dt_cwl_api_token_name
