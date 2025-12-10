@@ -88,7 +88,7 @@ resource "aws_iam_role" "cwl_to_firehose_role" {
         Effect = "Allow"
         Action = "sts:AssumeRole"
         Principal = {
-          Service = "logs.${data.aws_region.current.region}.amazonaws.com"
+          Service = "logs.amazonaws.com"
         }
         Condition = {
           StringLike = {
