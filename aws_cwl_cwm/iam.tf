@@ -1,3 +1,7 @@
+locals {
+  org_id = data.aws_organizations_organization.current.id
+}
+
 resource "aws_iam_role" "cc_cosmos_cwl_firehose_access_role" {
   name = var.firehose_access_role_name
 
@@ -86,11 +90,6 @@ resource "aws_iam_role" "cwl_to_firehose_role" {
         Principal = {
           Service = "logs.${data.aws_region.current.region}.amazonaws.com"
         }
-        Condition = {
-          StringLike = {
-            "aws:SourceArn" = "arn:aws:logs:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:log-group:*"
-          }
-        }
       }
     ]
   })
@@ -121,4 +120,28 @@ resource "aws_iam_role_policy_attachment" "cwl_to_firehose_attach" {
   count      = var.ingestion_type == "logs" ? 1 : 0
   role       = aws_iam_role.cwl_to_firehose_role[0].id
   policy_arn = aws_iam_policy.logs_to_firehose_policy[0].arn
+}
+
+# Policy to allow cwl sender account to access the destination in recipient account
+resource "aws_cloudwatch_log_destination_policy" "cwl_dt_subscription_policy" {
+  count = var.ingestion_type == "logs" ? 1 : 0
+
+  destination_name = aws_cloudwatch_log_destination.cloudwatch_logs_destination[0].name
+  access_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid       = "AllowPutSubscriptionFilter"
+        Effect    = "Allow"
+        Principal = "*"
+        Condition = {
+          StringEquals = {
+            "aws:PrincipalOrgID" = local.org_id
+          }
+        }
+        Action   = "logs:PutSubscriptionFilter"
+        Resource = aws_cloudwatch_log_destination.cloudwatch_logs_destination[0].arn
+      }
+    ]
+  })
 }
