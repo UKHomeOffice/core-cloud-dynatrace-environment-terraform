@@ -1177,3 +1177,34 @@ kinesisFirehose:
     statistic: SAMPLE_COUNT
     dimensions:
       - DeliveryStreamName
+Glue:
+  - name: glue.jvm.heap.usage
+    statistic: AVERAGE
+    dimensions:
+      - JobName
+      - JobRunId
+      - Type
+  - name: glue.driver.jvm.heap.usage
+    statistic: AVERAGE
+    dimensions:
+      - JobName
+      - JobRunId
+      - Type
+  - name: "glue.ALL.jvm.heap.usage"
+    statistic: AVERAGE
+    dimensions:
+     - JobName
+     - JobRunId
+     - Type
+  - name: glue.ALL.s3.filesystem.read_bytes
+    statistic: SUM
+    dimensions:
+     - JobName
+     - JobRunId
+     - Type
+  - name: glue.ALL.s3.filesystem.write_bytes
+    statistic: SUM
+    dimensions:
+    - JobName
+    - JobRunId
+    - Type
