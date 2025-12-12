@@ -66,7 +66,7 @@ default_rules:
   hadoop:
     type: "SELECTOR"
     enabled: true
-    entity_selector: type(dt.entity.jmx:com_dynatrace_extension_hadoop_service),fromRelationships.isChildOf(type(PROCESS_GROUP_INSTANCE),fromRelationships.isProcessOf(type(HOST),tag([AWS]project-id:${project_id})))
+    entity_selector: type(dt.entity.jmx:com_dynatrace_extension_hadoop_service),fromRelationships.isChildOf(type(PROCESS_GROUP_INSTANCE),fromRelationships.isProcessOf(type(HOST),tag([AWS]project-id:${project_id})%{ if service_id != "" },tag([AWS]service-id:${service_id})%{endif}%{ if env_name != "" },tag([AWS]environment-type:${env_name})%{ endif }))
   exclude_asg:
     type: "SELECTOR"
     enabled: true
