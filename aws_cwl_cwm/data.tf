@@ -47,26 +47,12 @@ data "aws_secretsmanager_secret_version" "dt_logs_api_endpoint" {
   secret_id = data.aws_secretsmanager_secret.dt_logs_api_endpoint.id
 }
 
-# Retrieve tags from SSM Parameter Store
-data "aws_ssm_parameter" "default_tags" {
-  name = "/corecloud/tags"
-  provider = aws.init
-}
-
-# Parse the JSON stored in SSM
-locals {
-  default_tags = jsondecode(data.aws_ssm_parameter.default_tags.value)
-}
-
-provider "aws" {
-  region = "eu-west-2"
-  alias = "init"
-}
-
-provider "aws" {
-  region = "eu-west-2"
-
-  default_tags {
-    tags = local.default_tags
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 6.0"
+      configuration_aliases = [ aws, aws.init ]
+    }
   }
 }
