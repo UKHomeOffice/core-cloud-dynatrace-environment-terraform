@@ -47,6 +47,12 @@ data "aws_secretsmanager_secret_version" "dt_logs_api_endpoint" {
   secret_id = data.aws_secretsmanager_secret.dt_logs_api_endpoint.id
 }
 
+# Retrieve tags from SSM Parameter Store
+data "aws_ssm_parameter" "default_tags" {
+  name = "/corecloud/tags"
+  provider = aws.init
+}
+
 terraform {
   required_providers {
     aws = {

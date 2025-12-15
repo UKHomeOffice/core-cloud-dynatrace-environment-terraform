@@ -1,9 +1,3 @@
-# Retrieve tags from SSM Parameter Store
-data "aws_ssm_parameter" "default_tags" {
-  name = "/corecloud/tags"
-  provider = aws.init
-}
-
 resource "aws_s3_bucket" "cwl_backup_bucket" {
   bucket = var.s3_backup_bucket_name
   tags   = var.tags
