@@ -1,15 +1,6 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 6.0"
-    }
-  }
-}
-
 resource "aws_s3_bucket" "cwl_backup_bucket" {
   bucket = var.s3_backup_bucket_name
-  tags   = merge(var.tags,local.default_tags.value,)
+  tags   = var.tags
 }
 
 resource "aws_s3_bucket_public_access_block" "this" {
