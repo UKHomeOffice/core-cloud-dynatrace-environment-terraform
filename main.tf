@@ -11,7 +11,7 @@ locals {
 }
 
 module "aws_account_configurations" {
-  source = "./aws_account_configuration"
+  source           = "./aws_account_configuration"
   for_each         = var.tenant_vars.aws_connections
   tenant_vars      = each.value
   connection_name  = each.key
@@ -258,35 +258,19 @@ module "aws_cwl_s3_bucket" {
   source   = "./aws_cwl_cwm"
   for_each = contains(keys(var.tenant_vars), "aws_cwl_cwm") ? var.tenant_vars.aws_cwl_cwm : {}
   tags     = each.value.tags
-
   #s3 config
   s3_backup_bucket_name     = each.value.s3_backup_bucket_name
   lifecycle_expiration_days = each.value.lifecycle_expiration_days
-  s3_encryption_algorithm   = each.value.s3_encryption_algorithm
-  versioning_status         = each.value.versioning_status
-  s3_backup_prefix          = each.value.s3_backup_prefix
-  s3_error_prefix           = each.value.s3_error_prefix
   #firehose config
-  cw_log_group_name                          = each.value.cw_log_group_name
-  cw_log_stream_name                         = each.value.cw_log_stream_name
-  firehose_name                              = each.value.firehose_name
-  buffering_size                             = each.value.buffering_size
-  buffering_interval                         = each.value.buffering_interval
-  retry_duration                             = each.value.retry_duration
-  ingestion_type                             = each.value.ingestion_type
-  firehose_access_role_name                  = each.value.firehose_access_role_name
-  aws_kms_alias_firehose                     = each.value.aws_kms_alias_firehose
-  cc_cosmos_firehose_s3_logs_kms_policy_name = each.value.cc_cosmos_firehose_s3_logs_kms_policy_name
-  common_attributes                          = try(each.value.common_attributes, [])
+  ingestion_type            = each.value.ingestion_type
+  firehose_access_role_name = each.value.firehose_access_role_name
+  aws_kms_alias_firehose    = each.value.aws_kms_alias_firehose
   #dt config
   dt_logs_api_endpoint_name = each.value.dt_logs_api_endpoint_name
   dt_cwl_api_token_name     = each.value.dt_cwl_api_token_name
   dt_endpoint_name          = each.value.dt_endpoint_name
   dt_endpoint_internal_name = each.value.dt_endpoint_internal_name
   dt_cwm_api_token_name     = each.value.dt_cwm_api_token_name
-  #cwl config
-  cloudwatch_log_group_name = try(each.value.cloudwatch_log_group_name, null)
-  log_retention_days        = try(each.value.log_retention_days, 1)
 }
 
 module "monitoring_k8s_clusters" {

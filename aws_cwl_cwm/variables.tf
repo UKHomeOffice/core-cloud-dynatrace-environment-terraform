@@ -6,14 +6,14 @@ variable "s3_backup_bucket_name" {
 
 variable "s3_encryption_algorithm" {
   type        = string
-  default     = "AES256"
+  default     = "aws:kms"
   description = "S3 bucket encryption algorithm"
 }
 
 variable "versioning_status" {
   description = "S3 bucket versioning status"
   type        = string
-  default     = "Suspended"
+  default     = "Disabled"
 }
 
 variable "tags" {
@@ -25,11 +25,6 @@ variable "lifecycle_expiration_days" {
   description = "Number of days to keep objects before expiration"
   type        = number
   default     = 10
-}
-
-variable "firehose_name" {
-  type        = string
-  description = "Name of the Firehose delivery stream"
 }
 
 variable "dt_cwl_api_token_name" {
@@ -57,7 +52,7 @@ variable "dt_logs_api_endpoint_name" {
 
 variable "s3_backup_prefix" {
   type        = string
-  default     = "backup/failed/"
+  default     = "backups/"
   description = "Prefix in S3 for backup of failed records"
 }
 
@@ -65,16 +60,6 @@ variable "s3_error_prefix" {
   type        = string
   default     = "errors/"
   description = "Prefix in S3 for error output"
-}
-
-variable "cw_log_group_name" {
-  description = "The name of the CloudWatch log group for Firehose logging"
-  type        = string
-}
-
-variable "cw_log_stream_name" {
-  description = "The name of the CloudWatch log stream for Firehose logging"
-  type        = string
 }
 
 variable "buffering_interval" {
@@ -119,7 +104,7 @@ variable "aws_kms_alias_firehose" {
 
 }
 variable "cc_cosmos_firehose_s3_logs_kms_policy_name" {
-
+  default     = "cc-cosmos-firehose-s3-logs-kms-policy"
   description = "name of the kms policy"
   type        = string
 }
