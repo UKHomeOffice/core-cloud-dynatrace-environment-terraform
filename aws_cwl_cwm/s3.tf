@@ -1,3 +1,7 @@
+locals {
+  s3_encryption_algorithm = "aws:kms"
+  versioning_status       = "Disabled"
+}
 resource "aws_s3_bucket" "cwl_backup_bucket" {
   bucket = var.s3_backup_bucket_name
   tags   = var.tags
@@ -17,7 +21,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "cwl_backup_bucket
 
   rule {
     apply_server_side_encryption_by_default {
-      sse_algorithm     = var.s3_encryption_algorithm
+      sse_algorithm     = local.s3_encryption_algorithm
       kms_master_key_id = aws_kms_alias.cc_cosmos_firehose_s3_kms_alias.target_key_id
     }
   }
@@ -26,7 +30,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "cwl_backup_bucket
 resource "aws_s3_bucket_versioning" "cwl_backup_bucket_versioning" {
   bucket = aws_s3_bucket.cwl_backup_bucket.id
   versioning_configuration {
-    status = var.versioning_status
+    status = local.versioning_status
   }
 }
 

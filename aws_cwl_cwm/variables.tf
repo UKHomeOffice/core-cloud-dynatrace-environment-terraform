@@ -4,18 +4,6 @@ variable "s3_backup_bucket_name" {
   description = "Name of the S3 bucket to be created for failed CloudWatch Logs"
 }
 
-variable "s3_encryption_algorithm" {
-  type        = string
-  default     = "aws:kms"
-  description = "S3 bucket encryption algorithm"
-}
-
-variable "versioning_status" {
-  description = "S3 bucket versioning status"
-  type        = string
-  default     = "Disabled"
-}
-
 variable "tags" {
   description = "A map of tags to assign to the resource."
   type        = map(string)
@@ -48,18 +36,6 @@ variable "dt_endpoint_internal_name" {
 variable "dt_logs_api_endpoint_name" {
   description = "The destination endpoint for the Dynatrace logs ingestion"
   type        = string
-}
-
-variable "s3_backup_prefix" {
-  type        = string
-  default     = "backups/"
-  description = "Prefix in S3 for backup of failed records"
-}
-
-variable "s3_error_prefix" {
-  type        = string
-  default     = "errors/"
-  description = "Prefix in S3 for error output"
 }
 
 variable "buffering_interval" {

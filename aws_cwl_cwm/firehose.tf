@@ -8,6 +8,8 @@ locals {
   firehose_name      = var.ingestion_type == "metrics" ? "cc-cosmos-cwm-firehose" : "cc-cosmos-cwl-firehose"
   cw_log_group_name  = var.ingestion_type == "metrics" ? "cc-cosmos-cwm-firehose-log-group" : "cc-cosmos-cwl-firehose-log-group"
   cw_log_stream_name = var.ingestion_type == "metrics" ? "cc-cosmos-cwm-firehose-log-stream" : "cc-cosmos-cwl-firehose-log-stream"
+  s3_backup_prefix   = "backup/failed/"
+  s3_error_prefix    = "errors/"
 }
 
 # This Firehose stream delivers CloudWatch metrics or logs to a Dynatrace HTTP endpoint.
@@ -43,8 +45,8 @@ resource "aws_kinesis_firehose_delivery_stream" "dynatrace_http_stream" {
     s3_configuration {
       role_arn            = aws_iam_role.cc_cosmos_cwl_firehose_access_role.arn
       bucket_arn          = aws_s3_bucket.cwl_backup_bucket.arn
-      prefix              = var.s3_backup_prefix
-      error_output_prefix = var.s3_error_prefix
+      prefix              = local.s3_backup_prefix
+      error_output_prefix = local.s3_error_prefix
 
       buffering_size     = var.buffering_size
       buffering_interval = var.buffering_interval
