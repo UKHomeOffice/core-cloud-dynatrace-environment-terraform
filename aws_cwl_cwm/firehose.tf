@@ -6,8 +6,8 @@ locals {
   dynatrace_access_key = var.ingestion_type == "metrics" ? data.aws_secretsmanager_secret_version.cw_metrics_api_token.secret_string : data.aws_secretsmanager_secret_version.cw_logs_api_token.secret_string
 
   firehose_name      = var.ingestion_type == "metrics" ? "cc-cosmos-cwm-firehose" : "cc-cosmos-cwl-firehose"
-  cw_log_group_name  = var.ingestion_type == "metrics" ? "cc-cosmos-cwm-firehose-log-group" : "cc-cosmos-cwl-firehose-log-group"
-  cw_log_stream_name = var.ingestion_type == "metrics" ? "cc-cosmos-cwm-firehose-log-stream" : "cc-cosmos-cwl-firehose-log-stream"
+  cw_log_group_name  = "${local.firehose_name}-log-group"
+  cw_log_stream_name = "${local.firehose_name}-log-stream"
   s3_backup_prefix   = "backup/failed/"
   s3_error_prefix    = "errors/"
 }
