@@ -1,5 +1,4 @@
 locals {
-  dynatrace_url_param_name = "dt-url"
   aws_kms_alias_firehose   = var.ingestion_type == "metrics" ? "alias/cc_cosmos_firehose_cwm_s3_kms_alias" : "alias/cc_cosmos_firehose_cwl_s3_kms_alias"
 }
 resource "aws_kms_key" "cc_cosmos_s3_kms_key" {
