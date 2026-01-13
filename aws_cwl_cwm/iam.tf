@@ -1,9 +1,11 @@
 locals {
-  org_id = data.aws_organizations_organization.current.id
+  org_id                                     = data.aws_organizations_organization.current.id
+  firehose_access_role_name                  = "${local.firehose_name}-access-role"
+  cc_cosmos_firehose_s3_logs_kms_policy_name = "${local.firehose_name}-s3-logs-kms-policy"
 }
 
 resource "aws_iam_role" "cc_cosmos_cwl_firehose_access_role" {
-  name = var.firehose_access_role_name
+  name = local.firehose_access_role_name
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -21,7 +23,7 @@ resource "aws_iam_role" "cc_cosmos_cwl_firehose_access_role" {
 }
 
 resource "aws_iam_policy" "cc_cosmos_cwl_firehose_s3_logs_kms_policy" {
-  name        = var.cc_cosmos_firehose_s3_logs_kms_policy_name
+  name        = local.cc_cosmos_firehose_s3_logs_kms_policy_name
   description = "Policy for Firehose roles to access S3 bucket and KMS key"
 
   policy = jsonencode({
