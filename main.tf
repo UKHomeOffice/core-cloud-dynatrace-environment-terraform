@@ -255,23 +255,12 @@ module "metric_stream" {
 }
 
 module "aws_cwl_s3_bucket" {
-  source   = "./aws_cwl_cwm"
-  for_each = try(var.tenant_vars.aws_cwl_cwm, {})
-  tags     = each.value.tags
-  #s3 config
+  source                    = "./aws_cwl_cwm"
+  for_each                  = try(var.tenant_vars.aws_cwl_cwm, {})
+  tags                      = each.value.tags
   s3_backup_bucket_name     = each.value.s3_backup_bucket_name
   lifecycle_expiration_days = each.value.lifecycle_expiration_days
-  #firehose config
-  ingestion_type                             = each.value.ingestion_type
-  firehose_access_role_name                  = each.value.firehose_access_role_name
-  aws_kms_alias_firehose                     = each.value.aws_kms_alias_firehose
-  cc_cosmos_firehose_s3_logs_kms_policy_name = each.value.cc_cosmos_firehose_s3_logs_kms_policy_name
-  #dt config
-  dt_logs_api_endpoint_name = each.value.dt_logs_api_endpoint_name
-  dt_cwl_api_token_name     = each.value.dt_cwl_api_token_name
-  dt_endpoint_name          = each.value.dt_endpoint_name
-  dt_endpoint_internal_name = each.value.dt_endpoint_internal_name
-  dt_cwm_api_token_name     = each.value.dt_cwm_api_token_name
+  ingestion_type            = each.value.ingestion_type
 }
 
 module "monitoring_k8s_clusters" {

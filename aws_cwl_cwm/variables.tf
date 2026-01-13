@@ -18,24 +18,29 @@ variable "lifecycle_expiration_days" {
 variable "dt_cwl_api_token_name" {
   description = "The name of the CWL Dynatrace API token in AWS Secrets Manager"
   type        = string
+  default     = "dynatrace/cc-cosmos-dt-cwl-firehose-ingest-token"
 }
 
 variable "dt_cwm_api_token_name" {
   description = "The name of the CWM Dynatrace API token in AWS Secrets Manager"
   type        = string
+  default     = "dynatrace/cc-cosmos-dt-cwm-firehose-ingest-token"
 }
 variable "dt_endpoint_name" {
   description = "The destination endpoint of the Dynatrace"
   type        = string
+  default     = "dynatrace/cc-cosmos-dt-cwl-firehose-destination-endpoint"
 }
 variable "dt_endpoint_internal_name" {
-  type = string
-
+  description = "The internal destination endpoint of the Dynatrace for metrics ingestion"
+  type        = string
+  default     = "dynatrace/cc-cosmos-dt-cwl-firehose-destination-endpoint-internal"
 }
 
 variable "dt_logs_api_endpoint_name" {
   description = "The destination endpoint for the Dynatrace logs ingestion"
   type        = string
+  default     = "dynatrace/cc-cosmos-dt-cwl-logs-destination-endpoint"
 }
 
 variable "buffering_interval" {
@@ -66,23 +71,6 @@ variable "common_attributes" {
   type        = list(object({ name = string, value = string }))
   default     = []
   description = "Optional common attributes to attach to each record"
-}
-
-variable "firehose_access_role_name" {
-  description = "name of the iam role used by firehose"
-  type        = string
-
-}
-
-variable "aws_kms_alias_firehose" {
-  description = "kms alias name"
-  type        = string
-
-}
-variable "cc_cosmos_firehose_s3_logs_kms_policy_name" {
-  default     = "cc-cosmos-firehose-s3-logs-kms-policy"
-  description = "name of the kms policy"
-  type        = string
 }
 
 variable "log_retention_days" {
