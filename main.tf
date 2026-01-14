@@ -258,7 +258,6 @@ module "aws_cwl_s3_bucket" {
   source                    = "./aws_cwl_cwm"
   for_each                  = try(var.tenant_vars.aws_cwl_cwm, {})
   tags                      = each.value.tags
-  s3_backup_bucket_name     = each.value.s3_backup_bucket_name
   lifecycle_expiration_days = each.value.lifecycle_expiration_days
   ingestion_type            = each.value.ingestion_type
 }
