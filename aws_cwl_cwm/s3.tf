@@ -1,7 +1,7 @@
 locals {
   s3_encryption_algorithm = "aws:kms"
   versioning_status       = "Disabled"
-  s3_backup_bucket_name   = "${local.firehose_name}-bucket"
+  s3_backup_bucket_name   = "${local.cw_log_group_name}-bucket"
 }
 resource "aws_s3_bucket" "cwl_backup_bucket" {
   bucket = local.s3_backup_bucket_name
