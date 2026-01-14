@@ -1,9 +1,3 @@
-variable "s3_backup_bucket_name" {
-  type        = string
-  default     = "cc-cosmos-cwl-bucket-s3"
-  description = "Name of the S3 bucket to be created for failed CloudWatch Logs"
-}
-
 variable "tags" {
   description = "A map of tags to assign to the resource."
   type        = map(string)
