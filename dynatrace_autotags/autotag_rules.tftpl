@@ -1,0 +1,82 @@
+default_rules:
+  project_id:
+    type: "ME"
+    enabled: true
+    value_format: "${project_id}"
+    value_normalization: "Leave text as-is"
+    attribute_rule:
+      entity_type: "SERVICE"
+      service_to_host_propagation: true
+      service_to_pgpropagation: true
+      conditions:
+        - key: "SERVICE_TAGS"  # Or BROWSER_MONITOR_TAGS, etc., depending on entity
+          operator: "TAG_KEY_EQUALS"
+          tag: "project-id"  # Matches tags like [Environment]project-id or project-id
+
+  environment_prod:
+    type: "ME"
+    enabled: true
+    value_format: "prod"
+    value_normalization: "To lower case"
+    attribute_rule:
+      entity_type: "PROCESS_GROUP"
+      pg_to_service_propagation: true
+      pg_to_host_propagation: true
+      conditions:
+        - key: "PROCESS_GROUP_CUSTOM_METADATA"
+          operator: "CONTAINS"
+          string_value: "prod"  # Example: matches env vars or custom metadata containing "prod"
+
+  k8s_namespace_environment:
+    type: "ME"
+    enabled: true
+    value_format: "{ProcessGroup:KubernetesNamespace}"
+    value_normalization: "Leave text as-is"
+    attribute_rule:
+      entity_type: "PROCESS_GROUP"
+      pg_to_service_propagation: true
+      pg_to_host_propagation: true
+      conditions:
+        - key: "KUBERNETES_NAMESPACE"
+          operator: "EXISTS"
+
+  gke_hosts:
+    type: "SELECTOR"
+    enabled: true
+    value_format: "gke-cluster"
+    value_normalization: "Leave text as-is"
+    entity_selector: type(HOST),entityName.startsWith("gke")
+
+  azure_site_tag_propagation:
+    type: "ME"
+    enabled: true
+    value_format: "{AzureSite:Name}"
+    value_normalization: "Leave text as-is"
+    attribute_rule:
+      entity_type: "AZURE_SITE"
+      azure_to_service_propagation: true
+      azure_to_pgpropagation: true
+      conditions:
+        - key: "AZURE_SITE_NAME"
+          operator: "EXISTS"
+
+  dev_stage_propagation_chain:
+    type: "SELECTOR"
+    enabled: true
+    value_format: "dev-stage"
+    value_normalization: "Leave text as-is"
+    entity_selector: >-
+      type(KUBERNETES_CLUSTER),entityName.contains("dev")
+      OR type(HOST),toRelationships.isClusterOfHost(type(KUBERNETES_CLUSTER),tag("dev-stage"))
+      OR type(PROCESS_GROUP),fromRelationships.isPgOfNamespace(type(CLOUD_APPLICATION_NAMESPACE),tag("dev-stage"))
+      OR type(SERVICE),fromRelationships.runsOn(type(PROCESS_GROUP),tag("dev-stage"))
+
+  test_queue_selector:
+    type: "SELECTOR"
+    enabled: true
+    value_format: "project-${project_id}"
+    value_normalization: "Leave text as-is"
+    entity_selector: >-
+      type(QUEUE),toRelationships.listensOnQueue(type(SERVICE),
+      fromRelationships.calls(type(SERVICE),
+      tag("[KUBERNETES]project-id:${project_id}","[Environment]project-id:${project_id}","project-id-${project_id}")))

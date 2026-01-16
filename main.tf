@@ -278,4 +278,24 @@ module "platform_dashboards" {
   groups_to_share = var.tenant_vars.platform_dashboards.groups
 }
 
+module "dynatrace_autotags" {
+  source = "./dynatrace_autotags"
+
+  # Create one AutoTag per named entry under the "autotags" block
+  # in the tenant-level configuration (e.g. config.yaml)
+  for_each = var.tenant_vars.autotags
+
+  # Project identifier used by rule templates (YAML rendering)
+  project_id = var.tenant_vars.project_id
+
+  # Logical name of the AutoTag (Terraform identifier only)
+  # The actual Dynatrace AutoTag name is taken from autotag_vars.name
+  autotag_name = each.key
+
+  # AutoTag configuration object
+  # Value is the attribute/parameter content of each named entry
+  # under the "autotags" block in the tenant configuration
+  autotag_vars = each.value
+}
+
 
