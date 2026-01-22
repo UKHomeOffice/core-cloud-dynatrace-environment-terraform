@@ -136,6 +136,14 @@ default_rules:
         - key: "KUBERNETES_CLUSTER_NAME"
           operator: "BEGINS_WITH"
           string_value: "${k8s_cluster_name_begins_with}"
+  k8s_cluster_by_project_id:
+    type: "SELECTOR"
+    enabled: true
+    entity_selector: "type(KUBERNETES_CLUSTER),tag(project-id:${project_id})"
+  k8s_node_by_project_id:
+    type: "SELECTOR"
+    enabled: true
+    entity_selector: "type(KUBERNETES_NODE),toRelationship.isClusterOfNode(type(KUBERNETES_CLUSTER),tag(project-id:${project_id}))"
 %{ if k8s_cluster_env!="" ~}
         - key: "KUBERNETES_CLUSTER_NAME"
           operator: "CONTAINS"

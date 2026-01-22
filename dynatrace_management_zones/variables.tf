@@ -22,6 +22,8 @@ variable "default_rules"{
     "host",
     "service",
     "k8s_clusters_name_type_clusters",
+    "k8s_cluster_by_project_id",
+    "k8s_node_by_project_id",
     "k8s_node",
     "k8s_namespace",
     "k8s_pg",
