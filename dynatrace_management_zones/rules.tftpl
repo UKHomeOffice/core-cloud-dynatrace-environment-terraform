@@ -143,7 +143,7 @@ default_rules:
   k8s_node_by_project_id:
     type: "SELECTOR"
     enabled: true
-    entity_selector: "type(KUBERNETES_NODE),toRelationship.isClusterOfNode(type("KUBERNETES_CLUSTER"),tag(project-id:${project_id}))"
+    entity_selector: "type(KUBERNETES_NODE),toRelationship.isClusterOfNode(type(KUBERNETES_CLUSTER),tag(project-id:${project_id}))"
 %{ if k8s_cluster_env!="" ~}
         - key: "KUBERNETES_CLUSTER_NAME"
           operator: "CONTAINS"
