@@ -30,7 +30,8 @@ variable "default_rules"{
     "k8s_workloads",
     "k8s_service",
     "include_web_apps",
-    "hadoop"
+    "hadoop",
+    "queue"
   ]
 }
 variable "zone_vars" {

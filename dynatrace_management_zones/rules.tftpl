@@ -59,6 +59,10 @@ default_rules:
     type: "SELECTOR"
     enabled: true
     entity_selector: type(SERVICE)%{ if project_id != "" },tag([AWS]project-id:${project_id})%{ endif }%{ if service_id != "" },tag([AWS]service-id:${service_id})%{ endif }%{ if project_service != "" },(PROJECT-SERVICE:${project_service})%{endif}%{ if env_name != "" },tag([AWS]environment-type:${env_name})%{ endif }
+  queue:
+    type: "SELECTOR"
+    enabled: true
+    entity_selector: type(QUEUE),toRelationships.listensOnQueue(type(SERVICE),fromRelationships.calls(type(SERVICE),tag("[KUBERNETES]project-id:dsa","[Environment]project-id:dsa","project-id-dsa"))
   k8s_filters:
     type: "SELECTOR"
     enabled: true
