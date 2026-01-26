@@ -62,7 +62,7 @@ default_rules:
   queue:
     type: "SELECTOR"
     enabled: true
-    entity_selector: type(QUEUE),toRelationships.listensOnQueue(type(SERVICE),fromRelationships.calls(type(SERVICE),tag("[KUBERNETES]project-id:dsa","[Environment]project-id:dsa","project-id-dsa"))
+    entity_selector: type(QUEUE),toRelationships.listensOnQueue(type(SERVICE),fromRelationships.calls(type(SERVICE),%{ if project_id != "" }tag("[KUBERNETES]project-id:${project_id}","[Environment]project-id:${project_id}","project-id-${project_id}")%{ endif }))
   k8s_filters:
     type: "SELECTOR"
     enabled: true
