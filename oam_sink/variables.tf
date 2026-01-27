@@ -13,3 +13,8 @@ variable "ou_paths" {
   description = "OU paths"
   type        = list(string)
 }
+
+variable "metric_namespaces" {
+  description = "CloudWatch metric namespaces to include in the OAM link"
+  type        = list(string)
+}
