@@ -31,7 +31,8 @@ variable "default_rules"{
     "k8s_service",
     "include_web_apps",
     "hadoop",
-    "queue"
+    "queue",
+    "indirect_queue"
   ]
 }
 variable "zone_vars" {
@@ -94,4 +95,3 @@ variable "zone_vars" {
     })))
   })
 }
-
