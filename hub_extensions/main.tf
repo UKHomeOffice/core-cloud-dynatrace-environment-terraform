@@ -1,4 +1,3 @@
-
 resource "dynatrace_hub_extension_config" "hub_extension" {
   name = var.extension_name
   # Optional attributes for scoping environment level scope if none are set
@@ -8,19 +7,5 @@ resource "dynatrace_hub_extension_config" "hub_extension" {
   host              = var.host
   # end of optional attributes
 
-  value = jsonencode(
-    {
-      "enabled" : var.enabled,
-      "description" : var.description,
-      "version" : var.extn_version,
-
-      # List of feature sets
-      "featureSets" : [
-        for feature_set in var.featureSets : feature_set
-      ],
-      "activationTags" : [for tag in var.activationTags : tag],
-      "activationContext": var.activationContext 
-    }
-  )
-
+  value = jsonencode(local.extension_value_clean)
 }
