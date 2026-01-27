@@ -4,6 +4,7 @@ locals {
 
 resource "aws_oam_sink" "this" {
   name = var.sink_name
+  tags = var.tags
 }
 
 resource "aws_oam_sink_policy" "this" {
@@ -27,4 +28,5 @@ resource "aws_oam_link" "oam_link" {
   depends_on = [
     aws_oam_sink_policy.this
   ]
+  tags = var.tags
 }

@@ -18,3 +18,8 @@ variable "metric_namespaces" {
   description = "CloudWatch metric namespaces to include in the OAM link"
   type        = list(string)
 }
+
+variable "tags" {
+  description = "A map of tags to assign to the resource."
+  type        = map(string)
+}
