@@ -75,6 +75,20 @@ default_rules:
     type: "SELECTOR"
     enabled: true
     entity_selector: type(dt.entity.jmx:com_dynatrace_extension_hadoop_service),fromRelationships.isChildOf(type(PROCESS_GROUP_INSTANCE),fromRelationships.isProcessOf(type(HOST),tag([AWS]project-id:${project_id})%{ if service_id != "" },tag([AWS]service-id:${service_id})%{endif}%{ if env_name != "" },tag([AWS]environment-type:${env_name})%{ endif }))
+  hadoop_metrics:
+    type: "DIMENSION"
+    enabled: true
+    dimension_rule:
+      applies_to: "METRIC"
+      dimension_conditions:
+        - key: yarn
+          rule_matcher: "BEGINS_WITH"
+          type: "METRIC_KEY"
+          value: "hadoop.yarn.*"
+        - key: hdfs    
+          rule_matcher: "BEGINS_WITH"
+          type: "METRIC_KEY"
+          value: "hadoop.hdfs.*"
   exclude_asg:
     type: "SELECTOR"
     enabled: true
