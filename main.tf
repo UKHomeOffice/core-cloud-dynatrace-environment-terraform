@@ -211,10 +211,11 @@ module "dynatrace_kafka_settings" {
 module "hub_extensions" {
 
   source   = "./hub_extensions"
-  for_each = contains(keys(var.tenant_vars), "hub_extensions") ? var.tenant_vars.hub_extensions : tomap({})
+  for_each = { for k, v in try(var.tenant_vars.hub_extensions, {}) : k => v if v != null }
 
   tenant_vars  = each.value
   extn_version = each.value.extn_version
+
   # Optional scoping
   management_zone   = try(each.value.management_zone, null)
   host_group        = try(each.value.host_group, null)
@@ -222,12 +223,24 @@ module "hub_extensions" {
   active_gate_group = try(each.value.active_gate_group, null)
   #end of optional scoping
 
-  description    = try(each.value.description, "")
-  featureSets    = each.value.featureSets
-  extension_name = each.value.extension_name
-  enabled        = try(each.value.enabled, true)
-  activationTags = each.value.activationTags != null ? each.value.activationTags : ["[AWS]dynatrace: true"]
+  description       = try(each.value.description, "")
+  featureSets       = try(each.value.featureSets, null)
+  extension_name    = each.value.extension_name
+  enabled           = try(each.value.enabled, true)
+  activationTags    = try(each.value.activationTags, ["[AWS]dynatrace: true"])
+  activationContext = try(each.value.activationContext, "LOCAL")
+
+  # Python certificate monitor specific attributes
+  check_hosts            = try(each.value.check_hosts, null)
+  port_range             = try(each.value.port_range, null)
+  additional_sni         = try(each.value.additional_sni, null)
+  debug                  = try(each.value.debug, null)
+  enable_ua_and_metrics  = try(each.value.enable_ua_and_metrics, null)
+  alerting_configuration = try(each.value.alerting_configuration, null)
+  filter_technologies    = try(each.value.filter_technologies, null)
+  log_event_interval     = try(each.value.log_event_interval, null)
 }
+
 module "oam_sink" {
   source   = "./oam_sink/"
   for_each = contains(keys(var.tenant_vars), "oam_sink") ? var.tenant_vars.oam_sink : {}

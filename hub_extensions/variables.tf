@@ -32,10 +32,13 @@ variable "host_group" {
 
 variable "host" {
   description = "The host this configuration will be scoped to (optional)"
+  type        = string
   default     = null
 }
+
 variable "active_gate_group" {
   description = "The active gate group this configuration will be scope to (optional)"
+  type        = string
   default     = null
 }
 
@@ -45,8 +48,9 @@ variable "extn_version" {
 }
 
 variable "featureSets" {
-  description = "List of feature sets for the Dynatrace extension"
+  description = "List of feature sets for the Dynatrace extension (used for JMX and other non-Python extensions)"
   type        = list(any)
+  default     = null
 }
 
 variable "activationTags" {
@@ -55,8 +59,63 @@ variable "activationTags" {
   # Expected format for tag: "[PROVIDER]key: value", e.g., "[AWS]dynatrace: true"
 }
 
-variable "activationContext"{
-  type = string 
+variable "activationContext" {
+  type        = string
   description = "The activation context e.g. REMOTE for active gate based or LOCAL for oneagent based"
-  default = "LOCAL"
+  default     = "LOCAL"
+}
+
+# Python certificate monitor specific variables
+variable "check_hosts" {
+  description = "List of hosts to check for SSL certificates (for python-certificate-monitor)"
+  type = list(object({
+    domain = string
+    port   = number
+  }))
+  default = null
+}
+
+variable "port_range" {
+  description = "Port range for certificate monitoring (comma-separated ports, e.g., '443,8443')"
+  type        = string
+  default     = null
+}
+
+variable "additional_sni" {
+  description = "Additional SNI (Server Name Indication) hostnames for certificate monitoring"
+  type        = list(string)
+  default     = null
+}
+
+variable "debug" {
+  description = "Enable debug mode for the extension"
+  type        = bool
+  default     = null
+}
+
+variable "enable_ua_and_metrics" {
+  description = "Enable unified analysis and metrics collection"
+  type        = bool
+  default     = null
+}
+
+variable "alerting_configuration" {
+  description = "Alerting configuration for certificate expiry warnings"
+  type = object({
+    expiryWarningDays  = optional(number)
+    expiryCriticalDays = optional(number)
+  })
+  default = null
+}
+
+variable "filter_technologies" {
+  description = "Filter technologies for certificate monitoring (e.g., ['PYTHON', 'JAVA'])"
+  type        = list(string)
+  default     = null
+}
+
+variable "log_event_interval" {
+  description = "Log event interval in minutes"
+  type        = number
+  default     = null
 }
