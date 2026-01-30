@@ -87,5 +87,6 @@ variable "destination_name" {
 
 variable "days_after_initiation" {
 description = "Specifies the number of days after initiating a multipart upload when the multipart upload must be completed."
-type = string
+default = 15
+type = number
 }
