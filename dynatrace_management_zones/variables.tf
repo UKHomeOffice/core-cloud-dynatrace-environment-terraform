@@ -32,7 +32,8 @@ variable "default_rules"{
     "include_web_apps",
     "hadoop",
     "queue",
-    "indirect_queue"
+    "indirect_queue",
+    "ssl_cert_monitor"
   ]
 }
 variable "zone_vars" {
