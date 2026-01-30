@@ -47,4 +47,15 @@ resource "aws_s3_bucket_lifecycle_configuration" "this" {
     }
   }
 
+ rule {
+    id     = "cwl-abort-incomplete-multipart-uploads"
+    status = "Enabled"
+
+    # No filter → applies to all multipart uploads
+    filter {}
+
+    abort_incomplete_multipart_upload {
+      days_after_initiation = var.days_after_initiation
+    }
+  }
 }

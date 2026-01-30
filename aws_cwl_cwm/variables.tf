@@ -84,3 +84,8 @@ variable "destination_name" {
   default     = "cc-cosmos-dynatrace-firehose"
   type        = string
 }
+
+variable "days_after_initiation" {
+description = "Specifies the number of days after initiating a multipart upload when the multipart upload must be completed."
+type = string
+}
