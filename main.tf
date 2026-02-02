@@ -272,6 +272,7 @@ module "aws_cwl_s3_bucket" {
   for_each                  = try(var.tenant_vars.aws_cwl_cwm, {})
   tags                      = each.value.tags
   lifecycle_expiration_days = each.value.lifecycle_expiration_days
+  days_after_initiation     = each.value.days_after_initiation
   ingestion_type            = each.value.ingestion_type
 }
 
