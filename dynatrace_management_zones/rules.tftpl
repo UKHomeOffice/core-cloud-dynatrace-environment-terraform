@@ -23,6 +23,10 @@ default_rules:
     type: "SELECTOR"
     enabled: true
     entity_selector: type(RELATIONAL_DATABASE_SERVICE)%{ if project_id != "" },tag([AWS]project-id:${project_id})%{ endif }%{ if service_id != "" },tag([AWS]service-id:${service_id})%{endif}%{ if env_name != "" },tag([AWS]environment-type:${env_name})%{ endif }
+  rds_extras:
+    type: "SELECTOR"
+    enabled: true
+    entity_selector: type(SERVICE_INSTANCE),fromRelationships.runsOnHost(type("cloud:aws:rds"),%{ if project_id != "" }tag("[AWS]project-id:${project_id}"%{ endif }))
   lambda:
     type: "SELECTOR"
     enabled: true
