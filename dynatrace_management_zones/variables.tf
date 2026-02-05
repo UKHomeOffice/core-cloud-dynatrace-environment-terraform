@@ -15,7 +15,6 @@ variable "default_rules"{
     "elb",
     "ec2",
     "rds",
-    "rds_extras",
     "lambda",
     "msk",
     "custom",
