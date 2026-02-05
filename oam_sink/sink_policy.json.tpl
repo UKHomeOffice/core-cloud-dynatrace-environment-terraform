@@ -12,13 +12,7 @@
       "Condition": {
         "ForAllValues:StringEquals": {
           "oam:ResourceTypes": [
-            "AWS::Logs::LogGroup",
-            "AWS::CloudWatch::Metric",
-            "AWS::XRay::Trace",
-            "AWS::ApplicationInsights::Application",
-            "AWS::InternetMonitor::Monitor",
-            "AWS::ApplicationSignals::ServiceLevelObjective",
-            "AWS::ApplicationSignals::Service"
+            "AWS::CloudWatch::Metric"
           ]
         },
         "ForAnyValue:StringLike": {
