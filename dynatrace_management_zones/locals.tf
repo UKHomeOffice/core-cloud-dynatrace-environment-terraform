@@ -15,6 +15,7 @@ locals {
       project_service              = var.zone_vars.project_service
       pg_to_host_propagation       = var.zone_vars.pg_to_host_propagation
       pg_to_service_propagation    = var.zone_vars.pg_to_host_propagation
+      activegate_id_pattern        = var.zone_vars.activegate_id_pattern
     })
   ).default_rules
   rules_templates = length(coalesce(try(var.zone_vars.rules_templates, null), [])) > 0 ? var.zone_vars.rules_templates : var.default_rules

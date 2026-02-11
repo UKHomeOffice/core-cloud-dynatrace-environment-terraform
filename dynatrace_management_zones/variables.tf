@@ -53,6 +53,7 @@ variable "zone_vars" {
     host_group_begins_with       = optional(string, "")
     aws_account_id               = optional(string, "")
     project_service              = optional(string, "")
+    activegate_id_pattern        = optional(string, "")
     pg_to_host_propagation       = optional(bool, false)
     pg_to_service_propagation    = optional(bool, false)
     rules_templates              = optional(list(string))
