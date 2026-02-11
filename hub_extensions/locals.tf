@@ -94,10 +94,9 @@ locals {
         ] : [],
         "debug_logging" : var.debug_logging != null ? var.debug_logging : false,
         "frequency" : var.frequency != null ? var.frequency : 5
-      },
-      
-      "pythonRemote" : null,
-      "featureSets" : tolist([])
+      }
+      # NO pythonRemote - not used
+      # NO featureSets - not used
     }
     
     other = {
