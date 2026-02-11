@@ -119,3 +119,38 @@ variable "log_event_interval" {
   type        = number
   default     = null
 }
+
+variable "use_chrony" {
+  description = "Use Chrony instead of NTP (reads from /etc/chrony.conf instead of /etc/ntp.conf)"
+  type        = bool
+  default     = null
+}
+
+variable "autodetected_report_errors" {
+  description = "Report errors for auto-detected time servers as log messages"
+  type        = bool
+  default     = null
+}
+
+variable "servers" {
+  description = "Manually define time servers to test against (leave empty for auto-detection)"
+  type = list(object({
+    server        = string
+    port          = optional(number, 123)
+    ntp_version   = optional(number, 4)
+    report_error  = optional(bool, true)
+  }))
+  default = null
+}
+
+variable "debug_logging" {
+  description = "Enable debug logging for troubleshooting"
+  type        = bool
+  default     = null
+}
+
+variable "frequency" {
+  description = "Check frequency in minutes (1-15)"
+  type        = number
+  default     = null
+}
