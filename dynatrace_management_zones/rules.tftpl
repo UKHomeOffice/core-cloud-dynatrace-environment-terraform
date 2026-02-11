@@ -86,7 +86,7 @@ default_rules:
   ssl_cert_remotes:
     type: "SELECTOR"
     enabled: true
-    entity_selector: %{ if project_id != "" }type(python:certificate_monitor_certificate),entityName.contains("${activegate_id_pattern}")%{ endif }
+    entity_selector: %{ if project_id != "" && activegate_id_pattern != ""}type(python:certificate_monitor_certificate),entityName.contains("${activegate_id_pattern}")%{ endif }
   exclude_asg:
     type: "SELECTOR"
     enabled: true
