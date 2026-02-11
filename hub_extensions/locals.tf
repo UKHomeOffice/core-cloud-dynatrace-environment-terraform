@@ -1,19 +1,18 @@
 locals {
   is_python_cert_monitor = var.extension_name == "com.dynatrace.custom.python-certificate-monitor"
   is_timedrift           = var.extension_name == "com.dynatrace.timedrift"
-
-  extension_configs = {
-    
-    # ========================================================================
-    # PYTHON CERTIFICATE MONITOR 
-    # ========================================================================
-    python_cert = {
+  
+  # Map of all extension configurations
+  all_extensions = {
+    ssl = {
+      # PYTHON CERTIFICATE MONITOR EXTENSION
       "enabled" : var.enabled,
       "description" : var.description,
       "version" : var.extn_version,
       "activationContext" : var.activationContext,
       "activationTags" : var.activationContext == "LOCAL" ? var.activationTags : [],
       
+      # pythonLocal is used when activationContext is LOCAL (OneAgent)
       "pythonLocal" : var.activationContext == "LOCAL" ? {
         "alerting_configuration" : {
           "days_event_stage_1" : var.alerting_configuration != null && var.alerting_configuration.expiryWarningDays != null ? var.alerting_configuration.expiryWarningDays : 30,
@@ -48,6 +47,7 @@ locals {
         "debug" : var.debug != null ? var.debug : false
       } : null,
       
+      # pythonRemote is used when activationContext is REMOTE (ActiveGate)
       "pythonRemote" : var.activationContext == "REMOTE" ? {
         "alerting_configuration" : {
           "days_event_stage_1" : var.alerting_configuration != null && var.alerting_configuration.expiryWarningDays != null ? var.alerting_configuration.expiryWarningDays : 30,
@@ -73,10 +73,8 @@ locals {
       "featureSets" : tolist([])
     }
     
-    # ========================================================================
-    # TIMEDRIFT EXTENSION 
-    # ========================================================================
     timedrift = {
+      # ========== TIMEDRIFT EXTENSION ==========
       "enabled" : var.enabled,
       "description" : var.description,
       "version" : var.extn_version,
@@ -96,13 +94,14 @@ locals {
         ] : [],
         "debug_logging" : var.debug_logging != null ? var.debug_logging : false,
         "frequency" : var.frequency != null ? var.frequency : 5
-      }
+      },
+      
+      "pythonRemote" : null,
+      "featureSets" : tolist([])
     }
     
-    # ========================================================================
-    # OTHER EXTENSIONS (HADOOP, JMX, ETC)
-    # ========================================================================
     other = {
+      # ========== ALL OTHER EXTENSIONS (HADOOP, JMX, ETC) ==========
       "enabled" : var.enabled,
       "description" : var.description,
       "version" : var.extn_version,
@@ -114,12 +113,11 @@ locals {
     }
   }
   
-  # Select the right configuration
-  extension_type = local.is_python_cert_monitor ? "python_cert" : (
-    local.is_timedrift ? "timedrift" : "other"
-  )
+  # Select extension type
+  ext_type = local.is_python_cert_monitor ? "ssl" : (local.is_timedrift ? "timedrift" : "other")
   
-  extension_value = local.extension_configs[local.extension_type]
+  # Get the right extension config
+  extension_value = local.all_extensions[local.ext_type]
   
   # Remove only top-level null values
   extension_value_clean = {
