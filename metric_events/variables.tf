@@ -82,15 +82,6 @@ variable "metrics_vars" {
       query_definition_type = string
       aggregation           = string
       metric_key            = string
-      warning = object({
-        enabled   = bool
-        title     = string
-        threshold = string
-        tags = list(object({
-          key   = string
-          value = string
-        }))
-      })
       critical = object({
         enabled   = bool
         title     = string
@@ -109,15 +100,6 @@ variable "metrics_vars" {
       query_definition_type = string
       aggregation           = string
       metric_key            = string
-      warning = object({
-        enabled   = bool
-        title     = string
-        threshold = string
-        tags = list(object({
-          key   = string
-          value = string
-        }))
-      })
       critical = object({
         enabled   = bool
         title     = string
